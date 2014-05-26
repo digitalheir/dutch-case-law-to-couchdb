@@ -2,8 +2,6 @@
 
 ## Header
 
-Compare:
-
 ```xml  
       <para>Gerechtshof te Amsterdam</para>
       <para/>
@@ -18,8 +16,6 @@ Compare:
 ```
 ([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))
 	  
-with
-
 ```xml  
      <parablock>
         <para>Gerechtshof te Amsterdam</para>
@@ -38,7 +34,6 @@ We can't make assumptions about tags and whitespacing but GHAMS has very consist
 - Where the verdict starts
 
 # Case subject
-Compare:
 
 ```xml  
       <para/>
@@ -50,8 +45,6 @@ Compare:
       <para/>
 ```
 ([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))
-	  
-With:
 
 ```xml
       </parablock>
@@ -67,15 +60,11 @@ The subject of the case is harder to extract. We know that:
 
 It may be possible to extract redacted names. They are single uppercase letters like X, Z, P, and sometimes a number of asterisks (*). Need to test precision.
 
-Compare:	  
-
 ```xml
       <para>1. Loop van het geding</para>
       <para/>
 ```
 ([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))
-
-With:	  
 	
 ```xml
      <para>1. Loop van het geding</para>
