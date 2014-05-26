@@ -16,7 +16,7 @@ Compare:
       <para>UITSPRAAK</para>
       <para/>
 ```
-([ECLI:NL:GHAMS:1997:AA4418](/1997/AA4418.xml))
+([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))
 	  
 with
 
@@ -29,7 +29,7 @@ with
       <para/>
       <para>	UITSPRAAK</para>
 ```
-([ECLI:NL:GHAMS:1997:AA4145](/1997/AA4145.xml))
+([ECLI:NL:GHAMS:1997:AA4145](1997/AA4145.xml))
 	  
 We can't make assumptions about tags and whitespacing but GHAMS has very consistent prose for
 - Court name
@@ -49,7 +49,7 @@ Compare:
       <para>een uitspraak van het Hoofd Douane P, de inspecteur.</para>
       <para/>
 ```
-([ECLI:NL:GHAMS:1997:AA4418](/1997/AA4418.xml))
+([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))
 	  
 With:
 
@@ -60,7 +60,7 @@ With:
       <para/>
       <parablock>
 ```	
-([ECLI:NL:GHAMS:1997:AA4145](/1997/AA4145.xml))  
+([ECLI:NL:GHAMS:1997:AA4145](1997/AA4145.xml))  
 
 The subject of the case is harder to extract. We know that:
 - It is after the start of the verdict ('UITSPRAAK') and before the the first header ('1. Loop van het geding')
@@ -73,7 +73,7 @@ Compare:
       <para>1. Loop van het geding</para>
       <para/>
 ```
-([ECLI:NL:GHAMS:1997:AA4418](/1997/AA4418.xml))
+([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))
 
 With:	  
 	
@@ -81,7 +81,7 @@ With:
      <para>1. Loop van het geding</para>
       <para/>
 ```
-([ECLI:NL:GHAMS:1997:AA4145](/1997/AA4145.xml))
+([ECLI:NL:GHAMS:1997:AA4145](1997/AA4145.xml))
 
 Other headers:
 
@@ -92,7 +92,7 @@ Other headers:
       <para>5. Beoordeling van het geschil</para>
       <para>6. Proceskosten</para>
 ```
-([ECLI:NL:GHAMS:1997:AA4418](/1997/AA4418.xml))    
+([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))    
 
 Is similar to 
 
@@ -103,7 +103,7 @@ Is similar to
       <para>5. Beoordeling van het geschil</para>
       <para>6. Proceskosten</para>
 ```
-([ECLI:NL:GHAMS:1997:AA4145](/1997/AA4145.xml))
+([ECLI:NL:GHAMS:1997:AA4145](1997/AA4145.xml))
 
 Note that we can't just look for something that starts with a number and a period:
 
@@ -111,7 +111,7 @@ Note that we can't just look for something that starts with a number and a perio
 	    <para>"2.	Verliezen en vermissen. </para>
         <para>3.	Salderen van meer- en minderbevindingen</para>
 ```
-([ECLI:NL:GHAMS:1997:AA4418](/1997/AA4418.xml))    
+([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))    
 
 ## Verdict
 	  
@@ -147,9 +147,9 @@ We can extract references if we can look up HR numbers:
 ```xml
       <para>[Zie ook arrest HR nummer 34000 (red.)]</para>
 ```
-([ECLI:NL:GHAMS:1997:AA4418](/1997/AA4418.xml))    
+([ECLI:NL:GHAMS:1997:AA4418](1997/AA4418.xml))    
 
 ```   
       <para>[Zie ook arrest HR nummer 33393 (red.)]</para>
 ```
-([ECLI:NL:GHAMS:1997:AA4145](/1997/AA4145.xml))
+([ECLI:NL:GHAMS:1997:AA4145](1997/AA4145.xml))
