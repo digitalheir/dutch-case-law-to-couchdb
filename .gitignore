@@ -10,6 +10,9 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/rich
+/notrich
+/ECLI
 
 ## Specific to RubyMotion:
 .dat*
