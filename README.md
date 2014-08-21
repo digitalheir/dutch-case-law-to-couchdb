@@ -3,7 +3,7 @@
 This repository contains scripts to get Dutch case law documents from rechtspraak.nl and convert them to a Metalex-compliant form.
 
 ## Data extraction from Dutch case law
-Although case law documents provided are in XML, a lot of early documents have little more information than plain text would. They consist merely of `<para>` and `<parablock>` elements (meant for paragraphs and paragraph blocks, respectively). 
+Although case law documents provided are in XML, a lot of early documents have almost no good markup. They consist merely of `<para>` and `<parablock>` elements (meant for paragraphs and paragraph blocks, respectively). 
 
 But most courts have a way of formatting documents that is very consistent. For example, many verdicts start with a variation of:
 
