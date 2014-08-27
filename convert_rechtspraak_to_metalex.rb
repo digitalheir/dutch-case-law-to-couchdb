@@ -1,35 +1,40 @@
+# Script to convert rechtspraak documents to Metalex standard
+
 require 'nokogiri'
 require 'json'
 require 'open-uri'
 require_relative 'metalex_converter/rechtspraak_to_metalex_converter'
+require_relative 'metalex_converter/metadata_handler'
 
-mapping = JSON.parse open('rechtspraak_mapping.json').read
+
+FOLDER='rich'
+mapping = JSON.parse open('metalex_converter/rechtspraak_mapping.json').read
 converter = RechtspraakToMetalexConverter.new(mapping)
-files = Dir['rich/*']
-xsd = Nokogiri::XML::Schema(open('e.xsd').read)
+files = Dir["#{FOLDER}/*"]
+xsd = Nokogiri::XML::Schema(open('metalex_converter/e.xsd').read)
 i=0
+
 files.each do |path|
-  # xml = Nokogiri::XML File.open(path)
-  #
-  #   #Convert doc
-  #   converter.start(xml, ecli,dfkdsjfn)
-  #
-  #   xml = Nokogiri::XML root.to_s
-  #   # puts root
-  #   # puts xml
-  #   has_error = false
-  #   xsd.validate(xml).each do |error|
-  #     puts error.message
-  #     has_error = true
-  #   end
-  #   if has_error
-  #     puts ''
-  #     puts xml
-  #   end
-  # end
-  # # break
-  # i+=1
-  # if i%100==0
-  # puts i
-  #   end
+  xml = Nokogiri::XML File.open(path)
+
+  #Convert doc
+  identifiers = xml.xpath('/open-rechtspraak/rdf:RDF/rdf:Description/dcterms:identifier', PREFIXES)
+  ecli = identifiers.first.text.strip
+  xml = converter.start(xml, ecli)
+
+  has_error = false
+  xml = Nokogiri::XML xml.to_s # build a new xml doc because validation doesnt work otherwise
+  xsd.validate(xml).each do |error|
+    puts error.message
+    has_error = true
+  end
+  if has_error
+    puts ''
+    puts xml
+  end
+end
+# break
+i+=1
+if i%100==0
+  puts "Processed #{i} documents"
 end

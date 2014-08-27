@@ -177,10 +177,12 @@ class MetadataStripper
 
     elements = tree.xpath("./#{verb}", PREFIXES)
     if !elements or elements.length <= 0
-      puts "Could not find #{verb} in #{tree.name}"
+      could_not_find = "Could not find #{verb} in #{tree.name}"
+      # puts could_not_find
     else
       if elements.length > 1
-        puts "Found #{elements.length} elements for #{verb} in #{@ecli}"
+        found_more_msg = "Found #{elements.length} elements for #{verb} in #{@ecli}"
+        # puts found_more_msg
       end
       elements.each do |element|
         # Get text content
@@ -255,9 +257,9 @@ class MetadataStripper
   def handle_case_numbers(tree, uri)
     predicate = 'psi:zaaknummer'
     elements = tree.xpath("./#{predicate}", PREFIXES)
-    if elements.length > 1
-      puts "Found #{elements.length} elements for #{predicate} in #{uri}"
-    end
+    # if elements.length > 1
+    #   puts "Found #{elements.length} elements for #{predicate} in #{uri}"
+    # end
     elements.each do |element|
       # A string like '97/8236 TW, 97/8241 TW' is probably two case numbers
       case_numbers = element.text.split(",")
@@ -336,11 +338,11 @@ class MetadataStripper
       # Parse reference to ECLI
       referent_ecli = element['ecli:resourceIdentifier']
       # NOTE: documentation says 'typeRelatie'. But the data says 'type'
-      relation_type = element.attrib['psi:type']
+      relation_type = element['psi:type']
       unless relation_type
-        relation_type = element.attrib['psi:typeRelatie']
+        relation_type = element['psi:typeRelatie']
       end
-      relation_aanleg = element.attrib['psi:aanleg']
+      relation_aanleg = element['psi:aanleg']
 
       # Create uri for this relation, in order to reify the statement
       relation_uri = "#{RECHTSPRAAK_DEEPLINK_ROOT}/relation?subject=#{@ecli}&object=#{referent_ecli}"
@@ -443,15 +445,28 @@ class MetadataStripper
     predicate = 'dcterms:references'
     elements = tree.xpath("./#{predicate}", PREFIXES)
     elements.each do |element|
-      resource_id = element['bwb:resourceIdentifier']
-      unless resource_id
+      resource = nil
+      ref_source = nil
+      element.attributes.each do |name, attr|
+        if name == 'resourceIdentifier' # Can be bwb:resourceIdentifier or cvdr:resourceIdentifier (for example in ECLI:NL:GHAMS:2014:1)
+          case attr.namespace.prefix
+            when 'bwb', 'cvdr'
+            else
+              puts "Found ref with prefix #{attr.namespace.prefix}"
+          end
+          ref_source = attr.namespace.prefix
+          resource = attr.value
+        end
+      end
+      unless resource
         puts "could not find resource_id of this element:"
         puts element.to_s
         return
       end
 
       # NOTE: I feel like both metalex:cites and dcterms:references are appropriate predicates, so I'll use dcterms:references for the juriconnect reference, and metalex:cites for the metalex document reference
-      @mcontainer << create_meta(subject, predicate, target)
+      @mcontainer << create_meta(subject, predicate, resource)
+      @mcontainer << create_meta(resource, 'dcterms:hasFormat', ref_source)
 
       # TODO use script of Radboud's students to resolve uri
       # metalex_uri = get_target(resource_id)
@@ -463,6 +478,7 @@ class MetadataStripper
 
       # TODO
       # @mcontainer << create_meta(ml_converter, subject_uri, "metalex:cites", metalex_uri)
+      # @mcontainer << create_meta(resource, 'dcterms:hasFormat', ref_source)
     end
   end
 

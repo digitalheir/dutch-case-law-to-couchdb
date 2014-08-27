@@ -34,5 +34,7 @@ get '/:ecli' do
     content_type 'text/plain'
     "Could not find ECLI '#{params[:ecli]}'"
   end
+
+  get ''
 end
 
