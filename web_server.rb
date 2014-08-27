@@ -31,8 +31,9 @@ get '/ecli/:ecli' do
   else
     # raise Sinatra::NotFound
     status 404
-    content_type 'text/plain'
-    "Could not find ECLI '#{params[:ecli]}'"
+    content_type 'application/xml'
+
+    '<?xml version="1.0" encoding="utf-8"?><error>Could not find ECLI '+params[:ecli]+'</error>'
   end
 
 end
@@ -143,6 +144,7 @@ get '/search' do
     end
     response[:docs] = docs
   end
+  content_type 'application/json'
   response.to_json
 end
 
