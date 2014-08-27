@@ -24,7 +24,7 @@ get '/:ecli' do
   if res.is_a?(Net::HTTPSuccess)
     xml=Nokogiri::XML res.body
     # The rechtspraak docs have metadata in them, but we want an XML doc out of the actual content. So first get the content root node.
-    converted = CONVERTER.start(xml,ecli)
+    converted = CONVERTER.start(xml, ecli)
     status 200
     content_type 'application/xml'
     converted.to_s
@@ -35,6 +35,8 @@ get '/:ecli' do
     "Could not find ECLI '#{params[:ecli]}'"
   end
 
-  get ''
+end
+get '/' do
+  'hello world'
 end
 
