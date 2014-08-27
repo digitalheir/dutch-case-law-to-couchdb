@@ -1,5 +1,4 @@
 /.idea
-
 *.gem
 *.rbc
 /.config
@@ -13,6 +12,7 @@
 /rich
 /notrich
 /ECLI
+README_2.md
 
 ## Specific to RubyMotion:
 .dat*

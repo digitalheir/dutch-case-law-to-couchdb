@@ -1,3 +1,5 @@
+#Script to download all documents with the folder structure determined by their ecli, eg ECLI:NL:CRVB:1999:AA4177 becomes ./ECLI/NL/CRVB/1999/AA4177.xml
+
 require 'open-uri'
 require 'nokogiri'
 

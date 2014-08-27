@@ -1,3 +1,5 @@
+# Script that kickstarts the metalex conversion mapping
+
 require 'nokogiri'
 require 'set'
 require 'json'
@@ -24,8 +26,9 @@ files.each do |path|
     elements.add root.name
   end
   # puts path
+  i+=1
   if i%1000 == 0
-    puts "Handled #{i} files"
+    puts "Looked at #{i} files"
   end
   # break
 end
@@ -35,11 +38,15 @@ puts "Found #{elements.length} unique elements"
 # Generate mapping file in JSON
 mapping = {}
 elements.each do |name|
-  mapping[name] = 'container' # TODO try to figure out a good combo
+  if name == 'conclusie' or name == 'uitspraak'
+    mapping[name] = 'container'
+  else
+    mapping[name] = 'inline'
+  end
 end
 
 # Serialize mapping as JSON file
-File.open('rechtspraak_mapping.json', 'w') do |file|
+File.open('rechtspraak_mapping.json', 'w+') do |file|
   file.puts JSON.pretty_generate(mapping)
 end
 

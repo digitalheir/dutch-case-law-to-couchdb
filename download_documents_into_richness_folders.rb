@@ -1,3 +1,5 @@
+#Script to download 'rich' documents (meaning not consisting of just <para> and <paragroup> elements) into the ./rich folder
+
 require 'open-uri'
 require 'nokogiri'
 
