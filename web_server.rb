@@ -74,13 +74,14 @@ end
 
 get '/search' do
   response = {}
+  error=nil
   if params[:max]
     max = params[:max].to_i
   else
     max = 1000
   end
   if max > 1000 or max < 1
-    error = "Return limit can't be larger than 1000 or smaller than 1"
+    error = "Return limit needs to be a number between 1 and 1000 inclusive"
   end
 
   if params[:return] and params[:return].match /meta/i
@@ -102,28 +103,34 @@ get '/search' do
     from = 0
   end
 
-  s_xml = open("http://data.rechtspraak.nl/uitspraken/zoeken?max=#{max}#{return_statement}&from=#{from}").read
-  xml = Nokogiri::XML s_xml
-  subtitle_tags = xml.xpath('/atom:feed/atom:subtitle', :atom => 'http://www.w3.org/2005/Atom')
-  total = nil
-  if subtitle_tags.length > 0
-    total = subtitle_tags.first.text.match(/([0-9]*)\s*\.?\s*$/)[1].to_i
-  end
+  uri = URI("http://data.rechtspraak.nl/uitspraken/zoeken?max=#{max}#{return_statement}&from=#{from}")
+  res = Net::HTTP.get_response(uri)
 
   docs = []
-
+  total = nil
   id=nil
-  xml.xpath('/atom:feed/atom:id', :atom => 'http://www.w3.org/2005/Atom').each do |id_tag|
-    id = id_tag.text
-  end
+  if res.is_a?(Net::HTTPSuccess)
+    xml = Nokogiri::XML res.body
 
-  xml.xpath('/atom:feed/atom:entry', :atom => 'http://www.w3.org/2005/Atom').each do |entry|
-    doc = parse_doc(entry)
-    docs << doc
+    subtitle_tags = xml.xpath('/atom:feed/atom:subtitle', :atom => 'http://www.w3.org/2005/Atom')
+    if subtitle_tags.length > 0
+      total = subtitle_tags.first.text.match(/([0-9]*)\s*\.?\s*$/)[1].to_i
+    end
+
+    xml.xpath('/atom:feed/atom:id', :atom => 'http://www.w3.org/2005/Atom').each do |id_tag|
+      id = id_tag.text
+    end
+
+    xml.xpath('/atom:feed/atom:entry', :atom => 'http://www.w3.org/2005/Atom').each do |entry|
+      doc = parse_doc(entry)
+      docs << doc
+    end
+  else
+    error = "Could not open URL #{uri.to_s}"
   end
 
   if error
-    reponse[:error] = error
+    response[:error] = error
   else
     if id
       response[:id]=id
