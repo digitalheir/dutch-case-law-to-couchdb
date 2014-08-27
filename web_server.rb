@@ -9,7 +9,7 @@ MAPPING = JSON.parse open('metalex_converter/rechtspraak_mapping.json').read
 CONVERTER = RechtspraakToMetalexConverter.new(MAPPING)
 
 # Open given ECLI on rechtspraak.nl, convert to Metalex, return converted
-get 'ecli/:ecli' do
+get '/ecli/:ecli' do
   if params[:return] == 'META'
     return_type = 'META'
   else
