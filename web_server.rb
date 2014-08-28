@@ -7,6 +7,7 @@ require 'json'
 
 MAPPING = JSON.parse open('metalex_converter/rechtspraak_mapping.json').read
 CONVERTER = RechtspraakToMetalexConverter.new(MAPPING)
+ATOM_PREFIXES = {:atom => 'http://www.w3.org/2005/Atom'}
 
 # Open given ECLI on rechtspraak.nl, convert to Metalex, return converted
 get '/doc/:ecli' do
@@ -73,19 +74,20 @@ def parse_doc(entry)
   doc
 end
 
-get '/search' do
-  response = {}
-  error=nil
-  if params[:max]
-    max = params[:max].to_i
+def get_max s_max
+  if s_max
+    max = s_max.to_i
   else
     max = 1000
   end
   if max > 1000 or max < 1
     error = "Return limit needs to be a number between 1 and 1000 inclusive"
   end
+  return max, error
+end
 
-  if params[:return] and params[:return].match /meta/i
+def get_return s_return
+  if s_return and s_return.match /meta/i
     return_type = 'META'
   else
     return_type = 'DOC'
@@ -94,17 +96,63 @@ get '/search' do
   if return_type=='DOC'
     return_statement = "&return=DOC"
   end
+  return return_statement, return_type
+end
 
+def get_param param, value
+  if value
+    return "&#{param}=#{value}", value
+  else
+    return '', nil
+  end
+end
+
+def get_type s
+  if s
+    if s.match /Conclusie/i
+      return '&type=Conclusie', 'Conclusie'
+    elsif s.match /Uitspraak/i
+      return '&type=Uitspraak', 'Uitspraak'
+    end
+  end
+  return '', nil
+end
+
+
+def get_sort(s_sort)
+  if s_sort and s_sort.match /DESC/i
+    'DESC'
+  else
+    'ASC'
+  end
+end
+
+def get_from(s_from)
   from = 0
-  if params[:from]
-    from = params[:from].to_i
+  if s_from
+    from = s_from.to_i
   end
 
   if from < 0
     from = 0
   end
+  from
+end
 
-  uri = URI("http://data.rechtspraak.nl/uitspraken/zoeken?max=#{max}#{return_statement}&from=#{from}")
+get '/search' do
+  response = {}
+
+  max, error = get_max params[:max]
+  return_statement, return_type = get_return params[:return]
+  from = get_from params[:from]
+  sort = get_sort params[:sort]
+  replaces_statement, replaces = get_param 'replaces', params[:replaces]
+  date_statement, date = '' #get_param 'date', params[:date]
+  modified_statement, modified = '' #get_param 'modified', params[:modified]
+  type_statement, type = get_type params[:type]
+  subject_statement, subject = get_param 'subject', params[:subject]
+
+  uri = URI("http://data.rechtspraak.nl/uitspraken/zoeken?max=#{max}#{return_statement}#{replaces_statement}#{date_statement}#{modified_statement}#{type_statement}#{subject_statement}&from=#{from}&sort=#{sort}")
   res = Net::HTTP.get_response(uri)
 
   docs = []
@@ -112,17 +160,16 @@ get '/search' do
   id=nil
   if res.is_a?(Net::HTTPSuccess)
     xml = Nokogiri::XML res.body
-
-    subtitle_tags = xml.xpath('/atom:feed/atom:subtitle', :atom => 'http://www.w3.org/2005/Atom')
+    subtitle_tags = xml.xpath('/atom:feed/atom:subtitle', ATOM_PREFIXES)
     if subtitle_tags.length > 0
       total = subtitle_tags.first.text.match(/([0-9]*)\s*\.?\s*$/)[1].to_i
     end
 
-    xml.xpath('/atom:feed/atom:id', :atom => 'http://www.w3.org/2005/Atom').each do |id_tag|
+    xml.xpath('/atom:feed/atom:id', ATOM_PREFIXES).each do |id_tag|
       id = id_tag.text
     end
 
-    xml.xpath('/atom:feed/atom:entry', :atom => 'http://www.w3.org/2005/Atom').each do |entry|
+    xml.xpath('/atom:feed/atom:entry', ATOM_PREFIXES).each do |entry|
       doc = parse_doc(entry)
       docs << doc
     end
@@ -139,12 +186,24 @@ get '/search' do
     response[:max] = max
     response[:from] = from
     response[:return] = return_type
-    if total
-      response[:total] = total
-    end
+    add_to_if_exists response, replaces, 'replaces'
+    add_to_if_exists response, total, 'total'
+    add_to_if_exists response, date, 'date'
+    add_to_if_exists response, modified, 'modified'
+    add_to_if_exists response, type, 'type'
+    add_to_if_exists response, subject, 'subject'
+
     response[:docs] = docs
   end
+
+
   content_type 'application/json'
   response.to_json
+end
+
+def add_to_if_exists(response, value, key)
+  if value
+    response[key]=value
+  end
 end
 
