@@ -15,13 +15,11 @@ Metadata is processed considerably; refer to `metadata_handler.rb` to see how di
 To make the content markup Metalex-compliant, almost all tags are made into inline elements. This is because rechtspraak.nl does not have an existing XML schema, and the XML found is too wild to try and conform to a more descriptive Metalex schema. The original tag names persist in the `name` attribute, though, so no information is lost.
 
 ### Examples 
-[http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177](http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177)
-
+[http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177](http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177)<br />
 Will return a full document with metadata
 
 
-[http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META](http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META)
-
+[http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META](http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META)<br />
 Will return only metadata for a given ECLI
  
 ## Search API
@@ -43,13 +41,11 @@ The root URL is [http://dutch-case-law.herokuapp.com/search](http://dutch-case-l
 |creator  |String         |       |Return only cases for given judicial body|
                            
 ### Examples:
-[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META)
-
+[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META)<br />
 Gives back the first page of cases that rechtspraak has at least metadata for.
 
 
-[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC)
-
+[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC)<br />
 And this for cases for which documents are available.
 
                           
