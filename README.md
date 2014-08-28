@@ -1,5 +1,5 @@
 # Rechtspraak to Metalex
-This repository contains scripts to get Dutch case law documents from data.rechtspraak.nl and convert them to a [Metalex](http://metalex.eu/)-compliant form.
+This repository describes a web service to get Dutch case law documents from data.rechtspraak.nl and convert them to a [Metalex](http://metalex.eu/)-compliant form.
 
 ## Document API
 Use this API to get Dutch case law documents. Both metadata and markup are converted to the Metalex standard. The root of this service is at [http://dutch-case-law.herokuapp.com/doc/<ecli>](http://dutch-case-law.herokuapp.com/doc/).

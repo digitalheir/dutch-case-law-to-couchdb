@@ -10,6 +10,10 @@ CONVERTER = RechtspraakToMetalexConverter.new(MAPPING)
 ATOM_PREFIXES = {:atom => 'http://www.w3.org/2005/Atom'}
 
 # Open given ECLI on rechtspraak.nl, convert to Metalex, return converted
+get '/doc' do
+  redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
+end
+
 get '/doc/:ecli' do
   if params[:return] == 'META'
     return_type = 'META'
@@ -40,7 +44,7 @@ get '/doc/:ecli' do
 end
 
 get '/' do
-  'hello world!'
+  redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
 end
 
 def parse_doc(entry)
@@ -206,4 +210,9 @@ def add_to_if_exists(response, value, key)
     response[key]=value
   end
 end
+
+get '/*' do
+redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
+end
+
 
