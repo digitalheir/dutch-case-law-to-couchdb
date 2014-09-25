@@ -1,6 +1,8 @@
 # Rechtspraak to Metalex
 This repository describes a web service to get Dutch case law documents from data.rechtspraak.nl and convert them to a [Metalex](http://metalex.eu/)-compliant form.
 
+This is a derivative of the rechtspraak.nl web service. Original documentation is available in Dutch [here](http://www.rechtspraak.nl/Uitspraken-en-Registers/Uitspraken/Open-Data/Documents/Technische-documentatie-Open-Data-van-de-Rechtspraak.pdf). 
+
 ## Document API
 Use this API to get Dutch case law documents. Both metadata and markup are converted to the Metalex standard. The root of this service is at [http://dutch-case-law.herokuapp.com/doc/<ecli>](http://dutch-case-law.herokuapp.com/doc/).
 
@@ -34,8 +36,8 @@ The root URL is [http://dutch-case-law.herokuapp.com/search](http://dutch-case-l
 |from     |Int, at least 0|0      |The numbers of documents to skip|
 |sort     |`ASC` or `DESC`|`ASC`  |Which direction to sort the documents (sorted on modification date)|
 |replaces |An LJN string  |       |Returns documents that correspond to the antiquated LJN identifier|
-|date     |1 or 2 dates formatted `YYYY-MM-DD`||**NOTE: Not in use.** If 1 date is specified, returns only cases for that day. If 2 dates are provided, returns cases between those dates.|
-|modified |1 or 2 dates formatted `YYYY-MM-DD`||**NOTE: Not in use.** Same as date, but for document changes|
+|date     |A JSON array of 1 or 2 dates formatted `YYYY-MM-DD`. Ex: ["2009-01-01", "2014-09-25"]||If 1 date is specified, returns only cases for that day. If 2 dates are provided, returns cases between those dates.|
+|modified |A JSON array of 1 or 2 dates formatted `YYYY-MM-DD`. Ex: ["2009-01-01", "2014-09-25"]||If 1 date is specifid, returns that have been modified from that date onwards.  If 2 dates are specified, returns documents changed beween those dates.|
 |type     |`Uitspraak` or `Conclusie`||Which type of case to return, default both|
 |subject  |URI            |       |Return only cases for given legal subject|
 |creator  |String         |       |Return only cases for given judicial body|
@@ -48,4 +50,5 @@ Gives back the first page of cases that rechtspraak has at least metadata for.
 [http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC)<br />
 And this for cases for which documents are available.
 
-                          
+## Limitations:
+Error handling is not very graceful yet. For some fields, if the value is set wrong, the server may raise an exception instead of return an error object telling you what you did wrong.                          

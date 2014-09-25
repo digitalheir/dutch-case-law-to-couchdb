@@ -78,19 +78,21 @@ def parse_doc(entry)
   doc
 end
 
-def get_max s_max
+def get_max s_max, query_params
   if s_max
     max = s_max.to_i
   else
     max = 1000
   end
+  error=nil
   if max > 1000 or max < 1
     error = "Return limit needs to be a number between 1 and 1000 inclusive"
   end
+  query_params[:max]=max
   return max, error
 end
 
-def get_return s_return
+def get_return s_return, query_params
   if s_return and s_return.match /meta/i
     return_type = 'META'
   else
@@ -98,40 +100,56 @@ def get_return s_return
   end
   return_statement =''
   if return_type=='DOC'
-    return_statement = "&return=DOC"
+    query_params[:return]='DOC'
   end
-  return return_statement, return_type
+
+  return_type
 end
 
-def get_param param, value
-  if value
-    return "&#{param}=#{value}", value
-  else
-    return '', nil
-  end
-end
-
-def get_type s
-  if s
-    if s.match /Conclusie/i
-      return '&type=Conclusie', 'Conclusie'
-    elsif s.match /Uitspraak/i
-      return '&type=Uitspraak', 'Uitspraak'
+def get_date_param param, value, query_params
+  begin
+    if value
+      dates = JSON.parse value
+      if dates.length > 0
+        query_params[param] = dates
+      end
     end
   end
-  return '', nil
 end
 
-
-def get_sort(s_sort)
-  if s_sort and s_sort.match /DESC/i
-    'DESC'
+def get_param param, value, query_params
+  if value
+    query_params[param]=value
+    value
   else
-    'ASC'
+    nil
   end
 end
 
-def get_from(s_from)
+def get_type s, query_params
+  if s
+    if s.match /Conclusie/i
+      type= 'Conclusie'
+    elsif s.match /Uitspraak/i
+      type= 'Uitspraak'
+    end
+    query_params['type', type]
+    return type
+  end
+  nil
+end
+
+
+def get_sort(s_sort, query_params)
+  sort = 'ASC'
+  if s_sort and s_sort.match /DESC/i
+    sort = 'DESC'
+  end
+  query_params[:sort]=sort
+  sort
+end
+
+def get_from(s_from, query_params)
   from = 0
   if s_from
     from = s_from.to_i
@@ -140,23 +158,31 @@ def get_from(s_from)
   if from < 0
     from = 0
   end
+  query_params[:from]=from
   from
 end
 
-get '/search' do
+def get_search_response params
   response = {}
 
-  max, error = get_max params[:max]
-  return_statement, return_type = get_return params[:return]
-  from = get_from params[:from]
-  sort = get_sort params[:sort]
-  replaces_statement, replaces = get_param 'replaces', params[:replaces]
-  date_statement, date = '' #get_param 'date', params[:date]
-  modified_statement, modified = '' #get_param 'modified', params[:modified]
-  type_statement, type = get_type params[:type]
-  subject_statement, subject = get_param 'subject', params[:subject]
+  uri = URI.parse "http://data.rechtspraak.nl/uitspraken/zoeken"
+  query_params = {}
 
-  uri = URI("http://data.rechtspraak.nl/uitspraken/zoeken?max=#{max}#{return_statement}#{replaces_statement}#{date_statement}#{modified_statement}#{type_statement}#{subject_statement}&from=#{from}&sort=#{sort}")
+  max, error = get_max params[:max], query_params
+
+  return_type = get_return params[:return], query_params
+  from = get_from(params[:from], query_params)
+  get_sort(params[:sort], query_params)
+  replaces = get_param('replaces', params[:replaces], query_params)
+  date = get_date_param('date', params[:date], query_params)
+  modified = get_date_param('modified', params[:modified], query_params)
+  type = get_type(params[:type], query_params)
+  subject = get_param('subject', params[:subject], query_params)
+
+  uri.query = URI.encode_www_form(query_params)
+
+
+  # ?
   res = Net::HTTP.get_response(uri)
 
   docs = []
@@ -168,11 +194,9 @@ get '/search' do
     if subtitle_tags.length > 0
       total = subtitle_tags.first.text.match(/([0-9]*)\s*\.?\s*$/)[1].to_i
     end
-
     xml.xpath('/atom:feed/atom:id', ATOM_PREFIXES).each do |id_tag|
       id = id_tag.text
     end
-
     xml.xpath('/atom:feed/atom:entry', ATOM_PREFIXES).each do |entry|
       doc = parse_doc(entry)
       docs << doc
@@ -199,8 +223,11 @@ get '/search' do
 
     response[:docs] = docs
   end
+  response
+end
 
-
+get '/search' do
+  response = get_search_response(params)
   content_type 'application/json'
   response.to_json
 end
@@ -212,7 +239,7 @@ def add_to_if_exists(response, value, key)
 end
 
 get '/*' do
-redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
+  redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
 end
 
 
