@@ -4,12 +4,12 @@ require 'nokogiri'
 require 'set'
 require 'json'
 
-SEARCH_FOR_ELEMENT = 'alt'
+SEARCH_FOR_ELEMENT = 'table'
 SEARCH_IN_FOLDER = 'rich'
 
 # add element names recursively to given set
 def has_element name, root
-  if root.name == name
+  if root.name == name and root.element_children.length > 0
     return true
   else
     root.children.each do |child|

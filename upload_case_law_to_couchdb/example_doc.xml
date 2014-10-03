@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metalex:root xmlns:metalex="http://www.metalex.eu/metalex/1.0"
+              id=":open-rechtspraak" name="open-rechtspraak">
+  <metalex:mcontainer xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dcterms="http://purl.org/dc/terms/"
+                      xmlns:psi="http://psi.rechtspraak.nl/" xmlns:bwb="bwb-dl"
+                      xmlns:ecli="https://e-justice.europa.eu/ecli"
+                      xmlns:cvdr="http://decentrale.regelgeving.overheid.nl/cvdr/"
+                      xmlns:eu="http://publications.europa.eu/celex/"
+                      xmlns:tr="http://tuchtrecht.overheid.nl/"
+                      id="ECLI:NL:GHARL:2014:2143:META" name="mcontainer">
+    <metalex:meta name="meta" about="" property="dcterms:modified" content="2014-07-16T04:05:21"
+                  id="ECLI:NL:GHARL:2014:2143:META:1"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:creator"
+                  content="http://standaarden.overheid.nl/owms/terms/Gerechtshof_Arnhem-Leeuwarden"
+                  id="ECLI:NL:GHARL:2014:2143:META:2"/>
+    <metalex:meta name="meta" about="http://standaarden.overheid.nl/owms/terms/Gerechtshof_Arnhem-Leeuwarden"
+                  property="rdfs:label" content="Gerechtshof Arnhem-Leeuwarden" id="ECLI:NL:GHARL:2014:2143:META:3"/>
+    <metalex:meta name="meta" about="dcterms:creator" property="rdfs:label" content="Instantie"
+                  id="ECLI:NL:GHARL:2014:2143:META:4"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:date" content="2014-03-11" id="ECLI:NL:GHARL:2014:2143:META:5"/>
+    <metalex:meta name="meta" about="dcterms:date" property="rdfs:label" content="Uitspraakdatum"
+                  id="ECLI:NL:GHARL:2014:2143:META:6"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:type" content="http://psi.rechtspraak.nl/uitspraak"
+                  id="ECLI:NL:GHARL:2014:2143:META:7"/>
+    <metalex:meta name="meta" about="http://psi.rechtspraak.nl/uitspraak" property="rdfs:label" content="Uitspraak"
+                  id="ECLI:NL:GHARL:2014:2143:META:8"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="psi:procedure" content="http://psi.rechtspraak.nl/procedure#hogerBeroep"
+                  id="ECLI:NL:GHARL:2014:2143:META:9"/>
+    <metalex:meta name="meta" about="http://psi.rechtspraak.nl/procedure#hogerBeroep" property="rdfs:label"
+                  content="Hoger beroep" id="ECLI:NL:GHARL:2014:2143:META:10"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:coverage" content="http://deeplink.rechtspraak.nl/jurisdiction?id=NL"
+                  id="ECLI:NL:GHARL:2014:2143:META:11"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="http://purl.org/dc/terms/hasVersion" content="Rechtspraak.nl"
+                  id="ECLI:NL:GHARL:2014:2143:META:12"/>
+    <metalex:meta name="meta"
+                  about="http://deeplink.rechtspraak.nl/relation?subject=ECLI:NL:GHARL:2014:2143&amp;object=ECLI:NL:RBZUT:2012:BV9956"
+                  property="rdf:subject" content="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  id="ECLI:NL:GHARL:2014:2143:META:13"/>
+    <metalex:meta name="meta"
+                  about="http://deeplink.rechtspraak.nl/relation?subject=ECLI:NL:GHARL:2014:2143&amp;object=ECLI:NL:RBZUT:2012:BV9956"
+                  property="rdf:predicate" content="dcterms:relation" id="ECLI:NL:GHARL:2014:2143:META:14"/>
+    <metalex:meta name="meta"
+                  about="http://deeplink.rechtspraak.nl/relation?subject=ECLI:NL:GHARL:2014:2143&amp;object=ECLI:NL:RBZUT:2012:BV9956"
+                  property="rdf:object" content="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:RBZUT:2012:BV9956"
+                  id="ECLI:NL:GHARL:2014:2143:META:15"/>
+    <metalex:meta name="meta"
+                  about="http://deeplink.rechtspraak.nl/relation?subject=ECLI:NL:GHARL:2014:2143&amp;object=ECLI:NL:RBZUT:2012:BV9956"
+                  property="psi:gevolg" content="http://psi.rechtspraak.nl/gevolg#meerdere afhandelingswijzen"
+                  id="ECLI:NL:GHARL:2014:2143:META:16"/>
+    <metalex:meta name="meta"
+                  about="http://deeplink.rechtspraak.nl/relation?subject=ECLI:NL:GHARL:2014:2143&amp;object=ECLI:NL:RBZUT:2012:BV9956"
+                  property="psi:typeRelatie" content="http://psi.rechtspraak.nl/hogerBeroep"
+                  id="ECLI:NL:GHARL:2014:2143:META:17"/>
+    <metalex:meta name="meta"
+                  about="http://deeplink.rechtspraak.nl/relation?subject=ECLI:NL:GHARL:2014:2143&amp;object=ECLI:NL:RBZUT:2012:BV9956"
+                  property="psi:aanleg" content="http://psi.rechtspraak.nl/eerdereAanleg"
+                  id="ECLI:NL:GHARL:2014:2143:META:18"/>
+    <metalex:meta name="meta"
+                  about="http://deeplink.rechtspraak.nl/relation?subject=ECLI:NL:GHARL:2014:2143&amp;object=ECLI:NL:RBZUT:2012:BV9956"
+                  property="rdf:type" content="rdf:statement" id="ECLI:NL:GHARL:2014:2143:META:19"/>
+    <metalex:meta name="meta" about="dcterms:relation" property="rdfs:label" content="Formele relatie"
+                  id="ECLI:NL:GHARL:2014:2143:META:20"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="psi:zaaknummer" content="21-001552-12" id="ECLI:NL:GHARL:2014:2143:META:21"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:subject" content="http://psi.rechtspraak.nl/rechtsgebied#strafrecht"
+                  id="ECLI:NL:GHARL:2014:2143:META:22"/>
+    <metalex:meta name="meta" about="http://psi.rechtspraak.nl/rechtsgebied#strafrecht" property="rdfs:label"
+                  content="Strafrecht" id="ECLI:NL:GHARL:2014:2143:META:23"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:accessRights" content="public" id="ECLI:NL:GHARL:2014:2143:META:24"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:modified" content="2014-03-19T10:55:16" id="ECLI:NL:GHARL:2014:2143:META:25"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:issued" content="2014-03-19" id="ECLI:NL:GHARL:2014:2143:META:26"/>
+    <metalex:meta name="meta" about="dcterms:issued" property="rdfs:label" content="Publicatiedatum"
+                  id="ECLI:NL:GHARL:2014:2143:META:27"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:publisher" content="http://rechtspraak.nl/" id="ECLI:NL:GHARL:2014:2143:META:28"/>
+    <metalex:meta name="meta" about="http://rechtspraak.nl/" property="rdfs:label" content="Raad voor de Rechtspraak"
+                  id="ECLI:NL:GHARL:2014:2143:META:29"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:title"
+                  content="ECLI:NL:GHARL:2014:2143 Gerechtshof Arnhem-Leeuwarden , 11-03-2014 / 21-001552-12"
+                  id="ECLI:NL:GHARL:2014:2143:META:30"/>
+    <metalex:meta name="meta" about="http://deeplink.rechtspraak.nl/uitspraak?id=ECLI:NL:GHARL:2014:2143"
+                  property="dcterms:abstract" content="Economie. Co-vergister." id="ECLI:NL:GHARL:2014:2143:META:31"/>
+  </metalex:mcontainer>
+  <metalex:block xmlns="http://www.rechtspraak.nl/schema/rechtspraak-1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" id="ECLI:NL:GHARL:2014:2143:DOC" lang="nl" xml:space="preserve" name="uitspraak">
+      <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:para" name="para">Afdeling strafrecht</metalex:inline>
+
+    <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:parablock" lol="oneindig" name="parablock">
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:parablock:para:1" name="para">Parketnummer:	21-001552-12 </metalex:inline>
+      </metalex:inline>
+      <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:1" role="procesverloop" name="section">
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:1:title" name="title">Verkort arrest van de economische kamer</metalex:inline>
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:1:para:1" name="para">gewezen op het hoger beroep, ingesteld tegen het vonnis van de economische politierechter in de rechtbank Zutphen van 26 maart 2012 met parketnummer 06-925052-10 in de strafzaak tegen</metalex:inline>
+      </metalex:inline>
+      <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:3" name="section">
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:3:title" name="title">Het hoger beroep</metalex:inline>
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:3:para:1" name="para"/>
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:3:parablock" name="parablock">
+          <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:section:3:parablock:para" name="para">De verdachte en de officier van justitie hebben tegen het hiervoor genoemde vonnis hoger beroep ingesteld.</metalex:inline>
+        </metalex:inline>
+      </metalex:inline>
+      <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:bridgehead:1" name="bridgehead">
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:bridgehead:1:nr" name="nr">1</metalex:inline>
+        <?linebreak?>verdachte op of omstreeks 21 januari 2009, althans in of omstreeks de maand januari 2009, in de gemeente Putten, tezamen en in vereniging met anderen of een ander, althans alleen, zonder vergunning, al dan niet opzettelijk, op andere wijze dan met behulp van een werk, een hoeveelheid percolaatwater, zijnde (een) afvalstof(fen), verontreinigende en/of schadelijke stof(fen) heeft gebracht in een sloot op of nabij perceel [perceel], zijnde een oppervlaktewater, door dat percolaatwater weg of af te laten stromen of vloeien in die sloot; </metalex:inline>
+      <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:bridgehead:2" name="bridgehead" role="bold smallcaps">
+        <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:bridgehead:1:nr" name="nr">1</metalex:inline>
+        <?linebreak?>verdachte op of omstreeks 21 januari 2009, althans in of omstreeks de maand januari 2009, in de gemeente Putten, tezamen en in vereniging met anderen of een ander, althans alleen, zonder vergunning, al dan niet opzettelijk, op andere wijze dan met behulp van een werk, een hoeveelheid percolaatwater, zijnde (een) afvalstof(fen), verontreinigende en/of schadelijke stof(fen) heeft gebracht in een sloot op of nabij perceel [perceel], zijnde een oppervlaktewater, door dat percolaatwater weg of af te laten stromen of vloeien in die sloot; </metalex:inline>
+      <metalex:inline id="ECLI:NL:GHARL:2014:2143:DOC:bridgehead:2" name="bridgehead" role=" bold">bla bla </metalex:inline>
+       <metalex:inline mark="-" id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist" name="itemizedlist">
+          <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:1" name="listitem">
+            <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:1:para" name="para">vernietigt de aangevallen uitspraak;</metalex:inline>
+          </metalex:inline>
+          <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:2" name="listitem">
+            <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:2:para" name="para">verklaart het bij de rechtbank ingestelde beroep van appellante tegen het besluit van 22 februari 2010 gegrond;</metalex:inline>
+          </metalex:inline>
+          <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:3" name="listitem">
+            <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:3:para" name="para">vernietigt het besluit van 22 februari 2010;</metalex:inline>
+          </metalex:inline>
+          <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:4" name="listitem">
+            <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:4:para" name="para">	herroept het besluit van 12 juni 2009;</metalex:inline>
+          </metalex:inline>
+          <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:5" name="listitem">
+            <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:5:para" name="para">	bepaalt dat deze uitspraak in de plaats treedt van het vernietigde besluit;</metalex:inline>
+          </metalex:inline>
+          <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:6" name="listitem">
+            <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:6:para" name="para">	veroordeelt de minister tot vergoeding van de door appellante in verband  met de behandeling van het beroep en het hoger beroep gemaakte proceskosten tot een bedrag van € 1.888,- (zegge: duizendachthonderdenachtentachtig euro);</metalex:inline>
+          </metalex:inline>
+          <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:7" name="listitem">
+            <metalex:inline id="ECLI:NL:CBB:2013:166:DOC:section:6:itemizedlist:listitem:7:para" name="para">	gelast dat de minister het door appellante voor de behandeling van het beroep en het hoger beroep betaalde griffierecht ten bedrage van in totaal € 746,- (zegge: zevenhonderdenzesenveertig euro) aan haar vergoedt.</metalex:inline>
+          </metalex:inline>
+        </metalex:inline>
+    <!-- Video -->
+    <metalex:inline id="ECLI:NL:OGEAA:2012:2:DOC:uitspraak.info:mediaobject" name="mediaobject">
+          <metalex:inline id="ECLI:NL:OGEAA:2012:2:DOC:uitspraak.info:mediaobject:videoobject" name="videoobject">
+            <metalex:inline depth="0" width="0" fileref="" format="video/mpeg" id="ECLI:NL:OGEAA:2012:2:DOC:uitspraak.info:mediaobject:videoobject:videodata" name="videodata"/>
+          </metalex:inline>
+        </metalex:inline>
+
+                           <!-- Images -->
+    <metalex:inline id="ECLI:NL:CBB:2013:65:DOC:section:2:paragroup:3:mediaobject" name="mediaobject">
+            <metalex:inline id="ECLI:NL:CBB:2013:65:DOC:section:2:paragroup:3:mediaobject:imageobject" name="imageobject">
+              <metalex:inline align="center" depth="1702" width="1255" fileref="a6c0531a-aded-414d-912c-14e2eda8876f" format="image/jpeg" scale="32" id="ECLI:NL:CBB:2013:65:DOC:section:2:paragroup:3:mediaobject:imageobject:imagedata" name="imagedata"/>
+            </metalex:inline>
+          </metalex:inline>
+        <metalex:inline id="ECLI:NL:GHDHA:2013:BY8716:DOC:para:23:inlinemediaobject" name="inlinemediaobject">
+          <metalex:inline id="ECLI:NL:GHDHA:2013:BY8716:DOC:para:23:inlinemediaobject:alt" name="alt">Afbeelding van de derde generatie My Little Pony</metalex:inline>
+          <metalex:inline id="ECLI:NL:GHDHA:2013:BY8716:DOC:para:23:inlinemediaobject:imageobject" name="imageobject">
+            <metalex:inline fileref="5db3d06b-22fe-401d-90d2-9248815add93" width="200" depth="224" format="image/gif" align="left" id="ECLI:NL:GHDHA:2013:BY8716:DOC:para:23:inlinemediaobject:imageobject:imagedata" name="imagedata"/>
+          </metalex:inline>
+        </metalex:inline>
+
+    <!-- Footnotes -->
+    <metalex:inline linkend="_f1bba303-60e4-478a-8465-7ff7fdd2a12d" id="ECLI:NL:CRVB:2012:BX2815:DOC:section:1:paragroup:2:paragroup:5:para:1:footnote-ref" name="footnote-ref"/>
+     <metalex:inline id="_f1bba303-60e4-478a-8465-7ff7fdd2a12d" label="1" name="footnote">
+        <metalex:inline id="_f1bba303-60e4-478a-8465-7ff7fdd2a12d:para" name="para">Dit is een voetnoot</metalex:inline>
+      </metalex:inline>
+    <metalex:inline linkend="1_f1bba303-60e4-478a-8465-7ff7fdd2a12d" id="ECLI:NL:CRVB:2012:BX2815:DOC:section:1:paragroup:2:paragroup:d5:para:1:footnote-ref" name="footnote-ref"/>
+     <metalex:inline id="1_f1bba303-60e4-478a-8465-7ff7fdd2a12d" label="" name="footnote">
+        <metalex:inline id="1_f1bba303-60e4-478a-8465-7ff7fdd2a12d:para" name="para">Dit is een voetnoot</metalex:inline>
+      </metalex:inline>
+
+
+    <!-- Lists -->
+       <metalex:inline numeration="arabic" id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1" name="orderedlist">
+        <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:1" name="listitem">
+          <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:1:para" name="para">Inburgeringsplichtig is de vreemdeling met rechtmatig verblijf in de zin van artikel 8, onderdelen a tot en met e, dan wel l, van de Vreemdelingenwet 2000, die: </metalex:inline>
+        </metalex:inline>
+        <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:2" name="listitem">
+          <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:2:para" name="para">anders dan voor een tijdelijk doel in Nederland verblijft, of </metalex:inline>
+        </metalex:inline>
+        <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:3" name="listitem">
+          <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:3:para" name="para">geestelijke bedienaar is. </metalex:inline>
+        </metalex:inline>
+        <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:4" name="listitem">
+          <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:4:para" name="para">Bij algemene maatregel van bestuur worden regels gesteld over het voortduren van de inburgeringsplicht in geval van tijdelijke beëindiging van de in het eerste lid bedoelde omstandigheden.  </metalex:inline>
+        </metalex:inline>
+        <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:5" name="listitem">
+          <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:5:para" name="para">Bij of krachtens algemene maatregel van bestuur worden regels gesteld omtrent het tijdelijke doel, bedoeld in het eerste lid, waarbij zo veel mogelijk wordt aangesloten bij het verblijfsrecht van tijdelijke aard, bedoeld in artikel 21, eerste lid onderdeel b, van de Vreemdelingenwet 2000.  </metalex:inline>
+        </metalex:inline>
+        <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:6" name="listitem">
+          <metalex:inline id="ECLI:NL:CRVB:2013:2269:DOC:orderedlist:1:listitem:6:para" name="para">De inburgeringsplicht, bedoeld in het eerste lid, wordt niet met terugwerkende kracht gevestigd. </metalex:inline>
+        </metalex:inline>
+      </metalex:inline>
+
+    <!-- Tables -->
+
+     <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable" name="informaltable">
+              <metalex:inline cols="3" id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup" name="tgroup">
+                <metalex:inline colname="colA" id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:colspec:1" name="colspec"/>
+                <metalex:inline colname="colB" id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:colspec:2" name="colspec"/>
+                <metalex:inline colname="colC" id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:colspec:3" name="colspec"/>
+                <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody" name="tbody">
+                  <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:1" name="row">
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:1:entry:1" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:1:entry:1:para" name="para">Register </metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:1:entry:2" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:1:entry:2:para" name="para">Resultaten</metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:1:entry:3" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:1:entry:3:para" name="para">Details</metalex:inline>
+                    </metalex:inline>
+                  </metalex:inline>
+                  <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:2" name="row">
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:2:entry:1" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:2:entry:1:para" name="para">NSIS </metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:2:entry:2" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:2:entry:2:para" name="para">0</metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:2:entry:3" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:2:entry:3:para" name="para">Toon</metalex:inline>
+                    </metalex:inline>
+                  </metalex:inline>
+                  <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:3" name="row">
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:3:entry:1" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:3:entry:1:para" name="para">CVI</metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:3:entry:2" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:3:entry:2:para" name="para">0</metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:3:entry:3" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:3:entry:3:para" name="para">Toon</metalex:inline>
+                    </metalex:inline>
+                  </metalex:inline>
+                  <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4" name="row">
+                    <metalex:inline morerows="3" id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4:entry:1" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4:entry:1:para:1" name="para">KTR</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4:entry:1:para:2" name="para"/>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4:entry:2" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4:entry:2:para" name="para">Status:</metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4:entry:3" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:4:entry:3:para" name="para">WAM</metalex:inline>
+                    </metalex:inline>
+                  </metalex:inline>
+                  <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:5" name="row">
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:5:entry:1" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:5:entry:1:para" name="para">Attendering:</metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:5:entry:2" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:5:entry:2:para" name="para">APK        </metalex:inline>
+                    </metalex:inline>
+                  </metalex:inline>
+                  <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:6" name="row">
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:6:entry:1" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:6:entry:1:para" name="para">Voertuig:</metalex:inline>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:6:entry:2" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:6:entry:2:para:1" name="para">MERCEDES-BENZ</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:6:entry:2:para:2" name="para">S 320: SEDAN</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:6:entry:2:para:3" name="para">BLAUW</metalex:inline>
+                    </metalex:inline>
+                  </metalex:inline>
+                  <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7" name="row">
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:1" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:1:para:1" name="para">Persoon:</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:1:para:2" name="para"/>
+                    </metalex:inline>
+                    <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:2" name="entry">
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:2:para:1" name="para">Rechtspersoon (tenaamstelling rechtspersoon)</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:2:para:2" name="para">STICHTING [D]</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:2:para:3" name="para">[adres]</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:2:para:4" name="para">[adres]</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:2:para:5" name="para">[adres]</metalex:inline>
+                      <metalex:inline id="ECLI:NL:HR:2014:965:DOC:section:1:paragroup:1:paragroup:2:informaltable:tgroup:tbody:row:7:entry:2:para:6" name="para">[adres]</metalex:inline>
+                    </metalex:inline>
+                  </metalex:inline>
+                </metalex:inline>
+              </metalex:inline>
+            </metalex:inline>
+
+    <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2" name="informaltable">
+          <metalex:inline cols="23" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup" name="tgroup">
+            <metalex:inline colname="colA" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:1" name="colspec"/>
+            <metalex:inline colname="colB" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:2" name="colspec"/>
+            <metalex:inline colname="colC" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:3" name="colspec"/>
+            <metalex:inline colname="colD" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:4" name="colspec"/>
+            <metalex:inline colname="colE" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:5" name="colspec"/>
+            <metalex:inline colname="colF" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:6" name="colspec"/>
+            <metalex:inline colname="colG" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:7" name="colspec"/>
+            <metalex:inline colname="colH" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:8" name="colspec"/>
+            <metalex:inline colname="colI" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:9" name="colspec"/>
+            <metalex:inline colname="colJ" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:10" name="colspec"/>
+            <metalex:inline colname="colK" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:11" name="colspec"/>
+            <metalex:inline colname="colL" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:12" name="colspec"/>
+            <metalex:inline colname="colM" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:13" name="colspec"/>
+            <metalex:inline colname="colN" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:14" name="colspec"/>
+            <metalex:inline colname="colO" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:15" name="colspec"/>
+            <metalex:inline colname="colP" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:16" name="colspec"/>
+            <metalex:inline colname="colQ" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:17" name="colspec"/>
+            <metalex:inline colname="colR" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:18" name="colspec"/>
+            <metalex:inline colname="colS" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:19" name="colspec"/>
+            <metalex:inline colname="colT" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:20" name="colspec"/>
+            <metalex:inline colname="colU" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:21" name="colspec"/>
+            <metalex:inline colname="colV" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:22" name="colspec"/>
+            <metalex:inline colname="colW" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:colspec:23" name="colspec"/>
+            <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody" name="tbody">
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1" name="row">
+                <metalex:inline namest="colA" nameend="colB" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colC" nameend="colD" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:2:para" name="para">Aangegeven winst </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colE" nameend="colF" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:3:para" name="para">€ </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colG" nameend="colH" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:4:para" name="para">-2.224 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colI" nameend="colK" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:5:para" name="para">€ </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colL" nameend="colM" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:6:para" name="para">15.044 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colN" nameend="colP" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:7:para" name="para">€ </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colQ" nameend="colS" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:8:para" name="para">30.018 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colT" nameend="colV" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:9:para" name="para">€ </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:1:entry:10:para" name="para">27.084 </metalex:inline>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2" name="row">
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colB" nameend="colC" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:2:para" name="para">Correcties: </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colD" nameend="colE" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:3:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colF" nameend="colG" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:4:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colH" nameend="colJ" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:5:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colK" nameend="colL" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:6:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colM" nameend="colO" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:7:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colP" nameend="colR" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:8:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colS" nameend="colU" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:9:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colV" nameend="colW" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:2:entry:10:para" name="para"/>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3" name="row">
+                <metalex:inline namest="colA" nameend="colB" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colC" nameend="colD" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:2:para" name="para">Afschrijving auto </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colE" nameend="colF" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:3:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colG" nameend="colH" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:4:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colI" nameend="colK" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:5:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colL" nameend="colM" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:6:para" name="para">1.284 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colN" nameend="colP" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:7:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colQ" nameend="colS" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:8:para" name="para">1.100 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colT" nameend="colV" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:9:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:3:entry:10:para" name="para">400 </metalex:inline>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4" name="row">
+                <metalex:inline namest="colA" nameend="colB" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colC" nameend="colD" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:2:para" name="para">Meer ontvangsten [A-festival] </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colE" nameend="colF" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:3:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colG" nameend="colH" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:4:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colI" nameend="colK" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:5:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colL" nameend="colM" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:6:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colN" nameend="colP" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:7:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colQ" nameend="colS" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:8:para" name="para">27.315 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colT" nameend="colV" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:9:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:4:entry:10:para" name="para">29.590 </metalex:inline>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5" name="row">
+                <metalex:inline namest="colA" nameend="colB" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colC" nameend="colD" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:2:para" name="para">Meer ontvangsten [A-festival] </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colE" nameend="colF" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:3:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colG" nameend="colH" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:4:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colI" nameend="colK" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:5:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colL" nameend="colM" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:6:para" name="para">2.100 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colN" nameend="colP" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:7:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colQ" nameend="colS" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:8:para" name="para">2.100 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colT" nameend="colV" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:9:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:5:entry:10:para" name="para">2.100 </metalex:inline>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6" name="row">
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colB" nameend="colC" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:2:para" name="para">Aftrek op ontvangsten geboekt </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colD" nameend="colE" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:3:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colF" nameend="colG" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:4:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colH" nameend="colJ" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:5:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colK" nameend="colL" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:6:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colM" nameend="colQ" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:7:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colR" nameend="colT" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:8:para" name="para">18.000</metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:9:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colV" nameend="colW" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:6:entry:10:para" name="para"/>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7" name="row">
+                <metalex:inline namest="colA" nameend="colB" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colC" nameend="colD" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:2:para" name="para">Niet opgegeven dagen omzet </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colE" nameend="colF" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:3:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colG" nameend="colH" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:4:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colI" nameend="colK" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:5:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colL" nameend="colM" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:6:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colN" nameend="colP" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:7:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colQ" nameend="colS" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:8:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colT" nameend="colV" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:9:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:7:entry:10:para" name="para">2.000 </metalex:inline>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8" name="row">
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colB" nameend="colC" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:2:para" name="para">Door negatieve kassen </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colD" nameend="colE" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:3:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colF" nameend="colI" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:4:para" name="para">3.000 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:5:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colK" nameend="colN" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:6:para" name="para">16.000 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:7:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colP" nameend="colR" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:8:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colS" nameend="colU" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:9:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colV" nameend="colW" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:8:entry:10:para" name="para"/>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9" name="row">
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colB" nameend="colC" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:2:para" name="para">Extra door lage bw% </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colD" nameend="colE" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:3:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colF" nameend="colI" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:4:para" name="para">20.000 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:5:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colK" nameend="colL" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:6:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colM" nameend="colO" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:7:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colP" nameend="colR" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:8:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colS" nameend="colU" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:9:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colV" nameend="colW" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:9:entry:10:para" name="para"/>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10" name="row">
+                <metalex:inline namest="colA" nameend="colB" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colC" nameend="colD" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:2:para" name="para">Meer verschuldigde OB ontvangsten </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colE" nameend="colF" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:3:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colG" nameend="colH" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:4:para" name="para">-1.782 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colI" nameend="colK" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:5:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colL" nameend="colM" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:6:para" name="para">-985 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colN" nameend="colP" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:7:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colQ" nameend="colS" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:8:para" name="para">-2.848 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colT" nameend="colV" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:9:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:10:entry:10:para" name="para">-2.634 </metalex:inline>
+                </metalex:inline>
+              </metalex:inline>
+              <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11" name="row">
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:1" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:1:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colB" nameend="colC" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:2" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:2:para" name="para">Privé gebruik auto </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colD" nameend="colE" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:3" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:3:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colF" nameend="colI" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:4" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:4:para" name="para">1.742 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:5" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:5:para" name="para">- </metalex:inline>
+                </metalex:inline>
+                <metalex:inline namest="colK" nameend="colN" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:6" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:6:para" name="para">1.742 </metalex:inline>
+                </metalex:inline>
+                <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:7" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:7:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colP" nameend="colR" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:8" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:8:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colS" nameend="colU" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:9" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:9:para" name="para"/>
+                </metalex:inline>
+                <metalex:inline namest="colV" nameend="colW" id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:10" name="entry">
+                  <metalex:inline id="ECLI:NL:GHDHA:2014:1776:DOC:section:8:informaltable:2:tgroup:tbody:row:11:entry:10:para" name="para"/>
+                </metalex:inline>
+              </metalex:inline>
+    </metalex:inline>
+    </metalex:inline>
+    </metalex:inline>
+    <!-- Foreign phrase -->
+  </metalex:block>
+</metalex:root>

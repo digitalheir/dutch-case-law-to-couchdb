@@ -1,0 +1,66 @@
+/* List styling */
+.loweralpha {
+    list-style-type: lower-alpha;
+}
+
+.arabic {
+    /*
+       NOTE: this does not mean Arabic script, but just 1, 2, 3...
+       See http://www.docbook.org/tdg5/en/html/orderedlist.html
+    */
+    list-style-type: decimal;
+}
+
+.lowerroman {
+    list-style-type: lower-roman;
+}
+
+.upperalpha {
+    list-style-type: upper-alpha;
+}
+
+.upperroman {
+    list-style-type: upper-roman;
+}
+
+/* Bridgehead and emphasis styling: */
+/* NOTE: We can't handle double underline combined with strike-through */
+.smallcaps {
+    font-variant: small-caps;
+}
+
+.caps {
+    text-transform: uppercase;
+}
+
+.underline {
+    text-decoration-line: underline;
+}
+
+.strike-through {
+    text-decoration-line: line-through;
+}
+
+.underline.strike-through {
+    text-decoration-line: line-through;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.double-underline {
+    text-decoration-line: underline;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+em.bold {
+    font-style: normal;
+}

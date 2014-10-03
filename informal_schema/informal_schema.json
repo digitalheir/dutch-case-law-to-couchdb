@@ -1,0 +1,685 @@
+{
+  "generated_on": "2014-10-02",
+  "uitspraak": {
+    "attr": {
+      "id": {
+        "example": "ECLI:NL:CBB:2010:BM1341"
+      },
+      "lang": {
+        "example": "ECLI:NL:CBB:2010:BM1341",
+        "values": {
+          "nl": "ECLI:NL:CBB:2010:BM1341"
+        }
+      },
+      "space": {
+        "example": "ECLI:NL:CBB:2010:BM1341",
+        "values": {
+          "preserve": "ECLI:NL:CBB:2010:BM1341"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2010:BM1341",
+    "children": {
+      "parablock": "ECLI:NL:CBB:2010:BM1341",
+      "para": "ECLI:NL:CBB:2010:BM1341",
+      "uitspraak.info": "ECLI:NL:CBB:2010:BN1294",
+      "section": "ECLI:NL:CBB:2010:BN1294",
+      "footnote": "ECLI:NL:CBB:2014:349",
+      "bridgehead": "ECLI:NL:CRVB:2012:1169",
+      "paragroup": "ECLI:NL:CRVB:2013:1104",
+      "itemizedlist": "ECLI:NL:CRVB:2013:1271",
+      "orderedlist": "ECLI:NL:CRVB:2013:2269",
+      "informaltable": "ECLI:NL:CRVB:2013:2726",
+      "mediaobject": "ECLI:NL:GHAMS:2013:4752",
+      "table": "ECLI:NL:RBOVE:2014:1935"
+    }
+  },
+  "parablock": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BM1341",
+    "children": {
+      "para": "ECLI:NL:CBB:2010:BM1341"
+    }
+  },
+  "para": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BM1341",
+    "children": {
+      "inlinemediaobject": "ECLI:NL:CBB:2010:BM1341",
+      "emphasis": "ECLI:NL:CBB:2010:BN1294",
+      "footnote-ref": "ECLI:NL:CBB:2014:349",
+      "superscript": "ECLI:NL:GHARL:2013:4454",
+      "foreignphrase": "ECLI:NL:RBZWB:2013:5615"
+    }
+  },
+  "inlinemediaobject": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BM1341",
+    "children": {
+      "alt": "ECLI:NL:CBB:2010:BM1341",
+      "imageobject": "ECLI:NL:CBB:2010:BM1341"
+    }
+  },
+  "alt": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BM1341"
+  },
+  "imageobject": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BM1341",
+    "children": {
+      "imagedata": "ECLI:NL:CBB:2010:BM1341"
+    }
+  },
+  "imagedata": {
+    "attr": {
+      "fileref": {
+        "example": "ECLI:NL:CBB:2010:BM1341"
+      },
+      "width": {
+        "example": "ECLI:NL:CBB:2010:BM1341"
+      },
+      "depth": {
+        "example": "ECLI:NL:CBB:2010:BM1341"
+      },
+      "format": {
+        "example": "ECLI:NL:CBB:2010:BM1341",
+        "values": {
+          "image/gif": "ECLI:NL:CBB:2010:BM1341",
+          "image/jpeg": "ECLI:NL:CBB:2013:65",
+          "image/png": "ECLI:NL:CBB:2014:1"
+        }
+      },
+      "align": {
+        "example": "ECLI:NL:CBB:2010:BM1341",
+        "values": {
+          "left": "ECLI:NL:CBB:2010:BM1341",
+          "center": "ECLI:NL:CBB:2013:65",
+          "right": "ECLI:NL:RBDHA:2014:7104"
+        }
+      },
+      "scale": {
+        "example": "ECLI:NL:CBB:2013:65",
+        "values": {
+          "32": "ECLI:NL:CBB:2013:65",
+          "100": "ECLI:NL:CBB:2014:1",
+          "53": "ECLI:NL:GHARL:2013:6389",
+          "80": "ECLI:NL:GHDHA:2013:3376",
+          "48": "ECLI:NL:RBAMS:2013:5211",
+          "133": "ECLI:NL:RBNHO:2013:5911"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2010:BM1341"
+  },
+  "uitspraak.info": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BN1294",
+    "children": {
+      "para": "ECLI:NL:CBB:2010:BN1294",
+      "parablock": "ECLI:NL:CBB:2010:BN1294",
+      "bridgehead": "ECLI:NL:CBB:2013:100",
+      "paragroup": "ECLI:NL:CBB:2013:149",
+      "orderedlist": "ECLI:NL:CBB:2013:41",
+      "itemizedlist": "ECLI:NL:GHAMS:2012:4377",
+      "informaltable": "ECLI:NL:GHAMS:2013:1897",
+      "mediaobject": "ECLI:NL:GHAMS:2013:3342"
+    }
+  },
+  "emphasis": {
+    "attr": {
+      "role": {
+        "example": "ECLI:NL:CBB:2010:BN1294",
+        "values": {
+          "bold underline": "ECLI:NL:CBB:2010:BN1294",
+          "bold": "ECLI:NL:CBB:2010:BN1294",
+          "underline": "ECLI:NL:CBB:2011:1",
+          "italic": "ECLI:NL:CBB:2013:10",
+          "underline italic": "ECLI:NL:CBB:2013:137",
+          "caps": "ECLI:NL:CBB:2014:163",
+          "bold italic": "ECLI:NL:CBB:2014:67",
+          "bold underline italic": "ECLI:NL:GHAMS:2012:2653",
+          "bold double-underline": "ECLI:NL:GHAMS:2013:1425",
+          "bold caps": "ECLI:NL:GHAMS:2013:1469",
+          "double-underline": "ECLI:NL:GHAMS:2013:1469",
+          "strike-through": "ECLI:NL:GHAMS:2013:1874",
+          "underline strike-through": "ECLI:NL:GHAMS:2013:1874",
+          "bold strike-through": "ECLI:NL:GHAMS:2013:1874",
+          "bold underline caps": "ECLI:NL:GHAMS:2013:2393",
+          "underline caps": "ECLI:NL:GHAMS:2013:3791",
+          "bold ": "ECLI:NL:GHAMS:2013:4111",
+          "bold italic caps": "ECLI:NL:GHAMS:2014:2451",
+          "smallcaps": "ECLI:NL:GHAMS:2014:3066",
+          "italic strike-through": "ECLI:NL:GHARL:2013:4617",
+          "italic bold": "ECLI:NL:GHARL:2013:4671",
+          "bold  italic": "ECLI:NL:GHARL:2013:4671",
+          "bold smallcaps": "ECLI:NL:GHARL:2013:5126",
+          "underline smallcaps": "ECLI:NL:GHARL:2014:5694",
+          "italic caps": "ECLI:NL:GHSHE:2011:4782",
+          "underline bold": "ECLI:NL:HR:2013:1135",
+          " bold": "ECLI:NL:HR:2013:582",
+          "bold italic strike-through": "ECLI:NL:RBDHA:2014:8736",
+          "italic double-underline": "ECLI:NL:RBNHO:2013:9716",
+          " italic": "ECLI:NL:RBROT:2014:5931",
+          "double-underline caps": "ECLI:NL:RBZWB:2013:10246",
+          "bold underline strike-through": "ECLI:NL:RBZWB:2013:6337",
+          "bold underline italic strike-through": "ECLI:NL:RBZWB:2013:7106"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2010:BN1294",
+    "children": {
+      "emphasis": "ECLI:NL:GHAMS:2013:4418"
+    }
+  },
+  "section": {
+    "attr": {
+      "role": {
+        "example": "ECLI:NL:CBB:2010:BN1294",
+        "values": {
+          "procesverloop": "ECLI:NL:CBB:2010:BN1294",
+          "overwegingen": "ECLI:NL:CBB:2010:BN1294",
+          "beslissing": "ECLI:NL:CBB:2010:BN1294"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2010:BN1294",
+    "children": {
+      "title": "ECLI:NL:CBB:2010:BN1294",
+      "parablock": "ECLI:NL:CBB:2010:BN1294",
+      "paragroup": "ECLI:NL:CBB:2010:BN1294",
+      "para": "ECLI:NL:CBB:2010:BN1294",
+      "itemizedlist": "ECLI:NL:CBB:2013:10",
+      "orderedlist": "ECLI:NL:CBB:2013:301",
+      "bridgehead": "ECLI:NL:CBB:2013:69",
+      "informaltable": "ECLI:NL:CBB:2014:244",
+      "mediaobject": "ECLI:NL:GHAMS:2013:3396",
+      "table": "ECLI:NL:GHARL:2013:4850",
+      "section": "ECLI:NL:RBMNE:2013:3921"
+    }
+  },
+  "title": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BN1294",
+    "children": {
+      "nr": "ECLI:NL:CBB:2010:BN1294",
+      "emphasis": "ECLI:NL:GHAMS:2013:2339",
+      "subscript": "ECLI:NL:GHSHE:2013:6147",
+      "footnote-ref": "ECLI:NL:PHR:2013:1051"
+    }
+  },
+  "nr": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BN1294"
+  },
+  "paragroup": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2010:BN1294",
+    "children": {
+      "nr": "ECLI:NL:CBB:2010:BN1294",
+      "para": "ECLI:NL:CBB:2010:BN1294",
+      "parablock": "ECLI:NL:CBB:2011:1",
+      "itemizedlist": "ECLI:NL:CBB:2011:1",
+      "paragroup": "ECLI:NL:CBB:2013:100",
+      "mediaobject": "ECLI:NL:CBB:2013:65",
+      "informaltable": "ECLI:NL:CBB:2014:234",
+      "orderedlist": "ECLI:NL:CRVB:2013:1041",
+      "bridgehead": "ECLI:NL:GHAMS:2012:4099",
+      "table": "ECLI:NL:HR:2013:5",
+      "blockquote": "ECLI:NL:RBNNE:2013:6317"
+    }
+  },
+  "itemizedlist": {
+    "attr": {
+      "mark": {
+        "example": "ECLI:NL:CBB:2011:1",
+        "values": {
+          "-": "ECLI:NL:CBB:2011:1",
+          "": "ECLI:NL:GHARL:2013:4454"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2011:1",
+    "children": {
+      "listitem": "ECLI:NL:CBB:2011:1"
+    }
+  },
+  "listitem": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2011:1",
+    "children": {
+      "para": "ECLI:NL:CBB:2011:1",
+      "orderedlist": "ECLI:NL:RBGEL:2013:4815"
+    }
+  },
+  "bridgehead": {
+    "attr": {
+      "role": {
+        "example": "ECLI:NL:CBB:2013:100",
+        "values": {
+          "bold": "ECLI:NL:CBB:2013:100",
+          "italic": "ECLI:NL:CBB:2013:69",
+          " bold": "ECLI:NL:CBB:2014:11",
+          "underline": "ECLI:NL:CBB:2014:82",
+          "bold underline": "ECLI:NL:GHAMS:2013:2046",
+          "underline caps": "ECLI:NL:GHAMS:2013:3792",
+          "bold italic": "ECLI:NL:GHAMS:2013:4011",
+          "strike-through": "ECLI:NL:GHARL:2013:7396",
+          "underline bold": "ECLI:NL:HR:2014:644",
+          "underline italic": "ECLI:NL:OGHACMB:2014:15",
+          "bold smallcaps": "ECLI:NL:PHR:2013:1050",
+          "smallcaps": "ECLI:NL:PHR:2014:1163",
+          "bold caps": "ECLI:NL:RBDHA:2013:10061",
+          "caps": "ECLI:NL:RBDHA:2013:11272",
+          " underline bold": "ECLI:NL:RBMNE:2013:3648",
+          "italic caps": "ECLI:NL:RBZWB:2013:10246"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2013:100",
+    "children": {
+      "nr": "ECLI:NL:GHAMS:2013:4775",
+      "emphasis": "ECLI:NL:RBDHA:2014:10450"
+    }
+  },
+  "orderedlist": {
+    "attr": {
+      "numeration": {
+        "example": "ECLI:NL:CBB:2013:301",
+        "values": {
+          "arabic": "ECLI:NL:CBB:2013:301",
+          "loweralpha": "ECLI:NL:CBB:2013:87",
+          "upperalpha": "ECLI:NL:CRVB:2013:2616",
+          "lowerroman": "ECLI:NL:CRVB:2014:2529",
+          "upperroman": "ECLI:NL:RBAMS:2013:5104",
+          "none": "ECLI:NL:RBNNE:2013:239"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2013:301",
+    "children": {
+      "listitem": "ECLI:NL:CBB:2013:301"
+    }
+  },
+  "mediaobject": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2013:65",
+    "children": {
+      "imageobject": "ECLI:NL:CBB:2013:65",
+      "videoobject": "ECLI:NL:OGEAA:2012:2"
+    }
+  },
+  "informaltable": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2014:234",
+    "children": {
+      "tgroup": "ECLI:NL:CBB:2014:234"
+    }
+  },
+  "tgroup": {
+    "attr": {
+      "cols": {
+        "example": "ECLI:NL:CBB:2014:234",
+        "values": {
+          "7": "ECLI:NL:CBB:2014:234",
+          "3": "ECLI:NL:CBB:2014:244",
+          "4": "ECLI:NL:CRVB:2013:2726",
+          "2": "ECLI:NL:GHAMS:2012:4485",
+          "5": "ECLI:NL:GHAMS:2013:2894",
+          "8": "ECLI:NL:GHAMS:2013:3006",
+          "6": "ECLI:NL:GHAMS:2013:3996",
+          "9": "ECLI:NL:GHAMS:2014:229",
+          "13": "ECLI:NL:GHAMS:2014:2454",
+          "10": "ECLI:NL:GHAMS:2014:3209",
+          "11": "ECLI:NL:GHARL:2013:6522",
+          "23": "ECLI:NL:GHDHA:2014:1776",
+          "18": "ECLI:NL:GHDHA:2014:1776",
+          "12": "ECLI:NL:RBGEL:2014:3766"
+        }
+      },
+      "align": {
+        "example": "ECLI:NL:RBZWB:2013:5882",
+        "values": {
+          "left": "ECLI:NL:RBZWB:2013:5882"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2014:234",
+    "children": {
+      "colspec": "ECLI:NL:CBB:2014:234",
+      "tbody": "ECLI:NL:CBB:2014:234",
+      "thead": "ECLI:NL:GHSHE:2014:3375",
+      "tfoot": "ECLI:NL:GHSHE:2014:3375"
+    }
+  },
+  "colspec": {
+    "attr": {
+      "colname": {
+        "example": "ECLI:NL:CBB:2014:234",
+        "values": {
+          "colA": "ECLI:NL:CBB:2014:234",
+          "colB": "ECLI:NL:CBB:2014:234",
+          "colC": "ECLI:NL:CBB:2014:234",
+          "colD": "ECLI:NL:CBB:2014:234",
+          "colE": "ECLI:NL:CBB:2014:234",
+          "colF": "ECLI:NL:CBB:2014:234",
+          "colG": "ECLI:NL:CBB:2014:234",
+          "colH": "ECLI:NL:GHAMS:2013:3006",
+          "colI": "ECLI:NL:GHAMS:2014:229",
+          "colJ": "ECLI:NL:GHAMS:2014:2454",
+          "colK": "ECLI:NL:GHAMS:2014:2454",
+          "colL": "ECLI:NL:GHAMS:2014:2454",
+          "colM": "ECLI:NL:GHAMS:2014:2454",
+          "colN": "ECLI:NL:GHDHA:2014:1776",
+          "colO": "ECLI:NL:GHDHA:2014:1776",
+          "colP": "ECLI:NL:GHDHA:2014:1776",
+          "colQ": "ECLI:NL:GHDHA:2014:1776",
+          "colR": "ECLI:NL:GHDHA:2014:1776",
+          "colS": "ECLI:NL:GHDHA:2014:1776",
+          "colT": "ECLI:NL:GHDHA:2014:1776",
+          "colU": "ECLI:NL:GHDHA:2014:1776",
+          "colV": "ECLI:NL:GHDHA:2014:1776",
+          "colW": "ECLI:NL:GHDHA:2014:1776"
+        }
+      },
+      "rowsep": {
+        "example": "ECLI:NL:RBGEL:2014:3047",
+        "values": {
+          "0": "ECLI:NL:RBGEL:2014:3047"
+        }
+      },
+      "align": {
+        "example": "ECLI:NL:RBZWB:2013:5882",
+        "values": {
+          "left": "ECLI:NL:RBZWB:2013:5882",
+          "right": "ECLI:NL:RBZWB:2013:5882"
+        }
+      },
+      "colwidth": {
+        "example": "ECLI:NL:RBZWB:2013:5882",
+        "values": {
+          "30": "ECLI:NL:RBZWB:2013:5882"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2014:234"
+  },
+  "tbody": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2014:234",
+    "children": {
+      "row": "ECLI:NL:CBB:2014:234"
+    }
+  },
+  "row": {
+    "attr": {
+    },
+    "example": "ECLI:NL:CBB:2014:234",
+    "children": {
+      "entry": "ECLI:NL:CBB:2014:234"
+    }
+  },
+  "entry": {
+    "attr": {
+      "namest": {
+        "example": "ECLI:NL:CBB:2014:234",
+        "values": {
+          "colA": "ECLI:NL:CBB:2014:234",
+          "colB": "ECLI:NL:CRVB:2013:2896",
+          "colE": "ECLI:NL:GHAMS:2014:2454",
+          "colH": "ECLI:NL:GHAMS:2014:2454",
+          "colC": "ECLI:NL:GHAMS:2014:2454",
+          "colG": "ECLI:NL:GHAMS:2014:2454",
+          "colD": "ECLI:NL:GHAMS:2014:2454",
+          "colI": "ECLI:NL:GHDHA:2014:1776",
+          "colL": "ECLI:NL:GHDHA:2014:1776",
+          "colN": "ECLI:NL:GHDHA:2014:1776",
+          "colQ": "ECLI:NL:GHDHA:2014:1776",
+          "colT": "ECLI:NL:GHDHA:2014:1776",
+          "colF": "ECLI:NL:GHDHA:2014:1776",
+          "colK": "ECLI:NL:GHDHA:2014:1776",
+          "colM": "ECLI:NL:GHDHA:2014:1776",
+          "colP": "ECLI:NL:GHDHA:2014:1776",
+          "colS": "ECLI:NL:GHDHA:2014:1776",
+          "colV": "ECLI:NL:GHDHA:2014:1776",
+          "colR": "ECLI:NL:GHDHA:2014:1776",
+          "colJ": "ECLI:NL:GHDHA:2014:1776",
+          "colO": "ECLI:NL:GHDHA:2014:1776"
+        }
+      },
+      "nameend": {
+        "example": "ECLI:NL:CBB:2014:234",
+        "values": {
+          "colD": "ECLI:NL:CBB:2014:234",
+          "colB": "ECLI:NL:CBB:2014:234",
+          "colC": "ECLI:NL:CBB:2014:234",
+          "colG": "ECLI:NL:GHAMS:2014:2454",
+          "colL": "ECLI:NL:GHAMS:2014:2454",
+          "colE": "ECLI:NL:GHAMS:2014:2454",
+          "colH": "ECLI:NL:GHAMS:2014:2454",
+          "colM": "ECLI:NL:GHAMS:2014:2454",
+          "colF": "ECLI:NL:GHAMS:2014:3214",
+          "colK": "ECLI:NL:GHDHA:2014:1776",
+          "colP": "ECLI:NL:GHDHA:2014:1776",
+          "colS": "ECLI:NL:GHDHA:2014:1776",
+          "colV": "ECLI:NL:GHDHA:2014:1776",
+          "colJ": "ECLI:NL:GHDHA:2014:1776",
+          "colO": "ECLI:NL:GHDHA:2014:1776",
+          "colR": "ECLI:NL:GHDHA:2014:1776",
+          "colU": "ECLI:NL:GHDHA:2014:1776",
+          "colW": "ECLI:NL:GHDHA:2014:1776",
+          "colQ": "ECLI:NL:GHDHA:2014:1776",
+          "colT": "ECLI:NL:GHDHA:2014:1776",
+          "colI": "ECLI:NL:GHDHA:2014:1776",
+          "colN": "ECLI:NL:GHDHA:2014:1776",
+          "colA": "ECLI:NL:PHR:2014:356"
+        }
+      },
+      "morerows": {
+        "example": "ECLI:NL:GHARL:2013:6754",
+        "values": {
+          "1": "ECLI:NL:GHARL:2013:6754",
+          "3": "ECLI:NL:HR:2014:965",
+          "2": "ECLI:NL:PHR:2014:521",
+          "11": "ECLI:NL:RBDHA:2013:11273",
+          "4": "ECLI:NL:RBDHA:2014:2761"
+        }
+      },
+      "align": {
+        "example": "ECLI:NL:HR:2013:128",
+        "values": {
+          "left": "ECLI:NL:HR:2013:128",
+          "right": "ECLI:NL:PHR:2013:606",
+          "center": "ECLI:NL:RBZWB:2013:5882"
+        }
+      },
+      "valign": {
+        "example": "ECLI:NL:RBZWB:2013:5615",
+        "values": {
+          "bottom": "ECLI:NL:RBZWB:2013:5615"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2014:234",
+    "children": {
+      "para": "ECLI:NL:CBB:2014:234",
+      "mediaobject": "ECLI:NL:GHAMS:2013:4978"
+    }
+  },
+  "footnote-ref": {
+    "attr": {
+      "linkend": {
+        "example": "ECLI:NL:CBB:2014:349"
+      }
+    },
+    "example": "ECLI:NL:CBB:2014:349"
+  },
+  "footnote": {
+    "attr": {
+      "id": {
+        "example": "ECLI:NL:CBB:2014:349"
+      },
+      "label": {
+        "example": "ECLI:NL:CBB:2014:349",
+        "values": {
+          "": "ECLI:NL:CBB:2014:349",
+          "/[0-9]+/": "",
+          " ": "ECLI:NL:RBZWB:2014:150"
+        }
+      }
+    },
+    "example": "ECLI:NL:CBB:2014:349",
+    "children": {
+      "para": "ECLI:NL:CBB:2014:349"
+    }
+  },
+  "superscript": {
+    "attr": {
+    },
+    "example": "ECLI:NL:GHARL:2013:4454"
+  },
+  "table": {
+    "attr": {
+    },
+    "example": "ECLI:NL:GHARL:2013:4850",
+    "children": {
+      "title": "ECLI:NL:GHARL:2013:4850",
+      "tgroup": "ECLI:NL:GHARL:2013:4850"
+    }
+  },
+  "subscript": {
+    "attr": {
+    },
+    "example": "ECLI:NL:GHSHE:2013:6147"
+  },
+  "thead": {
+    "attr": {
+    },
+    "example": "ECLI:NL:GHSHE:2014:3375",
+    "children": {
+      "row": "ECLI:NL:GHSHE:2014:3375"
+    }
+  },
+  "tfoot": {
+    "attr": {
+    },
+    "example": "ECLI:NL:GHSHE:2014:3375",
+    "children": {
+      "row": "ECLI:NL:GHSHE:2014:3375"
+    }
+  },
+  "videoobject": {
+    "attr": {
+    },
+    "example": "ECLI:NL:OGEAA:2012:2",
+    "children": {
+      "videodata": "ECLI:NL:OGEAA:2012:2"
+    }
+  },
+  "videodata": {
+    "attr": {
+      "depth": {
+        "example": "ECLI:NL:OGEAA:2012:2",
+        "values": {
+          "0": "ECLI:NL:OGEAA:2012:2"
+        }
+      },
+      "width": {
+        "example": "ECLI:NL:OGEAA:2012:2",
+        "values": {
+          "0": "ECLI:NL:OGEAA:2012:2"
+        }
+      },
+      "fileref": {
+        "example": "ECLI:NL:OGEAA:2012:2",
+        "values": {
+          "": "ECLI:NL:OGEAA:2012:2"
+        }
+      },
+      "format": {
+        "example": "ECLI:NL:OGEAA:2012:2",
+        "values": {
+          "video/mpeg": "ECLI:NL:OGEAA:2012:2"
+        }
+      }
+    },
+    "example": "ECLI:NL:OGEAA:2012:2"
+  },
+  "conclusie": {
+    "attr": {
+      "id": {
+        "example": "ECLI:NL:PHR:2001:1"
+      },
+      "lang": {
+        "example": "ECLI:NL:PHR:2001:1",
+        "values": {
+          "nl": "ECLI:NL:PHR:2001:1"
+        }
+      },
+      "space": {
+        "example": "ECLI:NL:PHR:2001:1",
+        "values": {
+          "preserve": "ECLI:NL:PHR:2001:1"
+        }
+      }
+    },
+    "example": "ECLI:NL:PHR:2001:1",
+    "children": {
+      "conclusie.info": "ECLI:NL:PHR:2001:1",
+      "section": "ECLI:NL:PHR:2001:1",
+      "parablock": "ECLI:NL:PHR:2010:BI5091",
+      "para": "ECLI:NL:PHR:2010:BI5091",
+      "footnote": "ECLI:NL:PHR:2012:2",
+      "informaltable": "ECLI:NL:PHR:2013:1",
+      "bridgehead": "ECLI:NL:PHR:2013:1007",
+      "itemizedlist": "ECLI:NL:PHR:2013:103",
+      "paragroup": "ECLI:NL:PHR:2013:1173",
+      "orderedlist": "ECLI:NL:PHR:2013:12",
+      "mediaobject": "ECLI:NL:PHR:2013:60",
+      "table": "ECLI:NL:PHR:2014:1416"
+    }
+  },
+  "conclusie.info": {
+    "attr": {
+    },
+    "example": "ECLI:NL:PHR:2001:1",
+    "children": {
+      "para": "ECLI:NL:PHR:2001:1",
+      "parablock": "ECLI:NL:PHR:2001:1",
+      "informaltable": "ECLI:NL:PHR:2013:102",
+      "bridgehead": "ECLI:NL:PHR:2013:1050"
+    }
+  },
+  "blockquote": {
+    "attr": {
+    },
+    "example": "ECLI:NL:RBNNE:2013:6317",
+    "children": {
+      "bridgehead": "ECLI:NL:RBNNE:2013:6317"
+    }
+  },
+  "foreignphrase": {
+    "attr": {
+      "lang": {
+        "example": "ECLI:NL:RBZWB:2013:5615",
+        "values": {
+          "bg": "ECLI:NL:RBZWB:2013:5615"
+        }
+      }
+    },
+    "example": "ECLI:NL:RBZWB:2013:5615"
+  }
+}

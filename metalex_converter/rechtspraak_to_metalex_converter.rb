@@ -38,7 +38,7 @@ class RechtspraakToMetalexConverter
     path_so_far = set_id_for_element(root, ids_already_used, index, path_so_far)
 
     element_count = {}
-    root.element_children.each do |child, i|
+    root.element_children.each do |child, _|
       this_kind_of_child_count = element_count[child.name] || 0
       this_kind_of_child_count += 1
       element_count[child.name] = this_kind_of_child_count
@@ -90,18 +90,19 @@ class RechtspraakToMetalexConverter
   end
 
   def convert_node_names(root)
-    if @mapping[root.name]
       element_name = root.name
       root.namespace = nil
+    if @mapping[root.name]
       root.name = "#{METALEX_PREFIX}:#{@mapping[root.name]}"
+    else
+      puts "WARNING: #{root.name} was not in mapping."
+      root.name = "#{METALEX_PREFIX}:inline"
+    end
 
       if root['name']
         puts "WARNING: #{element_name} already had a name: #{root['name']}. Overwriting."
       end
       root['name'] = element_name
-    else
-      raise "#{root.name} was not in mapping."
-    end
     root.element_children.each do |child|
       convert_node_names child
     end
