@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=no"/>
+  <title>Zoeken — Lawly</title>
+
+  <meta name="description" content="Zoeken naar Nederlandse wetten">
+
+  <link href='http://fonts.googleapis.com/css?family=Varela+Round%7CRoboto+Condensed' rel='stylesheet'
+        type='text/css'>
+  <!--suppress HtmlUnknownTarget -->
+  <link rel="stylesheet" href="//assets.lawly.eu/css/search.css">
+  <link rel="stylesheet" href="//assets.lawly.eu/css/normalize.css">
+  <link rel="stylesheet" href="//assets.lawly.eu/css/main.css">
+  <link rel="stylesheet" href="//assets.lawly.eu/css/lawly-document.css">
+  <link rel="stylesheet" href="//assets.lawly.eu/css/bwb.css">
+  <script src="//assets.lawly.eu/js/modernizr.js"></script>
+  <script src="//assets.lawly.eu/js/above_the_fold.js"></script>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Start content -->
+<nav id='top-search-bar'>
+  <div id='title-container'>
+    <a href='/' id='title-anchor'>
+      LAWLY
+    </a>
+
+    <div id='arrow-container'>
+      <div id='arrow'></div>
+    </div>
+  </div>
+  <div id='search-container'>
+    <input id='search' autofocus="autofocus" name='q' value="<%= initial_value %>" placeholder='Zoek een tekst' type='text'>
+  </div>
+</nav>
+<!--<div id="load-icn-table">-->
+<!--<div id="load-icn-cell">-->
+<!--<div id="loader"></div>-->
+<!--</div>-->
+<!--</div>-->
+<div id="no-results">Geen resultaten.</div>
+<div id="search-error">Er ging iets mis.</div>
+<ul id="search-results"></ul>
+
+<!-- End content -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="//assets.lawly.eu/js/jquery.js"><\/script>')</script>
+<script src="//assets.lawly.eu/js/main.js"></script>
+<!--suppress HtmlUnknownTarget -->
+<script src="/js/search.js"></script>
+<script>
+    (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+                function () {
+                    (b[l].q = b[l].q || []).push(arguments)
+                });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-54809256-3');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>

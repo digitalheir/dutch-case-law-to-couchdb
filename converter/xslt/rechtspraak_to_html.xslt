@@ -105,6 +105,7 @@ alt
 			<xsl:apply-templates select="node()"/>
 		</ol>
 	</xsl:template>
+	<!-- List items -->
 	<xsl:template match="*[@name='listitem']">
 		<li class="{@name}" id="{@id}">
 			<xsl:apply-templates select="node()"/>
@@ -320,9 +321,17 @@ alt
 <!-- Quote -->
 <xsl:template match="*[@name='blockquote']">
 <blockquote id="{@id}" class="{@name}">
+			<xsl:apply-templates select="node()"/>
 </blockquote>
 </xsl:template>	
 	
+	<!-- Foreign phrase -->
+<xsl:template match="*[@name='foreignphrase']">
+<span id="{@id}" class="{@name}">
+<xsl:copy-of select="@lang"/>
+			<xsl:apply-templates select="node()"/>
+</span>
+</xsl:template>	
 	<!-- Helper templates -->
 	<xsl:template name="makeDivSimple">
 		<div id="{@id}" class="{@name}">

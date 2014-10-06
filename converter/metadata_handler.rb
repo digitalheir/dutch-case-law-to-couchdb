@@ -1,3 +1,5 @@
+# Enhances metadata when converting a Rechtspraak.nl XML document to Metalex XML
+
 require 'cgi'
 
 NS_RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
@@ -18,9 +20,6 @@ RECHTSPRAAK_DEEPLINK_ROOT = "http://deeplink.rechtspraak.nl"
 
 PREFIXES = {:rdf => NS_RDF, :rdfs => NS_RDFS, :dcterms => NS_DCTERMS, :psi => NS_PSI, :rs => NS_RS}
 
-# Matches, for instance 'U I t S pR  a A k something following'
-RE_UITSPRAAK = /\s*[Uu]\s{0,2}[Ii]\s{0,2}[Tt]\s{0,2}[Ss]\s{0,2}[Pp]\s{0,2}[Rr]\s{0,2}[Aa]\s{0,2}[Aa]\s{0,2}[KK][^<]*/
-RE_PARA = /^para(group|block)?$/
 class MetadataStripper
   def initialize(xml, ecli)
     @xml = xml
@@ -78,7 +77,7 @@ class MetadataStripper
     # handle_metadata(about, register_metadata, 'dcterms:accessRights')
 
     # metadata modified
-    handle_metadata(register_metadata, '', 'dcterms:modified') # About the metadata, so subject ''...?
+    handle_metadata(register_metadata, @id_meta, 'dcterms:modified') # About the metadata
 
     # We only use issued from document metadata
     # handle_metadata(register_metadata, 'dcterms:issued')
@@ -177,13 +176,13 @@ class MetadataStripper
 
     elements = tree.xpath("./#{verb}", PREFIXES)
     if !elements or elements.length <= 0
-      could_not_find = "Could not find #{verb} in #{tree.name}"
+      # could_not_find = "Could not find #{verb} in #{tree.name}"
       # puts could_not_find
     else
-      if elements.length > 1
-        found_more_msg = "Found #{elements.length} elements for #{verb} in #{@ecli}"
+      # if elements.length > 1
+        # found_more_msg = "Found #{elements.length} elements for #{verb} in #{@ecli}"
         # puts found_more_msg
-      end
+      # end
       elements.each do |element|
         # Get text content
         if element and element.element_children.length > 0
@@ -552,35 +551,4 @@ class MetadataStripper
       end
     end
   end
-
-# def improve_xml(root_soup, ecli)
-#   doc_root = root_soup.contents[0]
-#
-#   # Convert 'uitspraak' or 'conclusie' to 'doc' with @role=rechtspraak:uitspraak|rechtspraak:conclusie
-#   doc_root['role'] = "http://psi.rechtspraak.nl/" + doc_root.name.lower()
-#   doc_root['id'] = ecli
-#   doc_root.name = 'doc'
-#
-#   # para elements
-#   all_elements = doc_root.find_all()
-#   para_elements = doc_root.find_all(RE_PARA)
-#   if len(para_elements) == len(all_elements)
-#     #logging.debug("Processing a para doc")
-#     # Wrap <para>'UITSPRAAK'</para> and following nodes in a <judgment> tag
-#     tags = doc_root.find_all(name='para', text=RE_UITSPRAAK)
-#     for tag in tags
-#       tag.name = 'header'
-#       #     wrapper = root_soup.new_tag("judgment")
-#       #     while not (tag.next_sibling is None or tag.next_sibling in tags):
-#       #         wrapper.append(tag.next_sibling)
-#       #     tag.insert_after(wrapper)
-#       #     wrapper.insert(0, tag)
-#       else
-#       logging.warning("Processing a richer doc: " + ecli)
-#     end
-#     # Return enriched xml
-#     return doc_root
-#   end
-# end
-
 end

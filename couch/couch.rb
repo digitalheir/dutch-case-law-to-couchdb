@@ -71,7 +71,7 @@ module Couch
       result = JSON.parse(res.body)
       docs = []
       result['rows'].each do |row|
-        if row['error']
+        if row['error'] or !row['doc']
           puts "#{row['key']}: #{row['error']}"
           puts "#{row['reason']}"
         else
@@ -114,13 +114,23 @@ module Couch
     end
 
     def flush_bulk_throttled(db, docs, max_size=15)
+      puts "Flushing #{docs.length} docs"
       bulk = []
       bytesize = 0
       docs.each do |doc|
         bulk << doc
         bytesize += get_bytesize(doc)
         if bytesize/1024/1024 > max_size
-          flush_bulk(db, bulk)
+          res = flush_bulk(db, bulk)
+          error_count=0
+          if res.body
+            begin
+              JSON.parse(res.body).each do |d|
+                error_count+=1 if d['error']
+              end
+            end
+          end
+          puts "> Flushed #{bulk.length} docs; #{error_count} errors"
           bulk.clear
           bytesize=0
         end
@@ -131,13 +141,30 @@ module Couch
       end
     end
 
+    def flush_bulk_if_big_enough(db, docs, flush_size_mb=50)
+      if get_bytesize_array(docs) >= flush_size_mb*1024*1024
+        flush_bulk_throttled(db, docs)
+        docs.clear
+      end
+    end
+
+    def get_bytesize_array(docs)
+      bytesize = 0
+      docs.each do |doc|
+        bytesize+=get_bytesize doc
+      end
+      bytesize
+    end
+
     def get_bytesize(doc)
       bytesize=0
       if doc['_attachments']
         doc['_attachments'].each do |name, attachment|
           data = attachment['data'] || attachment[:data]
-          bytesize += data.bytesize
-          bytesize += name.bytesize
+          if data
+            bytesize += data.bytesize
+            bytesize += name.bytesize
+          end
         end
         doc.each do |_, val|
           if val.is_a? String
@@ -176,13 +203,12 @@ module Couch
            Secret::CLOUDANT_PASSWORD
       }
   )
-
-  LAWLY_CONNECTION = Server.new(
-      "#{Secret::LAWLY_NAME}.cloudant.com", "80",
+  LAW = Server.new(
+      "lawly.cloudant.com", "80",
       {name:
-           Secret::LAWLY_NAME,
+           'lawly',
        password:
-           Secret::LAWLY_PASSWORD
+           Secret::CLOUDANT_PASSWORD
       }
   )
 end

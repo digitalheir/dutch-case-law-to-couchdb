@@ -664,5 +664,10 @@
     </metalex:inline>
     </metalex:inline>
     <!-- Foreign phrase -->
+                       <metalex:inline id="ECLI:NL:RBZWB:2013:5615:DOC:section:2:paragroup:5:paragroup:8:para:1" name="para">
+              <?linebreak?>
+              <metalex:inline lang="bg"
+                              id="ECLI:NL:RBZWB:2013:5615:DOC:section:2:paragroup:5:paragroup:8:para:1:foreignphrase"
+                              name="foreignphrase">Bla bla bla </metalex:inline></metalex:inline>
   </metalex:block>
 </metalex:root>

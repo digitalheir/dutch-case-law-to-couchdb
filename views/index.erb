@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=no"/>
+    <title>Rechtspraak — Lawly</title>
+    <meta name="description" content="Web app om rechtspraak te lezen.">
+
+    <link href='//fonts.googleapis.com/css?family=Varela+Round%7CRoboto+Condensed' rel='stylesheet'
+          type='text/css'>
+
+    <!--suppress HtmlUnknownTarget -->
+  <link rel="stylesheet" href="/css/rechtspraak.css">
+
+    <link rel="stylesheet" href="//assets.lawly.eu/css/normalize.css">
+    <link rel="stylesheet" href="//assets.lawly.eu/css/main.css">
+    <link rel="stylesheet" href="//assets.lawly.eu/css/lawly-document.css">
+    <link rel="stylesheet" href="//assets.lawly.eu/css/bwb.css">
+    <link rel="stylesheet" href="//assets.lawly.eu/css/landing.css">
+    <script src="//assets.lawly.eu/js/modernizr.js"></script>
+    <script src="//assets.lawly.eu/js/above_the_fold.js"></script>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<div id="the-universe">
+    <div id="the-flag">
+        <div id="tri" class="flag-color"></div>
+        <div id="co" class="flag-color"></div>
+        <div id="lore" class="flag-color"></div>
+    </div>
+    <div id="outer" class="outer">
+        <div class="middle">
+            <div class="inner">
+                <div id="lawly-splash-container">
+                    <h1 id="lawly-splash">
+                        <span id="lawly-splash-content">LAWLY</span>
+                    </h1>
+
+                    <h2 id="lawly-subtitle">
+                        <span id="lawly-subtitle-content">Rechtspraak</span>
+                    </h2>
+                </div>
+                <div id='landing-search-container'>
+                    <form action='/search' id='landing-search-form' method='get'>
+                        <input autofocus="autofocus" id='landing-search' maxlength='120' name='q'
+                               placeholder='Zoek een tekst'
+                               type='text'/>
+                        <input id="landing-search-button" type="submit" value=""/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="quick-menu">
+    <div id='quick-menu-content-cntnr'>
+        <div id='quick-menu-content'>
+        </div>
+        <footer id="footer">
+            <p>&copy; 2014 — Lawly</p>
+
+            <p id="contact_us">
+                <a href="mailto:we.are.lawly@gmail.com">we.are.lawly@gmail.com</a>
+            </p>
+        </footer>
+    </div>
+    <div id="menu-opener-container">
+        <button id="menu-opener"></button>
+    </div>
+
+</div>
+<!-- End content -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="//assets.lawly.eu/js/jquery.js"><\/script>')</script>
+<script>
+    function tglMnu() {
+        var mnu = document.getElementById("quick-menu");
+
+        //Click event
+        $as = $("a", $(mnu));
+        if (hasClass(mnu, 'opened')) {
+            rmClass(mnu, 'opened');
+            $as.attr('tabindex', '-1');
+        } else {
+            addClass(mnu, 'opened');
+            $as.attr('tabindex', '0');
+        }
+    }
+    function rmMnuHvr() {
+        var mnu = document.getElementById("quick-menu");
+        rmClass(mnu, 'hover');
+        rmClass(mnu, 'opened');
+    }
+
+    var mnuBtn = document.getElementById("menu-opener");
+    mnuBtn.addEventListener('click', tglMnu, true);
+    //mnuBtn.addEventListener('mouseover', tglMnu, true);
+
+    //Make quick links non-tabbable while not visible
+    var mnu = document.getElementById("quick-menu");
+    $("a", $(mnu)).attr('tabindex', -1);
+
+    nvrs = document.getElementById("the-universe");
+    var lndSrch = document.getElementById("landing-search");
+    nvrs.addEventListener('click', rmMnuHvr, false);
+    var mnuCnt = document.getElementById("menu-opener-container");
+    //mnuCnt.addEventListener('click', rmMnuHvr, false);
+    //nvrs.addEventListener('mouseover', rmMnuHvr, false);
+
+    //Easter egg for Vincent
+    var btn = document.getElementById("landing-search-button");
+    lndSrch.addEventListener('keyup', function (e) {
+        if (lndSrch.value.match(/[l]+olze/i)) {
+            nvrs = document.getElementById("the-universe");
+            if (!hasClass(nvrs, "were-hovering")) {
+                lplsh = document.getElementById("lawly-splash");
+                document.getElementById("lawly-subtitle-content").innerHTML = 'lololol';
+                lplsh.innerHTML = "HOI VINCENT";
+                appndClass(nvrs, "were-hovering");
+            }
+        }
+        if (e.which === 27) {
+            lndSrch.value = '';
+        }
+    }, false);
+    btn.addEventListener('mouseover', function () {
+        //rmClass(document.getElementById("the-universe"), "were-hovering");
+        nvrs = document.getElementById("the-universe");
+        if (hasClass(nvrs, "were-hovering")) {
+            if (!hasClass(nvrs, "weve-hovered")) {
+                lplsh = document.getElementById("lawly-splash");
+                lplsh.innerHTML = "MAMA MIA";
+                appndClass(nvrs, "weve-hovered");
+            }
+        }
+    }, false);
+</script>
+<script src="//assets.lawly.eu/js/main.js"></script>
+<script>
+    (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+                function () {
+                    (b[l].q = b[l].q || []).push(arguments)
+                });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-54809256-3');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>

@@ -1,3 +1,16 @@
+/* Titles */
+.title {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin: .47em 0;
+    border-bottom: 1px solid #B6B6B6;
+    font-family: /*"Roboto Condensed",*/ sans-serif font-size : 1.6 em;
+}
+
+.nr {
+    padding-right: 1em;
+}
+
 /* List styling */
 .loweralpha {
     list-style-type: lower-alpha;
@@ -34,21 +47,28 @@
 }
 
 .underline {
-    text-decoration-line: underline;
+    text-decoration: underline;
 }
 
 .strike-through {
-    text-decoration-line: line-through;
+    text-decoration: line-through;
 }
 
 .underline.strike-through {
-    text-decoration-line: line-through;
+    text-decoration: line-through;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.double-underline.strike-through {
+    /*TODO do some box shadow trick to get second underline*/
+    text-decoration: line-through;
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
 
 .double-underline {
-    text-decoration-line: underline;
+    text-decoration: underline;
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
