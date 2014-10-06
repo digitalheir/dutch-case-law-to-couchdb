@@ -210,9 +210,11 @@ alt
 	<!-- Footnote: start off with label -->
 	<xsl:template match="*[@name='footnote']">
 		<div id="{@id}" class="{@name} ">
-			<span id="{@id}:label" class="footnote-label">
-				<xsl:value-of select="@label"/>
-			</span>
+			<a id="{@id}:label" class="footnote-label">
+              <xsl:variable name="id"><xsl:value-of select="@id"/></xsl:variable>
+              <xsl:attribute name="href"><xsl:text>#</xsl:text><xsl:value-of select="/.//*[@linkend=$id]/@id"/></xsl:attribute>
+              <xsl:value-of select="@label"/>
+			</a>
 			<xsl:apply-templates select="node()"/>
 		</div>
 	</xsl:template>
@@ -278,7 +280,7 @@ alt
 			<xsl:apply-templates select="node()"/>
 		</tbody>
 	</xsl:template>
-	
+
 	<!-- thead-->
 	<xsl:template match="*[@name='thead']">
 		<thead class="{@name}" id="{@id}">
@@ -317,27 +319,27 @@ alt
 			<xsl:apply-templates select="node()"/>
 		</td>
 	</xsl:template>
-	
+
 <!-- Quote -->
 <xsl:template match="*[@name='blockquote']">
 <blockquote id="{@id}" class="{@name}">
 			<xsl:apply-templates select="node()"/>
 </blockquote>
-</xsl:template>	
-	
+</xsl:template>
+
 	<!-- Foreign phrase -->
 <xsl:template match="*[@name='foreignphrase']">
 <span id="{@id}" class="{@name}">
 <xsl:copy-of select="@lang"/>
 			<xsl:apply-templates select="node()"/>
 </span>
-</xsl:template>	
+</xsl:template>
 	<!-- Helper templates -->
 	<xsl:template name="makeDivSimple">
 		<div id="{@id}" class="{@name}">
 		<xsl:for-each select="@*">
 		<xsl:if test="local-name()!='id' and local-name()!='name'">
-<xsl:attribute name="data-{local-name()}"><xsl:value-of select="."/></xsl:attribute>		
+<xsl:attribute name="data-{local-name()}"><xsl:value-of select="."/></xsl:attribute>
 </xsl:if>
 		</xsl:for-each>
 			<xsl:apply-templates select="node()"/>

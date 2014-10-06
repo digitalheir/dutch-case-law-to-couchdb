@@ -1,3 +1,14 @@
+/* Footnotes */
+.footnote-ref {
+    vertical-align: super;
+    font-size: small;
+}
+
+.footnote-label{
+    margin-right: 6px;
+     text-decoration: underline;
+}
+
 /* Titles */
 .title {
     font-size: 1.6em;
