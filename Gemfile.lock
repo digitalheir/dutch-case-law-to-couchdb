@@ -30,4 +30,4 @@ DEPENDENCIES
   json
   nokogiri
   sinatra
-  tilt
+  tilt (~> 1.4.1)

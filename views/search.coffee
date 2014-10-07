@@ -21,10 +21,21 @@ getFunctionForBookmark = (isContinuedSearch) ->
 
       while i < rows.length
         doc = rows[i]
+        htmlSnippet = "<div class='result nl case-law'><a href='/ecli/" +
+          doc["id"] +
+          "' id='" +
+          doc["id"] +
+          "'><div class='res-title'>" +
+          doc["fields"]["title"] +
+          "</div><div class='res-kind'>" +
+          doc["fields"]["ecli"] +
+          "</div></a>"
+
+        htmlSnippet += "</div>"
         if isContinuedSearch
-          $sres.append "<a class='nl law' href='/ecli/" + doc["id"] + "' id='" + doc["id"] + "'><div class='res-title'>" + doc["fields"]["title"] + "</div><div class='res-kind'>" + doc["fields"]["kind"] + "</div></a>"
+          $sres.append htmlSnippet
         else
-          items.push "<a class='nl law' href='/ecli/" + doc["id"] + "' id='" + doc["id"] + "'><div class='res-title'>" + doc["fields"]["title"] + "</div><div class='res-kind'>" + doc["fields"]["kind"] + "</div></a>"
+          items.push htmlSnippet
         i++
     else
       console.error "No data!"

@@ -1,3 +1,3 @@
 require 'open-uri'
 
-open('http://rechtspraak.lawly.nl/')
+open('http://dutch-case-law.herokuapp.com/')
