@@ -7,6 +7,8 @@ GEM
     coffee-script-source (1.8.0)
     execjs (2.2.1)
     json (1.8.1)
+    json-ld (1.1.7)
+      rdf (~> 1.1, >= 1.1.4)
     mini_portile (0.6.0)
     nokogiri (1.6.2.1-x64-mingw32)
       mini_portile (= 0.6.0)
@@ -15,6 +17,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    rdf (1.1.4)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -28,6 +31,8 @@ PLATFORMS
 DEPENDENCIES
   coffee-script
   json
+  json-ld (~> 1.1.7)
   nokogiri
+  rdf
   sinatra
   tilt (~> 1.4.1)

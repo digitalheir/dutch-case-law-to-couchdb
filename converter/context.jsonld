@@ -1,18 +1,16 @@
 {
-    "_id": "@id",
-    "schema": "http://schema.org/",
-    "foaf": "http://xmlns.com/foaf/0.1/",
-    "frbr": "http://purl.org/vocab/frbr/core#",
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "dcterms": "http://purl.org/dc/terms/",
-    "psi": "http://psi.rechtspraak.nl/",
-    "bwb": "bwb-dl",
-    "ecli": "https://e-justice.europa.eu/ecli",
-    "cvdr": "http://decentrale.regelgeving.overheid.nl/cvdr/",
-    "eu": "http://publications.europa.eu/celex/",
-    "tr": "http://tuchtrecht.overheid.nl/",
-    "metadataModified": {
-        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+    "@context": {
+        "_id": "@id",
+        "schema": "http://schema.org/",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "frbr": "http://purl.org/vocab/frbr/core#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "dcterms": "http://purl.org/dc/terms/",
+        "psi": "http://psi.rechtspraak.nl/",
+        "ecli": "https://e-justice.europa.eu/ecli",
+        "cvdr": "http://decentrale.regelgeving.overheid.nl/cvdr/",
+        "eu": "http://publications.europa.eu/celex/",
+        "tr": "http://tuchtrecht.overheid.nl/"
     }
 }

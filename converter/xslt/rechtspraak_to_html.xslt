@@ -144,9 +144,9 @@ alt
 	</xsl:template>
 	<!-- Mediaobject (image or video. Although we only have 1 example of video which does not work) -->
 	<xsl:template match="*[@name='mediaobject']">
-		<span class="{@name}" id="{@id}">
+		<figure class="{@name}" id="{@id}">
 			<xsl:apply-templates select="node()"/>
-		</span>
+		</figure>
 	</xsl:template>
 	<xsl:template match="*[@name='imageobject']">
 		<span class="{@name}" id="{@id}">

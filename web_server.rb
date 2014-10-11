@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'open-uri'
 require 'erb'
+require 'coffee-script'
+require 'tilt'
 require 'net/http'
 require 'nokogiri'
 require_relative 'converter/xml_converter'
@@ -9,9 +11,8 @@ require 'json'
 
 ATOM_PREFIXES = {:atom => 'http://www.w3.org/2005/Atom'}
 
-# Open given ECLI on rechtspraak.nl, convert to Metalex, return converted
 get '/doc' do
-  redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
+  redirect to('/')
 end
 
 get '/example' do
@@ -19,6 +20,14 @@ get '/example' do
   expression.converter.generate_html(expression.doc)
 
   expression.converter.html_show
+end
+
+get '/jurisdiction' do
+  #TODO list jurisdictions
+end
+
+get '/jurisdiction/:id' do
+  #TODO get all info for jurisdiction
 end
 
 def get_rechtspraak_xml ecli, return_type='DOC'
@@ -30,6 +39,15 @@ def get_rechtspraak_xml ecli, return_type='DOC'
   else
     raise "Could not open #{uri}"
   end
+end
+
+get '/id/:ecli' do
+  ecli = params[:ecli].sub(/(:META|:DOC)$/,'')
+  xml = get_rechtspraak_xml ecli
+  conv = XmlConverter.new(ecli, xml)
+
+  content_type 'application/ld+json'
+  conv.metadata.to_json_ld.to_json
 end
 
 get '/ecli/:ecli' do
@@ -48,9 +66,10 @@ end
 
 get '/search' do
   q = params[:q] || ''
-  erb :search, {:locals => {:initial_value=>q}}
+  erb :search, {:locals => {:initial_value => q}}
 end
 
+# Open given ECLI on rechtspraak.nl, convert to Metalex, return converted
 get '/doc/:ecli' do
   if params[:return] == 'META'
     return_type = 'META'
@@ -79,7 +98,6 @@ get '/doc/:ecli' do
 
     '<?xml version="1.0" encoding="utf-8"?><error>Could not find ECLI '+params[:ecli]+'</error>'
   end
-
 end
 
 def parse_search_doc(entry)
@@ -187,6 +205,7 @@ end
 #   redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
 # end
 
+# noinspection RubyTooManyInstanceVariablesInspection
 class ParamsExtractor
   attr_reader :query_params
   attr_reader :return_type
@@ -202,7 +221,7 @@ class ParamsExtractor
   def initialize(params)
     @params=params
     @query_params={}
-    max, error = get_max params[:max]
+    @max, @error = get_max params[:max]
 
     @return_type = get_return params[:return]
     @from = get_from(params[:from])
@@ -234,7 +253,7 @@ class ParamsExtractor
     else
       return_type = 'DOC'
     end
-    return_statement =''
+    # return_statement =''
     if return_type=='DOC'
       @query_params[:return]='DOC'
     end
@@ -268,6 +287,9 @@ class ParamsExtractor
         type= 'Conclusie'
       elsif s.match /Uitspraak/i
         type= 'Uitspraak'
+      else
+        # TODO return error object
+        type = 'Uitspraak'
       end
       @query_params['type', type]
       return type

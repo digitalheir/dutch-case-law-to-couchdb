@@ -20,10 +20,10 @@ class RechtspraakExpression
   end
 
   private
-    # These attachments may or may not be available in the future, but currently not added due to space limitations.
-    #
-    # - metalex.xml can be generated through the web service
-    # - inner.html and toc.html can be scraped from show.html
+# These attachments may or may not be available in the future, but currently not added due to space limitations.
+#
+# - metalex.xml can be generated through the web service
+# - inner.html and toc.html can be scraped from show.html
   def add_attachments
     @doc['_attachments'] ||= {}
     @doc['_attachments']['original.xml'] = {
@@ -72,31 +72,43 @@ class RechtspraakExpression
 
 # noinspection RubyStringKeysInHashInspection
   def add_metadata_to_json(doc, ecli, n_xml)
+    triple_hash = {}
     n_xml.xpath('//metalex:meta',
                 {'metalex' => 'http://www.metalex.eu/metalex/1.0'}).each do |meta|
-      val = shorten_http_prefix(meta['content'])
-      if is_about_this(meta['about'], ecli)
-        property = shorten_http_prefix(meta['property'])
-        if doc[property] and doc[property] != val
-          if property == 'dcterms:modified'
-            puts "WARNING: documents already had a last modified date: #{doc[property]} (as opposed to #{val})"
-          else
-            # Make sure it's an array, because we have multiple values for this property
-            unless doc[property].respond_to?('push')
-              doc[property]=[doc[property]]
-            end
-            doc[property].push(val)
-          end
-        else
-          doc[property] = val
-        end
-      else
-        if meta['about'].match(/META/) or meta['about'].match(/mcontainer/)
-          # Also store the moment when metadata was last changed
-          doc['metadataModified'] = val
-        end
-      end
+      subject = shorten_http_prefix(meta['about'])
+      predicate = shorten_http_prefix(meta['property'])
+      object = shorten_http_prefix(meta['content'])
+
+      properties = triple_hash[subject] || {}
+      values = properties[predicate] || []
+      values << object
+      properties[predicate] = values
+      triple_hash[subject] = properties
     end
+
+    puts triple_hash.to_json
+    # if is_about_this(meta['about'], ecli)
+    #   property = shorten_http_prefix(meta['property'])
+    #   if doc[property] and doc[property] != val
+    #     if property == 'dcterms:modified'
+    #       puts "WARNING: documents already had a last modified date: #{doc[property]} (as opposed to #{val})"
+    #     else
+    #       # Make sure it's an array, because we have multiple values for this property
+    #       unless doc[property].respond_to?('push')
+    #         doc[property]=[doc[property]]
+    #       end
+    #       doc[property].push(val)
+    #     end
+    #   else
+    #     doc[property] = val
+    #   end
+    # else
+    #   if meta['about'].match(/META/) or meta['about'].match(/mcontainer/)
+    #     # Also store the moment when metadata was last changed
+    #     doc['metadataModified'] = val
+    #   end
+    # end
+
     doc['@context'] = XmlConverter::JSON_LD_URI
   end
 end

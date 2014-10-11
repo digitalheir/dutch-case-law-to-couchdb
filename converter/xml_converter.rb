@@ -1,5 +1,6 @@
 require 'json'
 require_relative 'metadata_handler'
+require_relative 'metadata_stripper'
 
 METALEX_PREFIX = 'metalex'
 
@@ -10,7 +11,7 @@ HTML_SHOW_TEMPLATE = Tilt.new('converter/erb/show.html.erb', :default_encoding =
 MAPPING = JSON.parse(File.read('converter/rechtspraak_mapping.json'))
 
 class XmlConverter
-  JSON_LD_URI = "http://assets.lawly.eu/ld/rechtspraak.jsonld"
+  JSON_LD_URI = "http://assets.lawly.eu/ld/context.jsonld"
 
   attr_reader :original
   attr_reader :metalex
@@ -22,7 +23,7 @@ class XmlConverter
     @ecli=ecli
     @mapping=MAPPING
     @original = xml
-    convert_to_metalex
+    @metadata = MetadataHandler.new xml, ecli
   end
 
   # Creates inner HTML, TOC, and the Lawly page that binds all data together
@@ -53,8 +54,8 @@ class XmlConverter
 
     give_all_elements_id(@metalex.root, '', {})
     convert_node_names(@metalex.root)
-
     add_metadata_container(@metalex, metadata_element)
+
     @metalex
   end
 

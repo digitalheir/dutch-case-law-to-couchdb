@@ -21,16 +21,18 @@ getFunctionForBookmark = (isContinuedSearch) ->
 
       while i < rows.length
         doc = rows[i]
-        htmlSnippet = "<div class='result nl case-law'><a href='/ecli/" +
-          doc["id"] +
-          "' id='" +
-          doc["id"] +
-          "'><div class='res-title'>" +
-          doc["fields"]["title"] +
-          "</div><div class='res-kind'>" +
-          doc["fields"]["ecli"] +
-          "</div></a>"
 
+        title = doc["fields"]["title"]
+        subtitle = doc["fields"]["ecli"]
+        ecliRegex = new RegExp("^\\s*#{subtitle}\\s*");
+        title=title.replace(ecliRegex, '')
+
+        htmlSnippet = "<!--suppress HtmlUnknownTarget -->
+<div class='result nl case-law'>
+ <a href='/ecli/#{doc["id"]}' id='#{doc["id"]}'>
+  <div class='res-title'>#{title}</div>
+  <div class='res-kind'>#{subtitle}</div>
+ </a>"
         htmlSnippet += "</div>"
         if isContinuedSearch
           $sres.append htmlSnippet
