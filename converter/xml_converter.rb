@@ -11,7 +11,7 @@ HTML_SHOW_TEMPLATE = Tilt.new('converter/erb/show.html.erb', :default_encoding =
 MAPPING = JSON.parse(File.read('converter/rechtspraak_mapping.json'))
 
 class XmlConverter
-  JSON_LD_URI = "http://assets.lawly.eu/ld/context.jsonld"
+  JSON_LD_URI = 'http://assets.lawly.eu/ld/context.jsonld'
 
   attr_reader :original
   attr_reader :metalex
@@ -45,9 +45,9 @@ class XmlConverter
   private
   def convert_to_metalex
     @metalex = Nokogiri::XML(@original.to_s)
-    @metalex.root.add_namespace_definition(METALEX_PREFIX, "http://www.metalex.eu/metalex/1.0")
+    @metalex.root.add_namespace_definition(METALEX_PREFIX, 'http://www.metalex.eu/metalex/1.0')
     @metalex.root.add_namespace_definition('xsi', 'http://www.w3.org/2001/XMLSchema-instance')
-    @metalex.root['xsi:schemaLocation'] = "http://www.metalex.eu/metalex/1.0 http://justinian.leibnizcenter.org/MetaLex/e.xsd"
+    @metalex.root['xsi:schemaLocation'] = 'http://www.metalex.eu/metalex/1.0 http://justinian.leibnizcenter.org/MetaLex/e.xsd'
 
     stripper = MetadataStripper.new @metalex, @ecli
     metadata_element = stripper.strip_metadata
