@@ -5,6 +5,7 @@ class RechtspraakExpression
 # Only processes metadata; source docs are added in add_attachments.
   def initialize(ecli, original_xml, rich_markup=nil)
     @converter = XmlConverter.new(ecli, original_xml)
+    @converter.convert_to_metalex
 
     @doc = {}
     add_metadata_to_json(@doc, ecli, @converter.metalex)

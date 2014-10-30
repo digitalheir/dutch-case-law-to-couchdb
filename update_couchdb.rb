@@ -9,19 +9,19 @@ require_relative 'couch/couch'
 require_relative 'couch/rechtspraak_expression'
 require_relative 'couch/rechtspraak_work'
 require_relative 'converter/xml_converter'
+require_relative 'rechtspraak_search_parser'
+include RechtspraakSearchParser
 
 RES_MAX=1000
 
 LOGGER = Logger.new('update_couchdb.log')
 
-def add_expression_and_work(new_docs, path, rich_markup)
-  ecli = path.gsub(/^\.\.\//, '').gsub(/^rich\//, '').gsub(/\.xml$/, '').gsub('.', ':')
-  original_xml = Nokogiri::XML(File.read(path))
+def add_work(new_docs, path_to_expression, rich_markup)
+  ecli = path_to_expression.gsub(/^\.\.\//, '').gsub(/^rich\//, '').gsub(/\.xml$/, '').gsub('.', ':')
+  original_xml = Nokogiri::XML(File.read(path_to_expression))
 
   expression = RechtspraakExpression.new(ecli, original_xml, rich_markup)
-  # new_docs << expression.doc
-
-  work = RechtspraakWork.new(ecli,expression.doc)
+  work = RechtspraakWork.new(ecli, expression.doc)
   work.set_show_html(expression.doc['_attachments']['show.html'])
 
   new_docs << work.doc
@@ -33,7 +33,7 @@ def initialize_couchdb
   rich_docs = Dir['rich/*']
   rich_docs.each do |path|
     rich_markup=true
-    add_expression_and_work(new_docs, path, rich_markup)
+    add_work(new_docs, path, rich_markup)
     Couch::CLOUDANT_CONNECTION.flush_bulk_if_big_enough('rechtspraak', new_docs)
     i+=1
     if i%1000==0
@@ -44,10 +44,10 @@ def initialize_couchdb
   not_rich_docs = Dir['notrich/*']
   not_rich_docs.each do |path|
     rich_markup=false
-    add_expression_and_work(new_docs, path, rich_markup)
+    add_work(new_docs, path, rich_markup)
     Couch::CLOUDANT_CONNECTION.flush_bulk_if_big_enough('rechtspraak', new_docs)
     i+=1
-    if i%1000==0
+    if i % 1000 == 0
       puts "processed #{i} docs"
     end
   end
@@ -55,12 +55,39 @@ def initialize_couchdb
   Couch::CLOUDANT_CONNECTION.flush_bulk_throttled('rechtspraak', new_docs)
 end
 
-def update_couchdb
+# noinspection RubyStringKeysInHashInspection
+def get_new_docs(since)
+  new_docs=[]
+  from=0
+  max=1000
+  params = {
+      modified: "[\"#{since}\"]",
+      max: max
+  }
+  loop do
+    params[:from] = from
+    resp = get_search_response(params)
+    from += max
+    if resp[:docs] and resp[:docs].length
+      new_docs<<resp[:docs].map { |doc| doc[:id] }
+    end
+    break unless resp[:docs] and resp[:docs].length>0
+  end
 
+  new_docs.flatten
 end
 
-initialize_couchdb
-# update_couchdb
+def update_couchdb
+  today = Date.today.strftime('%Y-%m-%d')
+  doc_last_updated = Couch::CLOUDANT_CONNECTION.get_doc('informal_schema', 'general')
+
+  new_docs = get_new_docs(doc_last_updated['date_last_updated'])
+  puts "#{new_docs.length} new docs"
+  # update_docs(new_docs)
+  # doc_last_updated['date_last_updated'] = today
+end
+
+update_couchdb
 LOGGER.close
 
 #

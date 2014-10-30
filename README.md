@@ -27,7 +27,7 @@ Will return only metadata for a given ECLI
 ## Search API
 Rechtspraak.nl has an Atom-based (XML) search API. Because JSON is usually a litle bit easier to work with, here's a JSON wrapper around this API.
 
-The root URL is [http://dutch-case-law.herokuapp.com/search](http://dutch-case-law.herokuapp.com/search). Use the following parameters to filter:
+The root URL is [http://dutch-case-law.herokuapp.com/search.json](http://dutch-case-law.herokuapp.com/search.json). Use the following parameters to filter:
 
 |parameter|expected value |default|description|
 |---------|---------------|-------|-----------|
@@ -43,11 +43,11 @@ The root URL is [http://dutch-case-law.herokuapp.com/search](http://dutch-case-l
 |creator  |String         |       |Return only cases for given judicial body|
                            
 ### Examples:
-[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META)<br />
+[http://dutch-case-law.herokuapp.com/search.json?max=100&from=0&return=META](http://dutch-case-law.herokuapp.com/search.json?max=100&from=0&return=META)<br />
 Gives back the first page of cases that rechtspraak has at least metadata for.
 
 
-[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC)<br />
+[http://dutch-case-law.herokuapp.com/search.json?max=100&from=0&return=DOC](http://dutch-case-law.herokuapp.com/search.json?max=100&from=0&return=DOC)<br />
 And this for cases for which documents are available.
 
 ## Limitations:

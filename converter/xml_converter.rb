@@ -1,6 +1,9 @@
 require 'json'
-require_relative 'metadata_handler'
-require_relative 'metadata_stripper'
+require 'tilt'
+require 'erb'
+require_relative 'metadata_handler_graph'
+require_relative 'metadata_handler_jsonld'
+require_relative 'metadata_handler_metalex'
 
 METALEX_PREFIX = 'metalex'
 
@@ -23,7 +26,10 @@ class XmlConverter
     @ecli=ecli
     @mapping=MAPPING
     @original = xml
-    @metadata = MetadataHandler.new xml, ecli
+  end
+
+  def get_rdf_metadata
+    MetadataHandler.new xml, ecli
   end
 
   # Creates inner HTML, TOC, and the Lawly page that binds all data together
@@ -42,7 +48,6 @@ class XmlConverter
     })
   end
 
-  private
   def convert_to_metalex
     @metalex = Nokogiri::XML(@original.to_s)
     @metalex.root.add_namespace_definition(METALEX_PREFIX, "http://www.metalex.eu/metalex/1.0")
@@ -58,6 +63,13 @@ class XmlConverter
 
     @metalex
   end
+
+  def get_json_ld
+    metadata_handler = MetadataHandlerJsonLd.new(@original, @ecli)
+    metadata_handler.metadata
+  end
+
+  private
 
   def add_metadata_container(xml, node)
     if xml.children.length > 0

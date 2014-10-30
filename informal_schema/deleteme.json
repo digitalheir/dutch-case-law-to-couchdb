@@ -1,0 +1,127 @@
+{
+    "@context": [
+        "http://assets.lawly.eu/ld/context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "rdf:Statement",
+            "_id": "_:f13ffe20-335e-0132-9756-1c4bd66bc18d",
+            "psi:aanleg": {
+                "_id": "psi:eerdereAanleg"
+            },
+            "psi:gevolg": {
+                "_id": "psi:gevolg#meerdere afhandelingswijzen"
+            },
+            "psi:typeRelatie": {
+                "_id": "psi:hogerBeroep"
+            },
+            "rdf:object": {
+                "_id": "http://rechtspraak.lawly.nl/id/ECLI:NL:RBARN:2012:BW3216"
+            },
+            "rdf:predicate": {
+                "_id": "dcterms:relation"
+            },
+            "rdf:subject": {
+                "_id": "http://rechtspraak.lawly.nl/id/ECLI:NL:GHARL:2013:9800"
+            }
+        },
+        {
+            "_id": "psi:procedure",
+            "rdfs:label": "Procedure"
+        },
+        {
+            "_id": "psi:procedure#hogerBeroep",
+            "rdfs:label": "Hoger beroep"
+        },
+        {
+            "_id": "psi:uitspraak",
+            "rdfs:label": "Uitspraak"
+        },
+        {
+            "_id": "psi:zaaknummer",
+            "rdfs:label": "Zaaknr"
+        },
+        {
+            "_id": "dcterms:creator",
+            "rdfs:label": "Instantie"
+        },
+        {
+            "_id": "dcterms:date",
+            "rdfs:label": "Uitspraakdatum"
+        },
+        {
+            "_id": "dcterms:issued",
+            "rdfs:label": "Publicatiedatum"
+        },
+        {
+            "_id": "dcterms:relation",
+            "rdfs:label": "Formele relatie"
+        },
+        {
+            "_id": "http://rechtspraak.lawly.nl/id/ECLI:NL:GHARL:2013:9800",
+            "dcterms:abstract": "Zeven jaar gevangenisstraf voor mensenhandel en verkrachting.",
+            "dcterms:accessRights": "public",
+            "dcterms:coverage": {
+                "_id": "http://rechtspraak.lawly.nl/jurisdiction/NL"
+            },
+            "dcterms:creator": {
+                "_id": "http://standaarden.overheid.nl/owms/terms/Gerechtshof_Arnhem-Leeuwarden"
+            },
+            "dcterms:date": {
+                "@value": "2013-12-20",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcterms:hasVersion": "Rechtspraak.nl",
+            "dcterms:issued": {
+                "@value": "2013-12-24",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcterms:publisher": {
+                "_id": "http://rechtspraak.nl/"
+            },
+            "dcterms:relation": {
+                "_id": "http://rechtspraak.lawly.nl/id/ECLI:NL:RBARN:2012:BW3216"
+            },
+            "dcterms:subject": {
+                "_id": "http://rechtspraak.lawly.nl/rechtsgebied/strafrecht"
+            },
+            "dcterms:title": {
+                "@value": "ECLI:NL:GHARL:2013:9800 Gerechtshof Arnhem-Leeuwarden , 20-12-2013 / 21-001567-12",
+                "@language": "nl"
+            },
+            "dcterms:type": {
+                "_id": "psi:uitspraak"
+            },
+            "psi:procedure": {
+                "_id": "psi:procedure#hogerBeroep"
+            },
+            "psi:zaaknummer": "21-001567-12"
+        },
+        {
+            "_id": "http://rechtspraak.lawly.nl/id/ECLI:NL:GHARL:2013:9800:DOC",
+            "dcterms:modified": {
+                "@value": "2013-12-24T14:14:12",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "_id": "http://rechtspraak.lawly.nl/id/ECLI:NL:GHARL:2013:9800:META",
+            "dcterms:modified": {
+                "@value": "2014-07-16T03:54:37",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "_id": "http://rechtspraak.lawly.nl/rechtsgebied/strafrecht",
+            "rdfs:label": "Strafrecht"
+        },
+        {
+            "_id": "http://rechtspraak.nl/",
+            "rdfs:label": "Raad voor de Rechtspraak"
+        },
+        {
+            "_id": "http://standaarden.overheid.nl/owms/terms/Gerechtshof_Arnhem-Leeuwarden",
+            "rdfs:label": "Gerechtshof Arnhem-Leeuwarden"
+        }
+    ]
+}

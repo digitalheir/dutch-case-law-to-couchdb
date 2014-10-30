@@ -1,20 +1,11 @@
-# Enhances metadata when converting a Rechtspraak.nl XML document to Metalex XML
+# Enhances and extracts metadata to an RDF graph
 
 require 'cgi'
 require 'rdf'
 require 'json/ld'
 
+#Creates a knowledge graph
 # noinspection RubyStringKeysInHashInspection
-# context = [
-#     'http://assets.lawly.eu/ld/context.jsonld',
-#     {
-#         'name' => 'foaf:name',
-#         'homepage' => {'@id' => 'http://xmlns.com/foaf/0.1/homepage', '@type' => '@id'},
-#         'avatar' => {'@id' => 'http://xmlns.com/foaf/0.1/avatar', '@type' => '@id'}
-#     }
-# ]
-
-#Knowledge repo
 class MetadataHandler
   attr_reader :graph
   LAWLY_ROOT = 'http://rechtspraak.lawly.nl/'
@@ -46,8 +37,21 @@ class MetadataHandler
   end
 
   def to_json_ld
+    # query = RDF::Query.new({
+    #                            :uri => {
+    #                                RDF::RDFS.label => :label
+    #                            }
+    #                        })
+    # label_mapping = {}
+    # query.execute(graph) do |solution|
+    #   label_mapping[solution.label.to_s] = solution.uri.to_s
+    # end
+
     context = [
-        "http://assets.lawly.eu/ld/context.jsonld"
+        "http://assets.lawly.eu/ld/rechtspraak_context.jsonld",
+        # label_mapping.merge(
+        {'@base' => 'http://rechtspraak.lawly.nl/id/'}
+    # )
     ]
 
     JSON::LD::API::fromRdf(@graph) do |expanded|
@@ -57,7 +61,6 @@ class MetadataHandler
 
     nil
   end
-
 
   def self.shorten_http_prefix(uri)
     uri
@@ -111,7 +114,7 @@ class MetadataHandler
     # Add some more info
     # Work level
     add_statement(@work_uri, RDF::RDFV.type, RDF::URI.new('http://purl.org/vocab/frbr/core#LegalWork'))
-    add_statement(@work_uri, RDF::OWL.sameAs, RDF::URI.new("http://deeplink.rechtspraak.nl/uitspraak?id=#{ecli}"))
+    add_statement(@work_uri, RDF::OWL.sameAs, RDF::URI.new("http://deeplink.rechtspraak.nl/uitspraak?id=#{@ecli}"))
     add_statement(@work_uri, RDF::URI.new('http://purl.org/vocab/frbr/core#realization'), @doc_uri)
     # TODO add foaf:page ... But to XML or JSON or HTML manifestation?
 
@@ -313,7 +316,7 @@ class MetadataHandler
         abstract = element.text.strip # fallback if there's no resourceIdentifier
         if element['resourceIdentifier']
           inhoudsindicaties = @xml.xpath('/open-rechtspraak/rs:inhoudsindicatie', PREFIXES)
-          if inhoudsindicaties.length > 0
+          if inhoudsindicaties.length > 1
             puts "WARNING: found #{inhoudsindicaties.length} inhoudsindicaties"
           end
           inhoudsindicaties.each do |inhoudsindicatie|
