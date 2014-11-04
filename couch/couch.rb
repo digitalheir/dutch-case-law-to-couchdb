@@ -1,6 +1,7 @@
 require 'net/http'
 require 'cgi'
 require 'json'
+require 'objspace'
 require_relative 'secret'
 
 module Couch
@@ -66,7 +67,7 @@ module Couch
       res = get(uri)
       result = JSON.parse(res.body)
       result['rows'].each do |row|
-        if row['error'] or !row['doc']
+        if row['error']
           puts "#{row['key']}: #{row['error']}"
           puts "#{row['reason']}"
         else
@@ -79,9 +80,7 @@ module Couch
 
     # Returns an array of the full documents for given database, possibly filtered with given parameters. Note that the 'include_docs' parameter must be set to true for this.
     def get_all_docs(database, params)
-      if params.include? 'include_docs'
-        params['include_docs'] = true
-      else
+      unless params.include? 'include_docs' or params.include? :include_docs
         params.merge!({:include_docs => true})
       end
       postfix = create_postfix(params)
@@ -177,22 +176,23 @@ module Couch
     end
 
     def get_bytesize(doc)
-      bytesize=0
-      if doc['_attachments']
-        doc['_attachments'].each do |name, attachment|
-          data = attachment['data'] || attachment[:data]
-          if data
-            bytesize += data.bytesize
-            bytesize += name.bytesize
-          end
-        end
-        doc.each do |_, val|
-          if val.is_a? String
-            bytesize += val.bytesize
-          end
-        end
-      end
-      bytesize
+      ObjectSpace.memsize_of doc
+      # bytesize=0
+      # if doc['_attachments']
+      #   doc['_attachments'].each do |name, attachment|
+      #     data = attachment['data'] || attachment[:data]
+      #     if data
+      #       bytesize += data.bytesize
+      #       bytesize += name.bytesize
+      #     end
+      #   end
+      #   doc.each do |_, val|
+      #     if val.is_a? String
+      #       bytesize += val.bytesize
+      #     end
+      #   end
+      # end
+      # bytesize
     end
 
     private

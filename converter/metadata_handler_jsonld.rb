@@ -701,10 +701,13 @@ class MetadataHandlerJsonLd
 # NOTE: psi:afdeling is deprecated, so we won't parse it
   def handle_creator(tree)
     #TODO handle scheme........?
-    predicate = 'dcterms:creator'
-    creator_element = tree.at_xpath(".//#{predicate}", PREFIXES)
+    creator_element = tree.at_xpath(".//dcterms:creator", PREFIXES)
     # A reference an OWMS uri (http://standaarden.overheid.nl/owms)
 
+    unless creator_element
+      raise "ERROR: #{@ecli} did not have a creator"
+      # return
+    end
     court_name = creator_element.text.strip
     court_uri = creator_element['resourceIdentifier']
     unless court_uri
