@@ -17,7 +17,7 @@ get '/doc' do
 end
 
 get '/example' do
-  expression = RechtspraakExpression.new("example", Nokogiri::XML(File.read('converter/example_rechtspraak_doc.xml')), true)
+  expression = RechtspraakExpression.new('example', Nokogiri::XML(File.read('converter/example_rechtspraak_doc.xml')), true)
   expression.converter.generate_html(expression.doc)
 
   expression.converter.html_show
@@ -31,7 +31,7 @@ get '/jurisdiction/:id' do
   #TODO get all info for jurisdiction
 end
 
-def get_rechtspraak_xml ecli, return_type='DOC'
+def get_rechtspraak_xml(ecli, return_type='DOC')
   uri = URI("http://data.rechtspraak.nl/uitspraken/content?id=#{ecli}&return=#{return_type}")
   res = Net::HTTP.get_response(uri)
 
@@ -65,8 +65,8 @@ get '/ecli/:ecli' do
   expression.converter.html_show
 end
 
-get "/js/search.js" do
-  content_type "text/javascript"
+get '/js/search.js' do
+  content_type 'text/javascript'
   coffee :search
 end
 
@@ -113,18 +113,7 @@ get '/doc/:ecli' do
   end
 end
 
-
-
-
-
-
-
 get '/' do
   erb :index
 end
-# get '/*' do
-#   redirect to('https://github.com/digitalheir/dutch-case-law-to-metalex')
-# end
-
-
 

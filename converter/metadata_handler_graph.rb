@@ -68,8 +68,6 @@ class MetadataHandler
     .gsub('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:')
     .gsub('http://purl.org/dc/terms/', 'dcterms:')
     .gsub('http://psi.rechtspraak.nl/', 'psi:')
-    .gsub(/^bwb-dl$/, 'bwb:')
-    .gsub('https://e-justice.europa.eu/ecli', 'ecli:')
     .gsub('http://decentrale.regelgeving.overheid.nl/cvdr/', 'cvdr:')
     .gsub('http://publications.europa.eu/celex/', 'eu:')
     .gsub('http://tuchtrecht.overheid.nl/', 'tr:')
@@ -116,8 +114,8 @@ class MetadataHandler
     add_statement(@work_uri, RDF::RDFV.type, RDF::URI.new('http://purl.org/vocab/frbr/core#LegalWork'))
     add_statement(@work_uri, RDF::OWL.sameAs, RDF::URI.new("http://deeplink.rechtspraak.nl/uitspraak?id=#{@ecli}"))
     add_statement(@work_uri, RDF::URI.new('http://purl.org/vocab/frbr/core#realization'), @doc_uri)
-    # TODO add foaf:page ... But to XML or JSON or HTML manifestation?
 
+    # TODO add foaf:page ... But to XML or JSON or HTML manifestation?
     # Expression level # TODO route expression uri to this data
     add_statement(@doc_uri, RDF::RDFV.type, RDF::URI.new('http://purl.org/vocab/frbr/core#Expression'))
     # TODO add manifestation

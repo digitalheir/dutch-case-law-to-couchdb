@@ -19,7 +19,7 @@ module RechtspraakSearchParser
   def get_search_response params
     response = {}
 
-    uri = URI.parse "http://data.rechtspraak.nl/uitspraken/zoeken"
+    uri = URI.parse 'http://data.rechtspraak.nl/uitspraken/zoeken'
 
     params_extractor = ParamsExtractor.new(params)
     uri.query = URI.encode_www_form(params_extractor.query_params)
@@ -138,7 +138,7 @@ class ParamsExtractor
     end
     error=nil
     if max > 1000 or max < 1
-      error = "Return limit needs to be a number between 1 and 1000 inclusive"
+      error = 'Return limit needs to be a number between 1 and 1000 inclusive'
     end
     @query_params[:max]=max
     return max, error
