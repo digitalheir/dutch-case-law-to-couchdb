@@ -1,5 +1,7 @@
 require 'net/http'
 require 'cgi'
+require 'json'
+require 'objspace'
 require_relative 'secret'
 
 module Couch
@@ -57,11 +59,28 @@ module Couch
       JSON.parse(res.body.force_encoding('utf-8'))['rows']
     end
 
+    def get_all_ids(database, params)
+      ids=[]
+      postfix = create_postfix(params)
+
+      uri = URI::encode "/#{database}/_all_docs#{postfix}"
+      res = get(uri)
+      result = JSON.parse(res.body)
+      result['rows'].each do |row|
+        if row['error']
+          puts "#{row['key']}: #{row['error']}"
+          puts "#{row['reason']}"
+        else
+          ids << row['id']
+        end
+      end
+
+      ids
+    end
+
     # Returns an array of the full documents for given database, possibly filtered with given parameters. Note that the 'include_docs' parameter must be set to true for this.
     def get_all_docs(database, params)
-      if params.include? 'include_docs'
-        params['include_docs'] = true
-      else
+      unless params.include? 'include_docs' or params.include? :include_docs
         params.merge!({:include_docs => true})
       end
       postfix = create_postfix(params)
@@ -142,7 +161,7 @@ module Couch
     end
 
     def flush_bulk_if_big_enough(db, docs, flush_size_mb=50)
-      if get_bytesize_array(docs) >= flush_size_mb*1024*1024
+      if get_bytesize_array(docs) >= flush_size_mb*1024*1024 or docs.length >= 500
         flush_bulk_throttled(db, docs)
         docs.clear
       end
@@ -157,22 +176,23 @@ module Couch
     end
 
     def get_bytesize(doc)
-      bytesize=0
-      if doc['_attachments']
-        doc['_attachments'].each do |name, attachment|
-          data = attachment['data'] || attachment[:data]
-          if data
-            bytesize += data.bytesize
-            bytesize += name.bytesize
-          end
-        end
-        doc.each do |_, val|
-          if val.is_a? String
-            bytesize += val.bytesize
-          end
-        end
-      end
-      bytesize
+      ObjectSpace.memsize_of doc
+      # bytesize=0
+      # if doc['_attachments']
+      #   doc['_attachments'].each do |name, attachment|
+      #     data = attachment['data'] || attachment[:data]
+      #     if data
+      #       bytesize += data.bytesize
+      #       bytesize += name.bytesize
+      #     end
+      #   end
+      #   doc.each do |_, val|
+      #     if val.is_a? String
+      #       bytesize += val.bytesize
+      #     end
+      #   end
+      # end
+      # bytesize
     end
 
     private
@@ -195,10 +215,18 @@ module Couch
     end
   end
 
-  CLOUDANT_CONNECTION = Server.new(
-      "#{Secret::CLOUDANT_NAME}.cloudant.com", "80",
+  WETTEN_CONNECTION = Server.new(
+      "#{Secret::WETTEN_NAME}.cloudant.com", "80",
       {name:
-           Secret::CLOUDANT_NAME,
+           Secret::WETTEN_NAME,
+       password:
+           Secret::CLOUDANT_PASSWORD
+      }
+  )
+  CLOUDANT_CONNECTION = Server.new(
+      "#{Secret::RECHTSPRAAK_NAME}.cloudant.com", "80",
+      {name:
+           Secret::RECHTSPRAAK_NAME,
        password:
            Secret::CLOUDANT_PASSWORD
       }

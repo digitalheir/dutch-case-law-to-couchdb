@@ -10,6 +10,12 @@
       <dcterms:issued rdfs:label="Publicatiedatum">2013-04-05</dcterms:issued>
       <dcterms:publisher resourceIdentifier="http://rechtspraak.nl/">Raad voor de Rechtspraak</dcterms:publisher>
       <dcterms:language>nl</dcterms:language>
+      <dcterms:temporal rdfs:label="Periode">
+        <start rdfs:label="van">2005</start>
+        <end rdfs:label="tot">2008</end>
+      </dcterms:temporal>
+      <dcterms:references rdfs:label="Wetsverwijzing" bwb:resourceIdentifier="1.0:v:BWB:BWBR0015007&amp;g=2014-01-08">Spoorwegwet</dcterms:references>
+      <dcterms:references rdfs:label="Wetsverwijzing" bwb:resourceIdentifier="1.0:v:BWB:BWBR0005537&amp;artikel=1:2&amp;g=2014-01-08">Algemene wet bestuursrecht 1:2</dcterms:references>
       <dcterms:replaces rdfs:label="Vervangt">BN1294</dcterms:replaces>
       <dcterms:creator rdfs:label="Instantie" resourceIdentifier="http://standaarden.overheid.nl/owms/terms/College_van_Beroep_voor_het_bedrijfsleven" scheme="overheid.RechterlijkeMacht">College van Beroep voor het bedrijfsleven</dcterms:creator>
       <dcterms:date rdfs:label="Uitspraakdatum">2010-05-17</dcterms:date>
@@ -17,8 +23,16 @@
       <dcterms:type rdf:language="nl" resourceIdentifier="http://psi.rechtspraak.nl/uitspraak">Uitspraak</dcterms:type>
       <psi:procedure rdf:language="nl" rdfs:label="Procedure" resourceIdentifier="http://psi.rechtspraak.nl/procedure#eersteAanlegEnkelvoudig">Eerste aanleg - enkelvoudig</psi:procedure>
       <dcterms:coverage>NL</dcterms:coverage>
+      <dcterms:references rdfs:label="Wetsverwijzing" cvdr:resourceIdentifier="CVDR:78304_1">Verordening parkeerbelastingen 2011</dcterms:references>
+
       <dcterms:spatial rdfs:label="Zittingsplaats">'s-Gravenhage</dcterms:spatial>
       <dcterms:subject rdfs:label="Rechtsgebied" resourceIdentifier="http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht">Bestuursrecht</dcterms:subject>
+      <dcterms:subject rdfs:label="Rechtsgebied" resourceIdentifier="http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht">Bestuursrecht</dcterms:subject>
+      <dcterms:subject rdfs:label="Rechtsgebied" resourceIdentifier="http://psi.rechtspraak.nl/rechtsgebied#strafrecht">Strafrecht, Bestuursrecht</dcterms:subject>
+      <dcterms:relation rdfs:label="Formele relatie" ecli:resourceIdentifier="ECLI:NL:PHR:2013:983" psi:type="http://psi.rechtspraak.nl/conclusie" psi:aanleg="http://psi.rechtspraak.nl/eerdereAanleg" psi:gevolg="http://psi.rechtspraak.nl/gevolg#gevolgd">Conclusie: ECLI:NL:PHR:2013:983, Gevolgd</dcterms:relation>
+      <dcterms:relation rdfs:label="Formele relatie" ecli:resourceIdentifier="ECLI:NL:PHR:2013:985" psi:type="http://psi.rechtspraak.nl/conclusie" psi:aanleg="http://psi.rechtspraak.nl/eerdereAanleg" psi:gevolg="http://psi.rechtspraak.nl/gevolg#gevolgd">Conclusie: ECLI:NL:PHR:2013:985, Gevolgd</dcterms:relation>
+      <dcterms:relation rdfs:label="Formele relatie" ecli:resourceIdentifier="ECLI:NL:GHSHE:2013:1941" psi:type="http://psi.rechtspraak.nl/cassatie" psi:aanleg="http://psi.rechtspraak.nl/eerdereAanleg" psi:gevolg="http://psi.rechtspraak.nl/gevolg#(Gedeeltelijke) vernietiging met verwijzen">In cassatie op : ECLI:NL:GHSHE:2013:1941, (Gedeeltelijke) vernietiging met verwijzen</dcterms:relation>
+
       <dcterms:hasVersion rdfs:label="Vindplaatsen" resourceIdentifier="http://psi.rechtspraak.nl/vindplaats">
         <rdf:list>
           <rdf:li>Rechtspraak.nl</rdf:li>

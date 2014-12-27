@@ -1,54 +1,29 @@
-# Rechtspraak to Metalex
-This repository describes a web service to get Dutch case law documents from data.rechtspraak.nl and convert them to a [Metalex](http://metalex.eu/)-compliant form.
+# Dutch case law as linked open data 
 
-This is a derivative of the rechtspraak.nl web service. Original documentation is available in Dutch [here](http://www.rechtspraak.nl/Uitspraken-en-Registers/Uitspraken/Open-Data/Documents/Technische-documentatie-Open-Data-van-de-Rechtspraak.pdf). 
+This repository contains code that converts Dutch case law documents from data.rechtspraak.nl and convert them to JSON-LD and a [Metalex](http://metalex.eu/)-compliant form. 
+
+For a motivation of this project and more high-level description, please go [here](http://leibniz-internship-report.herokuapp.com/#dutch-case-law).
+
+Everything described here is a derivative of the rechtspraak.nl web service. Original documentation is available in Dutch [here](http://www.rechtspraak.nl/Uitspraken-en-Registers/Uitspraken/Open-Data/Documents/Technische-documentatie-Open-Data-van-de-Rechtspraak.pdf). 
 
 ## Document API
-Use this API to get Dutch case law documents. Both metadata and markup are converted to the Metalex standard. The root of this service is at [http://dutch-case-law.herokuapp.com/doc/<ecli>](http://dutch-case-law.herokuapp.com/doc/).
+Use this API to get Dutch case law documents. Documents are available in HTML and Metalex XML
 
-There is only one parameter: `return`. 
+The root URL of this service is at [http://rechtspraak.lawly.nl/](http://rechtspraak.lawly.nl/).
 
-|parameter|expected value |default|description|
-|---------|---------------|-------|-----------|
-|return   |`META` or `DOC`|`DOC`  |Whether to return just the metadata for a document (`META`), or metadata along with the document (`DOC`).|         
+### HTML
+Suffix `http://rechtspraak.lawly.nl/ecli/` with an ECLI id to get a HTML manifestation. [Example](http://rechtspraak.lawly.nl/ecli/ECLI:NL:GHAMS:2013:4606).
+
+### Metalex XML
+Suffix `http://rechtspraak.lawly.nl/doc/` with an ECLI id to get a Metalex XML manifestation. [Example](http://rechtspraak.lawly.nl/doc/ECLI:NL:GHAMS:2013:4606).
+
+There is one parameter: `return`. 
+
+|parameter|expected value |default|description|Example|
+|---------|---------------|-------|-----------|-------|
+|return   |`META` or `DOC`|`DOC`  |Whether to return just the metadata for a document (`META`), or metadata along with the document (`DOC`).|[http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META](http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META)|         
  
 Metadata is processed considerably; refer to `metadata_handler.rb` to see how different metadata elements are processed.
 
 To make the content markup Metalex-compliant, almost all tags are made into inline elements. This is because rechtspraak.nl does not have an existing XML schema, and the XML found is too wild to try and conform to a more descriptive Metalex schema. The original tag names persist in the `name` attribute, though, so no information is lost.
-
-### Examples 
-[http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177](http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177)<br />
-Will return a full document with metadata
-
-
-[http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META](http://dutch-case-law.herokuapp.com/doc/ECLI:NL:CRVB:1999:AA4177?return=META)<br />
-Will return only metadata for a given ECLI
  
-## Search API
-Rechtspraak.nl has an Atom-based (XML) search API. Because JSON is usually a litle bit easier to work with, here's a JSON wrapper around this API.
-
-The root URL is [http://dutch-case-law.herokuapp.com/search](http://dutch-case-law.herokuapp.com/search). Use the following parameters to filter:
-
-|parameter|expected value |default|description|
-|---------|---------------|-------|-----------|
-|return   |`META` or `DOC`|`DOC`  |Whether to return the cases for which we at least have metadata (`META`), or for which we also have the document (`DOC`).|         
-|max     |Int between 1 and 1000, inclusive|1000|The maximum number of documents to return|
-|from     |Int, at least 0|0      |The numbers of documents to skip|
-|sort     |`ASC` or `DESC`|`ASC`  |Which direction to sort the documents (sorted on modification date)|
-|replaces |An LJN string  |       |Returns documents that correspond to the antiquated LJN identifier|
-|date     |A JSON array of 1 or 2 dates formatted `YYYY-MM-DD`. Ex: ["2009-01-01", "2014-09-25"]||If 1 date is specified, returns only cases for that day. If 2 dates are provided, returns cases between those dates.|
-|modified |A JSON array of 1 or 2 dates formatted `YYYY-MM-DD`. Ex: ["2009-01-01", "2014-09-25"]||If 1 date is specifid, returns that have been modified from that date onwards.  If 2 dates are specified, returns documents changed beween those dates.|
-|type     |`Uitspraak` or `Conclusie`||Which type of case to return, default both|
-|subject  |URI            |       |Return only cases for given legal subject|
-|creator  |String         |       |Return only cases for given judicial body|
-                           
-### Examples:
-[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=META)<br />
-Gives back the first page of cases that rechtspraak has at least metadata for.
-
-
-[http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC](http://dutch-case-law.herokuapp.com/search?max=100&from=0&return=DOC)<br />
-And this for cases for which documents are available.
-
-## Limitations:
-Error handling is not very graceful yet. For some fields, if the value is set wrong, the server may raise an exception instead of return an error object telling you what you did wrong.                          

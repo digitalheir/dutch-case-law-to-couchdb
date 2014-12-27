@@ -1,15 +1,15 @@
 require 'json'
 require 'base64'
-     require_relative '../couch/couch'
-doc = JSON.parse('{
-  "_id": "ld"
-}')
+require_relative '../couch/couch'
 
 puts Dir.getwd
-doc['_attachments'] ||= {}
-doc['_attachments']['context.jsonld'] = {
+
+
+doc = JSON.parse(Couch::WETTEN_CONNECTION.get('/assets/ld').body)
+# noinspection RubyStringKeysInHashInspection
+doc['_attachments']['rechtspraak_context.jsonld'] = {
     'content_type' => 'application/ld+json',
-    'data' => Base64.encode64(File.read('context.jsonld'))
+    'data' => Base64.encode64(File.read('rechtspraak_context.jsonld'))
 }
 
-Couch::LAW.put('/assets/ld',doc.to_json)
+Couch::WETTEN_CONNECTION.flush_bulk('assets', [doc])
