@@ -40,12 +40,12 @@ class XmlConverter
     @html_toc = EXTRACT_TOC.transform(@metalex).to_s
 
     @html_show = HTML_SHOW_TEMPLATE.render(Object.new, {
-        :page_title => from_doc['dcterms:title'],
-        :date_last_modified => from_doc['dcterms:modified'],
-        :description => from_doc['dcterms:abstract'],
-        :inner_html => @html_inner,
-        :toc => @html_toc
-    })
+                                                         :page_title => from_doc['dcterms:title'],
+                                                         :date_last_modified => from_doc['dcterms:modified'],
+                                                         :description => from_doc['dcterms:abstract'],
+                                                         :inner_html => @html_inner,
+                                                         :toc => @html_toc
+                                                     })
   end
 
   def convert_to_metalex
@@ -106,20 +106,20 @@ class XmlConverter
   end
 
   # Sets an id attribute for every element
-  # NOTE: I use colons instead of slashes, because a string with slashes does not count as NMTOKEN when validating against metalex schema
+  # NOTE: I use colons instead of slashes, because a string with slashes does not count as NMTOKEN when validating against Metalex schema
   def set_id_for_element(root, ids_used, index, path_so_far)
     if root['id']
       unless root.name == 'uitspraak' or root.name == 'conclusie' or root.name == 'footnote'
         puts "NOTE: #{root.name} already had an id: #{root['id']}"
       end
-      id=root['id']
+      id = root['id']
     else
       element_name = root.name.gsub(' ', '_')
       if index
         # TODO use nr if possible
-        id="#{path_so_far}:#{element_name}:#{index.to_s.gsub(/[ \/\*]/, '_')}"
+        id = "#{path_so_far}:#{element_name}:#{index.to_s.gsub(/[ \/\*]/, '_')}"
       else
-        id ="#{path_so_far}:#{element_name}"
+        id = "#{path_so_far}:#{element_name}"
       end
     end
 
@@ -166,34 +166,34 @@ class XmlConverter
   # Matches, for instance 'U I t S pR  a A k something following'
   RE_UITSPRAAK = /\s*[Uu]\s{0,2}[Ii]\s{0,2}[Tt]\s{0,2}[Ss]\s{0,2}[Pp]\s{0,2}[Rr]\s{0,2}[Aa]\s{0,2}[Aa]\s{0,2}[KK][^<]*/
 
-# def improve_xml(root_soup, ecli)
-#   doc_root = root_soup.contents[0]
-#
-#   # Convert 'uitspraak' or 'conclusie' to 'doc' with @role=rechtspraak:uitspraak|rechtspraak:conclusie
-#   doc_root['role'] = "http://psi.rechtspraak.nl/" + doc_root.name.lower()
-#   doc_root['id'] = ecli
-#   doc_root.name = 'doc'
-#
-#   # para elements
-#   all_elements = doc_root.find_all()
-#   para_elements = doc_root.find_all(RE_PARA)
-#   if len(para_elements) == len(all_elements)
-#     #logging.debug("Processing a para doc")
-#     # Wrap <para>'UITSPRAAK'</para> and following nodes in a <judgment> tag
-#     tags = doc_root.find_all(name='para', text=RE_UITSPRAAK)
-#     for tag in tags
-#       tag.name = 'header'
-#       #     wrapper = root_soup.new_tag("judgment")
-#       #     while not (tag.next_sibling is None or tag.next_sibling in tags):
-#       #         wrapper.append(tag.next_sibling)
-#       #     tag.insert_after(wrapper)
-#       #     wrapper.insert(0, tag)
-#       else
-#       logging.warning("Processing a richer doc: " + ecli)
-#     end
-#     # Return enriched xml
-#     return doc_root
-#   end
-# end
+  # def improve_xml(root_soup, ecli)
+  #   doc_root = root_soup.contents[0]
+  #
+  #   # Convert 'uitspraak' or 'conclusie' to 'doc' with @role=rechtspraak:uitspraak|rechtspraak:conclusie
+  #   doc_root['role'] = "http://psi.rechtspraak.nl/" + doc_root.name.lower()
+  #   doc_root['id'] = ecli
+  #   doc_root.name = 'doc'
+  #
+  #   # para elements
+  #   all_elements = doc_root.find_all()
+  #   para_elements = doc_root.find_all(RE_PARA)
+  #   if len(para_elements) == len(all_elements)
+  #     #logging.debug("Processing a para doc")
+  #     # Wrap <para>'UITSPRAAK'</para> and following nodes in a <judgment> tag
+  #     tags = doc_root.find_all(name='para', text=RE_UITSPRAAK)
+  #     for tag in tags
+  #       tag.name = 'header'
+  #       #     wrapper = root_soup.new_tag("judgment")
+  #       #     while not (tag.next_sibling is None or tag.next_sibling in tags):
+  #       #         wrapper.append(tag.next_sibling)
+  #       #     tag.insert_after(wrapper)
+  #       #     wrapper.insert(0, tag)
+  #       else
+  #       logging.warning("Processing a richer doc: " + ecli)
+  #     end
+  #     # Return enriched xml
+  #     return doc_root
+  #   end
+  # end
   RE_PARA = /^para(group|block)?$/
 end

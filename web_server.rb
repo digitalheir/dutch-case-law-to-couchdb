@@ -55,6 +55,16 @@ get '/id/:ecli' do
   conv.get_json_ld.to_json
 end
 
+get '/ecli/:ecli/data.htm' do
+  ecli = params[:ecli]
+  xml = get_rechtspraak_xml ecli
+  # TODO don't convert to metalex first... It doesn't add anything
+  expression = RechtspraakExpression.new(ecli, xml)
+  expression.converter.generate_html(expression.doc)
+
+  expression.converter.html_inner
+end
+
 get '/ecli/:ecli' do
   ecli = params[:ecli]
   xml = get_rechtspraak_xml ecli

@@ -29,10 +29,10 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  coffee-script
-  json
+  coffee-script (~> 2.3.0)
+  json (~> 1.8.1)
   json-ld (~> 1.1.7)
   nokogiri
-  rdf
-  sinatra
+  rdf (~> 1.1.4)
+  sinatra (~> 1.4.5)
   tilt (~> 1.4.1)
