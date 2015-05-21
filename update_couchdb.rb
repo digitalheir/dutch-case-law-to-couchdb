@@ -7,67 +7,58 @@ require 'open-uri'
 require 'base64'
 require_relative 'couch/couch'
 require_relative 'couch/rechtspraak_expression'
-require_relative 'couch/rechtspraak_work'
 require_relative 'converter/xml_converter'
 require_relative 'rechtspraak_search_parser'
 include RechtspraakSearchParser
 
-RES_MAX=1000
-
-LOGGER = Logger.new('update_couchdb.log')
-
-def add_work(new_docs, path_to_expression, rich_markup)
-  ecli = path_to_expression.gsub(/^\.\.\//, '').gsub(/^rich\//, '').gsub(/\.xml$/, '').gsub('.', ':')
-  original_xml = Nokogiri::XML(File.read(path_to_expression))
-
-  expression = RechtspraakExpression.new(ecli, original_xml, rich_markup)
-  work = RechtspraakWork.new(ecli, expression.doc)
-  work.set_show_html(expression.doc['_attachments']['show.html'])
-
-  new_docs << work.doc
+def create_couch_doc(ecli)
+  # cache_path = "/media/maarten/BA46DFBC46DF7819/Text mining Dutch case law/ecli/#{ecli.gsub(':', '.')}.xml"
+  # if File.exists? cache_path
+  #   puts "using #{cache_path}"
+  #   original_xml = Nokogiri::XML(File.open cache_path)
+  # else
+    original_xml = Nokogiri::XML(open("http://data.rechtspraak.nl/uitspraken/content?id=#{ecli}"))
+  # end
+  RechtspraakExpression.new(ecli, original_xml).doc
 end
 
-def initialize_couchdb
+def update_docs current_revs, update_eclis
   i=0
-  new_docs = []
-  rich_docs = Dir['rich/*']
-  rich_docs.each do |path|
-    rich_markup=true
-    add_work(new_docs, path, rich_markup)
-    Couch::CLOUDANT_CONNECTION.flush_bulk_if_big_enough('rechtspraak', new_docs)
+  docs_to_upload = []
+  update_eclis.each do |ecli|
+   begin
+    doc = create_couch_doc(ecli)
+    if current_revs[ecli]
+      doc['_rev'] = current_revs[doc['ecli']]
+    end
+
+    docs_to_upload << doc
+    Couch::CLOUDANT_CONNECTION.flush_bulk_if_big_enough(DATABASE_NAME, docs_to_upload)
     i+=1
     if i%1000==0
       puts "processed #{i} docs"
     end
+   rescue
+    puts "Error processing #{ecli}"
+   end
   end
-
-  not_rich_docs = Dir['notrich/*']
-  not_rich_docs.each do |path|
-    rich_markup=false
-    add_work(new_docs, path, rich_markup)
-    Couch::CLOUDANT_CONNECTION.flush_bulk_if_big_enough('rechtspraak', new_docs)
-    i+=1
-    if i % 1000 == 0
-      puts "processed #{i} docs"
-    end
-  end
-
-  Couch::CLOUDANT_CONNECTION.flush_bulk_throttled('rechtspraak', new_docs)
+  Couch::CLOUDANT_CONNECTION.flush_bulk_throttled(DATABASE_NAME, docs_to_upload)
 end
 
-# noinspection RubyStringKeysInHashInspection
+# Returns an array of ECLIs that have changed since given date
 def get_new_docs(since)
+  since = "1888-05-13"
   new_docs=[]
   from=0
-  max=1000
   params = {
       modified: "[\"#{since}\"]",
-      max: max
+      max: 1000
   }
   loop do
     params[:from] = from
     resp = get_search_response(params)
-    from += max
+    from += params[:max]
+    puts "from: #{from}"
     if resp[:docs] and resp[:docs].length
       new_docs<<resp[:docs].map { |doc| doc[:id] }
     end
@@ -77,54 +68,43 @@ def get_new_docs(since)
   new_docs.flatten
 end
 
+def get_current_revs
+  revs = {}
+  rows = Couch::CLOUDANT_CONNECTION.get_rows_for_view 'ecli', 'query', 'rechtspraak_rev'#, {'stale'=>'ok'}
+  rows.each do |row|
+    revs[row['key']] = row['value']
+  end
+  revs
+end
+
 def update_couchdb
   today = Date.today.strftime('%Y-%m-%d')
   doc_last_updated = Couch::CLOUDANT_CONNECTION.get_doc('informal_schema', 'general')
 
+  # Resolve new docs and update database
+  current_revs = get_current_revs
+  puts "found #{current_revs.length} documents in db"
+
   new_docs = get_new_docs(doc_last_updated['date_last_updated'])
+#todo REMOVE
+new_docs
+new_docs.select! {|ecli| current_revs[ecli].nil?}
+#TODO remove
   puts "#{new_docs.length} new docs"
-  # update_docs(new_docs)
-  # doc_last_updated['date_last_updated'] = today
+
+  update_docs(current_revs, new_docs)
+
+  # Update the document that tracks our last update date
+  doc_last_updated['date_last_updated'] = today
+  Couch::CLOUDANT_CONNECTION.put('/informal_schema/general', doc_last_updated.to_json)
 end
+
+# Script starts here
+
+RES_MAX=1000
+DATABASE_NAME = 'ecli'
+
+LOGGER = Logger.new('update_couchdb.log')
 
 update_couchdb
 LOGGER.close
-
-#
-# new_expressions = {}
-# from = 0
-# loop do
-#   uri = URI.parse('http://dutch-case-law.herokuapp.com/search')
-#   uri.query = URI.encode_www_form({
-#                                       max: RES_MAX,
-#                                       from: from,
-#                                       # modified: ["2014-09-25"]
-#                                   })
-#   puts "Opening #{uri.to_s}"
-#   data = JSON.parse open(uri).read
-#   if data and data['docs'].length > 0
-#     data['docs'].each do |doc|
-#       new_expressions[doc['id']]=doc
-#     end
-#   else
-#     break
-#   end
-#
-#   if new_expressions.length >= 1000 #TODO
-#     break
-#   end
-#   from += RES_MAX
-# end
-#
-# update_keys = []
-# new_expressions.each do |ecli, _|
-#   update_keys << ecli
-#   if update_keys.length >= 10
-#     process_eclis update_keys, new_expressions
-#     puts "Processed #{update_keys.length} keys"
-#     update_keys.clear
-#
-#     break #TODO
-#   end
-# end
-#

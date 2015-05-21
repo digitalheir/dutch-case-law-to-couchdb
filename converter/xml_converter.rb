@@ -32,37 +32,7 @@ class XmlConverter
     MetadataHandler.new xml, ecli
   end
 
-  # Creates inner HTML, TOC, and the Lawly page that binds all data together
-  def generate_html(from_doc)
-    # TODO do something about xml:preserve space... a bunch of &nbsp;s?
-    # TODO and what about <? breakline ?> ?
-    @html_inner = TO_HTML.transform(@metalex).to_s
-    @html_toc = EXTRACT_TOC.transform(@metalex).to_s
 
-    @html_show = HTML_SHOW_TEMPLATE.render(Object.new, {
-                                                         :page_title => from_doc['dcterms:title'],
-                                                         :date_last_modified => from_doc['dcterms:modified'],
-                                                         :description => from_doc['dcterms:abstract'],
-                                                         :inner_html => @html_inner,
-                                                         :toc => @html_toc
-                                                     })
-  end
-
-  def convert_to_metalex
-    @metalex = Nokogiri::XML(@original.to_s)
-    @metalex.root.add_namespace_definition(METALEX_PREFIX, 'http://www.metalex.eu/metalex/1.0')
-    @metalex.root.add_namespace_definition('xsi', 'http://www.w3.org/2001/XMLSchema-instance')
-    @metalex.root['xsi:schemaLocation'] = 'http://www.metalex.eu/metalex/1.0 http://justinian.leibnizcenter.org/MetaLex/e.xsd'
-
-    stripper = MetadataStripper.new @metalex, @ecli
-    metadata_element = stripper.strip_metadata
-
-    give_all_elements_id(@metalex.root, '', {})
-    convert_node_names(@metalex.root)
-    add_metadata_container(@metalex, metadata_element)
-
-    @metalex
-  end
 
   def get_json_ld
     metadata_handler = MetadataHandlerJsonLd.new(@original, @ecli)

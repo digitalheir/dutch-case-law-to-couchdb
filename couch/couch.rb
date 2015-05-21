@@ -160,8 +160,8 @@ module Couch
       end
     end
 
-    def flush_bulk_if_big_enough(db, docs, flush_size_mb=50)
-      if get_bytesize_array(docs) >= flush_size_mb*1024*1024 or docs.length >= 500
+    def flush_bulk_if_big_enough(db, docs, flush_size_mb=10)
+      if get_bytesize_array(docs) >= flush_size_mb*1024*1024 or docs.length >= 300
         flush_bulk_throttled(db, docs)
         docs.clear
       end
