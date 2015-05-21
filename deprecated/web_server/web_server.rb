@@ -5,9 +5,9 @@ require 'coffee-script'
 require 'tilt'
 require 'net/http'
 require 'nokogiri'
-require_relative 'converter/xml_converter'
-require_relative 'rechtspraak_search_parser'
-require_relative 'couch/rechtspraak_expression'
+require_relative '../converter/xml_converter'
+require_relative '../rechtspraak_search_parser'
+require_relative '../couch/rechtspraak_expression'
 require 'json'
 include RechtspraakSearchParser
 

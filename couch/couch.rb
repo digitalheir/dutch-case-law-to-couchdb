@@ -18,6 +18,12 @@ module Couch
       request(req)
     end
 
+    def head(uri)
+      req = Net::HTTP::Head.new(uri)
+      req.basic_auth @options[:name], @options[:password]
+      request(req)
+    end
+
     def get(uri)
       req = Net::HTTP::Get.new(uri)
       req.basic_auth @options[:name], @options[:password]
@@ -120,6 +126,16 @@ module Couch
     def bulk_delete(database, docs)
       json = {:docs => docs}.to_json
       post("/#{database}/_bulk_docs", json)
+    end
+
+    # Returns revision for given document
+    def get_rev(database, id)
+      res = head("/#{database}/#{CGI.escape(id)}")
+      if res.code == '200'
+        res['etag'].gsub(/^"|"$/,'')
+      else
+        nil
+      end
     end
 
     #Returns parsed doc from database

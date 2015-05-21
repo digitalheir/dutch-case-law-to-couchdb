@@ -1,6 +1,8 @@
-require_relative './rechtspraak_xml_utils'
+require 'base64'
+require_relative 'rechtspraak_utils'
 
-include RechtspraakXmlUtils
+
+
 
 # noinspection RubyStringKeysInHashInspection
 class RechtspraakExpression
