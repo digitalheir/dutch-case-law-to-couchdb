@@ -231,14 +231,6 @@ module Couch
     end
   end
 
-  WETTEN_CONNECTION = Server.new(
-      "#{Secret::WETTEN_NAME}.cloudant.com", "80",
-      {name:
-           Secret::WETTEN_NAME,
-       password:
-           Secret::CLOUDANT_PASSWORD
-      }
-  )
   CLOUDANT_CONNECTION = Server.new(
       "#{Secret::RECHTSPRAAK_NAME}.cloudant.com", "80",
       {name:
