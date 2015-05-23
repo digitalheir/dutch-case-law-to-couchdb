@@ -40,3 +40,4 @@ build/
 .rvmrc
 
 Gemfile.lock
+tmp.txt
