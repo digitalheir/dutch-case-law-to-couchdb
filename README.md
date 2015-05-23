@@ -30,3 +30,6 @@ Metadata is processed considerably; refer to `metadata_handler.rb` to see how di
 
 Note that the Metalex XML markup is not semantic at all. To make the content markup Metalex-compliant, almost all tags are made into inline elements. This is because rechtspraak.nl does not have an existing XML schema, and the XML found is too wild to try and conform to a more descriptive Metalex schema. The original tag names persist in the `name` attribute, however, so no information is lost.
  
+# Prerequisites
+* Ruby (tested on 2.1.6)
+* [Alpino](http://www.let.rug.nl/vannoord/alp/Alpino/AlpinoUserGuide.html) plus all dependencies. This projects assumes environment variable `ALPINO_HOME` to be set, e.g. `export ALPINO_HOME=/home/maarten/Alpino`. Alpino is a mess of Perl, C, and shell scripts. If you rather not use it, you can comment out the lines using it in `rechtspraak_expression.rb`. You will not be able to generate a tokenized version of the document, then.

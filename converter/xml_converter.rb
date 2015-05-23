@@ -8,10 +8,10 @@ require_relative 'metadata_handler_metalex'
 METALEX_PREFIX = 'metalex'
 
 # XSD = Nokogiri::XML::Schema(open('converter/e.xsd').read)
-TO_HTML = Nokogiri::XSLT(File.open('converter/xslt/rechtspraak_to_html.xslt'))
-EXTRACT_TOC = Nokogiri::XSLT(File.open('converter/xslt/rechtspraak_extract_toc.xslt'))
-HTML_SHOW_TEMPLATE = Tilt.new('converter/erb/show.html.erb', :default_encoding => 'utf-8')
-MAPPING = JSON.parse(File.read('converter/rechtspraak_mapping.json'))
+TO_HTML = Nokogiri::XSLT(File.open('../converter/xslt/rechtspraak_to_html.xslt'))
+EXTRACT_TOC = Nokogiri::XSLT(File.open('../converter/xslt/rechtspraak_extract_toc.xslt'))
+HTML_SHOW_TEMPLATE = Tilt.new('../converter/erb/show.html.erb', :default_encoding => 'utf-8')
+MAPPING = JSON.parse(File.read('../converter/rechtspraak_mapping.json'))
 
 class XmlConverter
   JSON_LD_URI = 'http://assets.lawly.eu/ld/context.jsonld'

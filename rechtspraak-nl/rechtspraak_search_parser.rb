@@ -1,8 +1,5 @@
-require 'sinatra'
 require 'open-uri'
 require 'erb'
-require 'coffee-script'
-require 'tilt'
 require 'net/http'
 require 'nokogiri'
 require 'json'

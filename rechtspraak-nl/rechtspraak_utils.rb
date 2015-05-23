@@ -166,7 +166,7 @@ module RechtspraakUtils
       if update_docs.length>0
         logger.info "#{update_docs.length} new docs"
       end
-      
+
       # Update docs
       if update_docs.length > 0
         revs = {}

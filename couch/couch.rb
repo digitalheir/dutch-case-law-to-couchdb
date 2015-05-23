@@ -123,6 +123,33 @@ module Couch
       docs
     end
 
+    def each_slice(db, limit=250, opts={}, &block)
+      start_key=nil
+      loop do
+        opts = opts.merge({limit: limit})
+        if start_key
+          opts[:startkey]=start_key
+        end
+        docs = get_all_docs(db, opts)
+        if docs.length <= 0
+          break
+        else
+          block.call(docs)
+          start_key = "\"#{docs.last['_id']}\\ufff0\""
+        end
+      end
+    end
+
+    def each_slice_for_view(db, design_doc, view, limit=250, opts={}, &block)
+      rows = get_rows_for_view(db, design_doc, view, opts) # all rows in one go
+      puts "found #{rows.length} rows"
+      if rows.length > 0
+        rows.each_slice(limit) do |slice|
+          block.call(slice)
+        end
+      end
+    end
+
     def bulk_delete(database, docs)
       json = {:docs => docs}.to_json
       post("/#{database}/_bulk_docs", json)
@@ -132,7 +159,7 @@ module Couch
     def get_rev(database, id)
       res = head("/#{database}/#{CGI.escape(id)}")
       if res.code == '200'
-        res['etag'].gsub(/^"|"$/,'')
+        res['etag'].gsub(/^"|"$/, '')
       else
         nil
       end
