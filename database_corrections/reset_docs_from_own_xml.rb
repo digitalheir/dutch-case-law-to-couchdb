@@ -1,18 +1,29 @@
 require 'nokogiri'
 
-require_relative '../rechtspraak-nl/rechtspraak_expression'
-require_relative '../converter/xml_converter'
-require_relative '../couch/couch'
+require_relative '../couch/rechtspraak_expression'
+require_relative '../../couch/couch'
 
-per=100
+per=250
 i=0
 
-Couch::CLOUDANT_CONNECTION.each_slice_for_view('ecli', 'query_dev', 'locallyUpdated?',
-                                               per,
-                                               {stale: 'ok',
-                                                startkey: 'null',
-                                                limit: 15000,
-                                                endkey: 'null'}) do |rows|
+class Cloudant < Couch::Server
+  def initialize
+    super(
+        'rechtspraak.cloudant.com', '80',
+        {
+            name: 'rechtspraak',
+            password: 'ssssssssecret'
+        }
+    )
+  end
+end
+
+couch = Cloudant.new
+couch.each_slice_for_view('ecli', 'query_dev', 'locally_updated?',
+                          per,
+                          {stale: 'ok',
+                           startkey: 'null',
+                           endkey: 'null'}) do |rows|
   docs = []
   rows.each do |row|
     ecli = row['id']
@@ -23,7 +34,7 @@ Couch::CLOUDANT_CONNECTION.each_slice_for_view('ecli', 'query_dev', 'locallyUpda
 
     docs<<new_doc
   end
-  Couch::CLOUDANT_CONNECTION.flush_bulk('ecli', docs)
+  couch.flush_bulk('ecli', docs)
   i+=per
   puts i
 end

@@ -58,8 +58,7 @@ class MetadataHandlerJsonLd
     set_property('@type', 'frbr:LegalWork')
     set_property('_id', @ecli)
     set_property('owl:sameAs', "http://deeplink.rechtspraak.nl/uitspraak?id=#{@ecli}")
-    set_property('foaf:page', "http://rechtspraak.lawly.nl/ecli/ECLI:NL:GHAMS:2013:4606")
-    # TODO add XML manifestation..?
+    set_property('foaf:page', "http://rechtspraak.lawly.nl/ecli/#{@ecli}")
     # TODO add adaption/alternate
   end
 
@@ -146,11 +145,11 @@ class MetadataHandlerJsonLd
       return
     end
     set_uri_mapping('Periode', 'dcterms:temporal')
-    set_property('Periode', {
-        '@type' => 'dcterms:PeriodOfTime',
-        'schema:startDate' => el_start.text.strip,
-        'schema:endDate' => el_end.text.strip
-    })
+    set_property('dcterms:temporal', {
+                                       '@type' => 'dcterms:PeriodOfTime',
+                                       'schema:startDate' => el_start.text.strip,
+                                       'schema:endDate' => el_end.text.strip
+                                   })
   end
 
   # Handle document metadata. This is generally metadata about the document.
@@ -159,8 +158,8 @@ class MetadataHandlerJsonLd
     unless xml_element['rdf:about']
       puts "WARNING: metadata block for #{@ecli} didn't have rdf:about"
     end
-    handle_html_publication(xml_element)# HTML publication date in YYYY-MM-DD
-    handle_single_literal(xml_element, RDF::DC.modified)# Document modified
+    handle_html_publication(xml_element) # HTML publication date in YYYY-MM-DD
+    handle_single_literal(xml_element, RDF::DC.modified) # Document modified
     # ECLI id suffixed with :DOC; irrelevant
     # handle_metadata(text_document_metadata, 'dcterms:identifier')
     # handle_metadata(text_document_metadata, 'dcterms:format')  # 'text/html', irrelevant
@@ -169,12 +168,13 @@ class MetadataHandlerJsonLd
   # noinspection RubyStringKeysInHashInspection
   def handle_resource_list(tree, property_uri)
     property_uri=property_uri.to_s
-    elements = tree.xpath(".//#{contract_uri(property_uri.to_s)}", PREFIXES)
+    field = contract_uri(property_uri)
+    elements = tree.xpath(".//#{field}", PREFIXES)
     if !elements or elements.length <= 0
       return
     end
-    if property_uri.to_s ==  RDF::DC.contributor.to_s
-    puts
+    if property_uri.to_s == RDF::DC.contributor.to_s
+      puts
     end
 
     predicate_value_map = {}
@@ -183,15 +183,11 @@ class MetadataHandlerJsonLd
       # Decide what to use for value
       value = create_value_map(resource_uri, value_label, language)
 
-      # determine what to use as predicate term
       if predicate_label
         set_uri_mapping(predicate_label, property_uri)
-        predicate_value_map[predicate_label] ||= []
-        predicate_value_map[predicate_label] << value
-      else
-        predicate_value_map[contract_uri(property_uri)] ||= []
-        predicate_value_map[predicate_label] << value
       end
+      predicate_value_map[field] ||= []
+      predicate_value_map[field] << value
     end
 
     predicate_value_map.each do |pred, values|
@@ -204,7 +200,8 @@ class MetadataHandlerJsonLd
   # noinspection RubyStringKeysInHashInspection
   def handle_literal_list(tree, property_uri)
     property_uri=property_uri.to_s
-    elements = tree.xpath(".//#{contract_uri(property_uri.to_s)}", PREFIXES)
+    field = contract_uri(property_uri.to_s)
+    elements = tree.xpath(".//#{field}", PREFIXES)
     if !elements or elements.length <= 0
       return
     end
@@ -218,15 +215,11 @@ class MetadataHandlerJsonLd
       # Decide what to use for value
       value = value_label
 
-      # determine what to use as predicate term
       if predicate_label
         set_uri_mapping(predicate_label, property_uri)
-        predicate_value_map[predicate_label] ||= []
-        predicate_value_map[predicate_label] << value
-      else
-        predicate_value_map[contract_uri(property_uri)] ||= []
-        predicate_value_map[predicate_label] << value
       end
+      predicate_value_map[field] ||= []
+      predicate_value_map[field] << value
     end
 
     predicate_value_map.each do |pred, values|
@@ -318,14 +311,12 @@ class MetadataHandlerJsonLd
     value = create_value_map(resource_uri, value_label, language)
     if predicate_label
       set_uri_mapping(predicate_label, property_uri)
-      set_property(predicate_label, value)
-    else
-      set_property(property_uri, value)
     end
+    set_property(property_uri, value)
   end
 
   def handle_html_publication(tree)
-    elements = tree.xpath("./dcterms:issued", PREFIXES)
+    elements = tree.xpath('./dcterms:issued', PREFIXES)
     if elements and elements.length > 0
       issued = elements.first.text.strip
       set_property('htmlIssued', issued) if issued.length > 0
@@ -365,10 +356,6 @@ class MetadataHandlerJsonLd
     prop_name = contract_uri(property.to_s)
     elements = tree.xpath(".//#{prop_name}", PREFIXES)
     if elements.length > 0
-      if property.to_s == RDF::DC.isReplacedBy.to_s
-      puts ' lol'
-      end
-
       elements.each do |element|
         set_property(prop_name, element.text.strip)
       end
@@ -405,13 +392,13 @@ class MetadataHandlerJsonLd
     end
   end
 
-# Example:
-#
-# <psi:zaaknummer rdfs:label="Zaaknr">AWB 98/539</psi:zaaknummer>
-#
-# Becomes:
-#
-# <uri> <http://psi.rechtspraak.nl/zaaknummer> "AWB 98/539"^string
+  # Example:
+  #
+  # <psi:zaaknummer rdfs:label="Zaaknr">AWB 98/539</psi:zaaknummer>
+  #
+  # Becomes:
+  #
+  # <uri> <http://psi.rechtspraak.nl/zaaknummer> "AWB 98/539"^string
   def handle_case_numbers(tree)
     elements = tree.xpath('.//psi:zaaknummer', PREFIXES)
     # if elements.length > 1
@@ -437,19 +424,19 @@ class MetadataHandlerJsonLd
     end
   end
 
-# Example:
-#
-# <dcterms:subject rdfs:label="Rechtsgebied"
-#   resourceIdentifier="http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht_socialezekerheidsrecht">
-#     Bestuursrecht; Socialezekerheidsrecht
-# </dcterms:subject>
-#
-# Becomes
-#
-# <uri> dcterms:subject <http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht>
-# <uri> dcterms:subject <http://psi.rechtspraak.nl/rechtsgebied#socialezekerheidsrecht>
-# <http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht> rdfs:label "Bestuursrecht"
-# <http://psi.rechtspraak.nl/rechtsgebied#socialezekerheidsrecht> rdfs:label "Socialezekerheidsrecht"
+  # Example:
+  #
+  # <dcterms:subject rdfs:label="Rechtsgebied"
+  #   resourceIdentifier="http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht_socialezekerheidsrecht">
+  #     Bestuursrecht; Socialezekerheidsrecht
+  # </dcterms:subject>
+  #
+  # Becomes
+  #
+  # <uri> dcterms:subject <http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht>
+  # <uri> dcterms:subject <http://psi.rechtspraak.nl/rechtsgebied#socialezekerheidsrecht>
+  # <http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht> rdfs:label "Bestuursrecht"
+  # <http://psi.rechtspraak.nl/rechtsgebied#socialezekerheidsrecht> rdfs:label "Socialezekerheidsrecht"
   def handle_subject(tree)
     elements = tree.xpath('.//dcterms:subject', PREFIXES)
     all_subjects = Set.new
@@ -477,32 +464,32 @@ class MetadataHandlerJsonLd
     end
   end
 
-# Handle relation between ECLIs, for example:
-#
-#   <dcterms:relation
-#     rdfs:label="Formele relatie"
-#     ecli:resourceIdentifier="ECLI:NL:PHR:2013:860"
-#     psi:type="http://psi.rechtspraak.nl/conclusie"
-#     psi:aanleg="http://psi.rechtspraak.nl/eerdereAanleg"
-#     psi:gevolg="http://psi.rechtspraak.nl/gevolg#contrair">
-#       Conclusie: ECLI:NL:PHR:2013:860, Contrair
-#   </dcterms:relation>
-#
-#   <dcterms:relation
-#     rdfs:label="Formele relatie"
-#     ecli:resourceIdentifier="ECLI:NL:RBONE:2013:BZ5236"
-#     psi:type="http://psi.rechtspraak.nl/sprongcassatie"
-#     psi:aanleg="http://psi.rechtspraak.nl/eerdereAanleg"
-#     psi:gevolg="http://psi.rechtspraak.nl/gevolg#bekrachtiging/bevestiging">
-#       In sprongcassatie op: ECLI:NL:RBONE:2013:BZ5236, Bekrachtiging/bevestiging
-#   </dcterms:relation>
-#
-# http://dublincore.org/documents/dcmi-terms/#terms-relation says:
-#  "Recommended best practice is to identify the related resource by means of a string
-#   conforming to a formal identification system"
-#
-# NOTE: this relation is reified so that we can make meta-statements about it.
-#       See stackoverflow.com/questions/5671227/ddg#5671407
+  # Handle relation between ECLIs, for example:
+  #
+  #   <dcterms:relation
+  #     rdfs:label="Formele relatie"
+  #     ecli:resourceIdentifier="ECLI:NL:PHR:2013:860"
+  #     psi:type="http://psi.rechtspraak.nl/conclusie"
+  #     psi:aanleg="http://psi.rechtspraak.nl/eerdereAanleg"
+  #     psi:gevolg="http://psi.rechtspraak.nl/gevolg#contrair">
+  #       Conclusie: ECLI:NL:PHR:2013:860, Contrair
+  #   </dcterms:relation>
+  #
+  #   <dcterms:relation
+  #     rdfs:label="Formele relatie"
+  #     ecli:resourceIdentifier="ECLI:NL:RBONE:2013:BZ5236"
+  #     psi:type="http://psi.rechtspraak.nl/sprongcassatie"
+  #     psi:aanleg="http://psi.rechtspraak.nl/eerdereAanleg"
+  #     psi:gevolg="http://psi.rechtspraak.nl/gevolg#bekrachtiging/bevestiging">
+  #       In sprongcassatie op: ECLI:NL:RBONE:2013:BZ5236, Bekrachtiging/bevestiging
+  #   </dcterms:relation>
+  #
+  # http://dublincore.org/documents/dcmi-terms/#terms-relation says:
+  #  "Recommended best practice is to identify the related resource by means of a string
+  #   conforming to a formal identification system"
+  #
+  # NOTE: this relation is reified so that we can make meta-statements about it.
+  #       See stackoverflow.com/questions/5671227/ddg#5671407
   def handle_relations(tree)
     relation_infos=[]
     elements = tree.xpath('.//dcterms:relation', PREFIXES)
@@ -549,22 +536,15 @@ class MetadataHandlerJsonLd
     set_property('dcterms:relation', relation_infos)
   end
 
-# Example (list is always assumed to be present):
-#
-# <dcterms:hasVersion rdfs:label="Vindplaatsen" resourceIdentifier="http://psi.rechtspraak.nl/vindplaats">
-#   <rdf:list>
-#     <rdf:li>Rechtspraak.nl</rdf:li>
-#     <rdf:li>V-N 2013/59.23.30</rdf:li>
-#     <rdf:li>NJB 2013/2526</rdf:li>
-#   </rdf:list>
-# </dcterms:hasVersion>
-#
-# Will be converted to:
-#
-# <sub_uri> dcterms:hasVersion "Rechtspraak.nl"^string
-# <sub_uri> dcterms:hasVersion "V-N 2013/59.23.30"^string
-# <sub_uri> dcterms:hasVersion "NJB 2013/2526"^string
-#
+  # Example (list is always assumed to be present):
+  #
+  # <dcterms:hasVersion rdfs:label="Vindplaatsen" resourceIdentifier="http://psi.rechtspraak.nl/vindplaats">
+  #   <rdf:list>
+  #     <rdf:li>Rechtspraak.nl</rdf:li>
+  #     <rdf:li>V-N 2013/59.23.30</rdf:li>
+  #     <rdf:li>NJB 2013/2526</rdf:li>
+  #   </rdf:list>
+  # </dcterms:hasVersion>
   def handle_has_version(tree)
     predicate = 'dcterms:hasVersion'
     sources = []
@@ -581,7 +561,7 @@ class MetadataHandlerJsonLd
         end
       end
     end
-    set_property('dcterms:hasVersion', sources)
+    set_property(predicate, sources)
   end
 
   def create_uri_from_label(subdir, id, normalize_id=true)
@@ -594,14 +574,14 @@ class MetadataHandlerJsonLd
     "#{CGI.escape(subdir)}/#{CGI.escape(id)}"
   end
 
-# Example:
-#
-# <dcterms:coverage>NL</dcterms:coverage>
-#
-# Becomes:
-#
-# <subj_uri> dcterms:coverage "NL"
-# Fixed value. This is/should be part of the hierarchy in the document work id: /country code/name of court/date or year/issue number/
+  # Example:
+  #
+  # <dcterms:coverage>NL</dcterms:coverage>
+  #
+  # Becomes:
+  #
+  # <subj_uri> dcterms:coverage "NL"
+  # Fixed value. This is/should be part of the hierarchy in the document work id: /country code/name of court/date or year/issue number/
   def handle_coverage(tree)
     predicate = 'dcterms:coverage'
     element = tree.xpath(".//#{predicate}", PREFIXES)
@@ -614,23 +594,21 @@ class MetadataHandlerJsonLd
         value_label=jurisdiction_code
     end
     jurisdiction_uri = create_uri_from_label('jurisdiction', jurisdiction_code, true)
-    set_property('dcterms:coverage', create_value_map(jurisdiction_uri, value_label, 'nl'))
+    set_property(predicate, create_value_map(jurisdiction_uri, value_label, 'nl'))
   end
 
-# Example:
-#
-# <dcterms:references
-#   rdfs:label="Wetsverwijzing"
-#   bwb:resourceIdentifier="1.0:v:BWB:BWBR0011823&artikel=59">
-#     Vreemdelingenwet 2000 59
-# </dcterms:references>
-#
-# TODO <uri> metalex:cites <http://doc.metalex.eu/id/BWBR0011823/artikel/59> ... ?
-#
-# NOTE: Discussed whether this should this references an *expression* of a law,
-# because it refers to the law at a particular time (usually the time of the court case).
-# I don't resolve the expression because we can't know with full certainty to what time it refers.
-# It's rechtspraak.nl's responsibility to get the reference right anyway.
+  # Example:
+  #
+  # <dcterms:references
+  #   rdfs:label="Wetsverwijzing"
+  #   bwb:resourceIdentifier="1.0:v:BWB:BWBR0011823&artikel=59">
+  #     Vreemdelingenwet 2000 59
+  # </dcterms:references>
+  #
+  # NOTE: Discussed whether this should this references an *expression* of a law,
+  # because it refers to the law at a particular time (usually the time of the court case).
+  # I don't resolve the expression because we can't know with full certainty to what time it refers.
+  # It's rechtspraak.nl's responsibility to get the reference right anyway.
   def handle_references(tree)
     predicate = 'dcterms:references'
     reference_infos=[]
@@ -638,7 +616,7 @@ class MetadataHandlerJsonLd
     elements.each do |element|
       ## Gather info
       # Resource identifier
-      doc_reference = nil
+      reference_id = nil
       doc_source_corpus = nil
       element.attributes.each do |name, attr|
         if name == 'resourceIdentifier' # Can be bwb:resourceIdentifier or cvdr:resourceIdentifier (for example in ECLI:NL:GHAMS:2014:1)
@@ -649,59 +627,54 @@ class MetadataHandlerJsonLd
               puts "WARNING: Found ref with prefix #{attr.namespace.prefix} but did not know how to handle it"
           end
           doc_source_corpus = attr.namespace.prefix #e.g., 'bwb', 'cvdr'
-          doc_reference = attr.value #identifier/juriconnect reference
+          reference_id = attr.value #identifier/juriconnect reference
         end
       end
-      unless doc_reference
+      unless reference_id
         puts 'could not find resource_id of this element:'
         puts element.to_s
         return
       end
-      doc_reference.strip!
+      reference_id.strip!
 
-      # TODO resolve identifier to URI if possible
       reference = {
-          '@id' => doc_reference
-      }
-      relation_info = {
-          '@type' => 'rdf:Statement',
-          'rdf:subject' => @ecli,
-          'rdf:predicate' => 'dcterms:references',
-          'dcterms:identifier' => doc_reference,
+          '@id' => reference_id,
+          'referenceType' => {
+              'dcterms:hasFormat' => doc_source_corpus
+          }
       }
       # Create reified statement
       if element['rdfs:label'] and element['rdfs:label'].strip.length > 0
-        #For example 'Wetsverwijzing'
-        relation_info['rdfs:label']=element['rdfs:label'].strip
+        # For example 'Wetsverwijzing'
+        label = element['rdfs:label'].strip
+        reference['referenceType']['rdfs:label'] = label
+        reference['referenceType']['@id'] = label.downcase
       end
       # Name of the referent document
       ref_doc_name = element.text.strip
       if ref_doc_name.length>0
         reference['dcterms:title'] = ref_doc_name
       end
-      reference['dcterms:hasFormat'] = doc_source_corpus
-      relation_info['rdf:object'] = doc_reference
-
-      reference_infos << relation_info
+      reference_infos << reference
     end
     if reference_infos.length > 0
-      set_property('dcterms:references', reference_infos)
+      set_property(predicate, reference_infos)
     end
   end
 
-# Cardinality of 1. Example:
-#
-# <dcterms:creator
-#  rdfs:label="Instantie"
-#  resourceIdentifier="http://standaarden.overheid.nl/owms/terms/Centrale_Raad_van_Beroep"
-#  scheme="overheid.RechterlijkeMacht">
-#    Centrale Raad van Beroep
-# </dcterms:creator>
-#
-# NOTE: psi:afdeling is deprecated, so we won't parse it
+  # Cardinality of 1. Example:
+  #
+  # <dcterms:creator
+  #  rdfs:label="Instantie"
+  #  resourceIdentifier="http://standaarden.overheid.nl/owms/terms/Centrale_Raad_van_Beroep"
+  #  scheme="overheid.RechterlijkeMacht">
+  #    Centrale Raad van Beroep
+  # </dcterms:creator>
+  #
+  # NOTE: psi:afdeling is deprecated, so we won't parse it
   def handle_creator(tree)
-    #TODO handle scheme........?
-    creator_element = tree.at_xpath(".//dcterms:creator", PREFIXES)
+    #TODO handle scheme........? (28-5-2015: what scheme?)
+    creator_element = tree.at_xpath('.//dcterms:creator', PREFIXES)
     # A reference an OWMS uri (http://standaarden.overheid.nl/owms)
 
     unless creator_element
