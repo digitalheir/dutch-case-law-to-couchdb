@@ -6,7 +6,7 @@ include RechtspraakUtils
 # noinspection RubyStringKeysInHashInspection
 class RechtspraakExpression
   JSON_LD_URI = 'http://assets.lawly.eu/ld/context.jsonld'
-  XSLT_TO_TXT = Nokogiri::XSLT(File.read('../converter/xslt/rechtspraak_to_txt.xslt'))
+  XSLT_TO_TXT = Nokogiri::XSLT(File.read('converter/xslt/rechtspraak_to_txt.xslt'))
 
   attr_reader :doc
   # Initializes a new CouchDB document for a case law expression.

@@ -42,3 +42,4 @@ build/
 Gemfile.lock
 tmp.txt
 secret.rb
+*.log

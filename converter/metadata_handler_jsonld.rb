@@ -6,6 +6,24 @@ require 'json/ld'
 
 # noinspection RubyStringKeysInHashInspection,RubyTooManyMethodsInspection
 class MetadataHandlerJsonLd
+  NS_RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  NS_RDFS = 'http://www.w3.org/2000/01/rdf-schema#'
+  NS_DCTERMS = 'http://purl.org/dc/terms/'
+  NS_PSI = 'http://psi.rechtspraak.nl/'
+  NS_BWB = 'bwb-dl'
+  NS_METALEX = 'http://www.metalex.eu/schema/1.0#'
+  NS_ECLI = 'https://e-justice.europa.eu/ecli'
+  NS_RECHTSPRAAK = 'http://doc.metalex.eu/rechtspraak/ontology/'
+  NS_RS = 'http://www.rechtspraak.nl/schema/rechtspraak-1.0'
+  NS_CVDR = 'http://decentrale.regelgeving.overheid.nl/cvdr/'
+  NS_EU = 'http://publications.europa.eu/celex/'
+  NS_TR = 'http://tuchtrecht.overheid.nl/'
+
+  RECHTSPRAAK_DEEPLINK_ROOT = 'http://deeplink.rechtspraak.nl'
+
+
+  PREFIXES = {:rdf => NS_RDF, :rdfs => NS_RDFS, :dcterms => NS_DCTERMS, :psi => NS_PSI, :rs => NS_RS}
+
   attr_reader :metadata
   LAWLY_ROOT = 'http://rechtspraak.lawly.nl/'
 

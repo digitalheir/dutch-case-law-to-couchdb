@@ -38,7 +38,7 @@ class CouchUpdater
         end
       end
       if update_docs.length>0
-        logger.info "#{update_docs.length} new docs"
+        @logger.info "#{update_docs.length} new docs"
       end
 
       # Update docs
@@ -52,7 +52,7 @@ class CouchUpdater
           new_docs << ecli
         end
 
-        @couch.update_docs(new_docs, revs, logger)
+        @couch.update_docs(new_docs, revs, @logger)
       end
     end
 

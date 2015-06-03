@@ -18,13 +18,6 @@ class CloudantRechtspraak < Couch::Server
   def get_ecli_last_modified(source_docs)
     get_rows_for_view(DATABASE_NAME, 'query', 'ecli_last_modified', {keys: source_docs.map { |d| d[:id] }})
   end
-
-  private
-  def create_couch_doc(ecli)
-    original_xml = Nokogiri::XML(open("http://data.rechtspraak.nl/uitspraken/content?id=#{ecli}"))
-    RechtspraakExpression.new(ecli, original_xml).doc
-  end
-
   def update_docs(update_eclis, current_revs=nil, logger=nil)
     i=0
     docs_to_upload = []
@@ -49,13 +42,20 @@ class CloudantRechtspraak < Couch::Server
         if i%1000==0
           puts "processed #{i} docs"
         end
-      rescue
-        puts "Error processing #{ecli}"
+      rescue => e
+        puts "Error processing #{ecli}: #{e.message}"
         if logger
-          logger.error "Error processing #{ecli}"
+          logger.error "Error processing #{ecli}: #{e.message}"
         end
       end
     end
     flush_bulk_throttled(DATABASE_NAME, docs_to_upload)
   end
+
+  private
+  def create_couch_doc(ecli)
+    original_xml = Nokogiri::XML(open("http://data.rechtspraak.nl/uitspraken/content?id=#{ecli}"))
+    RechtspraakExpression.new(ecli, original_xml).doc
+  end
+
 end
