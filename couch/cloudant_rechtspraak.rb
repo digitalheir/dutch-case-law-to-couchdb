@@ -1,5 +1,5 @@
-require_relative '../../couch/couch'
-require_relative '../../couch/secret'
+require_relative 'couch'
+require_relative 'secret'
 require_relative 'rechtspraak_expression'
 include Secret
 
