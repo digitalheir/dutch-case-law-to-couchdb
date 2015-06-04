@@ -39,3 +39,6 @@ DEPENDENCIES
   rdf (~> 1.1.4)
   sinatra (~> 1.4.6)
   tilt (~> 1.4.1)
+
+BUNDLED WITH
+   1.10.3

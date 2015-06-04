@@ -1,24 +1,13 @@
 require 'nokogiri'
 
 require_relative '../couch/rechtspraak_expression'
-require_relative '../../couch/couch'
+require_relative '../couch/couch'
+require_relative '../couch/cloudant_rechtspraak'
 
-per=250
+per=5
 i=0
 
-class Cloudant < Couch::Server
-  def initialize
-    super(
-        'rechtspraak.cloudant.com', '80',
-        {
-            name: 'rechtspraak',
-            password: 'ssssssssecret'
-        }
-    )
-  end
-end
-
-couch = Cloudant.new
+couch = CloudantRechtspraak.new
 couch.each_slice_for_view('ecli', 'query_dev', 'locally_updated?',
                           per,
                           {stale: 'ok',
@@ -29,10 +18,11 @@ couch.each_slice_for_view('ecli', 'query_dev', 'locally_updated?',
     ecli = row['id']
     puts ecli
     xml = Nokogiri::XML(open("http://rechtspraak.cloudant.com/ecli/#{ecli}/data.xml"))
-    new_doc = RechtspraakExpression.new(ecli, xml).doc
+    expr = RechtspraakExpression.new(ecli, xml)
+    new_doc =expr.doc
     new_doc['_rev'] = row['value']
 
-    docs<<new_doc
+    docs << new_doc
   end
   couch.flush_bulk('ecli', docs)
   i+=per
