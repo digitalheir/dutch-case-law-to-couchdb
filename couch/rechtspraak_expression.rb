@@ -5,7 +5,7 @@ require_relative '../converter/metadata_handler_jsonld'
 include RechtspraakUtils
 # noinspection RubyStringKeysInHashInspection
 class RechtspraakExpression
-  JSON_LD_URI = 'http://assets.lawly.eu/ld/context.jsonld'
+  JSON_LD_URI = 'https://rechtspraak.cloudant.com/assets/assets/context.jsonld'
   XSLT_TO_TXT = Nokogiri::XSLT(File.read('../converter/xslt/rechtspraak_to_txt.xslt'))
   XSLT_TO_HTML = Nokogiri::XSLT(File.read('../converter/xslt/rechtspraak_to_html.xslt'))
 
@@ -24,7 +24,7 @@ class RechtspraakExpression
 
     #??? @doc['@type'] = 'frbr:Expression'
     add_metadata(ecli, original_xml)
-    now = Time.now.getutc.iso8601
+    now = (Time.now+(48*60*60)).getutc.iso8601
     @doc['couchDbUpdated']=now
     add_attachments(original_xml)
   end

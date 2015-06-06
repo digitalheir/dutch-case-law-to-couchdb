@@ -25,25 +25,25 @@ class MetadataHandlerJsonLd
   PREFIXES = {:rdf => NS_RDF, :rdfs => NS_RDFS, :dcterms => NS_DCTERMS, :psi => NS_PSI, :rs => NS_RS}
 
   attr_reader :metadata
-  LAWLY_ROOT = 'http://rechtspraak.lawly.nl/'
+  LAWLY_ROOT = 'http://rechtspraak.lawreader.eu/'
 
   def initialize(xml, ecli)
     @xml = xml
     @ecli = ecli
     @metadata = {}
     @context_mapping = {
-        '@base' => 'http://rechtspraak.lawly.nl/id/'
+
     }
     extract_metadata
     @metadata['@context'] = [
-        'http://assets.lawly.eu/ld/rechtspraak_context.jsonld',
+        'http://rechtspraak.cloudant.com/assets/assets/context.jsonld',
         @context_mapping
     #TODO add url prefixes from xml that are not in context (if any!)
     ]
   end
 
   def contract_uri(string)
-    #TODO use @prefix with prefixes from XML
+    #TODO use @prefix, where @prefix is defined with with prefixes found in XML
     PREFIXES.each do |key_, val|
       key = key_.to_s
       if string.start_with? val
@@ -524,10 +524,7 @@ class MetadataHandlerJsonLd
       # Create uri for this relation, in order to reify the statement
       # Build triple
       relation_info={
-          '@type' => 'rdf:Statement',
-          'rdf:subject' => @ecli,
-          'rdf:predicate' => 'dcterms:relation',
-          'rdf:object' => referent_ecli,
+          '@id' => "http://www.lawreader.eu/ref/ecli/#{referent_ecli}",
       }
 
       # Add additional information about this triple # TODO validate if values are URIs; create URI mapping.
@@ -543,15 +540,21 @@ class MetadataHandlerJsonLd
       if relation_aanleg and relation_aanleg.strip.length > 0
         relation_info['psi:aanleg']= relation_aanleg.strip
       end
+      if element.text.strip and element.text.strip.length > 0
+        relation_info['rdfs:label']=element.text.strip
+      end
 
       # Human readable label for dc:relation
       predicate_label = element['rdfs:label']
       if predicate_label and predicate_label.strip.length > 0
         set_uri_mapping(predicate_label, 'dc:relation')
       end
+
       relation_infos << relation_info
     }
-    set_property('dcterms:relation', relation_infos)
+    if relation_infos and relation_infos.length > 0
+      set_property('dcterms:relation', relation_infos)
+    end
   end
 
   # Example (list is always assumed to be present):
@@ -575,21 +578,25 @@ class MetadataHandlerJsonLd
       item_lists.each do |item_list|
         list_items = item_list.xpath('./rdf:li', PREFIXES)
         list_items.each do |item|
-          sources << create_value_map(create_uri_from_label('source', item.text.strip, false), item.text.strip)
+          sources << create_value_map(create_uri_from_label('source', item.text.strip, false, false), item.text.strip)
         end
       end
     end
     set_property(predicate, sources)
   end
 
-  def create_uri_from_label(subdir, id, normalize_id=true)
+  def create_uri_from_label(subdir, id, normalize_id=true, as_parameter=false)
     if subdir.match /^[^:]+:([^:]+)$/
       subdir = $1
     end
     if normalize_id
       id = id.downcase.gsub(/[^a-z0-9-]/, '_')
     end
-    "#{CGI.escape(subdir)}/#{CGI.escape(id)}"
+    if as_parameter
+      "#{CGI.escape(subdir)}/#{CGI.escape(id)}"
+    else
+      "#{CGI.escape(subdir)}?p=#{CGI.escape(id)}"
+    end
   end
 
   # Example:
@@ -644,6 +651,8 @@ class MetadataHandlerJsonLd
             else
               puts "WARNING: Found ref with prefix #{attr.namespace.prefix} but did not know how to handle it"
           end
+
+
           doc_source_corpus = attr.namespace.prefix #e.g., 'bwb', 'cvdr'
           reference_id = attr.value #identifier/juriconnect reference
         end
@@ -655,18 +664,24 @@ class MetadataHandlerJsonLd
       end
       reference_id.strip!
 
+      if doc_source_corpus
+        id = "http://www.lawreader.eu/ref/#{doc_source_corpus}/#{reference_id}"
+      else
+        id = "http://www.lawreader.eu/ref/#{reference_id}"
+      end
       reference = {
-          '@id' => reference_id,
-          'referenceType' => {
-              'dcterms:hasFormat' => doc_source_corpus
-          }
+          '@id' => id,
+          'dcterms:identifier' => reference_id,
+          'dcterms:isReferencedBy' => "http://rechtspraak.lawreader.eu/id/#{@ecli}",
+          'dcterms:hasFormat' => doc_source_corpus,
       }
       # Create reified statement
       if element['rdfs:label'] and element['rdfs:label'].strip.length > 0
         # For example 'Wetsverwijzing'
         label = element['rdfs:label'].strip
-        reference['referenceType']['rdfs:label'] = label
-        reference['referenceType']['@id'] = label.downcase
+        reference['lawly:referenceType'] = {}
+        reference['lawly:referenceType']['rdfs:label'] = [{'@value' => label}]
+        reference['lawly:referenceType']['@id'] = label.downcase
       end
       # Name of the referent document
       ref_doc_name = element.text.strip

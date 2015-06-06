@@ -20,6 +20,12 @@
             "@id": "foaf:page",
             "@type": "@id"
         },
+        "dcterms:isReferencedBy": {
+            "@type": "@id"
+        },
+        "dcterms:source": {
+            "@type": "@id"
+        },
         "dcterms:modified": {
             "@id": "dcterms:modified",
             "@type": "xsd:dateTime"
