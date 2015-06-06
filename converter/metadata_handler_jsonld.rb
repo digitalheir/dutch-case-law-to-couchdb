@@ -593,9 +593,9 @@ class MetadataHandlerJsonLd
       id = id.downcase.gsub(/[^a-z0-9-]/, '_')
     end
     if as_parameter
-      "#{CGI.escape(subdir)}/#{CGI.escape(id)}"
-    else
       "#{CGI.escape(subdir)}?p=#{CGI.escape(id)}"
+    else
+      "#{CGI.escape(subdir)}/#{CGI.escape(id)}"
     end
   end
 

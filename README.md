@@ -9,7 +9,7 @@ Dutch [here](http://www.rechtspraak.nl/Uitspraken-en-Registers/Uitspraken/Open-D
 
 ## Metadata
 **Document metadata** is retrieved using the URL scheme `https://rechtspraak.cloudant.com/ecli/{ECLI identifier}`.
-[Example](https://rechtspraak.cloudant.com/ecli/ECLI:NL:GHSHE:2014:1641/data.xml).
+[Example](https://rechtspraak.cloudant.com/ecli/ECLI:NL:GHSHE:2014:1641).
 
 Rechtspraak.nl contains metadata for judgments in XML/RDF, but the RDF is actually not well formed. XML is also [a bad 
 format for metadata](http://www.programmableweb.com/news/xml-vs.-json-primer/how-to/2013/11/07) (I think). In any case, 
