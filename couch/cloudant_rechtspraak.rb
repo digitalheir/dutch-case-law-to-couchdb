@@ -29,11 +29,9 @@ class CloudantRechtspraak < Couch::Server
         doc = expr.doc
 
         # Set revision
-        set_rev(current_revs, expr.doc)
-        set_rev(current_revs, expr.tokens)
+        set_rev(current_revs, doc)
 
         docs_to_upload << doc
-        docs_to_upload << expr.tokens
         flush_bulk_if_big_enough(DATABASE_NAME, docs_to_upload)
         i+=1
         if i%1000==0

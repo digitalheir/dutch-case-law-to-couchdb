@@ -13,9 +13,9 @@ couch.each_slice_for_view('ecli',
                           per,
                           {
                               # stale: 'ok',
-                              # startkey: 'null',
-                              # endkey: '[2015,6,5]',
-                              limit: 100
+                              startkey: 'null',
+                              endkey: '[2015,6,6]',
+                              # limit: 100
                           }) do |rows|
   docs = []
   rows.each do |row|
@@ -29,7 +29,7 @@ couch.each_slice_for_view('ecli',
       # puts ecli
     end
     if new_doc['dcterms:relation']
-      puts ecli
+      # puts ecli
     end
     docs << new_doc
   end
