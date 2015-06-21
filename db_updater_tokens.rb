@@ -5,71 +5,57 @@ class DbUpdaterTokens
 
   def initialize
     @logger = Logger.new('update_couchdb_tokens.log')
-    @couch = CloudantRechtspraak.new
+    @couch_tokens = CloudantRechtspraak.new('ecli_tokens')
+    @couch_mirror = CloudantRechtspraak.new('ecli')
   end
 
-  # Updates our database that clones Rechtspraak.nl's documents.
-  # Params:
-  # +enforce_consistency+ Whether to scan all documents on Rechtspraak.nl (~330,000) to make sure that our db doesn't
-  # miss anything, or just update from the last time that this script completed successfully.
-  def start(enforce_consistency)
+  # Updates our database that clones Rechtspraak.nl's documents along with their tokens and tags as a JSON structure.
+  def start()
     today = Date.today.strftime('%Y-%m-%d')
-    doc_last_updated = @couch.get_doc('informal_schema', 'general')
+    doc_last_updated = @couch_tokens.get_doc('informal_schema', 'general')
 
-    if enforce_consistency
-      since = '1000-01-01'
-    else
-      since = doc_last_updated['date_last_updated_tokens']
+
+    revs_tokenized = @couch_tokens.get_current_revs
+    puts "#{revs_tokenized.length} tokenized docs"
+    revs_mirror = @couch_mirror.get_current_revs
+
+    new = {}
+    revs_mirror.each do |ecli, rev|
+      unless revs_tokenized[ecli] == rev
+        new[ecli] = rev
+      end
     end
+    puts "#{new.length} new docs"
 
+    new.keys.each_slice(150) do |slice|
+      src_docs = @couch_mirror.get_all_docs('ecli', {keys: slice})
+      src_docs.each do |doc|
+        ecli = doc['_id']
 
-    RechtspraakUtils::for_source_docs(since) do |docs|
-      # Get docs to update
-      update_docs = {}
-      docs.each_slice(100) do |subgroup|
-        evaluate_eclis_to_update(subgroup) do |id, our_data, source_data|
-          if our_data
-            update_docs[id] = our_data
-          else
-            update_docs[id] = {
-                _rev: nil,
-                modified: source_data[:updated]
-            }
-          end
-        end
-      end
-      if update_docs.length>0
-        @logger.info "#{update_docs.length} new docs"
-      end
-
-      # Update docs
-      if update_docs.length > 0
-        revs = {}
-        new_docs = []
-        update_docs.each do |ecli, data|
-          if data[:_rev]
-            revs[ecli] = data[:_rev]
-          end
-          unless enforce_consistency
-            puts ecli
-          end
-          new_docs << ecli
+        cache_path = "/media/maarten/BA46DFBC46DF7819/ecli-dump/xml/#{ecli.gsub(':', '.')}.xml"
+        if File.exists? cache_path and doc['metadataModified'] < '2015-06-01'
+          xml = Nokogiri::XML File.open(cache_path)
+        else
+          puts "downloading http://rechtspraak.cloudant.com/ecli/#{ecli}/data.xml"
+          xml = Nokogiri::XML open("http://rechtspraak.cloudant.com/ecli/#{ecli}/data.xml")
         end
 
-        @couch.update_docs(new_docs, revs, @logger)
+        new_doc = RechtspraakExpressionTokenized.new(doc, xml).doc
+        @couch_tokens.add_and_maybe_flush(new_doc)
       end
+      @couch_tokens.flush
     end
 
     # Update the document that tracks our last update date
     doc_last_updated['date_last_updated_tokens'] = today
-    @couch.put('/informal_schema/general', doc_last_updated.to_json)
+    @couch_tokens.put('/informal_schema/general', doc_last_updated.to_json)
     @logger.close
   end
 
   private
   # Checks given ECLIs to our database; call block for those we wish do update
   def evaluate_eclis_to_update(source_docs, &block)
-    rows = @couch.get_ecli_last_modified source_docs
+    rows = @couch_tokens.get_ecli_last_modified source_docs
     our_revs = {}
     rows.each do |row|
       our_revs[row['id']] = {

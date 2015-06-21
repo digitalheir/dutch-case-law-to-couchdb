@@ -1,5 +1,6 @@
 require 'base64'
 require 'time'
+require 'open3'
 require_relative '../rechtspraak-nl/rechtspraak_utils'
 require_relative '../converter/metadata_handler_jsonld'
 include RechtspraakUtils
@@ -14,16 +15,17 @@ class RechtspraakExpressionTokenized
   # Only processes metadata; source docs are added in add_attachments.
   def initialize(doc, original_xml)
     @doc = doc
-    add_attachments(original_xml)
+    doc['mirror_rev'] = doc['_rev']
+    doc.delete '_rev'
+    add_fields(original_xml)
   end
 
   private
 
-  # These attachments may or may not be available in the future, but currently not added due to space limitations.
-  #
-  # - metalex.xml can be generated through the web service
-  def add_attachments xml
-    @doc['_attachments'] ||= {}
+  def add_fields xml
+    @doc[:tags] = ...
+
+        @doc['_attachments'] = {}
     str_xml = xml.to_s
 
     plaintext = XSLT_TO_TXT.transform(xml).to_s.sub(/^<\?[\s]*xml[^>]*\?>/, '')
@@ -47,12 +49,6 @@ class RechtspraakExpressionTokenized
         content_type: 'text/json',
         data: Base64.encode64(tag_positions.to_json)
     }
-
-    html = XSLT_TO_HTML.transform(xml).to_s
-    @doc['_attachments']['data.htm'] = {
-        content_type: 'text/html',
-        data: Base64.encode64(html)
-    }
   end
 
   def shorten_http_prefix(property)
@@ -70,8 +66,15 @@ class RechtspraakExpressionTokenized
 
   private
   def tokenize str
-    File.write('tmp.txt', str)
-    str = `$ALPINO_HOME/Tokenization/paragraph_per_line tmp.txt | $ALPINO_HOME/Tokenization/tokenize.sh`
-    str.split(/\r?\n/).map { |s| s.split(' ') }
+    lines = []
+    o, e, s = Open3::capture3('$ALPINO_HOME/Tokenization/paragraph_per_line | $ALPINO_HOME/Tokenization/tokenize.sh', :stdin_data => str)
+
+    if e and e.length > 0
+      raise "Could not tokenize #{@doc['_id']}: #{puts s}\n #{e}"
+    end
+    o.each_line do |line|
+      lines << line.split(' ')
+    end
+    lines
   end
 end

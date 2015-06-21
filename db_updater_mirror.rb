@@ -5,7 +5,7 @@ class DbUpdaterMirror
 
   def initialize
     @logger = Logger.new('update_couchdb.log')
-    @couch = CloudantRechtspraak.new
+    @couch_tokens = CloudantRechtspraak.new
   end
 
   # Updates our database that clones Rechtspraak.nl's documents.
@@ -14,7 +14,7 @@ class DbUpdaterMirror
   # miss anything, or just update from the last time that this script completed successfully.
   def start(enforce_consistency)
     today = Date.today.strftime('%Y-%m-%d')
-    doc_last_updated = @couch.get_doc('informal_schema', 'general')
+    doc_last_updated = @couch_tokens.get_doc('informal_schema', 'general')
 
     if enforce_consistency
       since = '1000-01-01'
@@ -55,20 +55,20 @@ class DbUpdaterMirror
           new_docs << ecli
         end
 
-        @couch.update_docs(new_docs, revs, @logger)
+        @couch_tokens.update_docs(new_docs, revs, @logger)
       end
     end
 
     # Update the document that tracks our last update date
     doc_last_updated['date_last_updated_tokens'] = today
-    @couch.put('/informal_schema/general', doc_last_updated.to_json)
+    @couch_tokens.put('/informal_schema/general', doc_last_updated.to_json)
     @logger.close
   end
 
   private
   # Checks given ECLIs to our database; call block for those we wish do update
   def evaluate_eclis_to_update(source_docs, &block)
-    rows = @couch.get_ecli_last_modified source_docs
+    rows = @couch_tokens.get_ecli_last_modified source_docs
     our_revs = {}
     rows.each do |row|
       our_revs[row['id']] = {

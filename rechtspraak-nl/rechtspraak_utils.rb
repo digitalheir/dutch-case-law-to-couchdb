@@ -21,23 +21,6 @@ module RechtspraakUtils
   def generate_html(doc)
   end
 
-
-
-
-
-  def get_current_revs(keys=nil)
-    revs = {}
-    params = {}
-    if keys
-      params[:keys] = keys
-    end
-    rows = Couch::CLOUDANT_CONNECTION.get_rows_for_view DATABASE_NAME, 'query', 'rechtspraak_rev', params
-    rows.each do |row|
-      revs[row['key']] = row['value']
-    end
-    revs
-  end
-
   # Returns an array of ECLIs that have changed since given date
   def get_new_docs(since='1000-01-01')
     new_docs=[]
