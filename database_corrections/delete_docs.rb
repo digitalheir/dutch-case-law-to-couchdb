@@ -1,21 +1,21 @@
-require_relative '../couch/couch'
+require_relative '../couch/cloudant_rechtspraak'
 
+@c=CloudantRechtspraak.new
+i=0
+def delete_condition(doc)
+  doc['_attachments'] and doc['_attachments']['data.htm'] and doc['_attachments']['data.htm']['length'] < 6
+end
 
-all_docs = Couch::CLOUDANT_CONNECTION.get_all_docs('rechtspraak', {:include_docs => true, 'limit'=>10000})
- puts "Found #{all_docs.length}"
-bulk = []
-max=750
-all_docs.each do |doc|
-  if doc['_id'].start_with? 'ECLI:'
-    bulk<<doc
-    doc['_deleted']=true
-    if bulk.length >= max
-      Couch::CLOUDANT_CONNECTION.flush_bulk('rechtspraak', bulk)
-      bulk.clear
-      puts "flushed #{max}"
+@c.all_docs('ecli',50_000) do |docs|
+  docs.each do |doc|
+    if delete_condition(doc)
+      puts "Adding #{doc['_id']}"
+      doc['_deleted']=true
+      @c.add_and_maybe_flush doc
     end
   end
+  i+=docs.length
+  puts i
 end
-if bulk.length >= 0
-  Couch::CLOUDANT_CONNECTION.flush_bulk('rechtspraak', bulk)
-end
+@c.flush
+

@@ -4,7 +4,6 @@ require_relative 'rechtspraak-nl/rechtspraak_utils'
 class DbUpdaterTokens
 
   def initialize
-    @logger = Logger.new('update_couchdb_tokens.log')
     @couch_tokens = CloudantRechtspraak.new('ecli_tokens')
     @couch_mirror = CloudantRechtspraak.new('ecli')
   end
@@ -13,7 +12,6 @@ class DbUpdaterTokens
   def start()
     today = Date.today.strftime('%Y-%m-%d')
     doc_last_updated = @couch_tokens.get_doc('informal_schema', 'general')
-
 
     revs_tokenized = @couch_tokens.get_current_revs
     puts "#{revs_tokenized.length} tokenized docs"
@@ -49,7 +47,6 @@ class DbUpdaterTokens
     # Update the document that tracks our last update date
     doc_last_updated['date_last_updated_tokens'] = today
     @couch_tokens.put('/informal_schema/general', doc_last_updated.to_json)
-    @logger.close
   end
 
   private

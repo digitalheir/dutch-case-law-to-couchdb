@@ -83,7 +83,7 @@ class MetadataHandlerJsonLd
   def handle_manifestation_metadata(rdf_tag)
     metadata_tags = rdf_tag.xpath('./rdf:Description', PREFIXES)
     if metadata_tags.length < 2
-      # puts "WARNING: only found #{metadata_tags.length} metadata tags in #{@ecli} (expected 2)"
+      #$stderr.puts "WARNING: only found #{metadata_tags.length} metadata tags in #{@ecli} (expected 2)"
       if metadata_tags.first
         if metadata_tags.first['rdf:about']
           handle_doc_metadata(metadata_tags.first)
@@ -93,7 +93,7 @@ class MetadataHandlerJsonLd
       end
     else
       if metadata_tags.length > 2
-        puts "WARNING: found #{metadata_tags.length} metadata tags in #{@ecli} (expected 2)"
+        $stderr.puts "WARNING: found #{metadata_tags.length} metadata tags in #{@ecli} (expected 2)"
       end
       handle_register_metadata(metadata_tags.first)
       handle_doc_metadata(metadata_tags.last)
@@ -174,7 +174,7 @@ class MetadataHandlerJsonLd
   # noinspection RubyResolve
   def handle_doc_metadata(xml_element)
     unless xml_element['rdf:about']
-      puts "WARNING: metadata block for #{@ecli} didn't have rdf:about"
+      $stderr.puts "WARNING: metadata block for #{@ecli} didn't have rdf:about"
     end
     handle_html_publication(xml_element) # HTML publication date in YYYY-MM-DD
     handle_single_literal(xml_element, RDF::DC.modified) # Document modified
@@ -268,7 +268,7 @@ class MetadataHandlerJsonLd
       str_resource_uri = element['resourceIdentifier']
       if str_resource_uri
         unless str_resource_uri.start_with? 'http'
-          puts "WARNING: resource id is #{str_resource_uri.to_s}; did not start with http"
+          $stderr.puts "WARNING: resource id is #{str_resource_uri.to_s}; did not start with http"
         end
         resource_uri = str_resource_uri
       end
@@ -286,7 +286,7 @@ class MetadataHandlerJsonLd
     if value_label
       case value_label
         when /^http/
-          puts "WARNING: element text is URI: #{value_label} (#{@ecli})"
+          $stderr.puts "WARNING: element text is URI: #{value_label} (#{@ecli})"
           resource_uri = value_label unless resource_uri
           value_label = nil
         when 'nl'
@@ -302,7 +302,7 @@ class MetadataHandlerJsonLd
       value_label = create_label_from_uri(resource_uri)
     end
     if !value_label or !resource_uri
-      puts "WARNING: no value label or resource uri (#{@ecli})"
+      $stderr.puts "WARNING: no value label or resource uri (#{@ecli})"
     end
     return language, predicate_label, resource_uri, value_label
   end
@@ -355,7 +355,7 @@ class MetadataHandlerJsonLd
     map = mapping_uri
 
     if @context_mapping[label] and @context_mapping[label] != map
-      puts "WARNING: #{label} already has mapping #{@context_mapping[label]} (#{@ecli})"
+      $stderr.puts "WARNING: #{label} already has mapping #{@context_mapping[label]} (#{@ecli})"
     end
     @context_mapping[label] = map
   end
@@ -363,7 +363,7 @@ class MetadataHandlerJsonLd
   def set_property(p, o)
     p=contract_uri(p)
     if @metadata[p] and @metadata[p] != o
-      puts "WARNING: #{p} already has value #{@metadata[p]} (#{@ecli})"
+      $stderr.puts "WARNING: #{p} already has value #{@metadata[p]} (#{@ecli})"
     end
     @metadata[p] = o
     # puts "Added new statement: #{p}: #{o}"
@@ -396,7 +396,7 @@ class MetadataHandlerJsonLd
         if element['resourceIdentifier']
           inhoudsindicaties = @xml.xpath('/open-rechtspraak/rs:inhoudsindicatie', PREFIXES)
           if inhoudsindicaties.length > 1
-            puts "WARNING: found #{inhoudsindicaties.length} inhoudsindicaties"
+            $stderr.puts "WARNING: found #{inhoudsindicaties.length} inhoudsindicaties"
           end
           inhoudsindicaties.each do |inhoudsindicatie|
             abstract = inhoudsindicatie.text.strip
@@ -649,7 +649,7 @@ class MetadataHandlerJsonLd
             when 'bwb'
             when 'cvdr'
             else
-              puts "WARNING: Found ref with prefix #{attr.namespace.prefix} but did not know how to handle it"
+              $stderr.puts "WARNING: Found ref with prefix #{attr.namespace.prefix} but did not know how to handle it"
           end
 
 
@@ -711,7 +711,7 @@ class MetadataHandlerJsonLd
     # A reference an OWMS uri (http://standaarden.overheid.nl/owms)
 
     unless creator_element
-      raise "ERROR: #{@ecli} did not have a creator"
+      raise "ERROR: #{@ecli} did not have a creator. XML: #{@xml.to_s}"
       # return
     end
     court_name = creator_element.text.strip
@@ -726,11 +726,11 @@ class MetadataHandlerJsonLd
     end
 
     unless court_uri and court_uri.length > 0
-      puts "WARNING: Court #{court_name} doesn't have a http uri"
+      $stderr.puts "WARNING: Court #{court_name} doesn't have a http uri"
       court_uri = create_uri_from_label('court', court_name, true)
     end
     unless court_name and court_name.length > 0
-      puts "WARNING: Court #{court_uri} doesn't have a name"
+      $stderr.puts "WARNING: Court #{court_uri} doesn't have a name"
       court_name = create_label_from_uri(court_uri)
     end
     set_property('dcterms:creator', create_value_map(court_uri, court_name))

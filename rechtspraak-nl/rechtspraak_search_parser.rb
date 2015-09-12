@@ -183,7 +183,7 @@ class ParamsExtractor
         type= 'Uitspraak'
       else
         # TODO return error object
-        type = 'Uitspraak'
+        raise "#{s} was neither Conclusie nor Uitspraak"
       end
       @query_params['type', type]
       return type
