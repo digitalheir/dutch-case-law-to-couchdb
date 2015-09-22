@@ -23,9 +23,9 @@ class RechtspraakExpressionTokenized
   private
 
   def add_fields xml
-    @doc[:tags] = ...
+    @doc[:tags] = tokenize_text_nodes(xml.to_hash)
 
-        @doc['_attachments'] = {}
+    @doc['_attachments'] = {}
     str_xml = xml.to_s
 
     plaintext = XSLT_TO_TXT.transform(xml).to_s.sub(/^<\?[\s]*xml[^>]*\?>/, '')
@@ -49,6 +49,11 @@ class RechtspraakExpressionTokenized
         content_type: 'text/json',
         data: Base64.encode64(tag_positions.to_json)
     }
+  end
+
+  def tokenize_text_nodes(hash)
+    # TODO
+    hash
   end
 
   def shorten_http_prefix(property)

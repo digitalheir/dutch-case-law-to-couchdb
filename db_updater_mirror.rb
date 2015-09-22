@@ -4,7 +4,6 @@ require_relative 'rechtspraak-nl/rechtspraak_utils'
 class DbUpdaterMirror
 
   def initialize
-    @logger = Logger.new('update_couchdb.log')
     @couch_tokens = CloudantRechtspraak.new
   end
 
@@ -19,10 +18,12 @@ class DbUpdaterMirror
     if enforce_consistency
       since = '1000-01-01'
     else
-      since = doc_last_updated['date_last_updated']
+      since = doc_last_updated['date_last_updated_mirror']
     end
 
+    page_num = 0
     RechtspraakUtils::for_source_docs(since) do |docs|
+      page_num += 1
       # Get docs to update
       update_docs = {}
       docs.each_slice(100) do |subgroup|
@@ -38,7 +39,7 @@ class DbUpdaterMirror
         end
       end
       if update_docs.length>0
-        @logger.info "#{update_docs.length} new docs"
+        puts "#{update_docs.length} new docs on page #{page_num}"
       end
 
       # Update docs
@@ -50,19 +51,18 @@ class DbUpdaterMirror
             revs[ecli] = data[:_rev]
           end
           unless enforce_consistency
-            puts ecli
+            # puts ecli
           end
           new_docs << ecli
         end
 
-        @couch_tokens.update_docs(new_docs, revs, @logger)
+        @couch_tokens.update_docs(new_docs, revs)
       end
     end
 
     # Update the document that tracks our last update date
-    doc_last_updated['date_last_updated_tokens'] = today
+    doc_last_updated['date_last_updated_mirror'] = today
     @couch_tokens.put('/informal_schema/general', doc_last_updated.to_json)
-    @logger.close
   end
 
   private

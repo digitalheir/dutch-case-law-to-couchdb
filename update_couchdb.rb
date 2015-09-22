@@ -15,5 +15,5 @@ include RechtspraakUtils
 # script checks for *all* documents, not only those that report to have been updated after we last successfully
 # performed this script.
 enforce_consistency = Date.today.saturday?
-# DbUpdaterMirror.new.start(enforce_consistency)
-DbUpdaterTokens.new.start()
+DbUpdaterMirror.new.start(enforce_consistency)
+# DbUpdaterTokens.new.start()

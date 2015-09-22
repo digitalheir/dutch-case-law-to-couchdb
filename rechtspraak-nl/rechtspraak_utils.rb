@@ -33,7 +33,7 @@ module RechtspraakUtils
       params[:from] = from
       resp = get_search_response(params)
       from += params[:max]
-      puts "from: #{from}"
+      # puts "from: #{from}"
       if resp[:docs] and resp[:docs].length
         new_docs<<resp[:docs].map { |doc| doc[:id] }
       end

@@ -6,7 +6,7 @@ include RechtspraakUtils
 # noinspection RubyStringKeysInHashInspection
 class RechtspraakExpression
   JSON_LD_URI = 'https://rechtspraak.cloudant.com/assets/assets/context.jsonld'
-  XSLT_TO_TXT = Nokogiri::XSLT(File.read('converter/xslt/rechtspraak_to_txt.xslt'))
+  XSLT_TO_TXT = Nokogiri::XSLT(File.read( 'converter/xslt/rechtspraak_to_txt.xslt'))
   XSLT_TO_HTML = Nokogiri::XSLT(File.read('converter/xslt/rechtspraak_to_html.xslt'))
 
   attr_reader :doc
@@ -24,8 +24,7 @@ class RechtspraakExpression
 
     #??? @doc['@type'] = 'frbr:Expression'
     add_metadata(ecli, original_xml)
-    now = (Time.now).getutc.iso8601
-    @doc['couchDbUpdated']=now
+    @doc['couchDbUpdated'] = (Time.now).getutc.iso8601
     add_attachments(original_xml)
   end
 
@@ -41,6 +40,9 @@ class RechtspraakExpression
     }
 
     html = XSLT_TO_HTML.transform(xml).to_s.force_encoding('utf-8')
+    unless html.length > 6
+      raise "#{ecli} had no document"
+    end
     @doc['_attachments']['data.htm'] = {
         content_type: 'text/html;charset=utf-8',
         data: Base64.encode64(html)

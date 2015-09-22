@@ -1,0 +1,10 @@
+{
+  "selector": {
+    "couchDbUpdated": {
+      "$gt": "2014-06-09"
+    },
+    "fields": [
+      "ecli"
+    ]
+  }
+}
