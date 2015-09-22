@@ -1,0 +1,47 @@
+{
+    "docs": [
+        {
+            "_id": "_design/stats",
+            "views":
+            <%= map 'stats/views' %>,
+            "rewrites": [],
+            "language": "javascript",
+            "indexes": {}
+        },
+        {
+            "_id": "_design/query",
+            "views":
+            <%= map 'query/views' %>,
+            "rewrites": [],
+            "shows": {
+                "doc":
+                <%= File.read('query/shows/doc.js').to_json %>
+            },
+            "language": "javascript",
+            "indexes": {},
+            "indexes": {
+                "search": {
+                    "analyzer": "standard",
+                    "index":
+                    <%= File.read('query/indexes/search.js').to_json %>
+                }
+            }
+        },
+        {
+            "_id": "_design/query_dev",
+            "views":
+            <%= map 'query_dev/views' %>,
+            "rewrites": [],
+            "language": "javascript",
+            "indexes": {}
+        },
+        {
+            "_id": "_design/term_frequency",
+            "views":
+            <%= map 'term_frequency/views' %>,
+            "rewrites": [],
+            "language": "javascript",
+            "indexes": {}
+        }
+    ]
+}
