@@ -29,7 +29,8 @@ describe('query', function () {
         f(doc);
 
         it('should index like we expect', function () {
-            assert.equal(indexesMap.innerText[0].startsWith('arrestnummer'), true);
+            console.log(typeof  indexesMap.innerText[0].startsWith);
+            assert.equal(indexesMap.innerText[0].substring(0, 'arrestnummer'.length), 'arrestnummer');
             //console.log(JSON.stringify(indexesMap));
             assert.equal(example_index.subject[0], indexesMap.subject[0]);
             assert.equal(example_index.abstract[0], indexesMap.abstract[0]);

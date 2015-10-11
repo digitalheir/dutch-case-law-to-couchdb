@@ -1,0 +1,21 @@
+{
+  "name": "push_couchdb_designdocs",
+  "homepage": "http://documentcloud.github.com/underscore/",
+  "author": "Maarten Trompper <m.f.a.trompper@uva.nl>",
+  "dependencies": {
+    "mocha": "^2.3.3",
+    "pouchdb": "^5.0.0"
+  },
+  "scripts": {
+    "test": "mocha --recursive",
+    "start": "node push_to_couch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/documentcloud/underscore.git"
+  },
+  "main": "push_to_couch.js",
+  "private": true,
+  "license": "MIT",
+  "version": "0.0.0"
+}
