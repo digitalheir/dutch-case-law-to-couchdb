@@ -1,4 +1,5 @@
-/.idea
+.idea
+*.iml
 *.gem
 *.rbc
 /.config
@@ -39,7 +40,10 @@ build/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+.env
+*.*~
 Gemfile.lock
 tmp.txt
 secret*
 *.log
+target/

@@ -1,0 +1,38 @@
+var assert = require("assert");
+var doc = require("./doc/doc");
+var fs = require("fs");
+var doc_search_index = require("./doc/doc_search_index");
+
+
+
+describe('query_dev', function () {
+    describe('views', function () {
+        describe('docs_with_nonpara_markup', function () {
+            describe('map', function () {
+                var emitted = [];
+                var emit = function (key, val) {
+                    emitted.push([key, val])
+                };
+                var f = <%= File.read('../src/query_dev/views/docs_with_nonpara_markup/map.js') %>;
+                f(doc);
+                it('should behave like we expect', function () {
+                    assert.equal(JSON.stringify(emitted), JSON.stringify([[['2003', '09', '12'], 1]]));
+                });
+            });
+        });
+        describe('docs_with_rich_markup', function () {
+            describe('map', function () {
+                var emitted = [];
+                var emit = function (key, val) {
+                    emitted.push([key, val])
+                };
+                var f = <%= File.read('../src/query_dev/views/docs_with_rich_markup/map.js') %>;
+                f(doc);
+                console.log(emitted);
+                it('should behave like we expect', function () {
+                    assert.equal(emitted.length, 0);
+                });
+            });
+        });
+    });
+});
