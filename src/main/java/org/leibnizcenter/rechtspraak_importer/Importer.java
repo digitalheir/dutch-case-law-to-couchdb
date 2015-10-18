@@ -3,6 +3,7 @@ package org.leibnizcenter.rechtspraak_importer;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.cloudant.client.api.model.Response;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.*;
 import org.jsoup.HttpStatusException;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @author Maarten
  */
 public class Importer implements Runnable {
-    public final List<String> failed = new ArrayList<>();
+    public final List<String> failed = Collections.synchronizedList(new ArrayList<>());
 
 
     private final int stopAfter;
@@ -34,20 +35,19 @@ public class Importer implements Runnable {
      */
     private final int resultsPerPage;
     private final int startAt;
-    boolean reachedEndOfSearch;
 
     /**
      * Arbitrary number of threads
      */
-    private static final int THREAD_NUM = 64;
+    private final int threadNum;
     private final int timeOut;
 
 
     private final BulkHandler bulkHandler;
-    private final Set<Future> waitingForDocFutures = new HashSet<>(5000);
+    private final Set<Future> waitingOnFutures = Collections.synchronizedSet(new HashSet<>(5000));
 
     public Importer() throws IOException {
-        this(1000, 0, -1, 12 * 60 * 60);
+        this(1000, 0, -1, 32, 12 * 60 * 60);
     }
 
     /**
@@ -57,42 +57,26 @@ public class Importer implements Runnable {
      * @param timeOut        Number of seconds to wait on async thread after all search result pages. Defaults to 12 hours
      * @throws IOException
      */
-    public Importer(int resultsPerPage, int startAt, int stopAfter, int timeOut) throws IOException {
+    public Importer(int resultsPerPage, int startAt, int stopAfter, int threadNum, int timeOut) throws IOException {
         this.resultsPerPage = resultsPerPage;
         this.stopAfter = stopAfter;
         this.timeOut = timeOut;
         this.startAt = startAt;
+        this.threadNum = threadNum;
 
         this.bulkHandler = new BulkHandler();
     }
 
-    private void addToWaitingList(Future future) {
-        synchronized (waitingForDocFutures) {
-            waitingForDocFutures.add(future);
-        }
-    }
-
-    private int waitingListSize() {
-        synchronized (waitingForDocFutures) {
-            return waitingForDocFutures.size();
-        }
-    }
-
-    private void removeFromWaitingList(Future future) {
-        synchronized (waitingForDocFutures) {
-            waitingForDocFutures.remove(future);
-        }
-    }
 
     @Override
     public void run() {
         failed.clear();
-        ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(THREAD_NUM));
-        addAllDocsToExecutor(executor);
+        ListeningExecutorService executor = addAllDocsToExecutor();
 
         // Wait for threads to finish
         executor.shutdown();
         try {
+            System.out.println("Awaiting all threads to finish...");
             executor.awaitTermination(timeOut, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -102,12 +86,14 @@ public class Importer implements Runnable {
         // If there are some docs that failed before, try and handle them synchronously
         if (failed.size() > 0) {
             System.out.println("Retrying " + failed.size() + " doc(s) that failed before");
-            for (String m : failed) {
-                try {
-                    CouchDoc doc = new GetDocTask(m).call();
-                    bulkHandler.addToBulkQueue(doc);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            synchronized (failed) { // Should not be necessary to synchronize, because this is the only thread running at this point
+                for (String m : failed) {
+                    try {
+                        CouchDoc doc = new GetDocTask(m).call();
+                        bulkHandler.addToBulkQueue(doc);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -118,7 +104,10 @@ public class Importer implements Runnable {
         System.out.println("Done!");
     }
 
-    private void addAllDocsToExecutor(ListeningExecutorService executor) {
+    private ListeningExecutorService addAllDocsToExecutor() {
+        ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(threadNum));
+        boolean reachedEndOfSearch = false;
+
         int offset = startAt;
         do {
             try {
@@ -150,8 +139,8 @@ public class Importer implements Runnable {
                 // pages. Any running thread is not terminated, however.
                 throw new Error(e);
             }
-        }
-        while (!reachedEndOfSearch);
+        } while (!reachedEndOfSearch);
+        return executor;
     }
 
     private List<String> getEclisForOffset(int offset) throws IOException, ParserConfigurationException, SAXException {
@@ -163,32 +152,10 @@ public class Importer implements Runnable {
         // start tasks to convert JudgmentMetadata to the LegalObject subclass Judgment
         if (!bulkHandler.alreadyHaveDoc(ecli)) {
             final ListenableFuture<CouchDoc> future = executor.submit(new GetDocTask(ecli));
-            addToWaitingList(future);
+            waitingOnFutures.add(future); //waitingOnFutures is a synchronized set (thread-safe)
             Futures.addCallback(
                     future,
-                    new FutureCallback<CouchDoc>() {
-                        @Override
-                        public void onSuccess(CouchDoc judgment) {
-                            removeFromWaitingList(future);
-                            bulkHandler.addToBulkQueue(judgment);
-                        }
-
-
-                        @Override
-                        public void onFailure(Throwable throwable) {
-                            removeFromWaitingList(future);
-                            synchronized (failed) {
-                                failed.add(ecli);
-                            }
-                            System.err.println("Error downloading " + ecli + ": " + throwable.getMessage());
-                            if (!(throwable instanceof HttpStatusException
-                                    || throwable instanceof SocketException
-                                    || "Document should have exactly one uitspraak or conclusie".equals(throwable.getMessage())
-                            )) {
-                                throwable.printStackTrace();
-                            }
-                        }
-                    }
+                    new CouchDocFutureCallback(future, ecli)
             );
             return true;
         } else {
@@ -223,12 +190,15 @@ public class Importer implements Runnable {
             this.client = new CloudantClient(username, username, password);
             this.docsDb = client.database(Credentials.DB_NAME, true);
 
-            existingDocRevs = docsDb.getAllDocsRequestBuilder()
-                    .startKey("ECLI")
-                    .endKey("D")
-                    .build()
-                    .getResponse()
-                    .getIdsAndRevs();
+
+            existingDocRevs = ImmutableMap.copyOf(
+                    docsDb.getAllDocsRequestBuilder()
+                            .startKey("ECLI")
+                            .endKey("D")
+                            .build()
+                            .getResponse()
+                            .getIdsAndRevs()
+            );
             System.out.println("Found " + existingDocRevs.size() + " already imported docs.");
         }
 
@@ -271,7 +241,7 @@ public class Importer implements Runnable {
                     res -> System.err.println(res.getId() + ": " + res.getError())
             );
             System.out.println("Flushed " + toFlush.size() + " docs; " +
-                    "still got " + waitingListSize() + " docs in the waiting list");
+                    "still got " + waitingOnFutures.size() + " docs in the waiting list");
         }
 
         private int getKiloByteSize(CouchDoc judgment) {
@@ -281,9 +251,39 @@ public class Importer implements Runnable {
         public void flush() {
             synchronized (addToBulkQueue) {
                 ArrayList<CouchDoc> toFlush = new ArrayList<>(addToBulkQueue);
-                addToBulkQueue.clear();
-                bulk(toFlush);
                 clear();
+                bulk(toFlush);
+            }
+        }
+    }
+
+    private class CouchDocFutureCallback implements FutureCallback<CouchDoc> {
+        private final ListenableFuture<CouchDoc> future;
+        private final String ecli;
+
+        public CouchDocFutureCallback(ListenableFuture<CouchDoc> future, String ecli) {
+            this.future = future;
+            this.ecli = ecli;
+        }
+
+        @Override
+        public void onSuccess(CouchDoc judgment) {
+            waitingOnFutures.remove(future); //waitingOnFutures is a synchronized set (thread-safe)
+            bulkHandler.addToBulkQueue(judgment);
+        }
+
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            waitingOnFutures.remove(future); //#waitingOnFutures is a synchronized set (thread-safe)
+            failed.add(ecli);//#failed is a synchronized set (thread-safe)
+
+            System.err.println("Error downloading " + ecli + ": " + throwable.getMessage());
+            if (!(throwable instanceof HttpStatusException
+                    || throwable instanceof SocketException
+                    || "Document should have exactly one uitspraak or conclusie".equals(throwable.getMessage())
+            )) {
+                throwable.printStackTrace();
             }
         }
     }
