@@ -58,6 +58,52 @@ var functions = {
             }
             ,
             reduce: "_sum"
+        },
+        docs_with_image: {
+            map: function (doc) {
+                function hasAfbeelding(obj) {
+                        //console.log(obj);
+                    for (var field in obj) {
+                        if (obj.hasOwnProperty(field)) {
+                            if (field == 'imageobject') {
+                                return true;
+                            }
+                            var children = obj[field];
+                            for (var i = 0; i < children.length; i++) {
+                                var child = children[i];
+                                if (typeof child == 'object') {
+                                    if (hasAfbeelding(children[i])) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+                if (doc.simplifiedContent) {
+                    //console.log(doc.simplifiedContent)
+                    //return;
+                    if (hasAfbeelding(doc.simplifiedContent)) {
+                        emit(
+                            [
+                                doc._id
+                            ], 1
+                        );
+                    }
+                    //emit(
+                    //    [
+                    //        !isMarkedUp,
+                    //        d.getFullYear(),
+                    //        d.getMonth() + 1,
+                    //        d.getDate()
+                    //    ], 0
+                    //);
+
+                }
+            },
+            reduce: "_sum"
         }
     }
     ;
