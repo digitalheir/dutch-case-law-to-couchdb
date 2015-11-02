@@ -3,7 +3,7 @@
 This repository contains code that clones Dutch case law XML documents from 
 [data.rechtspraak.nl](http://data.rechtspraak.nl/) and 
 converts the metadata to JSON. This makes the documents easier to process with a machine. Because
-we store the documents in a [CouchDB](http://couchdb.apache.org/) database, the data is instantly amenable to
+we store the documents in a [CouchDB](http://couchdb.apache.org/) database, this makes the data instantly amenable to
 MapReduce jobs.
 
 Everything described here is a derivative of the [rechtspraak.nl web service](http://www.rechtspraak.nl/Uitspraken-en-Registers/Uitspraken/Open-Data/Pages/default.aspx).
