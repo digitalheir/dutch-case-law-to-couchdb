@@ -16,9 +16,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Class for importing Dutch case law metadata from http://www.rechtspraak.nl .
@@ -26,8 +27,6 @@ import java.util.concurrent.TimeUnit;
  * @author Maarten
  */
 public class Importer implements Runnable {
-    public final List<String> failed = Collections.synchronizedList(new ArrayList<>());
-
 
     private final int stopAfter;
     /**
@@ -44,10 +43,10 @@ public class Importer implements Runnable {
 
 
     private final BulkHandler bulkHandler;
-    private final Set<Future> waitingOnFutures = Collections.synchronizedSet(new HashSet<>(5000));
+    private final List<ListenableFuture<Nil>> futures = Collections.synchronizedList(new ArrayList<>(5000));
 
     public Importer() throws IOException {
-        this(1000, 0, -1, 32, 12 * 60 * 60);
+        this(1000, 0 /*+ 300 * 1000*/, -1, 32, 12 * 60 * 60);
     }
 
     /**
@@ -73,9 +72,18 @@ public class Importer implements Runnable {
         failed.clear();
         ListeningExecutorService executor = addAllDocsToExecutor();
 
+
+        ListenableFuture<List<Nil>> resultsFuture = Futures.allAsList(futures);
+
         // Wait for threads to finish
+        System.out.println("Awaiting all tasks to finish...");
         try {
-            System.out.println("Awaiting all threads to finish...");
+            resultsFuture.get(timeOut, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            e.printStackTrace();
+        }
+        try {
+            executor.shutdown();
             executor.awaitTermination(timeOut, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -154,12 +162,15 @@ public class Importer implements Runnable {
     private boolean addTaskToGetDoc(ListeningExecutorService executor, final String ecli) {
         // start tasks to convert JudgmentMetadata to the LegalObject subclass Judgment
         if (!bulkHandler.alreadyHaveDoc(ecli)) {
-            final ListenableFuture<CouchDoc> future = executor.submit(new GetDocTask(ecli));
-            waitingOnFutures.add(future); //waitingOnFutures is a synchronized set (thread-safe)
+
+            final ListenableFuture<Nil> future = executor.submit(
+                    new AddToFlushQueueTask(ecli, bulkHandler)
+            );
             Futures.addCallback(
                     future,
-                    new CouchDocFutureCallback(future, ecli)
+                    new AddDocToQueueCallback(ecli)
             );
+            futures.add(future); //futures is a synchronized set (thread-safe)
             return true;
         } else {
             return false;
@@ -176,7 +187,10 @@ public class Importer implements Runnable {
     }
 
 
-    private class BulkHandler {
+    public final List<String> failed = Collections.synchronizedList(new ArrayList<>());
+
+    class BulkHandler {
+
         private static final int MAX_BULK_SIZE = 500;
         private final Map<String, String> existingDocRevs;
         private int sizeKb;
@@ -209,7 +223,7 @@ public class Importer implements Runnable {
             return existingDocRevs.get(id) != null;
         }
 
-        private void addToBulkQueue(CouchDoc judgment) {
+        void addToBulkQueue(CouchDoc judgment) {
             ArrayList<CouchDoc> toFlush = null;
 
             synchronized (addToBulkQueue) {
@@ -243,8 +257,8 @@ public class Importer implements Runnable {
             responses.stream().filter(res -> res.getError() != null).forEach(
                     res -> System.err.println(res.getId() + ": " + res.getError())
             );
-            System.out.println("Flushed " + toFlush.size() + " docs; " +
-                    "still got " + waitingOnFutures.size() + " docs in the waiting list");
+            System.out.println("Flushed " + toFlush.size() + " docs; " /*+
+                    "still got " + futures.size() + " docs in the waiting list"*/);
         }
 
         private int getKiloByteSize(CouchDoc judgment) {
@@ -260,25 +274,24 @@ public class Importer implements Runnable {
         }
     }
 
-    private class CouchDocFutureCallback implements FutureCallback<CouchDoc> {
-        private final ListenableFuture<CouchDoc> future;
+    class AddDocToQueueCallback implements FutureCallback<Nil> {
+        //        private final ListenableFuture<CouchDoc> future;
         private final String ecli;
 
-        public CouchDocFutureCallback(ListenableFuture<CouchDoc> future, String ecli) {
-            this.future = future;
+        public AddDocToQueueCallback(String ecli) {
+//            this.future = future;
             this.ecli = ecli;
         }
 
         @Override
-        public void onSuccess(CouchDoc judgment) {
-            waitingOnFutures.remove(future); //waitingOnFutures is a synchronized set (thread-safe)
-            bulkHandler.addToBulkQueue(judgment);
+        public void onSuccess(Nil judgment) {
+            //waitingOnFutures.remove(future); //waitingOnFutures is a synchronized set (thread-safe)
         }
 
 
         @Override
         public void onFailure(Throwable throwable) {
-            waitingOnFutures.remove(future); //#waitingOnFutures is a synchronized set (thread-safe)
+            //waitingOnFutures.remove(future); //#waitingOnFutures is a synchronized set (thread-safe)
             failed.add(ecli);//#failed is a synchronized set (thread-safe)
 
             System.err.println("Error downloading " + ecli + ": " + throwable.getMessage());
