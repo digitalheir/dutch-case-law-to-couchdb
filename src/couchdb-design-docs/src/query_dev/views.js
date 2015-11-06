@@ -16,16 +16,16 @@ var functions = {
             },
             reduce: '_count'
         },
-        docs_with_rich_markup: {
+        docs_with_section_tag: {
             map: function (doc) {
-                function isMarkedUp(o) {
+                function hasSectionTag(o) {
                     for (var f in o) {
                         if (o.hasOwnProperty(f)) {
                             if (f.match(/section/g)) {
                                 return true;
                             } else {
                                 if (typeof o[f] == 'object' &&
-                                    isMarkedUp(o[f])) {
+                                    hasSectionTag(o[f])) {
                                     return true;
                                 }
                             }
@@ -35,11 +35,11 @@ var functions = {
                 }
 
                 if (doc.corpus == 'Rechtspraak.nl') {
-                    var isMarkedUp = isMarkedUp(doc.simplifiedContent);
+                    var hasSectionTag = hasSectionTag(doc.simplifiedContent);
                     var d = new Date(doc['date']);
                     emit(
                         [
-                            isMarkedUp,
+                            hasSectionTag,
                             d.getFullYear(),
                             d.getMonth() + 1,
                             d.getDate()

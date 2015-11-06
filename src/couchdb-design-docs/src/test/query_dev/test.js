@@ -35,8 +35,8 @@ function testSecondaryViewOnDocs(f, docs) {
 describe('query_dev', function () {
     describe('views', function () {
         describe('views', function () {
-            it('should emit doc that is marked up', function () {
-                var emitted = testSecondaryViewOnDocs(views.docs_with_rich_markup, [doc,doc_rich]);
+            it('should emit doc that has section tag', function () {
+                var emitted = testSecondaryViewOnDocs(views.docs_with_section_tag, [doc,doc_rich]);
 
                 assert.equal(emitted.length, 2);
                 assert.equal(emitted[0][0][0], false);

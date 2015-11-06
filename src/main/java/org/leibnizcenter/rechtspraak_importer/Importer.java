@@ -87,12 +87,16 @@ public class Importer implements Runnable {
         if (failed.size() > 0) {
             System.out.println("Retrying " + failed.size() + " doc(s) that failed before");
             synchronized (failed) { // Should not be necessary to synchronize, because this is the only thread running at this point
-                for (String m : failed) {
+                for (String ecliFailed : failed) {
                     try {
-                        CouchDoc doc = new GetDocTask(m).call();
+                        CouchDoc doc = new GetDocTask(ecliFailed).call();
                         bulkHandler.addToBulkQueue(doc);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        if ("Document should have exactly one uitspraak or conclusie".equals(e.getMessage())) {
+                            System.err.println(ecliFailed + ": " + e.getMessage());
+                        } else {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
