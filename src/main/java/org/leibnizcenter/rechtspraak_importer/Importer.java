@@ -74,7 +74,6 @@ public class Importer implements Runnable {
         ListeningExecutorService executor = addAllDocsToExecutor();
 
         // Wait for threads to finish
-        executor.shutdown();
         try {
             System.out.println("Awaiting all threads to finish...");
             executor.awaitTermination(timeOut, TimeUnit.SECONDS);
