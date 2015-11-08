@@ -67,5 +67,14 @@ describe('query_dev', function () {
         it('should index ecli_last_modified', function () {
             //assert.equal(true, true);
         });
+        it('should tokenize', function () {
+            var natural = require('../../query_dev/natural');
+
+            var tokenizer = natural.AggressiveTokenizerNl;//Dutch tokenizer
+            var str = tokenizer.tokenize("Hallo, ik ben een test! :p 33-1:ECLI:30.");
+            console.log(str);
+        });
+
     });
+
 });

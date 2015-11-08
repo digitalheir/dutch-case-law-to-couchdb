@@ -1,3 +1,4 @@
+var stringifyFunctions = require('./stringifyFunctions');
 var stats = {
     views: require('./stats/views')
 };
@@ -11,24 +12,6 @@ var query = {
 var query_dev = {
     views: require('./query_dev/views')
 };
-
-function stringifyFunctions(o) {
-    if (typeof o == 'function') {
-        return o.toString();
-    } else if (typeof o == 'object') {
-        var map = {};
-        for (var functionName in o) {
-            if (o.hasOwnProperty(functionName)) {
-                map[functionName] = stringifyFunctions(o[functionName]);
-            }
-        }
-        return map;
-    } else if (typeof o == 'string') {
-        return o;
-    } else {
-        throw Error(o + '???');
-    }
-}
 
 var docs = {
     "docs": [
@@ -55,13 +38,13 @@ var docs = {
         },
         {
             "_id": "_design/query_dev",
-            "views": stringifyFunctions(query_dev.views),
+            "views": (stringifyFunctions(query_dev.views)),
             "rewrites": [],
             "language": "javascript"
         }
     ]
 };
 
-//console.log(JSON.stringify(docs));
+//console.log(docs[3]);
 
 module.exports = docs;
