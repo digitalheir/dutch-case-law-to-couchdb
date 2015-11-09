@@ -25,7 +25,6 @@ package com.cloudant.client.api.model;
 public class Document extends com.cloudant.client.org.lightcouch.Document {
 
     public void addAttachment(String name, Attachment attachment) {
-        // TODO Auto-generated method stub
         super.addAttachment(name, attachment.getAttachement());
     }
 

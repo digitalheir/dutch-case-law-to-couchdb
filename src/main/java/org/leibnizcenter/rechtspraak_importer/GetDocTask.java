@@ -7,7 +7,7 @@ import org.leibnizcenter.rechtspraak.RechtspraakNlInterface;
 /**
  * Retrieves the document with given ecli from Rechtspraak.nl and transforms it into a
  * {@link CouchDoc} for serialization to JSON in a CouchDB.
- * <p>
+ * <p/>
  * Created by maarten on 5-10-15.
  */
 public class GetDocTask implements java.util.concurrent.Callable<CouchDoc> {
