@@ -1,4 +1,7 @@
+var fs = require('fs');
+
 var stringifyFunctions = require('./stringifyFunctions');
+
 var stats = {
     views: require('./stats/views')
 };
@@ -10,7 +13,23 @@ var query = {
     indexes: require('./query/indexes')
 };
 var query_dev = {
-    views: require('./query_dev/views')
+    views: require('./query_dev/views'),
+    lists: {
+        "crf-train": function (head, req) {
+            var row;
+            start({
+                "headers": {
+                    "Content-Type": "text/plain"
+                }
+            });
+            while (row = getRow()) {
+                send(row.value);
+            }
+        },
+        "crf-test": function (head, req) {
+
+        }
+    }
 };
 
 var docs = {
@@ -40,7 +59,12 @@ var docs = {
             "_id": "_design/query_dev",
             "views": (stringifyFunctions(query_dev.views)),
             "rewrites": [],
-            "language": "javascript"
+            "language": "javascript",
+            "lists": stringifyFunctions(query_dev.lists),
+            "lib": {
+                "natural": fs.readFileSync(__dirname + '/natural.js', {encoding: 'utf-8'}),
+                "crfTokenizer": fs.readFileSync(__dirname + '/crf_tokenizer.js', {encoding: 'utf-8'})
+            }
         }
     ]
 };

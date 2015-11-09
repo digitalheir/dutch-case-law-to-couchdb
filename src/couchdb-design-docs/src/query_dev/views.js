@@ -1,8 +1,6 @@
 var stringifyFunctions = require('../stringifyFunctions');
-var fs = require('fs');
 
 
-var nat = fs.readFileSync(__dirname+'/natural.js', {encoding: 'utf-8'});
 //console.log(nat);
 
 var functions = {
@@ -42,11 +40,11 @@ var functions = {
             }
 
             if (doc.corpus == 'Rechtspraak.nl') {
-                var hasSectionTag = hasSectionTag(doc.simplifiedContent);
+                var hasS = hasSectionTag(doc.simplifiedContent);
                 var d = new Date(doc['date']);
                 emit(
                     [
-                        hasSectionTag,
+                        hasS,
                         d.getFullYear(),
                         d.getMonth() + 1,
                         d.getDate()
@@ -66,14 +64,109 @@ var functions = {
         ,
         reduce: "_sum"
     },
-    generateCRFTestFile: {
+    sectionNrs: {
         map: function (doc) {
-            var natural = require('views/lib/natural');
-            var tokenizer = new natural.WordPunctTokenizer();
+            function getString(o) {
+                if (typeof o == 'string') {
+                    return o;
+                } else {
+                    var sb = [];
+                    for (var i in o) {
+                        if (o.hasOwnProperty(i)) {
+                            sb.push(getString(o[i]));
+                        }
+                    }
+                    return sb.join('');
+                }
+            }
 
-            var str = tokenizer.tokenize("Hallo, ik ben een test! :p 33-1:ECLI:30.");
-            //if (doc._id.match(/^_/))
-            emit(str, str);
+            function getTitles(o) {
+                var titles = [];
+                for (var tagName in o) {
+                    if (o.hasOwnProperty(tagName)) {
+                        if (tagName == "nr") {
+                            titles.push(getString(o[tagName]));
+                        } else {
+                            if (typeof o[tagName] == 'object') {
+                                // Append titles for inner object to titles object
+                                titles.push.apply(titles, getTitles(o[tagName]));
+                            }
+                        }
+                    }
+                }
+                return titles;
+            }
+
+            if (doc.simplifiedContent) {
+                var tts = getTitles(doc.simplifiedContent);
+                for (var i = 0; i < tts.length; i++) {
+                    emit(tts[i].toLowerCase(), 1);
+                }
+            }
+        },
+        reduce: "_sum"
+    },
+    sectionTitles: {
+        map: function (doc) {
+            function getString(o) {
+                if (typeof o == 'string') {
+                    return o;
+                } else {
+                    var sb = [];
+                    for (var i in o) {
+                        if (o.hasOwnProperty(i)) {
+                            sb.push(getString(o[i]));
+                        }
+                    }
+                    return sb.join('');
+                }
+            }
+
+            function getTitles(o) {
+                var titles = [];
+                for (var tagName in o) {
+                    if (o.hasOwnProperty(tagName)) {
+                        if (tagName == "title") {
+                            titles.push(getString(o[tagName]));
+                        } else {
+                            if (typeof o[tagName] == 'object') {
+                                // Append titles for inner object to titles object
+                                titles.push.apply(titles, getTitles(o[tagName]));
+                            }
+                        }
+                    }
+                }
+                return titles;
+            }
+
+            if (doc.simplifiedContent) {
+                var tts = getTitles(doc.simplifiedContent);
+                for (var i = 0; i < tts.length; i++) {
+                    emit(tts[i].toLowerCase(), 1);
+                }
+            }
+        },
+        reduce: "_sum"
+    },
+    crfTestTokens: {
+        map: function (doc) {
+            if (doc.useForCrf == "test") {
+                var crfTokenizer = require('lib/crfTokenizer');
+                var crfTokens = crfTokenizer.tokenize(require('lib/natural').WordPunctTokenizer(), doc.simplifiedContent);
+                for (var i in crfTokens) {
+                    if (crfTokens.hasOwnProperty(i)) {
+                        emit([doc._id, i], crfTokens[i]);
+                    }
+                }
+
+            }
+        }
+    },
+    crfTrainTokens: {
+        map: function (doc) {
+            if (doc.useForCrf == "train") {
+                //emit(doc, 1);
+            }
         }
     },
 
@@ -122,9 +215,6 @@ var functions = {
             }
         },
         reduce: "_sum"
-    },
-    "lib": {
-        "natural": nat
     }
 };
 

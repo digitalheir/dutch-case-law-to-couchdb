@@ -24,7 +24,7 @@ function testSecondaryViewOnDocs(f, docs) {
         emitted.push([a, b]);
     };
     f = eval("(" + f.map.toString() + ")");
-        //console.log(docs.length)
+    //console.log(docs.length)
     for (var i = 0; i < docs.length; i++) {
         f(docs[i]);
     }
@@ -36,7 +36,7 @@ describe('query_dev', function () {
     describe('views', function () {
         describe('views', function () {
             it('should emit doc that has section tag', function () {
-                var emitted = testSecondaryViewOnDocs(views.docs_with_section_tag, [doc,doc_rich]);
+                var emitted = testSecondaryViewOnDocs(views.docs_with_section_tag, [doc, doc_rich]);
 
                 assert.equal(emitted.length, 2);
                 assert.equal(emitted[0][0][0], false);
@@ -68,11 +68,8 @@ describe('query_dev', function () {
             //assert.equal(true, true);
         });
         it('should tokenize', function () {
-            var natural = require('../../query_dev/natural');
-
-            var tokenizer = natural.AggressiveTokenizerNl;//Dutch tokenizer
-            var str = tokenizer.tokenize("Hallo, ik ben een test! :p 33-1:ECLI:30.");
-            console.log(str);
+            var t = require('../../crf_tokenizer');
+            console.log(t.tokenize(doc_rich.simplifiedContent));
         });
 
     });
