@@ -67,11 +67,6 @@ describe('query_dev', function () {
         it('should index ecli_last_modified', function () {
             //assert.equal(true, true);
         });
-        it('should tokenize', function () {
-            var t = require('../../crf_tokenizer');
-            console.log(t.tokenize(doc_rich.simplifiedContent));
-        });
-
     });
 
 });

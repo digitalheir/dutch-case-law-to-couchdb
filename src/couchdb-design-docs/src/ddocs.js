@@ -13,8 +13,10 @@ var query = {
     indexes: require('./query/indexes')
 };
 var query_dev = {
-    views: require('./query_dev/views'),
-
+    views: require('./query_dev/views')
+};
+var crf = {
+    views: require('./crf/views'),
     lists: {
         "crf-train": function (head, req) {
             var row;
@@ -30,7 +32,7 @@ var query_dev = {
             }
         },
         "crf-test": function (head, req) {
-
+            //TODO
         }
     }
 };
@@ -62,8 +64,14 @@ var docs = {
             "_id": "_design/query_dev",
             "views": (stringifyFunctions(query_dev.views)),
             "rewrites": [],
-            "language": "javascript",
-            "lists": stringifyFunctions(query_dev.lists)
+            "language": "javascript"
+        },
+        {
+            "_id": "_design/crf",
+            "views": (stringifyFunctions(crf.views)),
+            "lists": stringifyFunctions(crf.lists),
+            "rewrites": [],
+            "language": "javascript"
         }
     ]
 };
