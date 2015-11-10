@@ -43,7 +43,8 @@ describe('crf', function () {
 
         it('should correctly emit parents of <nr> tags', function () {
             var emitted = testSecondaryViewOnDocs(views.parentsOfNr, [doc, doc_rich]);
-            console.log(emitted);
+            assert.equal(emitted.length, 11);
+            assert.equal(emitted[0][0][1], 'paragroup');
         });
     });
 

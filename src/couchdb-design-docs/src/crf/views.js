@@ -127,7 +127,7 @@ var functions = {
         }
     },
     parentsOfNr: {
-        map: function (doc, tagName) {
+        map: function (doc) {
             var property = function (key) {
                 return function (obj) {
                     return obj == null ? void 0 : obj[key];
@@ -145,12 +145,11 @@ var functions = {
                     if (o.hasOwnProperty(field)) {
                         if (field == 'nr') {
                             emit([doc._id, tagName], 1);
-                        } else if (typeof o[field] == 'object') {
-                            if (isArrayLike(o)) {
-                                emitNrParents(o[field], tagName);
-                            } else {
-                                emitNrParents(o[field], field);
-                            }
+                        } else if (typeof o[field] == 'string') {
+                        } else if (isArrayLike(o)) {
+                            emitNrParents(o[field], tagName);
+                        } else {
+                            emitNrParents(o[field], field);
                         }
                     }
                 }
