@@ -22,6 +22,50 @@ var functions = {
         },
         reduce: '_count'
     },
+    untagged_docs_with_section_tag: {
+        map: function (doc) {
+            function hasSectionTag(o) {
+                for (var f in o) {
+                    if (o.hasOwnProperty(f)) {
+                        if (f.match(/section/g)) {
+                            return true;
+                        } else {
+                            if (typeof o[f] == 'object' &&
+                                hasSectionTag(o[f])) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            if (doc.corpus == 'Rechtspraak.nl') {
+                if (!doc.useForCrf) {
+                    var hasS = hasSectionTag(doc.simplifiedContent);
+                    var d = new Date(doc['date']);
+                    emit(
+                        [
+                            hasS,
+                            d.getFullYear(),
+                            d.getMonth() + 1,
+                            d.getDate()
+                        ], 1
+                    );
+                    //emit(
+                    //    [
+                    //        !isMarkedUp,
+                    //        d.getFullYear(),
+                    //        d.getMonth() + 1,
+                    //        d.getDate()
+                    //    ], 0
+                    //);
+                }
+            }
+        }
+        ,
+        reduce: "_sum"
+    },
     docs_with_section_tag: {
         map: function (doc) {
             function hasSectionTag(o) {
@@ -179,11 +223,37 @@ var functions = {
     crfTrainTokens: {
         map: function (doc) {
             if (doc.useForCrf == "train") {
-                //emit(doc, 1);
+                var crfTokenizer = require('lib/crfTokenizer');
+                var crfTokens = crfTokenizer.tokenize(require('lib/natural').WordPunctTokenizer(), doc.simplifiedContent);
+                for (var i in crfTokens) {
+                    if (crfTokens.hasOwnProperty(i)) {
+                        emit([doc._id, i], crfTokens[i]);
+                    }
+                }
             }
         }
     },
+    parentsOfNr: {
+        map: function (doc, tagName) {
+            var emitNrParents = function (o) {
+                for (var field in o) {
+                    if (o.hasOwnProperty(field)) {
+                        if (field == 'nr') {
+                            emit([doc._id, tagName], 1);
+                        } else if (typeof o[field] == 'object') {
+                            //TODO is arraylike
+                            emitNrParents(o[field], field);
+                        }
+                    }
+                }
+            };
 
+            if (doc.simplifiedContent) {
+                emitNrParents(doc.simplifiedContent);
+            }
+        },
+        reduce: "_sum"
+    },
     docs_with_image: {
         map: function (doc) {
             function hasAfbeelding(obj) {

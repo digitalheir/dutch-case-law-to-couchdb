@@ -24,7 +24,9 @@ var query_dev = {
                 }
             });
             while (row = getRow()) {
-                send(row.value);
+                var token = row.value;
+                var label = token.tag.match(/^(nr|title)$/) ? token.tag : "out";
+                send(label + "\n");
             }
         },
         "crf-test": function (head, req) {
