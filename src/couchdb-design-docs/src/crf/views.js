@@ -144,7 +144,7 @@ var functions = {
                 for (var field in o) {
                     if (o.hasOwnProperty(field)) {
                         if (field == 'nr') {
-                            emit([doc._id, tagName], 1);
+                            emit([tagName,doc._id], 1);
                         } else if (typeof o[field] == 'string') {
                         } else if (isArrayLike(o)) {
                             emitNrParents(o[field], tagName);
