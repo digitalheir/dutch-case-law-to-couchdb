@@ -1,3 +1,15 @@
+var property = function (key) {
+    return function (obj) {
+        return obj == null ? void 0 : obj[key];
+    };
+};
+var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+var getLength = property('length');
+var isArrayLike = function (collection) {
+    var length = getLength(collection);
+    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+};
+
 module.exports = {
     /**
      *
@@ -5,6 +17,9 @@ module.exports = {
      * @param content object with arbitrarily deeply nested strings, keyed by their tag name
      */
     tokenize: function (tokenizer, content) {
+        if (!tokenizer) {
+            throw new Error("Tokenizer should exist");
+        }
         var tokens = [];
 
         //var tokens = tokenizer.tokenize(doc.simplifiedContent);
@@ -15,16 +30,24 @@ module.exports = {
                 var o = content[tagName];
                 if (typeof o == 'string') {
                     var stringTokens = tokenizer.tokenize(o);
-                    for (var tokenI; tokenI < stringTokens.length; tokenI++) {
+                    for (var tokenI = 0; tokenI < stringTokens.length; tokenI++) {
                         var str = stringTokens[tokenI];
                         tokens.push({
+                            "string": str,
                             "tag": tagName,
-                            "isNumber": !!str.match(/[0-9\.]+/),
-                            "isCapitalized": !!str.match(/^\p{Lu}/) //Match uppercase character
+                            "isPeriod": !!str.match(/^[\.]+$/),
+                            "isNumber": !!str.match(/^[0-9\.]+$/),
+                            "isCapitalized": !!str.match(/^[A-Z]/) //Match uppercase character
                         });
                     }
+                } else if (isArrayLike(o)) {
+                    for (var i = 0; i < o.length; i++) {
+                        var ob = {};
+                        ob[tagName] = o[i];
+                        tokens.push.apply(tokens, this.tokenize(tokenizer, ob));
+                    }
                 } else {
-                    tokens.push.apply(tokens, this.tokenize(o));
+                    tokens.push.apply(tokens, this.tokenize(tokenizer, o));
                 }
             }
         }

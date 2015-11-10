@@ -1,4 +1,5 @@
 var stringifyFunctions = require('../stringifyFunctions');
+var fs = require('fs');
 
 
 //console.log(nat);
@@ -80,7 +81,7 @@ var functions = {
                 }
             }
 
-            function getTitles(o) {
+            function getNrs(o) {
                 var titles = [];
                 for (var tagName in o) {
                     if (o.hasOwnProperty(tagName)) {
@@ -89,7 +90,7 @@ var functions = {
                         } else {
                             if (typeof o[tagName] == 'object') {
                                 // Append titles for inner object to titles object
-                                titles.push.apply(titles, getTitles(o[tagName]));
+                                titles.push.apply(titles, getNrs(o[tagName]));
                             }
                         }
                     }
@@ -98,9 +99,9 @@ var functions = {
             }
 
             if (doc.simplifiedContent) {
-                var tts = getTitles(doc.simplifiedContent);
+                var tts = getNrs(doc.simplifiedContent);
                 for (var i = 0; i < tts.length; i++) {
-                    emit(tts[i].toLowerCase(), 1);
+                    emit([tts[i], doc._id].toLowerCase(), 1);
                 }
             }
         },
@@ -127,7 +128,15 @@ var functions = {
                 for (var tagName in o) {
                     if (o.hasOwnProperty(tagName)) {
                         if (tagName == "title") {
-                            titles.push(getString(o[tagName]));
+                            if (typeof o == 'string') {
+                                titles.push(o);
+                            } else {
+                                for (var i = 0; i < o.length; i++) {
+                                    if (typeof o[i] == 'string') {
+                                        titles.push(o[i]);
+                                    }
+                                }
+                            }
                         } else {
                             if (typeof o[tagName] == 'object') {
                                 // Append titles for inner object to titles object
@@ -142,21 +151,26 @@ var functions = {
             if (doc.simplifiedContent) {
                 var tts = getTitles(doc.simplifiedContent);
                 for (var i = 0; i < tts.length; i++) {
-                    emit(tts[i].toLowerCase(), 1);
+                    emit([tts[i].toLowerCase(), doc._id], 1);
                 }
             }
         },
         reduce: "_sum"
     },
+    lib: {
+        "natural": fs.readFileSync('./natural.min.js', {encoding: 'utf-8'}),
+        "crfTokenizer": fs.readFileSync('./crf_tokenizer.min.js', {encoding: 'utf-8'})
+    },
     crfTestTokens: {
         map: function (doc) {
             if (doc.useForCrf == "test") {
-                var crfTokenizer = require('lib/crfTokenizer');
-                var crfTokens = crfTokenizer.tokenize(require('lib/natural').WordPunctTokenizer(), doc.simplifiedContent);
-                for (var i in crfTokens) {
-                    if (crfTokens.hasOwnProperty(i)) {
-                        emit([doc._id, i], crfTokens[i]);
-                    }
+                var crfTokenizer = require('views/lib/crfTokenizer');
+                var nat = require('views/lib/natural');
+                var tokenizer = new nat.WordPunctTokenizer();
+                
+                var crfTokens = crfTokenizer.tokenize(tokenizer, doc.simplifiedContent);
+                for (var i = 0; i < crfTokens.length; i++) {
+                    emit([doc._id, i], crfTokens[i]);
                 }
 
             }

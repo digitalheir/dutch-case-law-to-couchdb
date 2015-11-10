@@ -1,73 +1,15 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.naturaljs = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     module.exports = require('./lib/natural/');
 
 
 },{"./lib/natural/":9}],2:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Rob Ellis, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var _ = require("underscore")._;
 
-    /*
-     Sentences Analizer Class
-     From http://www.writingcentre.uottawa.ca/hypergrammar/sntpurps.html
 
-     Take a POS input and analyse it for
-     - Type of Sentense
-     - Interrogative
-     - Tag Questions
-     -
-     - Declarative
-     - Exclamatory
-     - Imperative
-
-     - Parts of a Sentense
-     - Subject
-     - Predicate
-
-     - Show Preposition Phrases
-     */
 
     var Sentences = function(pos, callback) {
         this.posObj = pos;
@@ -203,27 +145,7 @@
     module.exports = Sentences;
 
 },{"underscore":122}],3:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var util = require('util'),
         Classifier = require('./classifier'),
@@ -262,27 +184,7 @@
     module.exports = BayesClassifier;
 
 },{"./classifier":4,"apparatus":92,"util":135}],4:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var PorterStemmer = require('../stemmers/porter_stemmer'),
         util = require('util'),
@@ -432,27 +334,7 @@
     module.exports = Classifier;
 
 },{"../stemmers/porter_stemmer":30,"events":129,"fs":123,"util":135}],5:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var util = require('util'),
         Classifier = require('./classifier'),
@@ -493,27 +375,7 @@
     module.exports = LogisticRegressionClassifier;
 
 },{"./classifier":4,"apparatus":92,"util":135}],6:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, John Crepezzi, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // Get all of the pairs of letters for a string
     var letterPairs = function (str) {
@@ -574,29 +436,7 @@
     module.exports = compare;
 
 },{}],7:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Adam Phillabaum, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     Unless otherwise stated by a specific section of code
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // Computes the Jaro distance between two string -- intrepreted from:
 // http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance
@@ -692,27 +532,7 @@
     module.exports = JaroWinklerDistance;
 
 },{}],8:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Sid Nallu, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     /*
      * contribution by sidred123
@@ -762,27 +582,7 @@
     module.exports = LevenshteinDistance;
 
 },{}],9:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     exports.SoundEx = require('./phonetics/soundex');
     exports.Metaphone = require('./phonetics/metaphone');
@@ -842,27 +642,7 @@
     exports.transliterate_ja = require('./transliterators/ja');
 
 },{"./analyzers/sentence_analyzer":2,"./classifiers/bayes_classifier":3,"./classifiers/logistic_regression_classifier":5,"./distance/dice_coefficient":6,"./distance/jaro-winkler_distance":7,"./distance/levenshtein_distance":8,"./inflectors/count_inflector":10,"./inflectors/fr/noun_inflector":12,"./inflectors/ja/noun_inflector":13,"./inflectors/noun_inflector":14,"./inflectors/present_verb_inflector":15,"./ngrams/ngrams":17,"./ngrams/ngrams_zh":18,"./normalizers/normalizer":19,"./normalizers/normalizer_ja":20,"./normalizers/remove_diacritics":22,"./phonetics/dm_soundex":23,"./phonetics/double_metaphone":24,"./phonetics/metaphone":25,"./phonetics/soundex":27,"./stemmers/lancaster_stemmer":29,"./stemmers/porter_stemmer":30,"./stemmers/porter_stemmer_es":31,"./stemmers/porter_stemmer_fa":32,"./stemmers/porter_stemmer_fr":33,"./stemmers/porter_stemmer_it":34,"./stemmers/porter_stemmer_no":35,"./stemmers/porter_stemmer_pt":36,"./stemmers/porter_stemmer_ru":37,"./stemmers/stemmer_fr":41,"./stemmers/stemmer_ja":43,"./stemmers/stemmer_pl":45,"./tfidf/tfidf":49,"./tokenizers/aggressive_tokenizer":50,"./tokenizers/aggressive_tokenizer_es":51,"./tokenizers/aggressive_tokenizer_fa":52,"./tokenizers/aggressive_tokenizer_fr":53,"./tokenizers/aggressive_tokenizer_it":54,"./tokenizers/aggressive_tokenizer_nl":55,"./tokenizers/aggressive_tokenizer_no":56,"./tokenizers/aggressive_tokenizer_pl":57,"./tokenizers/aggressive_tokenizer_pt":58,"./tokenizers/aggressive_tokenizer_ru":59,"./tokenizers/regexp_tokenizer":60,"./tokenizers/tokenizer_case":62,"./tokenizers/tokenizer_ja":63,"./tokenizers/treebank_word_tokenizer":64,"./transliterators/ja":65,"./trie/trie":66,"./util/edge_weighted_digraph":68,"./util/longest_path_tree":69,"./util/shortest_path_tree":70,"./util/stopwords":71,"./wordnet/wordnet":85}],10:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     function nthForm(i) {
         var teenth = (i % 100);
@@ -898,27 +678,7 @@
     module.exports = CountInflector;
 
 },{}],11:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var FormSet = function() {
         this.regularForms = [];
@@ -928,37 +688,7 @@
     module.exports = FormSet;
 
 },{}],12:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Guillaume Marty
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * A noun inflector for French.
-     * Compiled from:
-     * \@see http://fr.wiktionary.org/wiki/Annexe:Pluriels_irr%C3%A9guliers_en_fran%C3%A7ais
-     * \@see http://fr.wikipedia.org/wiki/Pluriels_irr%C3%A9guliers_en_fran%C3%A7ais
-     *
-     * \@todo Take compounded noun into account (eaux-fortes, pique-nique...).
-     * \@todo General note: French also requires AdjectiveInflector (femininize...).
-     */
 
     var SingularPluralInflector = require('../singular_plural_inflector'),
         util = require('util'),
@@ -978,9 +708,7 @@
 
 
 
-    /**
-     * @constructor
-     */
+
     var NounInflector = function() {
         // Ambiguous a.k.a. invariant.
         // \@todo Expand this list to be as comprehensive as possible.
@@ -1165,46 +893,7 @@
     module.exports = NounInflector;
 
 },{"../form_set":11,"../singular_plural_inflector":16,"util":135}],13:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Guillaume Marty
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * A noun inflector for Japanese.
-     * Compiled from several sources including:
-     * \@see http://answers.yahoo.com/question/index?qid=20080528201740AASBWy6
-     * \@see http://www.excite.co.jp/dictionary/english_japanese/
-     *
-     * This script assumes input is normalized using normalizer_ja().
-     * Pluralizing Japanese has a very limited interest.
-     * Japanese don't usually distinct plural from singular, so even a word looking
-     * like a singular might actually be a plural.
-     *
-     * Singularization of nouns ending by -tachi or -ra is achieved using a
-     * comprehensive black list, while nouns ending by -domo or -gata use a white
-     * list because there are too many exceptions.
-     *
-     * \@todo Singularize nouns ending by -ら, but there are too many exceptions.
-     * \@todo Expand the list of common plurals ending by -domo and -gata.
-     */
 
     var SingularPluralInflector = require('../singular_plural_inflector'),
         util = require('util'),
@@ -1224,9 +913,7 @@
 
 
 
-    /**
-     * @constructor
-     */
+
     var NounInflector = function() {
         // Ambiguous a.k.a. invariant.
         this.ambiguous = [
@@ -1254,12 +941,7 @@
         this.addIrregular('所', '所所');
         this.addIrregular('隅', '隅隅');
 
-        /**
-         * Notes:
-         * -たち exceptions: いたち, おいたち, ついたち, かたち, かおかたち, なりかたち, いでたち, はたち, からたち, なりたち
-         * -達 exceptions: 伊達, 男伊達, 栄達, 上意下達, 熟達, 上達, 下意上達, 先達, 送達, 速達, 即日速達, 書留速達, 調達, 通達, 伝達, 到達, 配達, 牛乳配達, 新聞配達, 無料配達, 四通八達, 発達, 未発達, 御用達, 宮内庁御用達, 練達, 闊達
-         * -等 exceptions: 一等, 下等, 何等, 均等, 勲等, 高等, 三等, 初等, 上等, 親等, 二親等, 数等, 対等, 中等, 同等, 特等, 二等, 品等, 不等, 平等, 悪平等, 男女平等, 不平等, 優等, 劣等
-         */
+
 
             // Pluralize
         this.pluralForms.regularForms.push([/^(.+)$/i, '$1たち']);
@@ -1302,27 +984,7 @@
     module.exports = NounInflector;
 
 },{"../form_set":11,"../singular_plural_inflector":16,"util":135}],14:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var SingularPluralInflector = require('./singular_plural_inflector'),
         util = require('util'),
@@ -1409,27 +1071,7 @@
     module.exports = NounInflector;
 
 },{"./form_set":11,"./singular_plural_inflector":16,"util":135}],15:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var util = require('util'),
         SingularPluralInflector = require('./singular_plural_inflector'),
@@ -1486,27 +1128,7 @@
     module.exports = VerbInflector;
 
 },{"./form_set":11,"./singular_plural_inflector":16,"util":135}],16:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var TenseInflector = function () {
     };
@@ -1597,27 +1219,7 @@
     module.exports = TenseInflector;
 
 },{}],17:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Rob Ellis, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var _ = require("underscore")._,
         Tokenizer = require('../tokenizers/regexp_tokenizer').WordTokenizer,
@@ -1690,27 +1292,7 @@
 
 
 },{"../tokenizers/regexp_tokenizer":60,"underscore":122}],18:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Lee Wenzhu
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var _ = require("underscore")._;
 
@@ -1775,35 +1357,9 @@
 
 
 },{"underscore":122}],19:[function(require,module,exports){
-    /*
-     Copyright (c) 2013, Kenneth Koch
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
 
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
 
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * The english normalizer will create a string in which all contractions are expanded to their
-     * full meaning (i.e. "we'll" becomes "we will").
-     *
-     * It currently works off a conversion table and falls back to a set of rules.
-     * Since it is applied first, the conversion table provides an "override" for the rules.
-     **/
     var replacer = require('../util/utils').replacer;
 
     var conversionTable = {
@@ -1872,51 +1428,9 @@
 
 
 },{"../util/utils":82}],20:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Guillaume Marty
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
 
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
 
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * Normalize Japanese inputs and expose function to perform several conversions.
-     *
-     * Note: The space character is treated like a roman character as it usually
-     *   has the same width as them in Japanese texts.
-     *
-     * \@todo Replace characters range from ㈠ to ㉃, ㊀ to ㊰ and ㇰ to ㇿ.
-     * \@todo Lazy initializations of conversionTables and converters.
-     * \@todo Would fixHalfwidthKana be useful?
-     *
-     * Descriptions of functions exposed:
-     * normalizeJapanese 「全角」英字・数字を「半角」、「半角」記・カタカナを「全角」に変換
-     * converters.fullwidthToHalfwidth.alphabet    「全角」英字を「半角」に変換
-     * converters.halfwidthToFullwidth.alphabet    「半角」英字を「全角」に変換
-     * converters.fullwidthToHalfwidth.numbers     「全角」数字を「半角」に変換
-     * converters.halfwidthToFullwidth.numbers     「半角」数字を「全角」に変換 「全角」スペースを「半角」
-     * converters.fullwidthToHalfwidth.punctuation 「全角」記号を「半角」に変換 「半角」スペースを「全角」
-     * converters.halfwidthToFullwidth.punctuation 「半角」記号を「全角」に変換
-     * converters.fullwidthToHalfwidth.katakana    「全角カタカナ」を「半角カタカナ」に変換
-     * converters.halfwidthToFullwidth.katakana    「半角カタカナ」を「全角カタカナ」に変換
-     * converters.hiraganaToKatakana               「カタカナ」を「ひらがな」に変換
-     * converters.katakanaToHiragana               「ひらがな」を「カタカナ」に変換
-     */
 
     var flip = require('../util/utils.js').flip;
     var merge = require('../util/utils.js').merge;
@@ -2420,14 +1934,6 @@
     var fixCompositeSymbols = replacer(fixCompositeSymbolsTable);
 
 
-    /**
-     * Convert hiragana to fullwidth katakana.
-     * According to http://jsperf.com/converting-japanese, these implementations are
-     * faster than using lookup tables.
-     *
-     * @param {string} str A string.
-     * @return {string} A string not containing hiragana.
-     */
     converters.hiraganaToKatakana = function(str) {
         str = converters.halfwidthToFullwidth.katakana(str);
         str = converters.fixFullwidthKana(str);
@@ -2444,12 +1950,7 @@
     };
 
 
-    /**
-     * Convert katakana to hiragana.
-     *
-     * @param {string} str A string.
-     * @return {string} A string not containing katakana.
-     */
+
     converters.katakanaToHiragana = function(str) {
         str = converters.halfwidthToFullwidth.katakana(str);
         str = converters.fixFullwidthKana(str);
@@ -2466,19 +1967,7 @@
     };
 
 
-    /**
-     * Fix kana and apply the following processes;
-     * * Replace repeat characters
-     * * Alphabet to halfwidth
-     * * Numbers to halfwidth
-     * * Punctuation to fullwidth
-     * * Katakana to fullwidth
-     * * Fix fullwidth kana
-     * * Replace composite symbols
-     *
-     * @param {string} str
-     * @return {string}
-     */
+
     var normalize_ja = function(str) {
         // Replace repeat characters.
         str = str
@@ -2498,32 +1987,9 @@
     exports.converters = converters;
 
 },{"../util/utils":82,"../util/utils.js":82}],21:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Kristoffer Brabrand
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
 
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
 
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * Remove commonly used diacritic marks from a string as these
-     * are not used in a consistent manner. Leave only ä, ö, ü.
-     */
     var remove_diacritics = function(text) {
         text = text.replace('à', 'a');
         text = text.replace('À', 'A');
@@ -2558,32 +2024,8 @@
 // export the relevant stuff.
     exports.remove_diacritics = remove_diacritics;
 },{}],22:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Alexy Maslennikov
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
 
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * Script to remove diacritics. Original source was taken from
-     * http://lehelk.com/2011/05/06/script-to-remove-diacritics/
-     */
     var diacriticsRemovalMap = [
         {'base':'A', 'letters':/[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g},
         {'base':'AA','letters':/[\uA732]/g},
@@ -2681,27 +2123,7 @@
     };
 
 },{}],23:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Alexy Maslenninkov
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     /*
      * Daitch-Mokotoff Soundex Coding
@@ -2750,17 +2172,7 @@
      * For more info, see http://www.jewishgen.org/InfoFiles/soundex.html
      */
 
-    /**
-     * D-M transformation table in the form of finite-state machine.
-     * Every element of the table having member with zero index represents
-     * legal FSM state; every non-zero key is the transition rule.
-     *
-     * Every legal state comprises tree values chosen according to the position
-     * of the letter combination in the word:
-     *   0: start of a word;
-     *   1: before a vowel;
-     *   2: any other situation.
-     */
+
     var codes = {
         A: {
             0: [0, -1, -1],
@@ -2912,9 +2324,7 @@
     }
 
 
-    /**
-     * Pad right with zeroes or cut excess symbols to fit length
-     */
+
     function normalizeLength(token, length) {
         length = length || 6;
         if (token.length < length) {
@@ -2930,27 +2340,7 @@
 
 
 },{"./phonetic":26}],24:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Phonetic = require('./phonetic');
 
@@ -3171,7 +2561,7 @@
                 } else
                     add('J', 'H');
             } else {
-                if(pos == 0/* && !jose*/) {
+                if(pos == 0) {
                     addSecondary('J', 'A');
                 } else if(isVowel(token[pos - 1]) && !slavoGermanic
                     && (token[pos + 1] == 'A' || token[pos + 1] == 'O')) {
@@ -3443,27 +2833,7 @@
     DoubleMetaphone.isVowel = isVowel;
 
 },{"./phonetic":26}],25:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Phonetic = require('./phonetic');
 
@@ -3637,27 +3007,7 @@
     Metaphone.dropVowels = dropVowels;
 
 },{"./phonetic":26}],26:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer'),
@@ -3693,27 +3043,7 @@
     };
 
 },{"../tokenizers/aggressive_tokenizer":50,"../util/stopwords":71}],27:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Phonetic = require('./phonetic');
 
@@ -3779,27 +3109,7 @@
     SoundEx.padRight0 = padRight0;
 
 },{"./phonetic":26}],28:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     exports.rules = {
         "a": [
@@ -4571,27 +3881,7 @@
 
 
 },{}],29:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Stemmer = require('./stemmer');
     var ruleTable = require('./lancaster_rules').rules;
@@ -4647,27 +3937,7 @@
         return applyRuleSection(token.toLowerCase(), true);
     }
 },{"./lancaster_rules":28,"./stemmer":38}],30:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Stemmer = require('./stemmer');
 
@@ -4882,27 +4152,7 @@
     PorterStemmer.step5b = step5b;
 
 },{"./stemmer":38}],31:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, David Przybilla, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Stemmer = require('./stemmer_es');
 
@@ -5105,28 +4355,7 @@
     };
 
 },{"./stemmer_es":39}],32:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
-     Farsi Porter Stemmer by Fardin Koochaki <me@fardinak.com>
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Stemmer = require('./stemmer_fa');
 
@@ -5141,27 +4370,7 @@
 },{"./stemmer_fa":40}],33:[function(require,module,exports){
     'use strict';
 
-    /*
-     Copyright (c) 2014, Ismaël Héry
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     /*
      * Spec for the French Porter Stemmer can be found at:
@@ -5181,11 +4390,7 @@
     PorterStemmer.regions = regions;
     PorterStemmer.endsinArr = endsinArr;
 
-    /**
-     * Stem a word thanks to Porter Stemmer rules
-     * @param  {String} token Word to be stemmed
-     * @return {String}       Stemmed word
-     */
+
     function stem(token) {
         token = prelude(token.toLowerCase());
 
@@ -5407,11 +4612,7 @@
 
     };
 
-    /**
-     * Compute r1, r2, rv regions as required by french porter stemmer algorithm
-     * @param  {String} token Word to compute regions on
-     * @return {Object}       Regions r1, r2, rv as offsets from the begining of the word
-     */
+
     function regions(token) {
         var r1, r2, rv, len;
         var i;
@@ -5457,11 +4658,7 @@
         };
     };
 
-    /**
-     * Pre-process/prepare words as required by french porter stemmer algorithm
-     * @param  {String} token Word to be prepared
-     * @return {String}       Prepared word
-     */
+
     function prelude(token) {
         token = token.toLowerCase();
 
@@ -5490,12 +4687,7 @@
         return result;
     };
 
-    /**
-     * Return longest matching suffixes for a token or '' if no suffix match
-     * @param  {String} token    Word to find matching suffix
-     * @param  {Array} suffixes  Array of suffixes to test matching
-     * @return {String}          Longest found matching suffix or ''
-     */
+
     function endsinArr(token, suffixes) {
         var i, longest = '';
         for (i = 0; i < suffixes.length; i++) {
@@ -5517,27 +4709,7 @@
         return (token.slice(-suffix.length) == suffix);
     };
 },{"./stemmer_fr":41}],34:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Leonardo Fenu, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Stemmer = require('./stemmer_it');
 
@@ -5751,27 +4923,7 @@
 
     };
 },{"./stemmer_it":42}],35:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Kristoffer Brabrand
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Stemmer = require('./stemmer_no');
 
@@ -5907,27 +5059,7 @@
     PorterStemmer.step2  = step2;
     PorterStemmer.step3  = step3;
 },{"./stemmer_no":44}],36:[function(require,module,exports){
-    /*
-     Copyright (c) 2015, Luís Rodrigues
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     module.exports = (function () {
         'use strict';
@@ -5936,14 +5068,7 @@
             Token         = require('./token'),
             PorterStemmer = new Stemmer();
 
-        /**
-         * Marks a region after the first non-vowel following a vowel, or the
-         * null region at the end of the word if there is no such non-vowel.
-         *
-         * @param {Object} token Token to stem.
-         * @param {Number} start Start index (defaults to 0).
-         * @param {Number}       Region start index.
-         */
+
         var markRegionN = function (start) {
             var index = start || 0,
                 length = this.string.length,
@@ -5959,12 +5084,7 @@
             return region;
         };
 
-        /**
-         * Mark RV.
-         *
-         * @param  {Object} token Token to stem.
-         * @return {Number}       Region start index.
-         */
+
         var markRegionV = function () {
             var rv = this.string.length;
 
@@ -5983,28 +5103,14 @@
             return rv;
         };
 
-        /**
-         * Prelude.
-         *
-         * Nasalised vowel forms should be treated as a vowel followed by a consonant.
-         *
-         * @param  {String} token Word to stem.
-         * @return {String}       Stemmed token.
-         */
+
         function prelude (token) {
             return token
                 .replaceAll('ã', 'a~')
                 .replaceAll('õ', 'o~');
         }
 
-        /**
-         * Step 1: Standard suffix removal.
-         *
-         * This step should always be performed.
-         *
-         * @param  {Token} token Word to stem.
-         * @return {Token}       Stemmed token.
-         */
+
         function standardSuffix (token) {
 
             token.replaceSuffixInRegion([
@@ -6054,14 +5160,7 @@
             return token;
         }
 
-        /**
-         * Step 2: Verb suffix removal.
-         *
-         * Perform this step if no ending was removed in step 1.
-         *
-         * @param  {Token} token   Token to stem.
-         * @return {Token}         Stemmed token.
-         */
+
         function verbSuffix (token) {
 
             token.replaceSuffixInRegion([
@@ -6091,14 +5190,7 @@
             return token;
         }
 
-        /**
-         * Step 3: Delete suffix i.
-         *
-         * Perform this step if the word was changed, in RV and preceded by c.
-         *
-         * @param  {Token} token   Token to stem.
-         * @return {Token}         Stemmed token.
-         */
+
         function iPrecededByCSuffix (token) {
 
             if (token.hasSuffix('ci')) {
@@ -6108,14 +5200,7 @@
             return token;
         }
 
-        /**
-         * Step 4: Residual suffix.
-         *
-         * Perform this step if steps 1 and 2 did not alter the word.
-         *
-         * @param  {Token} token Token to stem.
-         * @return {Token}       Stemmed token.
-         */
+
         function residualSuffix (token) {
 
             token.replaceSuffixInRegion(['os', 'a', 'i', 'o', 'á', 'í', 'ó'], '', 'rv');
@@ -6123,14 +5208,7 @@
             return token;
         }
 
-        /**
-         * Step 5: Residual form.
-         *
-         * This step should always be performed.
-         *
-         * @param  {Token} token Token to stem.
-         * @return {Token}       Stemmed token.
-         */
+
         function residualForm (token) {
 
             var tokenString = token.string;
@@ -6152,26 +5230,14 @@
             return token;
         }
 
-        /**
-         * Postlude.
-         *
-         * Turns a~, o~ back into ã, õ.
-         *
-         * @param  {String} token Word to stem.
-         * @return {String}       Stemmed token.
-         */
+
         function postlude (token) {
             return token
                 .replaceAll('a~', 'ã')
                 .replaceAll('o~', 'õ');
         }
 
-        /**
-         * Stems a word using a Porter stemmer algorithm.
-         *
-         * @param  {String} word Word to stem.
-         * @return {String}      Stemmed token.
-         */
+
         PorterStemmer.stem = function (word) {
             var token = new Token(word.toLowerCase()),
                 original;
@@ -6211,27 +5277,7 @@
     })();
 
 },{"./stemmer_pt":46,"./token":48}],37:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Polyakov Vladimir, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Stemmer = require('./stemmer_ru');
 
@@ -6364,27 +5410,7 @@
     };
 
 },{"./stemmer_ru":47}],38:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer');
@@ -6437,27 +5463,7 @@
     }
 
 },{"../tokenizers/aggressive_tokenizer":50,"../util/stopwords":71}],39:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, David Przybilla, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords_es');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer_es');
@@ -6497,28 +5503,7 @@
     }
 
 },{"../tokenizers/aggressive_tokenizer_es":51,"../util/stopwords_es":72}],40:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
-     Farsi Stemmer by Fardin Koochaki <me@fardinak.com>
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords_fa');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer_fa');
@@ -6553,27 +5538,7 @@
     }
 
 },{"../tokenizers/aggressive_tokenizer_fa":52,"../util/stopwords_fa":73}],41:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Ismaël Héry
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords_fr');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer_fr');
@@ -6650,59 +5615,20 @@
         };
     }
 },{"../tokenizers/aggressive_tokenizer_it":54,"../util/stopwords_it":75}],43:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Guillaume Marty
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
 
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * A very basic stemmer that performs the following steps:
-     * * Stem katakana.
-     * Inspired by:
-     * http://svn.apache.org/repos/asf/lucene/dev/trunk/lucene/analysis/kuromoji/src/java/org/apache/lucene/analysis/ja/JapaneseKatakanaStemFilter.java
-     *
-     * This script assumes input is normalized using normalizer_ja().
-     *
-     * \@todo Use .bind() in StemmerJa.prototype.attach().
-     */
 
     var Tokenizer = require('../tokenizers/tokenizer_ja');
     var stopwords = require('../util/stopwords_ja');
 
 
 
-    /**
-     * @constructor
-     */
+
     var StemmerJa = function() {
     };
 
 
-    /**
-     * Tokenize and stem a text.
-     * Stop words are excluded except if the second argument is true.
-     *
-     * @param {string} text
-     * @param {boolean} keepStops Whether to keep stop words from the output or not.
-     * @return {Array.<string>}
-     */
+
     StemmerJa.prototype.tokenizeAndStem = function(text, keepStops) {
         var self = this;
         var stemmedTokens = [];
@@ -6729,12 +5655,7 @@
     };
 
 
-    /**
-     * Stem a term.
-     *
-     * @param {string} token
-     * @return {string}
-     */
+
     StemmerJa.prototype.stem = function(token) {
         token = this.stemKatakana(token);
 
@@ -6742,13 +5663,7 @@
     };
 
 
-    /**
-     * Remove the final prolonged sound mark on katakana if length is superior to
-     * a threshold.
-     *
-     * @param {string} token A katakana string to stem.
-     * @return {string} A katakana string stemmed.
-     */
+
     StemmerJa.prototype.stemKatakana = function(token) {
         var HIRAGANA_KATAKANA_PROLONGED_SOUND_MARK = 'ー';
         var DEFAULT_MINIMUM_LENGTH = 4;
@@ -6762,14 +5677,6 @@
     };
 
 
-    /**
-     * Is a string made of fullwidth katakana only?
-     * This implementation is the fastest I know:
-     * http://jsperf.com/string-contain-katakana-only/2
-     *
-     * @param {string} str A string.
-     * @return {boolean} True if the string has katakana only.
-     */
     StemmerJa.prototype.isKatakana = function(str) {
         return !!str.match(/^[゠-ヿ]+$/);
     };
@@ -6790,27 +5697,7 @@
     module.exports = StemmerJa;
 
 },{"../tokenizers/tokenizer_ja":63,"../util/stopwords_ja":76}],44:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Kristoffer Brabrand
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords_no');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer_no');
@@ -6853,27 +5740,7 @@
     }
 
 },{"../tokenizers/aggressive_tokenizer_no":56,"../util/stopwords_no":77}],45:[function(require,module,exports){
-    /*
-     Copyright (c) 2013, Paweł Łaskarzewski
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords_pl');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer_pl');
@@ -6913,27 +5780,7 @@
     }
 
 },{"../tokenizers/aggressive_tokenizer_pl":57,"../util/stopwords_pl":78}],46:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Ismaël Héry
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     module.exports = function () {
         'use strict';
@@ -6980,27 +5827,7 @@
     };
 
 },{"../tokenizers/aggressive_tokenizer_pt":58,"../util/stopwords_pt":79}],47:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Polyakov Vladimir, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var stopwords = require('../util/stopwords_ru');
     var Tokenizer = require('../tokenizers/aggressive_tokenizer_ru');
@@ -7040,36 +5867,12 @@
     }
 
 },{"../tokenizers/aggressive_tokenizer_ru":59,"../util/stopwords_ru":80}],48:[function(require,module,exports){
-    /*
-     Copyright (c) 2015, Luís Rodrigues
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     module.exports = (function () {
         'use strict';
 
-        /**
-         * Stemmer token constructor.
-         *
-         * @param {String} string Token string.
-         */
+
         var Token = function (string) {
             this.vowels   = '';
             this.regions  = {};
@@ -7077,27 +5880,13 @@
             this.original = string;
         }
 
-        /**
-         * Set vowels.
-         *
-         * @param  {String|Array} vowels List of vowels.
-         * @return {Token}               Token instance.
-         */
+
         Token.prototype.usingVowels = function (vowels) {
             this.vowels = vowels;
             return this;
         };
 
-        /**
-         * Marks a region by defining its starting index or providing a callback
-         * function that does.
-         *
-         * @param  {String}       region   Region name.
-         * @param  {Array|Number} args     Callback arguments or region start index.
-         * @param  {Function}     callback Function that determines the start index (optional).
-         * @param  {Object}       context  Callback context (optional, defaults to this).
-         * @return {Token}                 Token instance.
-         */
+
         Token.prototype.markRegion = function (region, args, callback, context) {
             if (typeof callback === 'function') {
                 this.regions[region] = callback.apply(context || this, [].concat(args));
@@ -7109,26 +5898,13 @@
             return this;
         };
 
-        /**
-         * Replaces all instances of a string with another.
-         *
-         * @param  {String} find    String to be replaced.
-         * @param  {String} replace Replacement string.
-         * @return {Token}          Token instance.
-         */
+
         Token.prototype.replaceAll = function (find, replace) {
             this.string = this.string.split(find).join(replace);
             return this;
         };
 
-        /**
-         * Replaces the token suffix if in a region.
-         *
-         * @param  {String} suffix  Suffix to replace.
-         * @param  {String} replace Replacement string.
-         * @param  {String} region  Region name.
-         * @return {Token}          Token instance.
-         */
+
         Token.prototype.replaceSuffixInRegion = function (suffix, replace, region) {
             var suffixes = [].concat(suffix);
             for (var i = 0; i < suffixes.length; i++) {
@@ -7140,22 +5916,12 @@
             return this;
         };
 
-        /**
-         * Determines whether the token has a vowel at the provided index.
-         *
-         * @param  {Integer} index Character index.
-         * @return {Boolean}       Whether the token has a vowel at the provided index.
-         */
+
         Token.prototype.hasVowelAtIndex = function (index) {
             return this.vowels.indexOf(this.string[index]) !== -1;
         };
 
-        /**
-         * Finds the next vowel in the token.
-         *
-         * @param  {Integer} start Starting index offset.
-         * @return {Integer}       Vowel index, or the end of the string.
-         */
+
         Token.prototype.nextVowelIndex = function (start) {
             var index = (start >= 0 && start < this.string.length) ? start : this.string.length;
             while (index < this.string.length && !this.hasVowelAtIndex(index)) {
@@ -7164,12 +5930,7 @@
             return index;
         };
 
-        /**
-         * Finds the next consonant in the token.
-         *
-         * @param  {Integer} start Starting index offset.
-         * @return {Integer}       Consonant index, or the end of the string.
-         */
+
         Token.prototype.nextConsonantIndex = function (start) {
             var index = (start >= 0 && start < this.string.length) ? start : this.string.length;
             while (index < this.string.length && this.hasVowelAtIndex(index)) {
@@ -7178,23 +5939,12 @@
             return index;
         };
 
-        /**
-         * Determines whether the token has the provided suffix.
-         * @param  {String}  suffix Suffix to match.
-         * @return {Boolean}        Whether the token string ends in suffix.
-         */
+
         Token.prototype.hasSuffix = function (suffix) {
             return this.string.slice(-suffix.length) === suffix;
         };
 
-        /**
-         * Determines whether the token has the provided suffix within the specified
-         * region.
-         *
-         * @param  {String}  suffix Suffix to match.
-         * @param  {String}  region Region name.
-         * @return {Boolean}        Whether the token string ends in suffix.
-         */
+
         Token.prototype.hasSuffixInRegion = function (suffix, region) {
             var regionStart = this.regions[region] || 0,
                 suffixStart   = this.string.length - suffix.length;
@@ -7206,27 +5956,7 @@
 
 },{}],49:[function(require,module,exports){
     (function (Buffer){
-        /*
-         Copyright (c) 2011, Rob Ellis, Chris Umbel
 
-         Permission is hereby granted, free of charge, to any person obtaining a copy
-         of this software and associated documentation files (the "Software"), to deal
-         in the Software without restriction, including without limitation the rights
-         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-         copies of the Software, and to permit persons to whom the Software is
-         furnished to do so, subject to the following conditions:
-
-         The above copyright notice and this permission notice shall be included in
-         all copies or substantial portions of the Software.
-
-         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-         THE SOFTWARE.
-         */
 
         var _ = require("underscore")._,
             Tokenizer = require('../tokenizers/regexp_tokenizer').WordTokenizer,
@@ -7402,27 +6132,7 @@
 
     }).call(this,require("buffer").Buffer)
 },{"../tokenizers/regexp_tokenizer":60,"../util/stopwords":71,"buffer":125,"fs":123,"underscore":122}],50:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7440,27 +6150,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],51:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel,David Przybilla
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7478,28 +6168,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],52:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
-     Farsi Aggressive Tokenizer by Fardin Koochaki <me@fardinak.com>
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7528,27 +6197,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],53:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7566,27 +6215,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],54:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel,David Przybilla
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7604,27 +6233,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],55:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel, Martijn de Boer
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7642,27 +6251,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],56:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Kristoffer Brabrand
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         normalizer = require('../normalizers/normalizer_no'),
@@ -7683,27 +6272,7 @@
     };
 
 },{"../normalizers/normalizer_no":21,"./tokenizer":61,"util":135}],57:[function(require,module,exports){
-    /*
-     Copyright (c) 2013, Paweł Łaskarzewski
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7730,27 +6299,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],58:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel,David Przybilla
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7772,27 +6321,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],59:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util');
@@ -7819,27 +6348,7 @@
     };
 
 },{"./tokenizer":61,"util":135}],60:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Rob Ellis, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require("util"),
@@ -7874,14 +6383,7 @@
 
     exports.RegexpTokenizer = RegexpTokenizer;
 
-    /***
-     * A tokenizer that divides a text into sequences of alphabetic and
-     * non-alphabetic characters.  E.g.:
-     *
-     *      >>> WordTokenizer().tokenize("She said 'hello'.")
-     *      ['She', 'said', 'hello']
-     *
-     */
+
     var WordTokenizer = function(options) {
         this._pattern = /\W+/;
         RegexpTokenizer.call(this,options)
@@ -7890,14 +6392,7 @@
     util.inherits(WordTokenizer, RegexpTokenizer);
     exports.WordTokenizer = WordTokenizer;
 
-    /***
-     * A tokenizer that divides a text into sequences of alphabetic and
-     * non-alphabetic characters.  E.g.:
-     *
-     *      >>> WordPunctTokenizer().tokenize("She said 'hello'.")
-     *      ['She', 'said', "'", 'hello', "'."]
-     *
-     */
+
     var WordPunctTokenizer = function(options) {
         this._pattern = new RegExp(/(\w+|\!|\'|\"")/i);
         RegexpTokenizer.call(this,options)
@@ -7907,31 +6402,9 @@
     exports.WordPunctTokenizer = WordPunctTokenizer;
 
 },{"./tokenizer":61,"underscore":122,"util":135}],61:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
 
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
 
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * \@todo Use .bind() in Tokenizer.prototype.attach().
-     */
 
     var Tokenizer = function() {
     };
@@ -7960,27 +6433,7 @@
     module.exports = Tokenizer;
 
 },{}],62:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel, Alex Langberg
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require('util'),
@@ -8052,27 +6505,7 @@
      */
 
 // This version:
-    /*
-     Copyright (c) 2012, Guillaume Marty
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // TinySegmenter 0.1 -- Super compact Japanese tokenizer in Javascript
 // (c) 2008 Taku Kudo <taku@chasen.org>
@@ -8085,9 +6518,7 @@
 
 
 
-    /**
-     * @constructor
-     */
+
     var TokenizerJa = function() {
         this.chartype_ = [
             [/[〇一二三四五六七八九十百千万億兆]/, 'M'],
@@ -8148,11 +6579,7 @@
     util.inherits(TokenizerJa, Tokenizer);
 
 
-    /**
-     * @param {string} str
-     * @return {string}
-     * @private
-     */
+
     TokenizerJa.prototype.ctype_ = function(str) {
         for (var i = 0, length = this.chartype_.length; i < length; i++) {
             if (str.match(this.chartype_[i][0])) {
@@ -8163,24 +6590,14 @@
     };
 
 
-    /**
-     * @param {string} v
-     * @return {number}
-     * @private
-     */
+
     TokenizerJa.prototype.ts_ = function(v) {
         if (v) { return v; }
         return 0;
     };
 
 
-    /**
-     * Remove punctuations signs from tokens.
-     *
-     * @param {Array.<string>} tokens An array of tokens.
-     * @return {Array.<string>} An array of tokens.
-     * @private
-     */
+
     TokenizerJa.prototype.removePuncTokens = function(tokens) {
         return tokens
             .map(function(token) {
@@ -8192,10 +6609,7 @@
     };
 
 
-    /**
-     * @param {string} text
-     * @return {Array.<string>}
-     */
+
     TokenizerJa.prototype.tokenize = function(text) {
         if (text == null || text == undefined || text == '') {
             return [];
@@ -8299,27 +6713,7 @@
     module.exports = TokenizerJa;
 
 },{"../normalizers/normalizer_ja":20,"./tokenizer":61,"util":135}],64:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Rob Ellis, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Tokenizer = require('./tokenizer'),
         util = require("util"),
@@ -8375,46 +6769,7 @@
     module.exports = TreebankWordTokenizer;
 
 },{"./tokenizer":61,"underscore":122,"util":135}],65:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Guillaume Marty
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * A transliteration of Katakana & Hiragana to roman characters using the
-     * modified Hepburn system.
-     * Rules based on CLDR transform rule set `Katakana-Latin-BGN.xml` but with
-     * several bugs fixed:
-     *  * Missing ū
-     *  * Missing tsu + voiced kana
-     *  * typos on my~ transliterations
-     *  * support for long vowel sign
-     *  * support for final small tsu
-     *  * support for u + small vowels
-     *  * support for su/shi/ji + small vowels
-     *  * support for tchi/tsu/te/to + small vowels
-     *  * support for fu + small vowels
-     *  * support for katakana middle dot
-     *
-     * \@todo Take iteration marks into account.
-     */
 
     var replacer = require('../../util/utils').replacer;
 
@@ -8959,31 +7314,9 @@
     };
 
 },{"../../util/utils":82}],66:[function(require,module,exports){
-    /*
-     Copyright (c) 2014 Ken Koch
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
 
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
 
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
-
-    /**
-     * The basis of the TRIE structure.
-     **/
     function Trie(caseSensitive) {
         this.dictionary = {};
         this.$ = false;
@@ -8995,10 +7328,7 @@
         this.cs = caseSensitive;
     }
 
-    /**
-     * Add a single string to the TRIE, returns true if the word was already in the
-     * trie.
-     **/
+
     Trie.prototype.addString = function(string) {
         if(this.cs === false) {
             string = string.toLowerCase();
@@ -9023,24 +7353,14 @@
         return next.addString(string.substring(1));
     };
 
-    /**
-     * Add multiple strings to the TRIE
-     **/
+
     Trie.prototype.addStrings = function(list) {
         for(var i in list) {
             this.addString(list[i]);
         }
     };
 
-    /**
-     * A function to search the TRIE and return an array of
-     * words which have same prefix <prefix>
-     * for example if we had the following words in our database:
-     * a, ab, bc, cd, abc, abd
-     * and we search the string: a
-     * we will get :
-     * [a, ab, abc, abd]
-     **/
+
     Trie.prototype.keysWithPrefix = function(prefix) {
         if(this.caseSensitive === false) {
             prefix = prefix.toLowerCase();
@@ -9079,10 +7399,7 @@
         return results;
     };
 
-    /**
-     * A function to search the given string and return true if it lands
-     * on on a word. Essentially testing if the word exists in the database.
-     **/
+
     Trie.prototype.contains = function(string) {
         if(this.cs === false) {
             string = string.toLowerCase();
@@ -9105,15 +7422,7 @@
         return next.contains(string.substring(1));
     }
 
-    /**
-     * A function to search the TRIE and return an array of words which were encountered along the way.
-     * This will only return words with full prefix matches.
-     * for example if we had the following words in our database:
-     * a, ab, bc, cd, abc
-     * and we searched the string: abcd
-     * we would get only:
-     * [a, ab, abc]
-     **/
+
     Trie.prototype.findMatchesOnPath = function(search) {
         if(this.cs === false) {
             search = search.toLowerCase();
@@ -9141,10 +7450,7 @@
         return recurse(this, search, "", []);
     };
 
-    /**
-     * Returns the longest match and the remaining part that could not be matched.
-     * inspired by [NLTK containers.trie.find_prefix](http://nltk.googlecode.com/svn-/trunk/doc/api/nltk.containers.Trie-class.html).
-     **/
+
     Trie.prototype.findPrefix = function(search) {
         if(this.cs === false) {
             search = search.toLowerCase();
@@ -9172,11 +7478,7 @@
         return recurse(this, search, "", null);
     };
 
-    /**
-     * Computes the number of actual nodes from this node to the end.
-     * Note: This involves traversing the entire structure and may not be
-     * good for frequent use.
-     **/
+
     Trie.prototype.getSize = function() {
         var total = 1;
         for(var c in this.dictionary) {
@@ -9185,33 +7487,11 @@
         return total;
     };
 
-    /**
-     * EXPORT THE TRIE
-     **/
+
     module.exports = Trie;
 
 },{}],67:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Lee Wenzhu
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
     'use strict';
 
     function Bag() {
@@ -9233,9 +7513,7 @@
         return this.dictionary.indexOf(item) >= 0;
     };
 
-    /**
-     * unpack the bag , and get all items
-     */
+
     Bag.prototype.unpack = function() {
         // return a copy is better than original
         return this.dictionary.slice();
@@ -9244,27 +7522,7 @@
     module.exports = Bag;
 
 },{}],68:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Lee Wenzhu
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
     'use strict';
 
     var util = require('util'),
@@ -9297,16 +7555,12 @@
         this.adj = []; // adjacency list
     };
 
-    /**
-     * the number of vertexs saved.
-     */
+
     EdgeWeightedDigraph.prototype.v = function() {
         return this.adj.length;
     };
 
-    /**
-     * the number of edges saved.
-     */
+
     EdgeWeightedDigraph.prototype.e = function() {
         return this.edgesNum;
     };
@@ -9324,17 +7578,13 @@
         this.edgesNum++;
     };
 
-    /**
-     * use callback on all edges from v.
-     */
+
     EdgeWeightedDigraph.prototype.getAdj = function(v) {
         if(!this.adj[v]) return [];
         return this.adj[v].unpack();
     };
 
-    /**
-     * use callback on all edges.
-     */
+
     EdgeWeightedDigraph.prototype.edges = function() {
         var adj = this.adj;
         var list = new Bag();
@@ -9358,41 +7608,13 @@
     module.exports = EdgeWeightedDigraph;
 
 },{"./bag":67,"util":135}],69:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Lee Wenzhu
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
     'use strict';
 
     var EdgeWeightedDigraph = require('./edge_weighted_digraph'),
         Topological = require('./topological');
 
-    /**
-     *  The LongestPathTree represents a data type for solving the
-     *  single-source longest paths problem in edge-weighted directed
-     *  acyclic graphs (DAGs). The edge weights can be positive, negative, or zero.
-     *  This implementation uses a topological-sort based algorithm.
-     *  the distTo() and hasPathTo() methods take
-     *  constant time and the pathTo() method takes time proportional to the
-     *  number of edges in the longest path returned.
-     */
+
     var LongestPathTree = function(digraph, start) {
         var _this = this;
         this.edgeTo = [];
@@ -9415,11 +7637,7 @@
         }
     };
 
-    /**
-     * relax a vertex v in the specified digraph g
-     * @param {EdgeWeightedDigraph} the apecified digraph
-     * @param {Vertex} v vertex to be relaxed
-     */
+
     LongestPathTree.prototype.relaxVertex = function(digraph, vertex, tree) {
         var distTo = tree.distTo;
         var edgeTo = tree.edgeTo;
@@ -9459,41 +7677,13 @@
     module.exports = LongestPathTree;
 
 },{"./edge_weighted_digraph":68,"./topological":81}],70:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Lee Wenzhu
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
     'use strict';
 
     var EdgeWeightedDigraph = require('./edge_weighted_digraph'),
         Topological = require('./topological');
 
-    /**
-     *  The ShortestPathTree represents a data type for solving the
-     *  single-source shortest paths problem in edge-weighted directed
-     *  acyclic graphs (DAGs). The edge weights can be positive, negative, or zero.
-     *  This implementation uses a topological-sort based algorithm.
-     *  the distTo() and hasPathTo() methods take
-     *  constant time and the pathTo() method takes time proportional to the
-     *  number of edges in the longest path returned.
-     */
+
     var ShortestPathTree = function(digraph, start) {
         var _this = this;
         this.edgeTo = [];
@@ -9516,11 +7706,7 @@
         }
     };
 
-    /**
-     * relax a vertex v in the specified digraph g
-     * @param {EdgeWeightedDigraph} the apecified digraph
-     * @param {Vertex} v vertex to be relaxed
-     */
+
     ShortestPathTree.prototype.relaxVertex = function(digraph, vertex, tree) {
         var distTo = tree.distTo;
         var edgeTo = tree.edgeTo;
@@ -9561,27 +7747,7 @@
     module.exports = ShortestPathTree;
 
 },{"./edge_weighted_digraph":68,"./topological":81}],71:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -9604,27 +7770,7 @@
     exports.words = words;
 
 },{}],72:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, David Przybilla, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -9642,28 +7788,7 @@
     exports.words = words;
 
 },{}],73:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
-     Farsi Stop Words by Fardin Koochaki <me@fardinak.com>
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -9682,27 +7807,7 @@
     exports.words = words;
 
 },{}],74:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Ismaël Héry
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // A list of commonly used french words that have little meaning and can be excluded
 // from analysis.
@@ -9878,27 +7983,7 @@
     exports.words = words;
 
 },{}],75:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, David Przybilla, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -9933,45 +8018,10 @@
 
 },{}],76:[function(require,module,exports){
 // Original copyright:
-    /*
-     Licensed to the Apache Software Foundation (ASF) under one or more
-     contributor license agreements.  See the NOTICE file distributed with
-     this work for additional information regarding copyright ownership.
-     The ASF licenses this file to You under the Apache License, Version 2.0
-     the "License"); you may not use this file except in compliance with
-     the License.  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
-     */
 
 // This version:
-    /*
-     Copyright (c) 2012, Guillaume Marty
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -9993,27 +8043,7 @@
     module.exports = words;
 
 },{}],77:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Kristoffer Brabrand
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -10036,27 +8066,7 @@
 // tell the world about the noise words.
     exports.words = words;
 },{}],78:[function(require,module,exports){
-    /*
-     Copyright (c) 2013, Paweł Łaskarzewski
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -10100,27 +8110,7 @@
     exports.words = words;
 
 },{}],79:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Luís Rodrigues
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -10238,27 +8228,7 @@
     exports.words = words;
 
 },{}],80:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Polyakov Vladimir, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
@@ -10281,33 +8251,10 @@
     exports.words = words;
 
 },{}],81:[function(require,module,exports){
-    /*
-     Copyright (c) 2014, Lee Wenzhu
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
     'use strict';
 
-    /**
-     * a topo sort for a digraph
-     * @param {Digraph}
-     */
+
     var Topological = function(g) {
         this.isDag = true;
         this.sorted = topoSort(uniqueVertexs(g.edges()), g.edges());
@@ -10317,17 +8264,12 @@
         return this.isDag;
     };
 
-    /**
-     * get ordered vertexs of digraph
-     */
+
     Topological.prototype.order = function() {
         return this.sorted.slice();
     };
 
-    /**
-     * @param {Array} all vertex in digraph
-     * @param {Object} all edges in the digraph
-     */
+
     function topoSort(vertexs, edges) {
         var sorted = [];
         var cursor = vertexs.length,
@@ -10381,55 +8323,18 @@
     module.exports = Topological;
 
 },{}],82:[function(require,module,exports){
-    /*
-     Copyright (c) 2012, Guillaume Marty
-
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
 
-    /**
-     * Generate a replacing function given a table of patterns. Inspired by:
-     * http://code.google.com/p/jslibs/wiki/JavascriptTips#String_converter
-     * The order of elements is significant. Longer elements should be listed first.
-     * @see Speed test http://jsperf.com/build-a-regexp-table
-     *
-     * @param {Object.<string, string>} translationTable The translation table of key value.
-     * @return {function(string): string} A translating function.
-     */
+
+
     function replacer(translationTable) {
-        /**
-         * An array of translationTable keys.
-         * @type {Array.<string>}
-         */
+
         var pattern = [];
 
-        /**
-         * The regular expression doing the replacement job.
-         * @type {RegExp}
-         */
+
         var regExp;
 
-        /**
-         * Used to iterate over translationTable.
-         * @type {string}
-         */
+
         var key;
 
         for (key in translationTable) {
@@ -10444,10 +8349,7 @@
 
         regExp = new RegExp(pattern.join('|'), 'g');
 
-        /**
-         * @param {string} str Input string.
-         * @return {string} The string replaced.
-         */
+
         return function(str) {
             return str.replace(regExp, function(str) {
                 return translationTable[str];
@@ -10456,12 +8358,7 @@
     }
 
 
-    /**
-     * Exchanges all keys with their associated values in an object.
-     *
-     * @param {Object.<string, string>} obj An object of strings.
-     * @return {Object.<string, string>} An object of strings.
-     */
+
     function flip(obj) {
         var newObj = Object.create(null),
             key;
@@ -10474,13 +8371,7 @@
     }
 
 
-    /**
-     * Merge several objects. Properties from earlier objects are overwritten by
-     * laters's in case of conflict.
-     *
-     * @param {...Object.<string, string>} var_args One or more objects of strings.
-     * @return {!Object.<string, string>} An object of strings.
-     */
+
     function merge(var_args) {
         var args = [].slice.call(arguments),
             newObj = Object.create(null),
@@ -10503,27 +8394,7 @@
 
 },{}],83:[function(require,module,exports){
     (function (Buffer){
-        /*
-         Copyright (c) 2011, Chris Umbel
 
-         Permission is hereby granted, free of charge, to any person obtaining a copy
-         of this software and associated documentation files (the "Software"), to deal
-         in the Software without restriction, including without limitation the rights
-         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-         copies of the Software, and to permit persons to whom the Software is
-         furnished to do so, subject to the following conditions:
-
-         The above copyright notice and this permission notice shall be included in
-         all copies or substantial portions of the Software.
-
-         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-         THE SOFTWARE.
-         */
 
         var WordNetFile = require('./wordnet_file'),
             fs = require('fs'),
@@ -10593,27 +8464,7 @@
     }).call(this,require("buffer").Buffer)
 },{"./wordnet_file":86,"buffer":125,"fs":123,"util":135}],84:[function(require,module,exports){
     (function (Buffer){
-        /*
-         Copyright (c) 2011, Chris Umbel
 
-         Permission is hereby granted, free of charge, to any person obtaining a copy
-         of this software and associated documentation files (the "Software"), to deal
-         in the Software without restriction, including without limitation the rights
-         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-         copies of the Software, and to permit persons to whom the Software is
-         furnished to do so, subject to the following conditions:
-
-         The above copyright notice and this permission notice shall be included in
-         all copies or substantial portions of the Software.
-
-         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-         THE SOFTWARE.
-         */
 
         var WordNetFile = require('./wordnet_file'),
             fs = require('fs'),
@@ -10736,27 +8587,7 @@
 
     }).call(this,require("buffer").Buffer)
 },{"./wordnet_file":86,"buffer":125,"fs":123,"util":135}],85:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var IndexFile = require('./index_file'),
         DataFile = require('./data_file');
@@ -10908,27 +8739,7 @@
 
 },{"./data_file":83,"./index_file":84,"WNdb":87}],86:[function(require,module,exports){
     (function (Buffer){
-        /*
-         Copyright (c) 2011, Chris Umbel
 
-         Permission is hereby granted, free of charge, to any person obtaining a copy
-         of this software and associated documentation files (the "Software"), to deal
-         in the Software without restriction, including without limitation the rights
-         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-         copies of the Software, and to permit persons to whom the Software is
-         furnished to do so, subject to the following conditions:
-
-         The above copyright notice and this permission notice shall be included in
-         all copies or substantial portions of the Software.
-
-         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-         THE SOFTWARE.
-         */
 
         var  fs = require('fs'),
             path = require('path'),
@@ -10988,27 +8799,7 @@
 
     }).call(this,"/node_modules/WNdb")
 },{"fs":123,"path":132}],88:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var util = require('util'),
         Classifier = require('./classifier');
@@ -11121,27 +8912,7 @@
 
     module.exports = BayesClassifier;
 },{"./classifier":89,"util":135}],89:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     function Classifier() {
     }
@@ -11177,27 +8948,7 @@
     module.exports = Classifier;
 
 },{}],90:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var util = require('util'),
         Classifier = require('./classifier');
@@ -11371,27 +9122,7 @@
     module.exports = LogisticRegressionClassifier;
 
 },{"./classifier":89,"sylvester":93,"util":135}],91:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-     */
 
     var Sylvester = require('sylvester'),
         Matrix = Sylvester.Matrix,
@@ -13646,27 +11377,7 @@
 
 },{"./matrix":96,"./sylvester":98}],100:[function(require,module,exports){
     (function (Buffer){
-        /*
-         Copyright (c) 2011, Chris Umbel
 
-         Permission is hereby granted, free of charge, to any person obtaining a copy
-         of this software and associated documentation files (the "Software"), to deal
-         in the Software without restriction, including without limitation the rights
-         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-         copies of the Software, and to permit persons to whom the Software is
-         furnished to do so, subject to the following conditions:
-
-         The above copyright notice and this permission notice shall be included in
-         all copies or substantial portions of the Software.
-
-         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-         THE SOFTWARE.
-         */
 
         var FFI = require('ffi');
 
@@ -13720,28 +11431,7 @@
 
     }).call(this,require("buffer").Buffer)
 },{"buffer":125,"ffi":110}],101:[function(require,module,exports){
-    /*
-     Copyright (c) 2011, Chris Umbel
 
-     Permission is hereby granted, free of charge, to any person obtaining a copy
-     of this software and associated documentation files (the "Software"), to deal
-     in the Software without restriction, including without limitation the rights
-     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     copies of the Software, and to permit persons to whom the Software is
-     furnished to do so, subject to the following conditions:
-
-     The above copyright notice and this permission notice shall be included in
-     all copies or substantial portions of the Software.
-
-     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     THE SOFTWARE.
-
-     */
 
     var lapack = require('./lapack.js');
     exports.sgeqrf = lapack.sgeqrf;
@@ -13754,27 +11444,7 @@
 
 },{"./lapack.js":102}],102:[function(require,module,exports){
     (function (Buffer){
-        /*
-         Copyright (c) 2011, Chris Umbel
 
-         Permission is hereby granted, free of charge, to any person obtaining a copy
-         of this software and associated documentation files (the "Software"), to deal
-         in the Software without restriction, including without limitation the rights
-         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-         copies of the Software, and to permit persons to whom the Software is
-         furnished to do so, subject to the following conditions:
-
-         The above copyright notice and this permission notice shall be included in
-         all copies or substantial portions of the Software.
-
-         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-         THE SOFTWARE.
-         */
 
         var fortranArray = require('./fortranArray');
         var FFI = require('ffi');
@@ -14062,9 +11732,7 @@
 },{"./fortranArray":100,"buffer":125,"ffi":110}],103:[function(require,module,exports){
     (function (process,Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var assert = require('assert')
             , debug = require('debug')('ffi:_ForeignFunction')
@@ -14086,11 +11754,7 @@
             var resultSize = returnType.size >= ref.sizeof.long ? returnType.size : FFI_ARG_SIZE
             assert(resultSize > 0)
 
-            /**
-             * This is the actual JS function that gets returned.
-             * It handles marshalling input arguments into C values,
-             * and unmarshalling the return value back into a JS value
-             */
+
 
             var proxy = function () {
                 debug('invoking proxy function')
@@ -14125,9 +11789,7 @@
                 return result.deref()
             }
 
-            /**
-             * The asynchronous version of the proxy function.
-             */
+
 
             proxy.async = function () {
                 debug('invoking async proxy function')
@@ -14192,9 +11854,7 @@
 },{"bindings":116}],105:[function(require,module,exports){
     (function (process){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var ref = require('ref')
             , CIF = require('./cif')
@@ -14216,11 +11876,7 @@
             }
         }
 
-        /**
-         * Turns a JavaScript function into a C function pointer.
-         * The function pointer may be used in other C functions that
-         * accept C callback functions.
-         */
+
 
         function Callback (retType, argTypes, abi, func) {
             debug('creating new Callback')
@@ -14280,9 +11936,7 @@
 },{"./bindings":104,"./cif":106,"_process":133,"assert":124,"debug":117,"ref":121}],106:[function(require,module,exports){
     (function (Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var Type = require('./type')
             , assert = require('assert')
@@ -14298,10 +11952,7 @@
             , FFI_BAD_TYPEDEF = bindings.FFI_BAD_TYPEDEF
             , FFI_BAD_ABI = bindings.FFI_BAD_ABI
 
-        /**
-         * JS wrapper for the `ffi_prep_cif` function.
-         * Returns a Buffer instance representing a `ffi_cif *` instance.
-         */
+
 
         function CIF (rtype, types, abi) {
             debug('creating `ffi_cif *` instance')
@@ -14363,9 +12014,7 @@
 },{"./bindings":104,"./type":115,"assert":124,"buffer":125,"debug":117,"ref":121}],107:[function(require,module,exports){
     (function (Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var Type = require('./type')
             , assert = require('assert')
@@ -14381,10 +12030,7 @@
             , FFI_BAD_TYPEDEF = bindings.FFI_BAD_TYPEDEF
             , FFI_BAD_ABI = bindings.FFI_BAD_ABI
 
-        /**
-         * JS wrapper for the `ffi_prep_cif_var` function.
-         * Returns a Buffer instance representing a variadic `ffi_cif *` instance.
-         */
+
 
         function CIF_var (rtype, types, numFixedArgs, abi) {
             debug('creating `ffi_cif *` instance with `ffi_prep_cif_var()`')
@@ -14447,9 +12093,7 @@
 },{"./bindings":104,"./type":115,"assert":124,"buffer":125,"debug":117,"ref":121}],108:[function(require,module,exports){
     (function (Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var ForeignFunction = require('./foreign_function')
             , assert = require('assert')
@@ -14468,13 +12112,7 @@
             , dlsym   = ForeignFunction(funcs.dlsym,   voidPtr, [ voidPtr, 'string' ])
             , dlerror = ForeignFunction(funcs.dlerror, 'string', [ ])
 
-        /**
-         * `DynamicLibrary` loads and fetches function pointers for dynamic libraries
-         * (.so, .dylib, etc). After the libray's function pointer is acquired, then you
-         * call `get(symbol)` to retreive a pointer to an exported symbol. You need to
-         * call `get___()` on the pointer to dereference it into its actual value, or
-         * turn the pointer into a callable function with `ForeignFunction`.
-         */
+
 
         function DynamicLibrary (path, mode) {
             if (!(this instanceof DynamicLibrary)) {
@@ -14524,9 +12162,7 @@
         }
         module.exports = DynamicLibrary
 
-        /**
-         * Set the exported flags from "dlfcn.h"
-         */
+
 
         DynamicLibrary.FLAGS = {};
         Object.keys(bindings).forEach(function (k) {
@@ -14536,18 +12172,14 @@
         });
 
 
-        /**
-         * Close this library, returns the result of the dlclose() system function.
-         */
+
 
         DynamicLibrary.prototype.close = function () {
             debug('dlclose()')
             return dlclose(this._handle)
         }
 
-        /**
-         * Get a symbol from this library, returns a Pointer for (memory address of) the symbol
-         */
+
 
         DynamicLibrary.prototype.get = function (symbol) {
             debug('dlsym()', symbol)
@@ -14565,9 +12197,7 @@
             return ptr
         }
 
-        /**
-         * Returns the result of the dlerror() system function
-         */
+
 
         DynamicLibrary.prototype.error = function error () {
             debug('dlerror()')
@@ -14578,16 +12208,8 @@
 },{"../../../../../../../n/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":131,"./bindings":104,"./foreign_function":111,"assert":124,"debug":117,"fs":123,"ref":121}],109:[function(require,module,exports){
     (function (process){
 
-        /**
-         * Implementation of errno. This is a #define :/
-         * On Linux, it's a global variable with the symbol `errno`,
-         * On Darwin it's a method execution called `__error`.
-         * On Windows it's a method execution called `_errno`.
-         */
 
-        /**
-         * Module dependencies.
-         */
+
 
         var DynamicLibrary = require('./dynamic_library')
             , ForeignFunction = require('./foreign_function')
@@ -14618,9 +12240,7 @@
     }).call(this,require('_process'))
 },{"./dynamic_library":108,"./foreign_function":111,"_process":133,"ref":121}],110:[function(require,module,exports){
 
-    /**
-     * Module dependencies.
-     */
+
 
     var ref = require('ref')
     var assert = require('assert')
@@ -14628,9 +12248,7 @@
     var Struct = require('ref-struct')
     var bindings = require('./bindings')
 
-    /**
-     * Export some of the properties from the "bindings" file.
-     */
+
 
         ;['HAS_OBJC', 'FFI_TYPES',
         , 'FFI_OK', 'FFI_BAD_TYPEDEF', 'FFI_BAD_ABI'
@@ -14646,9 +12264,7 @@
         Object.defineProperty(exports, prop, desc)
     })
 
-    /**
-     * Set the `ffi_type` property on the built-in types.
-     */
+
 
     Object.keys(bindings.FFI_TYPES).forEach(function (name) {
         var type = bindings.FFI_TYPES[name]
@@ -14684,9 +12300,7 @@
             throw new Error('unsupported "long" size: ' + ref.sizeof.long)
     }
 
-    /**
-     * Alias the "ref" types onto ffi's exports, for convenience...
-     */
+
 
     exports.types = ref.types
 
@@ -14711,9 +12325,7 @@
 },{"./bindings":104,"./callback":105,"./cif":106,"./cif_var":107,"./dynamic_library":108,"./errno":109,"./foreign_function":111,"./foreign_function_var":112,"./function":113,"./library":114,"./type":115,"assert":124,"debug":117,"ref":121,"ref-struct":120}],111:[function(require,module,exports){
     (function (Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var CIF = require('./cif')
             , _ForeignFunction = require('./_foreign_function')
@@ -14721,12 +12333,7 @@
             , assert = require('assert')
             , ref = require('ref')
 
-        /**
-         * Represents a foreign function in another library. Manages all of the aspects
-         * of function execution, including marshalling the data parameters for the
-         * function into native types and also unmarshalling the return from function
-         * execution.
-         */
+
 
         function ForeignFunction (funcPtr, returnType, argTypes, abi) {
             debug('creating new ForeignFunction', funcPtr)
@@ -14753,9 +12360,7 @@
 },{"../../../../../../../n/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":131,"./_foreign_function":103,"./cif":106,"assert":124,"debug":117,"ref":121}],112:[function(require,module,exports){
     (function (Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var CIF_var = require('./cif_var')
             , Type = require('./type')
@@ -14767,13 +12372,7 @@
             , POINTER_SIZE = ref.sizeof.pointer
             , FFI_ARG_SIZE = bindings.FFI_ARG_SIZE
 
-        /**
-         * For when you want to call to a C function with variable amount of arguments.
-         * i.e. `printf()`.
-         *
-         * This function takes care of caching and reusing ForeignFunction instances that
-         * contain the same ffi_type argument signature.
-         */
+
 
         function VariadicForeignFunction (funcPtr, returnType, fixedArgTypes, abi) {
             debug('creating new VariadicForeignFunction', funcPtr)
@@ -14859,9 +12458,7 @@
 },{"../../../../../../../n/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":131,"./_foreign_function":103,"./bindings":104,"./cif_var":107,"./type":115,"assert":124,"debug":117,"ref":121}],113:[function(require,module,exports){
     (function (Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var ref = require('ref')
             , assert = require('assert')
@@ -14870,17 +12467,11 @@
             , ForeignFunction = require('./foreign_function')
             , debug = require('debug')('ffi:FunctionType')
 
-        /**
-         * Module exports.
-         */
+
 
         module.exports = Function
 
-        /**
-         * Creates and returns a "type" object for a C "function pointer".
-         *
-         * @api public
-         */
+
 
         function Function (retType, argTypes, abi) {
             if (!(this instanceof Function)) {
@@ -14900,51 +12491,35 @@
             this.abi = null == abi ? bindings.FFI_DEFAULT_ABI : abi
         }
 
-        /**
-         * The "ffi_type" is set for node-ffi functions.
-         */
+
 
         Function.prototype.ffi_type = bindings.FFI_TYPES.pointer
 
-        /**
-         * The "size" is always pointer-sized.
-         */
+
 
         Function.prototype.size = ref.sizeof.pointer
 
-        /**
-         * The "alignment" is always pointer-aligned.
-         */
+
 
         Function.prototype.alignment = ref.alignof.pointer
 
-        /**
-         * The "indirection" is always 1 to ensure that our get()/set() get called.
-         */
+
 
         Function.prototype.indirection = 1
 
-        /**
-         * Returns a ffi.Callback pointer (Buffer) of this function type for the
-         * given `fn` Function.
-         */
+
 
         Function.prototype.toPointer = function toPointer (fn) {
             return Callback(this.retType, this.argTypes, this.abi, fn)
         }
 
-        /**
-         * Returns a ffi.ForeignFunction (Function) of this function type for the
-         * given `buf` Buffer.
-         */
+
 
         Function.prototype.toFunction = function toFunction (buf) {
             return ForeignFunction(buf, this.retType, this.argTypes, this.abi)
         }
 
-        /**
-         * get function; return a ForeignFunction instance.
-         */
+
 
         Function.prototype.get = function get (buffer, offset) {
             debug('ffi FunctionType "get" function')
@@ -14952,9 +12527,7 @@
             return this.toFunction(ptr)
         }
 
-        /**
-         * set function; return a Callback buffer.
-         */
+
 
         Function.prototype.set = function set (buffer, offset, value) {
             debug('ffi FunctionType "set" function')
@@ -14973,9 +12546,7 @@
 },{"../../../../../../../n/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":131,"./bindings":104,"./callback":105,"./foreign_function":111,"assert":124,"debug":117,"ref":121}],114:[function(require,module,exports){
     (function (process){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var DynamicLibrary = require('./dynamic_library')
             , ForeignFunction = require('./foreign_function')
@@ -14983,10 +12554,7 @@
             , debug = require('debug')('ffi:Library')
             , RTLD_NOW = DynamicLibrary.FLAGS.RTLD_NOW
 
-        /**
-         * The extension to use on libraries.
-         * i.e.  libm  ->  libm.so   on linux
-         */
+
 
         var EXT = Library.EXT = {
             'linux':  '.so'
@@ -15000,10 +12568,7 @@
             , 'win32':  '.dll'
         }[process.platform]
 
-        /**
-         * Provides a friendly abstraction/API on-top of DynamicLibrary and
-         * ForeignFunction.
-         */
+
 
         function Library (libfile, funcs, lib) {
             debug('creating Library object for', libfile)
@@ -15052,9 +12617,7 @@
 },{"./dynamic_library":108,"./foreign_function":111,"./foreign_function_var":112,"_process":133,"debug":117}],115:[function(require,module,exports){
     (function (Buffer){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var ref = require('ref')
         var assert = require('assert')
@@ -15062,10 +12625,6 @@
         var Struct = require('ref-struct')
         var bindings = require('./bindings')
 
-        /**
-         * Define the `ffi_type` struct (see deps/libffi/include/ffi.h) for use in JS.
-         * This struct type is used internally to define custom struct rtn/arg types.
-         */
 
         var FFI_TYPE = Type.FFI_TYPE = Struct()
         FFI_TYPE.defineProperty('size',      ref.types.size_t)
@@ -15076,13 +12635,7 @@
         FFI_TYPE.defineProperty('elements',  ffi_type_ptr_array)
         assert.equal(bindings.FFI_TYPE_SIZE, FFI_TYPE.size)
 
-        /**
-         * Returns a `ffi_type *` Buffer appropriate for the given "type".
-         *
-         * @param {Type|String} type A "ref" type (or string) to get the `ffi_type` for
-         * @return {Buffer} A buffer pointing to a `ffi_type` instance for "type"
-         * @api private
-         */
+
 
         function Type (type) {
             type = ref.coerceType(type)
@@ -15185,9 +12738,7 @@
 },{"./bindings":104,"assert":124,"buffer":125,"debug":117,"ref":121,"ref-struct":120}],116:[function(require,module,exports){
     (function (process,__filename){
 
-        /**
-         * Module dependencies.
-         */
+
 
         var fs = require('fs')
             , path = require('path')
@@ -15220,11 +12771,7 @@
             ]
         }
 
-        /**
-         * The main `bindings()` function loads the compiled bindings for a given module.
-         * It uses V8's Error API to determine the parent filename that this function is
-         * being invoked from, which is then used to find the root directory.
-         */
+
 
         function bindings (opts) {
 
@@ -15279,11 +12826,7 @@
         module.exports = exports = bindings
 
 
-        /**
-         * Gets the filename of the JavaScript file that invokes this function.
-         * Used to help find the root directory of a module.
-         * Optionally accepts an filename argument to skip when searching for the invoking filename
-         */
+
 
         exports.getFileName = function getFileName (calling_file) {
             var origPST = Error.prepareStackTrace
@@ -15319,14 +12862,6 @@
             return fileName
         }
 
-        /**
-         * Gets the root directory of a module, given an arbitrary filename
-         * somewhere in the module tree. The "root directory" is the directory
-         * containing the `package.json` file.
-         *
-         *   In:  /home/nate/node-native-module/lib/index.js
-         *   Out: /home/nate/node-native-module
-         */
 
         exports.getRoot = function getRoot (file) {
             var dir = dirname(file)
@@ -15354,11 +12889,7 @@
     }).call(this,require('_process'),"/node_modules/lapack/node_modules/ffi/node_modules/bindings/bindings.js")
 },{"_process":133,"fs":123,"path":132}],117:[function(require,module,exports){
 
-    /**
-     * This is the web browser implementation of `debug()`.
-     *
-     * Expose `debug()` as the module.
-     */
+
 
     exports = module.exports = require('./debug');
     exports.log = log;
@@ -15371,9 +12902,7 @@
         ? chrome.storage.local
         : localstorage();
 
-    /**
-     * Colors.
-     */
+
 
     exports.colors = [
         'lightseagreen',
@@ -15384,13 +12913,7 @@
         'crimson'
     ];
 
-    /**
-     * Currently only WebKit-based Web Inspectors, Firefox >= v31,
-     * and the Firebug extension (any Firefox version) are known
-     * to support "%c" CSS customizations.
-     *
-     * TODO: add a `localStorage` variable to explicitly enable/disable colors
-     */
+
 
     function useColors() {
         // is webkit? http://stackoverflow.com/a/16459606/376773
@@ -15402,20 +12925,14 @@
             (navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31);
     }
 
-    /**
-     * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
-     */
+
 
     exports.formatters.j = function(v) {
         return JSON.stringify(v);
     };
 
 
-    /**
-     * Colorize log arguments if enabled.
-     *
-     * @api public
-     */
+
 
     function formatArgs() {
         var args = arguments;
@@ -15452,12 +12969,7 @@
         return args;
     }
 
-    /**
-     * Invokes `console.log()` when available.
-     * No-op when `console.log` is not a "function".
-     *
-     * @api public
-     */
+
 
     function log() {
         // this hackery is required for IE8/9, where
@@ -15467,12 +12979,7 @@
             && Function.prototype.apply.call(console.log, console, arguments);
     }
 
-    /**
-     * Save `namespaces`.
-     *
-     * @param {String} namespaces
-     * @api private
-     */
+
 
     function save(namespaces) {
         try {
@@ -15484,12 +12991,7 @@
         } catch(e) {}
     }
 
-    /**
-     * Load `namespaces`.
-     *
-     * @return {String} returns the previously persisted debug modes
-     * @api private
-     */
+
 
     function load() {
         var r;
@@ -15499,22 +13001,11 @@
         return r;
     }
 
-    /**
-     * Enable namespaces listed in `localStorage.debug` initially.
-     */
+
 
     exports.enable(load());
 
-    /**
-     * Localstorage attempts to return the localstorage.
-     *
-     * This is necessary because safari throws
-     * when a user disables cookies/localstorage
-     * and you attempt to access it.
-     *
-     * @return {LocalStorage}
-     * @api private
-     */
+
 
     function localstorage(){
         try {
@@ -15524,12 +13015,7 @@
 
 },{"./debug":118}],118:[function(require,module,exports){
 
-    /**
-     * This is the common logic for both the Node.js and web browser
-     * implementations of `debug()`.
-     *
-     * Expose `debug()` as the module.
-     */
+
 
     exports = module.exports = debug;
     exports.coerce = coerce;
@@ -15538,51 +13024,30 @@
     exports.enabled = enabled;
     exports.humanize = require('ms');
 
-    /**
-     * The currently active debug mode names, and names to skip.
-     */
+
 
     exports.names = [];
     exports.skips = [];
 
-    /**
-     * Map of special "%n" handling functions, for the debug "format" argument.
-     *
-     * Valid key names are a single, lowercased letter, i.e. "n".
-     */
+
 
     exports.formatters = {};
 
-    /**
-     * Previously assigned color.
-     */
+
 
     var prevColor = 0;
 
-    /**
-     * Previous log timestamp.
-     */
+
 
     var prevTime;
 
-    /**
-     * Select a color.
-     *
-     * @return {Number}
-     * @api private
-     */
+
 
     function selectColor() {
         return exports.colors[prevColor++ % exports.colors.length];
     }
 
-    /**
-     * Create a debugger with the given `namespace`.
-     *
-     * @param {String} namespace
-     * @return {Function}
-     * @api public
-     */
+
 
     function debug(namespace) {
 
@@ -15650,13 +13115,7 @@
         return fn;
     }
 
-    /**
-     * Enables a debug mode by namespaces. This can include modes
-     * separated by a colon and wildcards.
-     *
-     * @param {String} namespaces
-     * @api public
-     */
+
 
     function enable(namespaces) {
         exports.save(namespaces);
@@ -15675,23 +13134,13 @@
         }
     }
 
-    /**
-     * Disable debug output.
-     *
-     * @api public
-     */
+
 
     function disable() {
         exports.enable('');
     }
 
-    /**
-     * Returns true if the given mode name is enabled, false otherwise.
-     *
-     * @param {String} name
-     * @return {Boolean}
-     * @api public
-     */
+
 
     function enabled(name) {
         var i, len;
@@ -15708,13 +13157,7 @@
         return false;
     }
 
-    /**
-     * Coerce `val`.
-     *
-     * @param {Mixed} val
-     * @return {Mixed}
-     * @api private
-     */
+
 
     function coerce(val) {
         if (val instanceof Error) return val.stack || val.message;
@@ -15722,9 +13165,7 @@
     }
 
 },{"ms":119}],119:[function(require,module,exports){
-    /**
-     * Helpers.
-     */
+
 
     var s = 1000;
     var m = s * 60;
@@ -15732,18 +13173,7 @@
     var d = h * 24;
     var y = d * 365.25;
 
-    /**
-     * Parse or format the given `val`.
-     *
-     * Options:
-     *
-     *  - `long` verbose formatting [false]
-     *
-     * @param {String|Number} val
-     * @param {Object} options
-     * @return {String|Number}
-     * @api public
-     */
+
 
     module.exports = function(val, options){
         options = options || {};
@@ -15753,13 +13183,7 @@
             : short(val);
     };
 
-    /**
-     * Parse the given `str` and return milliseconds.
-     *
-     * @param {String} str
-     * @return {Number}
-     * @api private
-     */
+
 
     function parse(str) {
         str = '' + str;
@@ -15806,13 +13230,7 @@
         }
     }
 
-    /**
-     * Short format for `ms`.
-     *
-     * @param {Number} ms
-     * @return {String}
-     * @api private
-     */
+
 
     function short(ms) {
         if (ms >= d) return Math.round(ms / d) + 'd';
@@ -15822,13 +13240,7 @@
         return ms + 'ms';
     }
 
-    /**
-     * Long format for `ms`.
-     *
-     * @param {Number} ms
-     * @return {String}
-     * @api private
-     */
+
 
     function long(ms) {
         return plural(ms, d, 'day')
@@ -15838,9 +13250,7 @@
             || ms + ' ms';
     }
 
-    /**
-     * Pluralization helper.
-     */
+
 
     function plural(ms, n, name) {
         if (ms < n) return;
@@ -15894,36 +13304,23 @@
          * ```
          */
 
-        /**
-         * Module dependencies.
-         */
+
 
         var ref = require('ref')
         var util = require('util')
         var assert = require('assert')
         var debug = require('debug')('ref:struct')
 
-        /**
-         * Module exports.
-         */
+
 
         module.exports = Struct
 
-        /**
-         * The Struct "type" meta-constructor.
-         */
+
 
         function Struct () {
             debug('defining new struct "type"')
 
-            /**
-             * This is the "constructor" of the Struct type that gets returned.
-             *
-             * Invoke it with `new` to create a new Buffer instance backing the struct.
-             * Pass it an existing Buffer instance to use that as the backing buffer.
-             * Pass in an Object containing the struct fields to auto-populate the
-             * struct with the data.
-             */
+
 
             function StructType (arg, data) {
                 if (!(this instanceof StructType)) {
@@ -15996,9 +13393,7 @@
             return StructType
         }
 
-        /**
-         * The "get" function of the Struct "type" interface
-         */
+
 
         function get (buffer, offset) {
             debug('Struct "type" getter for buffer at offset', buffer, offset)
@@ -16008,9 +13403,7 @@
             return new this(buffer)
         }
 
-        /**
-         * The "set" function of the Struct "type" interface
-         */
+
 
         function set (buffer, offset, value) {
             debug('Struct "type" setter for buffer at offset', buffer, offset, value)
@@ -16027,20 +13420,13 @@
             }
         }
 
-        /**
-         * Custom `toString()` override for struct type instances.
-         */
+
 
         function toString () {
             return '[StructType]'
         }
 
-        /**
-         * Adds a new field to the struct instance with the given name and type.
-         * Note that this function will throw an Error if any instances of the struct
-         * type have already been created, therefore this function must be called at the
-         * beginning, before any instances are created.
-         */
+
 
         function defineProperty (name, type) {
             debug('defining new struct type field', name)
@@ -16144,25 +13530,15 @@
             }
         }
 
-        /**
-         * this is the custom prototype of Struct type instances.
-         */
+
 
         var proto = {}
 
-        /**
-         * set a placeholder variable on the prototype so that defineProperty() will
-         * throw an error if you try to define a struct field with the name "buffer".
-         */
+
 
         proto['ref.buffer'] = ref.NULL
 
-        /**
-         * Flattens the Struct instance into a regular JavaScript Object. This function
-         * "gets" all the defined properties.
-         *
-         * @api public
-         */
+
 
         proto.toObject = function toObject () {
             var obj = {}
@@ -16172,19 +13548,13 @@
             return obj
         }
 
-        /**
-         * Basic `JSON.stringify(struct)` support.
-         */
+
 
         proto.toJSON = function toJSON () {
             return this.toObject()
         }
 
-        /**
-         * `.inspect()` override. For the REPL.
-         *
-         * @api public
-         */
+
 
         proto.inspect = function inspect () {
             var obj = this.toObject()
@@ -16195,9 +13565,7 @@
             return util.inspect(obj)
         }
 
-        /**
-         * returns a Buffer pointing to this struct data structure.
-         */
+
 
         proto.ref = function ref () {
             return this['ref.buffer']
@@ -16212,302 +13580,37 @@
 
         exports = module.exports = require('bindings')('binding')
 
-        /**
-         * A `Buffer` that references the C NULL pointer. That is, its memory address
-         * points to 0. Its `length` is 0 because accessing any data from this buffer
-         * would cause a _segmentation fault_.
-         *
-         * ```
-         * console.log(ref.NULL);
-         * <SlowBuffer@0x0 >
-         * ```
-         *
-         * @name NULL
-         * @type Buffer
-         */
 
-        /**
-         * A string that represents the native endianness of the machine's processor.
-         * The possible values are either `"LE"` or `"BE"`.
-         *
-         * ```
-         * console.log(ref.endianness);
-         * 'LE'
-         * ```
-         *
-         * @name endianness
-         * @type String
-         */
 
-        /**
-         * Accepts a `Buffer` instance and returns the memory address of the buffer
-         * instance.
-         *
-         * ```
-         * console.log(ref.address(new Buffer(1)));
-         * 4320233616
-         *
-         * console.log(ref.address(ref.NULL)));
-         * 0
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to get the memory address of.
-         * @return {Number} The memory address the buffer instance.
-         * @name address
-         * @type method
-         */
 
-        /**
-         * Accepts a `Buffer` instance and returns _true_ if the buffer represents the
-         * NULL pointer, _false_ otherwise.
-         *
-         * ```
-         * console.log(ref.isNull(new Buffer(1)));
-         * false
-         *
-         * console.log(ref.isNull(ref.NULL));
-         * true
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to check for NULL.
-         * @return {Boolean} true or false.
-         * @name isNull
-         * @type method
-         */
 
-        /**
-         * Reads a JavaScript Object that has previously been written to the given
-         * _buffer_ at the given _offset_.
-         *
-         * ```
-         * var obj = { foo: 'bar' };
-         * var buf = ref.alloc('Object', obj);
-         *
-         * var obj2 = ref.readObject(buf, 0);
-         * console.log(obj === obj2);
-         * true
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to read an Object from.
-         * @param {Number} offset The offset to begin reading from.
-         * @return {Object} The Object that was read from _buffer_.
-         * @name readObject
-         * @type method
-         */
 
-        /**
-         * Reads a Buffer instance from the given _buffer_ at the given _offset_.
-         * The _size_ parameter specifies the `length` of the returned Buffer instance,
-         * which defaults to __0__.
-         *
-         * ```
-         * var buf = new Buffer('hello world');
-         * var pointer = ref.alloc('pointer');
-         *
-         * var buf2 = ref.readPointer(pointer, 0, buf.length);
-         * console.log(buf.toString());
-         * 'hello world'
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to read a Buffer from.
-         * @param {Number} offset The offset to begin reading from.
-         * @param {Number} length (optional) The length of the returned Buffer. Defaults to 0.
-         * @return {Buffer} The Buffer instance that was read from _buffer_.
-         * @name readPointer
-         * @type method
-         */
 
-        /**
-         * Returns a JavaScript String read from _buffer_ at the given _offset_. The
-         * C String is read until the first NULL byte, which indicates the end of the
-         * String.
-         *
-         * This function can read beyond the `length` of a Buffer.
-         *
-         * ```
-         * var buf = new Buffer('hello\0world\0');
-         *
-         * var str = ref.readCString(buf, 0);
-         * console.log(str);
-         * 'hello'
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to read a Buffer from.
-         * @param {Number} offset The offset to begin reading from.
-         * @return {String} The String that was read from _buffer_.
-         * @name readCString
-         * @type method
-         */
 
-        /**
-         * Returns a big-endian signed 64-bit int read from _buffer_ at the given
-         * _offset_.
-         *
-         * If the returned value will fit inside a JavaScript Number without losing
-         * precision, then a Number is returned, otherwise a String is returned.
-         *
-         * ```
-         * var buf = ref.alloc('int64');
-         * ref.writeInt64BE(buf, 0, '9223372036854775807');
-         *
-         * var val = ref.readInt64BE(buf, 0)
-         * console.log(val)
-         * '9223372036854775807'
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to read a Buffer from.
-         * @param {Number} offset The offset to begin reading from.
-         * @return {Number|String} The Number or String that was read from _buffer_.
-         * @name readInt64BE
-         * @type method
-         */
 
-        /**
-         * Returns a little-endian signed 64-bit int read from _buffer_ at the given
-         * _offset_.
-         *
-         * If the returned value will fit inside a JavaScript Number without losing
-         * precision, then a Number is returned, otherwise a String is returned.
-         *
-         * ```
-         * var buf = ref.alloc('int64');
-         * ref.writeInt64LE(buf, 0, '9223372036854775807');
-         *
-         * var val = ref.readInt64LE(buf, 0)
-         * console.log(val)
-         * '9223372036854775807'
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to read a Buffer from.
-         * @param {Number} offset The offset to begin reading from.
-         * @return {Number|String} The Number or String that was read from _buffer_.
-         * @name readInt64LE
-         * @type method
-         */
 
-        /**
-         * Returns a big-endian unsigned 64-bit int read from _buffer_ at the given
-         * _offset_.
-         *
-         * If the returned value will fit inside a JavaScript Number without losing
-         * precision, then a Number is returned, otherwise a String is returned.
-         *
-         * ```
-         * var buf = ref.alloc('uint64');
-         * ref.writeUInt64BE(buf, 0, '18446744073709551615');
-         *
-         * var val = ref.readUInt64BE(buf, 0)
-         * console.log(val)
-         * '18446744073709551615'
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to read a Buffer from.
-         * @param {Number} offset The offset to begin reading from.
-         * @return {Number|String} The Number or String that was read from _buffer_.
-         * @name readUInt64BE
-         * @type method
-         */
 
-        /**
-         * Returns a little-endian unsigned 64-bit int read from _buffer_ at the given
-         * _offset_.
-         *
-         * If the returned value will fit inside a JavaScript Number without losing
-         * precision, then a Number is returned, otherwise a String is returned.
-         *
-         * ```
-         * var buf = ref.alloc('uint64');
-         * ref.writeUInt64LE(buf, 0, '18446744073709551615');
-         *
-         * var val = ref.readUInt64LE(buf, 0)
-         * console.log(val)
-         * '18446744073709551615'
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to read a Buffer from.
-         * @param {Number} offset The offset to begin reading from.
-         * @return {Number|String} The Number or String that was read from _buffer_.
-         * @name readUInt64LE
-         * @type method
-         */
 
-        /**
-         * Writes the _input_ Number or String as a big-endian signed 64-bit int into
-         * _buffer_ at the given _offset_.
-         *
-         * ```
-         * var buf = ref.alloc('int64');
-         * ref.writeInt64BE(buf, 0, '9223372036854775807');
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to write to.
-         * @param {Number} offset The offset to begin writing from.
-         * @param {Number|String} input This String or Number which gets written.
-         * @name writeInt64BE
-         * @type method
-         */
 
-        /**
-         * Writes the _input_ Number or String as a little-endian signed 64-bit int into
-         * _buffer_ at the given _offset_.
-         *
-         * ```
-         * var buf = ref.alloc('int64');
-         * ref.writeInt64LE(buf, 0, '9223372036854775807');
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to write to.
-         * @param {Number} offset The offset to begin writing from.
-         * @param {Number|String} input This String or Number which gets written.
-         * @name writeInt64LE
-         * @type method
-         */
 
-        /**
-         * Writes the _input_ Number or String as a big-endian unsigned 64-bit int into
-         * _buffer_ at the given _offset_.
-         *
-         * ```
-         * var buf = ref.alloc('uint64');
-         * ref.writeUInt64BE(buf, 0, '18446744073709551615');
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to write to.
-         * @param {Number} offset The offset to begin writing from.
-         * @param {Number|String} input This String or Number which gets written.
-         * @name writeUInt64BE
-         * @type method
-         */
 
-        /**
-         * Writes the _input_ Number or String as a little-endian unsigned 64-bit int
-         * into _buffer_ at the given _offset_.
-         *
-         * ```
-         * var buf = ref.alloc('uint64');
-         * ref.writeUInt64LE(buf, 0, '18446744073709551615');
-         * ```
-         *
-         * @param {Buffer} buffer The buffer to write to.
-         * @param {Number} offset The offset to begin writing from.
-         * @param {Number|String} input This String or Number which gets written.
-         * @name writeUInt64LE
-         * @type method
-         */
 
-        /**
-         * Returns a new clone of the given "type" object, with its
-         * `indirection` level incremented by **1**.
-         *
-         * Say you wanted to create a type representing a `void *`:
-         *
-         * ```
-         * var voidPtrType = ref.refType(ref.types.void);
-         * ```
-         *
-         * @param {Object|String} type The "type" object to create a reference type from. Strings get coerced first.
-         * @return {Object} The new "type" object with its `indirection` incremented by 1.
-         */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         exports.refType = function refType (type) {
             var _type = exports.coerceType(type)
@@ -16519,13 +13622,7 @@
             return rtn
         }
 
-        /**
-         * Returns a new clone of the given "type" object, with its
-         * `indirection` level decremented by 1.
-         *
-         * @param {Object|String} type The "type" object to create a dereference type from. Strings get coerced first.
-         * @return {Object} The new "type" object with its `indirection` decremented by 1.
-         */
+
 
         exports.derefType = function derefType (type) {
             var _type = exports.coerceType(type)
@@ -16541,29 +13638,7 @@
             return rtn
         }
 
-        /**
-         * Coerces a "type" object from a String or an actual "type" object. String values
-         * are looked up from the `ref.types` Object. So:
-         *
-         *   * `"int"` gets coerced into `ref.types.int`.
-         *   * `"int *"` gets translated into `ref.refType(ref.types.int)`
-         *   * `ref.types.int` gets translated into `ref.types.int` (returns itself)
-         *
-         * Throws an Error if no valid "type" object could be determined. Most `ref`
-         * functions use this function under the hood, so anywhere a "type" object is
-         * expected, a String may be passed as well, including simply setting the
-         * `buffer.type` property.
-         *
-         * ```
-         * var type = ref.coerceType('int **');
-         *
-         * console.log(type.indirection);
-         * 3
-         * ```
-         *
-         * @param {Object|String} type The "type" Object or String to coerce.
-         * @return {Object} A "type" object
-         */
+
 
         exports.coerceType = function coerceType (type) {
             var rtn = type
@@ -16602,13 +13677,7 @@
             return rtn
         }
 
-        /**
-         * Returns the "type" property of the given Buffer.
-         * Creates a default type for the buffer when none exists.
-         *
-         * @param {Buffer} buffer The Buffer instance to get the "type" object from.
-         * @return {Object} The "type" object from the given Buffer.
-         */
+
 
         exports.getType = function getType (buffer) {
             if (!buffer.type) {
@@ -16626,18 +13695,7 @@
             return exports.coerceType(buffer.type)
         }
 
-        /**
-         * Calls the `get()` function of the Buffer's current "type" (or the
-         * passed in _type_ if present) at the given _offset_.
-         *
-         * This function handles checking the "indirection" level and returning a
-         * proper "dereferenced" Bufffer instance when necessary.
-         *
-         * @param {Buffer} buffer The Buffer instance to read from.
-         * @param {Number} offset (optional) The offset on the Buffer to start reading from. Defaults to 0.
-         * @param {Object|String} type (optional) The "type" object to use when reading. Defaults to calling `getType()` on the buffer.
-         * @return {?} Whatever value the "type" used when reading returns.
-         */
+
 
         exports.get = function get (buffer, offset, type) {
             if (!offset) {
@@ -16662,18 +13720,7 @@
             }
         }
 
-        /**
-         * Calls the `set()` function of the Buffer's current "type" (or the
-         * passed in _type_ if present) at the given _offset_.
-         *
-         * This function handles checking the "indirection" level writing a pointer rather
-         * than calling the `set()` function if the indirection is greater than 1.
-         *
-         * @param {Buffer} buffer The Buffer instance to write to.
-         * @param {Number} offset The offset on the Buffer to start writing to.
-         * @param {?} value The value to write to the Buffer instance.
-         * @param {Object|String} type (optional) The "type" object to use when reading. Defaults to calling `getType()` on the buffer.
-         */
+
 
         exports.set = function set (buffer, offset, value, type) {
             if (!offset) {
@@ -16694,19 +13741,7 @@
         }
 
 
-        /**
-         * Returns a new Buffer instance big enough to hold `type`,
-         * with the given `value` written to it.
-         *
-         * ``` js
-         * var intBuf = ref.alloc(ref.types.int)
-         * var int_with_4 = ref.alloc(ref.types.int, 4)
-         * ```
-         *
-         * @param {Object|String} type The "type" object to allocate. Strings get coerced first.
-         * @param {?} value (optional) The initial value set on the returned Buffer, using _type_'s `set()` function.
-         * @return {Buffer} A new Buffer instance with it's `type` set to "type", and (optionally) "value" written to it.
-         */
+
 
         exports.alloc = function alloc (_type, value) {
             var type = exports.coerceType(_type)
@@ -16726,22 +13761,7 @@
             return buffer
         }
 
-        /**
-         * Returns a new `Buffer` instance with the given String written to it with the
-         * given encoding (defaults to __'utf8'__). The buffer is 1 byte longer than the
-         * string itself, and is NUL terminated.
-         *
-         * ```
-         * var buf = ref.allocCString('hello world');
-         *
-         * console.log(buf.toString());
-         * 'hello world\u0000'
-         * ```
-         *
-         * @param {String} string The JavaScript string to be converted to a C string.
-         * @param {String} encoding (optional) The encoding to use for the C string. Defaults to __'utf8'__.
-         * @return {Buffer} The new `Buffer` instance with the specified String wrtten to it, and a trailing NUL byte.
-         */
+
 
         exports.allocCString = function allocCString (string, encoding) {
             if (null == string || (Buffer.isBuffer(string) && exports.isNull(string))) {
@@ -16754,18 +13774,7 @@
             return buffer
         }
 
-        /**
-         * Writes the given string as a C String (NULL terminated) to the given buffer
-         * at the given offset. "encoding" is optional and defaults to __'utf8'__.
-         *
-         * Unlike `readCString()`, this function requires the buffer to actually have the
-         * proper length.
-         *
-         * @param {Buffer} buffer The Buffer instance to write to.
-         * @param {Number} offset The offset of the buffer to begin writing at.
-         * @param {String} string The JavaScript String to write that will be written to the buffer.
-         * @param {String} encoding (optional) The encoding to read the C string as. Defaults to __'utf8'__.
-         */
+
 
         exports.writeCString = function writeCString (buffer, offset, string, encoding) {
             assert(Buffer.isBuffer(buffer), 'expected a Buffer as the first argument')
@@ -16815,20 +13824,7 @@
             }
         }
 
-        /**
-         * `ref()` accepts a Buffer instance and returns a new Buffer
-         * instance that is "pointer" sized and has its data pointing to the given
-         * Buffer instance. Essentially the created Buffer is a "reference" to the
-         * original pointer, equivalent to the following C code:
-         *
-         * ``` c
-         * char *buf = buffer;
-         * char **ref = &buf;
-         * ```
-         *
-         * @param {Buffer} buffer A Buffer instance to create a reference to.
-         * @return {Buffer} A new Buffer instance pointing to _buffer_.
-         */
+
 
         exports.ref = function ref (buffer) {
             debug('creating a reference to buffer', buffer)
@@ -16836,41 +13832,14 @@
             return exports.alloc(type, buffer)
         }
 
-        /**
-         * Accepts a Buffer instance and attempts to "dereference" it.
-         * That is, first it checks the `indirection` count of _buffer_'s "type", and if
-         * it's greater than __1__ then it merely returns another Buffer, but with one
-         * level less `indirection`.
-         *
-         * When _buffer_'s indirection is at __1__, then it checks for `buffer.type`
-         * which should be an Object with its own `get()` function.
-         *
-         * ```
-         * var buf = ref.alloc('int', 6);
-         *
-         * var val = ref.deref(buf);
-         * console.log(val);
-         * 6
-         * ```
-         *
-         *
-         * @param {Buffer} buffer A Buffer instance to dereference.
-         * @return {?} The returned value after dereferencing _buffer_.
-         */
+
 
         exports.deref = function deref (buffer) {
             debug('dereferencing buffer', buffer)
             return exports.get(buffer)
         }
 
-        /**
-         * Attaches _object_ to _buffer_ such that it prevents _object_ from being garbage
-         * collected until _buffer_ does.
-         *
-         * @param {Buffer} buffer A Buffer instance to attach _object_ to.
-         * @param {Object|Buffer} object An Object or Buffer to prevent from being garbage collected until _buffer_ does.
-         * @api private
-         */
+
 
         exports._attach = function _attach (buf, obj) {
             if (!buf._refs) {
@@ -16879,35 +13848,11 @@
             buf._refs.push(obj)
         }
 
-        /**
-         * Same as `ref.writeObject()`, except that this version does not _attach_ the
-         * Object to the Buffer, which is potentially unsafe if the garbage collector
-         * runs.
-         *
-         * @param {Buffer} buffer A Buffer instance to write _object_ to.
-         * @param {Number} offset The offset on the Buffer to start writing at.
-         * @param {Object} object The Object to be written into _buffer_.
-         * @api private
-         */
+
 
         exports._writeObject = exports.writeObject
 
-        /**
-         * Writes a pointer to _object_ into _buffer_ at the specified _offset.
-         *
-         * This function "attaches" _object_ to _buffer_ to prevent it from being garbage
-         * collected.
-         *
-         * ```
-         * var buf = ref.alloc('Object');
-         * ref.writeObject(buf, 0, { foo: 'bar' });
-         *
-         * ```
-         *
-         * @param {Buffer} buffer A Buffer instance to write _object_ to.
-         * @param {Number} offset The offset on the Buffer to start writing at.
-         * @param {Object} object The Object to be written into _buffer_.
-         */
+
 
         exports.writeObject = function writeObject (buf, offset, obj, persistent) {
             debug('writing Object to buffer', buf, offset, obj, persistent)
@@ -16915,35 +13860,11 @@
             exports._attach(buf, obj)
         }
 
-        /**
-         * Same as `ref.writePointer()`, except that this version does not attach
-         * _pointer_ to _buffer_, which is potentially unsafe if the garbage collector
-         * runs.
-         *
-         * @param {Buffer} buffer A Buffer instance to write _pointer to.
-         * @param {Number} offset The offset on the Buffer to start writing at.
-         * @param {Buffer} pointer The Buffer instance whose memory address will be written to _buffer_.
-         * @api private
-         */
+
 
         exports._writePointer = exports.writePointer
 
-        /**
-         * Writes the memory address of _pointer_ to _buffer_ at the specified _offset_.
-         *
-         * This function "attaches" _object_ to _buffer_ to prevent it from being garbage
-         * collected.
-         *
-         * ```
-         * var someBuffer = new Buffer('whatever');
-         * var buf = ref.alloc('pointer');
-         * ref.writePointer(buf, 0, someBuffer);
-         * ```
-         *
-         * @param {Buffer} buffer A Buffer instance to write _pointer to.
-         * @param {Number} offset The offset on the Buffer to start writing at.
-         * @param {Buffer} pointer The Buffer instance whose memory address will be written to _buffer_.
-         */
+
 
         exports.writePointer = function writePointer (buf, offset, ptr) {
             debug('writing pointer to buffer', buf, offset, ptr)
@@ -16951,32 +13872,11 @@
             exports._attach(buf, ptr)
         }
 
-        /**
-         * Same as `ref.reinterpret()`, except that this version does not attach
-         * _buffer_ to the returned Buffer, which is potentially unsafe if the
-         * garbage collector runs.
-         *
-         * @param {Buffer} buffer A Buffer instance to base the returned Buffer off of.
-         * @param {Number} size The `length` property of the returned Buffer.
-         * @param {Number} offset The offset of the Buffer to begin from.
-         * @return {Buffer} A new Buffer instance with the same memory address as _buffer_, and the requested _size_.
-         * @api private
-         */
+
 
         exports._reinterpret = exports.reinterpret
 
-        /**
-         * Returns a new Buffer instance with the specified _size_, with the same memory
-         * address as _buffer_.
-         *
-         * This function "attaches" _buffer_ to the returned Buffer to prevent it from
-         * being garbage collected.
-         *
-         * @param {Buffer} buffer A Buffer instance to base the returned Buffer off of.
-         * @param {Number} size The `length` property of the returned Buffer.
-         * @param {Number} offset The offset of the Buffer to begin from.
-         * @return {Buffer} A new Buffer instance with the same memory address as _buffer_, and the requested _size_.
-         */
+
 
         exports.reinterpret = function reinterpret (buffer, size, offset) {
             debug('reinterpreting buffer to "%d" bytes', size)
@@ -16985,42 +13885,11 @@
             return rtn
         }
 
-        /**
-         * Same as `ref.reinterpretUntilZeros()`, except that this version does not
-         * attach _buffer_ to the returned Buffer, which is potentially unsafe if the
-         * garbage collector runs.
-         *
-         * @param {Buffer} buffer A Buffer instance to base the returned Buffer off of.
-         * @param {Number} size The number of sequential, aligned `NULL` bytes that are required to terminate the buffer.
-         * @param {Number} offset The offset of the Buffer to begin from.
-         * @return {Buffer} A new Buffer instance with the same memory address as _buffer_, and a variable `length` that is terminated by _size_ NUL bytes.
-         * @api private
-         */
+
 
         exports._reinterpretUntilZeros = exports.reinterpretUntilZeros
 
-        /**
-         * Accepts a `Buffer` instance and a number of `NULL` bytes to read from the
-         * pointer. This function will scan past the boundary of the Buffer's `length`
-         * until it finds `size` number of aligned `NULL` bytes.
-         *
-         * This is useful for finding the end of NUL-termintated array or C string. For
-         * example, the `readCString()` function _could_ be implemented like:
-         *
-         * ```
-         * function readCString (buf) {
- *   return ref.reinterpretUntilZeros(buf, 1).toString('utf8')
- * }
-         * ```
-         *
-         * This function "attaches" _buffer_ to the returned Buffer to prevent it from
-         * being garbage collected.
-         *
-         * @param {Buffer} buffer A Buffer instance to base the returned Buffer off of.
-         * @param {Number} size The number of sequential, aligned `NULL` bytes are required to terminate the buffer.
-         * @param {Number} offset The offset of the Buffer to begin from.
-         * @return {Buffer} A new Buffer instance with the same memory address as _buffer_, and a variable `length` that is terminated by _size_ NUL bytes.
-         */
+
 
         exports.reinterpretUntilZeros = function reinterpretUntilZeros (buffer, size, offset) {
             debug('reinterpreting buffer to until "%d" NULL (0) bytes are found', size)
@@ -17033,11 +13902,7 @@
 // the built-in "types"
         var types = exports.types = {}
 
-        /**
-         * The `void` type.
-         *
-         * @section types
-         */
+
 
         types.void = {
             size: 0
@@ -17051,9 +13916,7 @@
             }
         }
 
-        /**
-         * The `int8` type.
-         */
+
 
         types.int8 = {
             size: exports.sizeof.int8
@@ -17069,9 +13932,7 @@
             }
         }
 
-        /**
-         * The `uint8` type.
-         */
+
 
         types.uint8 = {
             size: exports.sizeof.uint8
@@ -17087,9 +13948,7 @@
             }
         }
 
-        /**
-         * The `int16` type.
-         */
+
 
         types.int16 = {
             size: exports.sizeof.int16
@@ -17102,9 +13961,7 @@
             }
         }
 
-        /**
-         * The `uint16` type.
-         */
+
 
         types.uint16 = {
             size: exports.sizeof.uint16
@@ -17117,9 +13974,7 @@
             }
         }
 
-        /**
-         * The `int32` type.
-         */
+
 
         types.int32 = {
             size: exports.sizeof.int32
@@ -17132,9 +13987,7 @@
             }
         }
 
-        /**
-         * The `uint32` type.
-         */
+
 
         types.uint32 = {
             size: exports.sizeof.uint32
@@ -17147,9 +14000,7 @@
             }
         }
 
-        /**
-         * The `int64` type.
-         */
+
 
         types.int64 = {
             size: exports.sizeof.int64
@@ -17162,9 +14013,7 @@
             }
         }
 
-        /**
-         * The `uint64` type.
-         */
+
 
         types.uint64 = {
             size: exports.sizeof.uint64
@@ -17177,9 +14026,7 @@
             }
         }
 
-        /**
-         * The `float` type.
-         */
+
 
         types.float = {
             size: exports.sizeof.float
@@ -17192,9 +14039,7 @@
             }
         }
 
-        /**
-         * The `double` type.
-         */
+
 
         types.double = {
             size: exports.sizeof.double
@@ -17223,14 +14068,7 @@
             }
         }
 
-        /**
-         * The `CString` (a.k.a `"string"`) type.
-         *
-         * CStrings are a kind of weird thing. We say it's `sizeof(char *)`, and
-         * `indirection` level of 1, which means that we have to return a Buffer that
-         * is pointer sized, and points to a some utf8 string data, so we have to create
-         * a 2nd "in-between" buffer.
-         */
+
 
         types.CString = {
             size: exports.sizeof.pointer
@@ -17279,77 +14117,29 @@
          *
          */
 
-        /**
-         * The `byte` type.
-         *
-         * @name byte
-         */
 
-        /**
-         * The `char` type.
-         *
-         * @name char
-         */
 
-        /**
-         * The `uchar` type.
-         *
-         * @name uchar
-         */
 
-        /**
-         * The `short` type.
-         *
-         * @name short
-         */
 
-        /**
-         * The `ushort` type.
-         *
-         * @name ushort
-         */
 
-        /**
-         * The `int` type.
-         *
-         * @name int
-         */
 
-        /**
-         * The `uint` type.
-         *
-         * @name uint
-         */
 
-        /**
-         * The `long` type.
-         *
-         * @name long
-         */
 
-        /**
-         * The `ulong` type.
-         *
-         * @name ulong
-         */
 
-        /**
-         * The `longlong` type.
-         *
-         * @name longlong
-         */
 
-        /**
-         * The `ulonglong` type.
-         *
-         * @name ulonglong
-         */
 
-        /**
-         * The `size_t` type.
-         *
-         * @name size_t
-         */
+
+
+
+
+
+
+
+
+
+
+
+
 
 // "typedef"s for the variable-sized types
         ;[ 'bool', 'byte', 'char', 'uchar', 'short', 'ushort', 'int', 'uint', 'long'
@@ -17411,210 +14201,137 @@
 
         exports.NULL.type = exports.types.void
 
-        /**
-         * `NULL_POINTER` is a pointer-sized `Buffer` instance pointing to `NULL`.
-         * Conceptually, it's equivalent to the following C code:
-         *
-         * ``` c
-         * char *null_pointer;
-         * null_pointer = NULL;
-         * ```
-         *
-         * @type Buffer
-         */
+
 
         exports.NULL_POINTER = exports.ref(exports.NULL)
 
-        /**
-         * All these '...' comment blocks below are for the documentation generator.
-         *
-         * @section buffer
-         */
+
 
         Buffer.prototype.address = function address () {
             return exports.address(this, 0)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.hexAddress = function hexAddress () {
             return exports.hexAddress(this, 0)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.isNull = function isNull () {
             return exports.isNull(this, 0)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.ref = function ref () {
             return exports.ref(this)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.deref = function deref () {
             return exports.deref(this)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.readObject = function readObject (offset) {
             return exports.readObject(this, offset)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.writeObject = function writeObject (obj, offset) {
             return exports.writeObject(this, offset, obj)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.readPointer = function readPointer (offset, size) {
             return exports.readPointer(this, offset, size)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.writePointer = function writePointer (ptr, offset) {
             return exports.writePointer(this, offset, ptr)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.readCString = function readCString (offset) {
             return exports.readCString(this, offset)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.writeCString = function writeCString (string, offset, encoding) {
             return exports.writeCString(this, offset, string, encoding)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.readInt64BE = function readInt64BE (offset) {
             return exports.readInt64BE(this, offset)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.writeInt64BE = function writeInt64BE (val, offset) {
             return exports.writeInt64BE(this, offset, val)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.readUInt64BE = function readUInt64BE (offset) {
             return exports.readUInt64BE(this, offset)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.writeUInt64BE = function writeUInt64BE (val, offset) {
             return exports.writeUInt64BE(this, offset, val)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.readInt64LE = function readInt64LE (offset) {
             return exports.readInt64LE(this, offset)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.writeInt64LE = function writeInt64LE (val, offset) {
             return exports.writeInt64LE(this, offset, val)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.readUInt64LE = function readUInt64LE (offset) {
             return exports.readUInt64LE(this, offset)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.writeUInt64LE = function writeUInt64LE (val, offset) {
             return exports.writeUInt64LE(this, offset, val)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.reinterpret = function reinterpret (size, offset) {
             return exports.reinterpret(this, size, offset)
         }
 
-        /**
-         * ...
-         */
+
 
         Buffer.prototype.reinterpretUntilZeros = function reinterpretUntilZeros (size, offset) {
             return exports.reinterpretUntilZeros(this, size, offset)
         }
 
-        /**
-         * `ref` overwrites the default `Buffer#inspect()` function to include the
-         * hex-encoded memory address of the Buffer instance when invoked.
-         *
-         * This is simply a nice-to-have.
-         *
-         * **Before**:
-         *
-         * ``` js
-         * console.log(new Buffer('ref'));
-         * <Buffer 72 65 66>
-         * ```
-         *
-         * **After**:
-         *
-         * ``` js
-         * console.log(new Buffer('ref'));
-         * <Buffer@0x103015490 72 65 66>
-         * ```
-         */
+
 
         Buffer.prototype.inspect = overwriteInspect(Buffer.prototype.inspect)
 
@@ -19558,12 +16275,12 @@
 // 11. Expected to throw an error:
 // assert.throws(block, Error_opt, message_opt);
 
-    assert.throws = function(block, /*optional*/error, /*optional*/message) {
+    assert.throws = function(block, error, message) {
         _throws.apply(this, [true].concat(pSlice.call(arguments)));
     };
 
 // EXTENSION! This is annoying to write outside this module.
-    assert.doesNotThrow = function(block, /*optional*/message) {
+    assert.doesNotThrow = function(block, message) {
         _throws.apply(this, [false].concat(pSlice.call(arguments)));
     };
 
@@ -19585,7 +16302,7 @@
          * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
          * @license  MIT
          */
-        /* eslint-disable no-proto */
+
 
         var base64 = require('base64-js')
         var ieee754 = require('ieee754')
@@ -19650,18 +16367,7 @@
                 : 0x3fffffff
         }
 
-        /**
-         * Class: Buffer
-         * =============
-         *
-         * The Buffer constructor returns instances of `Uint8Array` that are augmented
-         * with function properties for all the node `Buffer` API functions. We use
-         * `Uint8Array` so that square bracket notation works as expected -- it returns
-         * a single octet.
-         *
-         * By augmenting the instances, we can avoid modifying the `Uint8Array`
-         * prototype.
-         */
+
         function Buffer (arg) {
             if (!(this instanceof Buffer)) {
                 // Avoid going through an ArgumentsAdaptorTrampoline in the common case.
@@ -20892,10 +17598,7 @@
             return this
         }
 
-        /**
-         * Creates a new `ArrayBuffer` with the *copied* memory of the buffer instance.
-         * Added in Node 0.12. Only available in browsers that support ArrayBuffer.
-         */
+
         Buffer.prototype.toArrayBuffer = function toArrayBuffer () {
             if (typeof Uint8Array !== 'undefined') {
                 if (Buffer.TYPED_ARRAY_SUPPORT) {
@@ -20917,9 +17620,7 @@
 
         var BP = Buffer.prototype
 
-        /**
-         * Augment a Uint8Array *instance* (not the Uint8Array class!) with Buffer methods
-         */
+
         Buffer._augment = function _augment (arr) {
             arr.constructor = Buffer
             arr._isBuffer = true
@@ -21339,15 +18040,11 @@
 
 },{}],128:[function(require,module,exports){
 
-    /**
-     * isArray
-     */
+
 
     var isArray = Array.isArray;
 
-    /**
-     * toString
-     */
+
 
     var str = Object.prototype.toString;
 
@@ -22162,14 +18859,8 @@
         };
 
 
-        /**
-         * Echos the value of a value. Trys to print the value out
-         * in the best way possible given the different types.
-         *
-         * @param {Object} obj The object to print out.
-         * @param {Object} opts Optional options object that alters the output.
-         */
-        /* legacy: obj, showHidden, depth, colors*/
+
+
         function inspect(obj, opts) {
             // default options
             var ctx = {
@@ -22602,19 +19293,7 @@
         };
 
 
-        /**
-         * Inherit the prototype methods from one constructor into another.
-         *
-         * The Function.prototype.inherits from lang.js rewritten as a standalone
-         * function (not on Function.prototype). NOTE: If this file is to be loaded
-         * during bootstrapping this function needs to be rewritten using some native
-         * functions as prototype setup using normal JavaScript does not work as
-         * expected during bootstrapping (see mirror.js in r114903).
-         *
-         * @param {function} ctor Constructor function which needs to inherit the
-         *     prototype.
-         * @param {function} superCtor Constructor function to inherit prototype from.
-         */
+
         exports.inherits = require('inherits');
 
         exports._extend = function(origin, add) {

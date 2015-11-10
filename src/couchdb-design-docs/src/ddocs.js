@@ -14,6 +14,7 @@ var query = {
 };
 var query_dev = {
     views: require('./query_dev/views'),
+
     lists: {
         "crf-train": function (head, req) {
             var row;
@@ -60,11 +61,7 @@ var docs = {
             "views": (stringifyFunctions(query_dev.views)),
             "rewrites": [],
             "language": "javascript",
-            "lists": stringifyFunctions(query_dev.lists),
-            "lib": {
-                "natural": fs.readFileSync(__dirname + '/natural.js', {encoding: 'utf-8'}),
-                "crfTokenizer": fs.readFileSync(__dirname + '/crf_tokenizer.js', {encoding: 'utf-8'})
-            }
+            "lists": stringifyFunctions(query_dev.lists)
         }
     ]
 };
