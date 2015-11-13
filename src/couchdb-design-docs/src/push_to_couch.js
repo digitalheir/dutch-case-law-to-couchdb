@@ -1,5 +1,5 @@
 var PouchDB = require('pouchdb');
-var ddocs = require('./ddocs');
+var ddocs = require('./ddocs/ddocs');
 var secret = require('./secret');
 
 var db = new PouchDB("http://" + secret.username + ".cloudant.com/docs", {

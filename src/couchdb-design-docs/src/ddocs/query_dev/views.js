@@ -1,4 +1,3 @@
-var stringifyFunctions = require('../stringifyFunctions');
 var fs = require('fs');
 
 
@@ -98,7 +97,7 @@ var functions = {
 
             }
         }
-        ,reduce: "_sum"
+        , reduce: "_sum"
     },
     docs_with_image: {
         map: function (doc) {
@@ -142,6 +141,18 @@ var functions = {
                 //    ], 0
                 //);
 
+            }
+        },
+        reduce: "_sum"
+    },
+    document_fields: {
+        map: function (doc) {
+            if (doc.corpus == 'Rechtspraak.nl') {
+                for (var field in doc) {
+                    if (doc.hasOwnProperty(field)) {
+                        emit([field, doc._id], 1);
+                    }
+                }
             }
         },
         reduce: "_sum"

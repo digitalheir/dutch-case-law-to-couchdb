@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 var functions = {
     parents_of_nr: {
         map: function (doc) {
@@ -36,10 +38,8 @@ var functions = {
         reduce: "_sum"
     },
     words_in_title: {
-
         map: function (doc) {
             function hasTag(obj, tag) {
-                //console.log(obj);
                 if (typeof obj == "object") {
                     for (var field in obj) {
                         if (obj.hasOwnProperty(field)) {
@@ -54,8 +54,13 @@ var functions = {
                 return false;
             }
 
-            if (doc.simplifiedContent && hasTag(doc.simplifiedContent)) {
-                var nat = require('views/lib/natural');
+            if (doc.simplifiedContent && hasTag(doc.simplifiedContent, "title")) {
+                var nat = null;
+                try {
+                    nat = require('views/lib/natural');
+                } catch (err) {
+                    nat = require('natural');
+                }
                 var tokenizer = new nat.WordPunctTokenizer();
 
                 var emitRecursive = function (o) {
@@ -87,7 +92,7 @@ var functions = {
                     }
                 };
 
-                emitTokensInTitle(doc.simplifiedContent);
+                emitTitleTokens(doc.simplifiedContent);
             }
         },
         reduce: "_sum"
@@ -128,7 +133,8 @@ var functions = {
             if (doc.simplifiedContent) {
                 var tts = getNrs(doc.simplifiedContent);
                 for (var i = 0; i < tts.length; i++) {
-                    emit([tts[i], doc._id].toLowerCase(), 1);
+                    var token = tts[i].toLowerCase();
+                    emit([token, doc._id], 1);
                 }
             }
         },
@@ -155,18 +161,24 @@ var functions = {
                 for (var tagName in o) {
                     if (o.hasOwnProperty(tagName)) {
                         if (tagName == "title") {
-                            if (typeof o == 'string') {
-                                titles.push(o);
+                            //TODO split from nr
+                            var obj = o[tagName];
+                            if (typeof obj == 'string') {
+                                titles.push(obj);
                             } else {
-                                for (var i = 0; i < o.length; i++) {
-                                    if (typeof o[i] == 'string') {
-                                        titles.push(o[i]);
+                                for (var i = 0; i < obj.length; i++) {
+                                    if (typeof obj[i] == 'string') {
+                                        titles.push(obj[i]);
                                     }
                                 }
                             }
                         } else {
                             if (typeof o[tagName] == 'object') {
                                 // Append titles for inner object to titles object
+                                //console.log("apply " );
+                                //
+                                //console.log(getTitles(o[tagName]))
+                                //console.log("to" );
                                 titles.push.apply(titles, getTitles(o[tagName]));
                             }
                         }
@@ -178,7 +190,8 @@ var functions = {
             if (doc.simplifiedContent) {
                 var tts = getTitles(doc.simplifiedContent);
                 for (var i = 0; i < tts.length; i++) {
-                    emit([tts[i].toLowerCase(), doc._id], 1);
+                    var token = tts[i].toLowerCase();
+                    emit([token, doc._id], 1);
                 }
             }
         },
@@ -216,7 +229,11 @@ var functions = {
 
             }
         }
-        ,reduce: "_sum"
+        , reduce: "_sum"
+    },
+    lib: {
+        "natural": fs.readFileSync('./natural.min.js', {encoding: 'utf-8'}),
+        "crfTokenizer": fs.readFileSync('./crf_tokenizer.min.js', {encoding: 'utf-8'})
     }
 };
 

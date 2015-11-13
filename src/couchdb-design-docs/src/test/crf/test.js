@@ -1,5 +1,5 @@
 var assert = require('assert');
-var views = require('../../crf/views');
+var views = require('../../ddocs/crf/views');
 var doc = require('../doc/doc');
 var doc_rich = require('../doc/doc_rich');
 var doc_hoge_raad = require('../doc/doc_hoge_raad');

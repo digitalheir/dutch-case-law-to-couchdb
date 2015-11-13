@@ -1,4 +1,3 @@
-var stringifyFunctions = require('../stringifyFunctions');
 var fs = require('fs');
 
 

@@ -1,6 +1,6 @@
 var assert = require('assert');
-var indexes = require('../../query/indexes');
-var views = require('../../query/views');
+var indexes = require('../../ddocs/query/indexes');
+var views = require('../../ddocs/query/views');
 var doc = require('../doc/doc');
 
 var example_index =

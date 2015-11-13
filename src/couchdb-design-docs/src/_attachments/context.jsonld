@@ -17,9 +17,34 @@
         "owl": "http://www.w3.org/2002/07/owl#",
         "lawly":"http://www.lawly.eu/vocab#",
         "ECLI": "http://rechtspraak.lawly.nl/id/ECLI:",
-        "foaf:page": {
-            "@type": "@id"
-        },
+
+
+
+        "about":"foaf:page",
+        "abstract":"dcterms:abstract",
+        "accessRights":"dcterms:accessRights",
+        "contentModified":"dcterms:modified",
+        "coverage":"dcterms:coverage",
+        "creator":"dcterms:creator",
+        "date":"dcterms:date",
+        "hasVersion":"dcterms:hasVersion",
+
+        "issued":"dcterms:issued",
+        "language":"dcterms:language",
+        "procedure":"psi:procedure",
+        "references":"dcterms:references",
+        "replaces":"dcterms:replaces",
+        "replaces":"dcterms:replaces",
+        "spatial":"dcterms:spatial",
+        "subject":"dcterms:subject",
+        "title":"dcterms:title",
+        "type":"dcterms:type",
+        "zaaknummer":"psi:zaaknummer",
+
+
+
+
+
         "dcterms:source": {
             "@type": "@id"
         },
