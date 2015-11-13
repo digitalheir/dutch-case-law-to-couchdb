@@ -167,6 +167,40 @@ var functions = {
             }
         },
         reduce: "_sum"
+    },
+    docs_with_section_tag: {
+        map: function (doc) {
+            function hasSectionTag(o) {
+                for (var f in o) {
+                    if (o.hasOwnProperty(f)) {
+                        if (f.match(/section/g)) {
+                            return true;
+                        } else {
+                            if (typeof o[f] == 'object' &&
+                                hasSectionTag(o[f])) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            if (doc.corpus == 'Rechtspraak.nl') {
+                var hasS = hasSectionTag(doc.simplifiedContent);
+                var d = new Date(doc['date']);
+                emit(
+                    [
+                        hasS,
+                        d.getFullYear(),
+                        d.getMonth() + 1,
+                        d.getDate()
+                    ], 1
+                );
+
+            }
+        }
+        ,reduce: "_sum"
     }
 };
 

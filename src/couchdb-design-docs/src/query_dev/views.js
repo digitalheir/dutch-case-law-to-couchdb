@@ -95,19 +95,10 @@ var functions = {
                         d.getDate()
                     ], 1
                 );
-                //emit(
-                //    [
-                //        !isMarkedUp,
-                //        d.getFullYear(),
-                //        d.getMonth() + 1,
-                //        d.getDate()
-                //    ], 0
-                //);
 
             }
         }
-        ,
-        reduce: "_sum"
+        ,reduce: "_sum"
     },
     docs_with_image: {
         map: function (doc) {

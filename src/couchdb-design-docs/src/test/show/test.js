@@ -6,12 +6,8 @@ var example = "<!DOCTYPE html><html><head><title>ECLI:NL:GHAMS:2002:AF3970</titl
 
 
 describe('show', function () {
-    describe('shows', function () {
-        describe('show', function () {
-            it('should show correctly', function () {
-                //console.log(JSON.stringify(shows.context(doc)));
-                assert.equal(example, shows.show(doc));
-            });
-        });
+    it('should show correctly', function () {
+        //console.log(JSON.stringify(shows.context(doc)));
+        assert.equal(example, shows.show(doc));
     });
-});    
+});

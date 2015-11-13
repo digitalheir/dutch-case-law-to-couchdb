@@ -1,5 +1,5 @@
 var assert = require('assert');
-var views = require('../../query_dev/views');
+var views = require('../../stats/views');
 var doc = require('../doc/doc');
 var doc_rich = require('../doc/doc_rich');
 var doc_hoge_raad = require('../doc/doc_hoge_raad');
@@ -32,7 +32,7 @@ function testSecondaryViewOnDocs(f, docs) {
     return emitted;
 }
 
-describe('query_dev', function () {
+describe('stats', function () {
     it('should emit doc that has section tag', function () {
         var emitted = testSecondaryViewOnDocs(views.docs_with_section_tag, [doc, doc_rich]);
 
@@ -44,21 +44,4 @@ describe('query_dev', function () {
         //assert.equal(emitted[1][0][0], true);
         //assert.equal(emitted[1][1], 0);
     });
-    it('should emit doc with image', function () {
-        var emitted = testSecondaryViewOnDocs(views.docs_with_image, [doc_with_image, doc_rich]);
-        assert.equal(emitted.length, 1);
-        //assert.equal(emitted[0][0][0], true);
-        //assert.equal(emitted[0][1], 1);
-    });
-    it('should index hoge raad', function () {
-        var emitted = testSecondaryView(views.hoge_raad_by_date, doc_hoge_raad);
-        assert.equal(emitted.length, 1);
-        assert.equal(emitted[0][0][0], 1984);
-        assert.equal(emitted[0][0][1], 1);
-        assert.equal(emitted[0][0][2], 17);
-    });
-    it('should index ecli_last_modified', function () {
-        //assert.equal(true, true);
-    });
-
 });
