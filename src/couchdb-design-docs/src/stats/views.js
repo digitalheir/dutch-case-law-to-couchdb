@@ -1,13 +1,28 @@
 var functions = {
-    parentsOfNr: {
-        map: function (doc, tagName) {
-            var emitNrParents = function (o) {
+    parents_of_nr: {
+        map: function (doc) {
+            var property = function (key) {
+                return function (obj) {
+                    return obj == null ? void 0 : obj[key];
+                };
+            };
+            var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+            var getLength = property('length');
+            var isArrayLike = function (collection) {
+                var length = getLength(collection);
+                return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+            };
+
+            var emitNrParents = function (o, tagName) {
                 for (var field in o) {
                     if (o.hasOwnProperty(field)) {
                         if (field == 'nr') {
                             emit([doc._id, tagName], 1);
+                        } else if (isArrayLike(o[field])) {
+                            for (var i = 0; i < o[field].length; i += 1) {
+                                emitNrParents(o[field][i], tagName);
+                            }
                         } else if (typeof o[field] == 'object') {
-                            //TODO is arraylike
                             emitNrParents(o[field], field);
                         }
                     }
@@ -20,7 +35,7 @@ var functions = {
         },
         reduce: "_sum"
     },
-    wordsInTitle: {
+    words_in_title: {
 
         map: function (doc) {
             function hasTag(obj, tag) {
@@ -47,7 +62,8 @@ var functions = {
                     if (typeof o == 'string') {
                         var tokens = tokenizer.tokenize(o);
                         for (var i = 0; i < tokens.length; i++) {
-                            emit([tokens[i], doc._id], 1);
+                            var token = tokens[i].toLowerCase().trim();
+                            emit([token, doc._id], 1);
                         }
                     } else if (typeof o == 'object') {
                         for (var field in o) {
@@ -76,7 +92,7 @@ var functions = {
         },
         reduce: "_sum"
     },
-    sectionNrs: {
+    section_nrs: {
         map: function (doc) {
             function getString(o) {
                 if (typeof o == 'string') {
@@ -118,7 +134,7 @@ var functions = {
         },
         reduce: "_sum"
     },
-    sectionTitles: {
+    section_titles: {
         map: function (doc) {
             function getString(o) {
                 if (typeof o == 'string') {
