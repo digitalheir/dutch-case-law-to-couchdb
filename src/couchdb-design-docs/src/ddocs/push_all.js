@@ -1,15 +1,11 @@
 var fs = require('fs');
+var push = require('./push_to_couch');
 
-var docs = {
-    "docs": [
+push([
         require("./show"),
         require("./stats"),
         require("./query"),
         require("./query_dev"),
         require("./crf")
     ]
-};
-
-//console.log(docs[3]);
-
-module.exports = docs;
+);

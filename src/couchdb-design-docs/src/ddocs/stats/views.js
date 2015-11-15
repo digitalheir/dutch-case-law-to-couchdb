@@ -142,57 +142,33 @@ var functions = {
     },
     section_titles: {
         map: function (doc) {
-            function getString(o) {
+            function emitAllStrings(o) {
                 if (typeof o == 'string') {
-                    return o;
-                } else {
-                    var sb = [];
-                    for (var i in o) {
-                        if (o.hasOwnProperty(i)) {
-                            sb.push(getString(o[i]));
-                        }
-                    }
-                    return sb.join('');
+                    emit([o.toLowerCase(),doc._id],1);
+                } else  if (typeof o == 'object'){
+			for (var i in o) {
+                            if (o.hasOwnProperty(i)) {
+				emitAllStrings(o[i]);
                 }
+}
+}
             }
 
-            function getTitles(o) {
-                var titles = [];
+            function emitTitles(o) {
                 for (var tagName in o) {
                     if (o.hasOwnProperty(tagName)) {
-                        if (tagName == "title") {
-                            //TODO split from nr
-                            var obj = o[tagName];
-                            if (typeof obj == 'string') {
-                                titles.push(obj);
-                            } else {
-                                for (var i = 0; i < obj.length; i++) {
-                                    if (typeof obj[i] == 'string') {
-                                        titles.push(obj[i]);
-                                    }
-                                }
-                            }
-                        } else {
-                            if (typeof o[tagName] == 'object') {
-                                // Append titles for inner object to titles object
-                                //console.log("apply " );
-                                //
-                                //console.log(getTitles(o[tagName]))
-                                //console.log("to" );
-                                titles.push.apply(titles, getTitles(o[tagName]));
-                            }
-                        }
+			var obj = o[tagName];
+                         if (tagName == "title") {
+				emitAllStrings(obj);
+                         } else if (typeof obj == 'object'){
+				emitTitles(obj);
+                         }
                     }
                 }
-                return titles;
             }
 
             if (doc.simplifiedContent) {
-                var tts = getTitles(doc.simplifiedContent);
-                for (var i = 0; i < tts.length; i++) {
-                    var token = tts[i].toLowerCase();
-                    emit([token, doc._id], 1);
-                }
+                emitTitles(doc.simplifiedContent);
             }
         },
         reduce: "_sum"
