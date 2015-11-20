@@ -2,6 +2,36 @@ var functions = {
     search: {
         analyzer: "standard",
         index: function (doc) {
+            var nodeTypes = {
+                1: "element",
+                2: "attribute",
+                3: "text",
+                4: "cdata_section",
+                5: "entity_reference",
+                6: "entity",
+                7: "processing_instruction",
+                8: "comment",
+                9: "document",
+                10: "document_type",
+                11: "document_fragment",
+                12: "notation"
+            };
+            var getChildren = function (node) {
+                if (nodeTypes[node[0]].match(/element|document/)) {
+                    return node[1];
+                } else {
+                    return undefined;
+                }
+            };
+
+            var getTagName = function (node) {
+                if (nodeTypes[node[0]] == "element") {
+                    return node[2];
+                } else {
+                    return undefined;
+                }
+            };
+
             function indexDate(allWords) {
                 if (doc["date"]) {
                     var date = doc["date"];
@@ -52,24 +82,23 @@ var functions = {
 
             }
 
-            function addXmlTxt(o, strings) {
-                if (typeof o == 'string') {
-                    if (o.trim().length > 0) {
-                        strings.push(o.trim());
+            function addXmlTxt(node, strings) {
+                if (typeof node == 'string') {
+                    if (node.trim().length > 0) {
+                        strings.push(node.trim());
                     }
-                } else if (typeof o == 'object') {
-                    for (var field in o) {
-                        if (o.hasOwnProperty(field)) {
-                            addXmlTxt(o[field], strings)
-                        }
+                } else if (getChildren(node)) {
+                    var cs = getChildren(node);
+                    for (var i = 0; i < cs.length; i++) {
+                        addXmlTxt(cs[i], strings)
                     }
                 }
             }
 
             function getXmlFullText() {
                 var strings = [];
-                if (doc.simplifiedContent) {
-                    addXmlTxt(doc.simplifiedContent, strings);
+                if (doc.xml) {
+                    addXmlTxt(doc.xml, strings);
                 }
                 return strings.join(" ");
             }

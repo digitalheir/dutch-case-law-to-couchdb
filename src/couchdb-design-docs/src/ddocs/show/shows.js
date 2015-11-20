@@ -8,7 +8,7 @@ var functions = {
             var url = "https://rechtspraak.cloudant.com/ecli/" + doc._id;
             html += "<tr><td>URL</td><td><a href=\"" + url + "\">" + url + "</a></td></tr>";
             for (var field in doc) {
-                if (doc.hasOwnProperty(field) && field != 'simplifiedContent') {
+                if (doc.hasOwnProperty(field) && field != 'simplifiedContent' && field != 'xml') {
                     var value = doc[field];
                     if (value.hasOwnProperty('@value')) {
                         value = value['@value'];

@@ -37,7 +37,7 @@ describe('crf', function () {
         it('should tokenize', function () {
             var t = require('../../crf_tokenizer');
             var nat = require('../../natural');
-            var tokens = t.tokenize(new nat.WordPunctTokenizer(), doc_rich.simplifiedContent);
+            var tokens = t.tokenize(new nat.WordPunctTokenizer(), doc_rich.xml);
             assert.equal(tokens.length, 1213);
         });
 

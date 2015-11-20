@@ -15,46 +15,115 @@ var functions = {
                 return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
             };
 
-            var emitNrParents = function (o, tagName) {
-                for (var field in o) {
-                    if (o.hasOwnProperty(field)) {
-                        if (field == 'nr') {
-                            emit([doc._id, tagName], 1);
-                        } else if (isArrayLike(o[field])) {
-                            for (var i = 0; i < o[field].length; i += 1) {
-                                emitNrParents(o[field][i], tagName);
-                            }
-                        } else if (typeof o[field] == 'object') {
-                            emitNrParents(o[field], field);
+            var nodeTypes = {
+                1: "element",
+                2: "attribute",
+                3: "text",
+                4: "cdata_section",
+                5: "entity_reference",
+                6: "entity",
+                7: "processing_instruction",
+                8: "comment",
+                9: "document",
+                10: "document_type",
+                11: "document_fragment",
+                12: "notation"
+            };
+
+            var getChildren = function (node) {
+                if (nodeTypes[node[0]].match(/element|document/)) {
+                    return node[1];
+                } else {
+                    return undefined;
+                }
+            };
+
+            var getTagName = function (node) {
+                if (nodeTypes[node[0]] == "element") {
+                    return node[2];
+                } else {
+                    return undefined;
+                }
+            };
+
+            var emitNrParents = function (node) {
+                var children = getChildren(node);
+                if (children && children.length > 0) {
+                    for (var i = 0; i < children.length; i++) {
+                        if (getTagName(children[i]) == "nr") {
+                            emit([getTagName(node), doc._id], 1);
+                        } else {
+                            emitNrParents(children[i]);
                         }
                     }
                 }
             };
 
-            if (doc.simplifiedContent) {
-                emitNrParents(doc.simplifiedContent);
+            if (doc.xml) {
+                emitNrParents(doc.xml);
             }
         },
         reduce: "_sum"
     },
     words_in_title: {
         map: function (doc) {
-            function hasTag(obj, tag) {
-                if (typeof obj == "object") {
-                    for (var field in obj) {
-                        if (obj.hasOwnProperty(field)) {
-                            if (field == tag) {
-                                return true;
-                            } else if (hasTag(obj[field], tag)) {
-                                return true;
-                            }
+            var nodeTypes = {
+                1: "element",
+                2: "attribute",
+                3: "text",
+                4: "cdata_section",
+                5: "entity_reference",
+                6: "entity",
+                7: "processing_instruction",
+                8: "comment",
+                9: "document",
+                10: "document_type",
+                11: "document_fragment",
+                12: "notation"
+            };
+
+            var getChildren = function (node) {
+                if (nodeTypes[node[0]].match(/element|document/)) {
+                    return node[1];
+                } else {
+                    return undefined;
+                }
+            };
+
+            var getTagName = function (node) {
+                if (nodeTypes[node[0]] == "element") {
+                    return node[2];
+                } else {
+                    return undefined;
+                }
+            };
+
+
+            function hasTag(node, tagName) {
+                if (getTagName(node) == tagName) {
+                    return true;
+                } else {
+                    var cs = getChildren(node);
+                    for (var i = 0; i < cs.length; i++) {
+                        if (hasTag(cs[i], tagName)) {
+                            return true;
                         }
                     }
                 }
                 return false;
             }
 
-            if (doc.simplifiedContent && hasTag(doc.simplifiedContent, "title")) {
+            function forAllChildren(node, f) {
+                var cs = getChildren(node);
+                if (cs) {
+                    for (var ci = 0; ci < cs.length; ci++) {
+                        var child = cs[ci];
+                        f(child);
+                    }
+                }
+            }
+
+            if (doc.xml && hasTag(doc.xml, "title")) {
                 var nat = null;
                 try {
                     nat = require('views/lib/natural');
@@ -63,139 +132,92 @@ var functions = {
                 }
                 var tokenizer = new nat.WordPunctTokenizer();
 
-                var emitRecursive = function (o) {
-                    if (typeof o == 'string') {
-                        var tokens = tokenizer.tokenize(o);
+                var emitRecursive = function (node) {
+                    if (typeof node == 'string') {
+                        var tokens = tokenizer.tokenize(node);
                         for (var i = 0; i < tokens.length; i++) {
                             var token = tokens[i].toLowerCase().trim();
                             emit([token, doc._id], 1);
                         }
-                    } else if (typeof o == 'object') {
-                        for (var field in o) {
-                            if (o.hasOwnProperty(field)) {
-                                emitRecursive(o[field]);
-                            }
-                        }
+                    } else {
+                        forAllChildren(node, function (child) {
+                            emitRecursive(child);
+                        });
                     }
                 };
 
-                var emitTitleTokens = function (o) {
-                    for (var field in o) {
-                        if (o.hasOwnProperty(field)) {
-                            if (field == 'title') {
-                                emitRecursive(o[field]);
-                            } else if (typeof o[field] == 'string') {
-                            } else if (typeof o[field] == 'object') {
-                                emitTitleTokens(o[field]);
-                            }
+                var emitTitleTokens = function (node) {
+                    forAllChildren(node, function (child) {
+                        if (getTagName(child) == 'title') {
+                            emitRecursive(child);
+                        } else {
+                            emitTitleTokens(child);
                         }
-                    }
+                    });
                 };
 
-                emitTitleTokens(doc.simplifiedContent);
+                emitTitleTokens(doc.xml);
             }
         },
         reduce: "_sum"
     },
     section_nrs: {
         map: function (doc) {
-            function getString(o) {
-                if (typeof o == 'string') {
-                    return o;
-                } else {
-                    var sb = [];
-                    for (var i in o) {
-                        if (o.hasOwnProperty(i)) {
-                            sb.push(getString(o[i]));
-                        }
-                    }
-                    return sb.join('');
-                }
-            }
+            var xml = require('views/lib/xml');
 
-            function getNrs(o) {
-                var titles = [];
-                for (var tagName in o) {
-                    if (o.hasOwnProperty(tagName)) {
-                        if (tagName == "nr") {
-                            titles.push(getString(o[tagName]));
+            var elementToEmitFrom = 'nr';
+
+            if (xml.hasTag(doc.xml, elementToEmitFrom)) {
+                var nat = null;
+                try {
+                    nat = require('views/lib/natural');
+                } catch (err) {
+                    nat = require('natural');
+                }
+                var tokenizer = new nat.WordPunctTokenizer();
+
+                var emitRecursive = function (node) {
+                    if (typeof node == 'string') {
+                        var tokens = tokenizer.tokenize(node);
+                        for (var i = 0; i < tokens.length; i++) {
+                            var token = tokens[i].toLowerCase().trim();
+                            emit([token, doc._id], 1);
+                        }
+                    } else {
+                        xml.forAllChildren(node, function (child) {
+                            emitRecursive(child);
+                        });
+                    }
+                };
+
+                var emitNrTokens = function (node) {
+                    xml.forAllChildren(node, function (child) {
+                        if (xml.getTagName(node) == elementToEmitFrom) {
+                            emitRecursive(node);
                         } else {
-                            if (typeof o[tagName] == 'object') {
-                                // Append titles for inner object to titles object
-                                titles.push.apply(titles, getNrs(o[tagName]));
-                            }
+                            emitNrTokens(child);
                         }
-                    }
-                }
-                return titles;
-            }
+                    });
+                };
 
-            if (doc.simplifiedContent) {
-                var tts = getNrs(doc.simplifiedContent);
-                for (var i = 0; i < tts.length; i++) {
-                    var token = tts[i].toLowerCase();
-                    emit([token, doc._id], 1);
-                }
-            }
-        },
-        reduce: "_sum"
-    },
-    section_titles: {
-        map: function (doc) {
-            function emitAllStrings(o) {
-                if (typeof o == 'string') {
-                    emit([o.toLowerCase(),doc._id],1);
-                } else  if (typeof o == 'object'){
-			for (var i in o) {
-                            if (o.hasOwnProperty(i)) {
-				emitAllStrings(o[i]);
-                }
-}
-}
-            }
-
-            function emitTitles(o) {
-                for (var tagName in o) {
-                    if (o.hasOwnProperty(tagName)) {
-			var obj = o[tagName];
-                         if (tagName == "title") {
-				emitAllStrings(obj);
-                         } else if (typeof obj == 'object'){
-				emitTitles(obj);
-                         }
-                    }
-                }
-            }
-
-            if (doc.simplifiedContent) {
-                emitTitles(doc.simplifiedContent);
+                emitNrTokens(doc.xml);
             }
         },
         reduce: "_sum"
     },
     docs_with_section_tag: {
         map: function (doc) {
-            function hasSectionTag(o) {
-                for (var f in o) {
-                    if (o.hasOwnProperty(f)) {
-                        if (f.match(/section/g)) {
-                            return true;
-                        } else {
-                            if (typeof o[f] == 'object' &&
-                                hasSectionTag(o[f])) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-                return false;
+            var xml = null;
+            try {
+                require('views/lib/xml');
+            } catch (err) {
+                require('./xml_util');
             }
 
-            if (doc.corpus == 'Rechtspraak.nl') {
-                var hasS = hasSectionTag(doc.simplifiedContent);
+            if (doc.xml) {
+                var hasS = xml.hasTag(doc.xml, "section");
                 var d = new Date(doc['date']);
-                emit(
-                    [
+                emit([
                         hasS,
                         d.getFullYear(),
                         d.getMonth() + 1,
@@ -207,9 +229,30 @@ var functions = {
         }
         , reduce: "_sum"
     },
+    docs_with_image: {
+        map: function (doc) {
+            var xml = null;
+            try {
+                require('views/lib/xml');
+            } catch (err) {
+                require('./xml_util');
+            }
+
+            if (doc.xml) {
+                var hasS = xml.hasTag(doc.xml, "imageobject");
+                emit([
+                        hasS,
+                        doc._id
+                    ], 1
+                );
+            }
+        }
+        , reduce: "_sum"
+    },
     lib: {
         "natural": fs.readFileSync('./natural.min.js', {encoding: 'utf-8'}),
-        "crfTokenizer": fs.readFileSync('./crf_tokenizer.min.js', {encoding: 'utf-8'})
+        "crfTokenizer": fs.readFileSync('./crf_tokenizer.min.js', {encoding: 'utf-8'}),
+        "xml": fs.readFileSync('./xml_util.js', {encoding: 'utf-8'})
     }
 };
 
