@@ -34,8 +34,8 @@ var functions = {
         }
     },
     lib: {
-        "natural": fs.readFileSync('./natural.min.js', {encoding: 'utf-8'}),
-        "crfTokenizer": fs.readFileSync('./crf_tokenizer.min.js', {encoding: 'utf-8'})
+        "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),
+        "crfTokenizer": fs.readFileSync('../crf_tokenizer.min.js', {encoding: 'utf-8'})
     }
 };
 

@@ -34,7 +34,7 @@ var functions = {
                 if (nodeTypes[node[0]].match(/element|document/)) {
                     return node[1];
                 } else {
-                    return undefined;
+                    return null;
                 }
             };
 
@@ -42,7 +42,7 @@ var functions = {
                 if (nodeTypes[node[0]] == "element") {
                     return node[2];
                 } else {
-                    return undefined;
+                    return null;
                 }
             };
 
@@ -86,7 +86,7 @@ var functions = {
                 if (nodeTypes[node[0]].match(/element|document/)) {
                     return node[1];
                 } else {
-                    return undefined;
+                    return null;
                 }
             };
 
@@ -94,7 +94,7 @@ var functions = {
                 if (nodeTypes[node[0]] == "element") {
                     return node[2];
                 } else {
-                    return undefined;
+                    return null;
                 }
             };
 
@@ -250,9 +250,9 @@ var functions = {
         , reduce: "_sum"
     },
     lib: {
-        "natural": fs.readFileSync('./natural.min.js', {encoding: 'utf-8'}),
-        "crfTokenizer": fs.readFileSync('./crf_tokenizer.min.js', {encoding: 'utf-8'}),
-        "xml": fs.readFileSync('./xml_util.js', {encoding: 'utf-8'})
+        "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),
+        "crfTokenizer": fs.readFileSync('../crf_tokenizer.min.js', {encoding: 'utf-8'}),
+        "xml": fs.readFileSync('../xml_util.js', {encoding: 'utf-8'})
     }
 };
 

@@ -20,6 +20,15 @@ var functions = {
         },
         reduce: '_count'
     },
+    has_simplified_content: {
+        map: function (doc) {
+            if (doc.simplifiedContent) {
+                emit([doc._id, doc._rev], 1
+                );
+            }
+        },
+        reduce: '_count'
+    },
     document_fields: {
         map: function (doc) {
             if (doc.corpus == 'Rechtspraak.nl') {

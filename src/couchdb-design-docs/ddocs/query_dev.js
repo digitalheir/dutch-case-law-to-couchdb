@@ -1,4 +1,4 @@
-var stringifyFunctions = require('./../stringifyFunctions');
+var stringifyFunctions = require('../stringifyFunctions');
 
 var query_dev = {
     views: require('./query_dev/views')

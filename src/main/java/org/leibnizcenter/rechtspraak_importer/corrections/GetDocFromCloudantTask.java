@@ -4,7 +4,7 @@ import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.Response;
 import generated.OpenRechtspraak;
 import org.leibnizcenter.rechtspraak.*;
-import org.leibnizcenter.rechtspraak_importer.Credentials;
+import org.leibnizcenter.rechtspraak_importer.*;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.xpath.XPathExpressionException;
@@ -14,14 +14,18 @@ import java.net.URI;
 /**
  * Retrieve document from Cloudant; downloads the original XML and creates a new CouchDoc. Used when something has
  * gone wrong in the Cloudant database and we need te reset our docs from original XML.
- *
+ * <p>
  * Created by maarten on 5-10-15.
  */
-public class GetDocFromCloudantTask implements java.util.concurrent.Callable<CouchDoc> {
+public class GetDocFromCloudantTask implements java.util.concurrent.Callable<Nil> {
     private final String ecli;
+    private final RsImporter.BulkHandler bulkHandler;
+    private final String _rev;
 
-    public GetDocFromCloudantTask(String ecli) {
+    public GetDocFromCloudantTask(String ecli, String _rev, RsImporter.BulkHandler bh) {
+        this.bulkHandler = bh;
         this.ecli = ecli;
+        this._rev = _rev;
     }
 
     public static Response request(String ecli) throws IOException, JAXBException, XPathExpressionException {
@@ -31,13 +35,19 @@ public class GetDocFromCloudantTask implements java.util.concurrent.Callable<Cou
     }
 
     public static String getXmlUrl(String ecli) {
-        return Credentials.COUCH_URL + "/"+Credentials.DB_NAME+"/" + ecli + "/data.xml";
+        return Credentials.COUCH_URL + "/" + Credentials.DB_NAME + "/" + ecli + "/data.xml";
     }
 
-
     @Override
-    public CouchDoc call() throws Exception {
-        com.squareup.okhttp.Response res = CouchInterface.request(ecli.trim());
+    public Nil call() throws Exception {
+        CouchDoc doc = getDoc();
+        doc._rev = _rev;
+        bulkHandler.addToBulkQueue(doc);
+        return null;
+    }
+
+    public CouchDoc getDoc() throws Exception {
+        Response res = CouchInterface.request(ecli.trim());
         String strXml = res.body().string();
         OpenRechtspraak or = RechtspraakNlInterface.parseXml(strXml);
         return new CouchDoc(or, strXml);

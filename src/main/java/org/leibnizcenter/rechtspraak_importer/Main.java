@@ -1,7 +1,5 @@
 package org.leibnizcenter.rechtspraak_importer;
 
-import org.leibnizcenter.rechtspraak_importer.Importer;
-
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
@@ -15,9 +13,9 @@ public class Main implements Executor {
 
     public static void main(String[] args) {
         System.out.println("Starting importer service");
-        Importer i = null;
+        ImportUnknownFromSearchFeed i = null;
         try {
-            i = new Importer();
+            i = new ImportUnknownFromSearchFeed();
             i.run();
         } catch (IOException e) {
             throw new Error(e);

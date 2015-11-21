@@ -24,10 +24,12 @@ var forAllChildren = function (node, f) {
 };
 var getChildren = function (node) {
     if (node) {
-        if (nodeTypes[node[0]].match(/element|document/)) {
-            return node[1];
+        if (nodeTypes[node[0]] == "element") {
+            return node[2];
+        } else if (nodeTypes[node[0]] == "document") {
+            return node[2];
         } else {
-            return undefined;
+            return null;
         }
     }
 };
@@ -36,7 +38,7 @@ var getTagName = function (node) {
         if (nodeTypes[node[0]] == "element") {
             return node[2];
         } else {
-            return undefined;
+            return null;
         }
     }
 };
@@ -55,10 +57,11 @@ var hasTag = function (node, tagName) {
     return false;
 };
 
-var fs = {
+module.exports = {
     nodeTypes: nodeTypes,
     getChildren: getChildren,
     getTagName: getTagName,
     forAllChildren: forAllChildren,
     hasTag: hasTag
 };
+
