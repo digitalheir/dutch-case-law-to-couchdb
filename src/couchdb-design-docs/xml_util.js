@@ -24,10 +24,11 @@ var forAllChildren = function (node, f) {
 };
 var getChildren = function (node) {
     if (node) {
-        if (nodeTypes[node[0]] == "element") {
+        var type = nodeTypes[node[0]];
+        if (type == "element") {
             return node[2];
-        } else if (nodeTypes[node[0]] == "document") {
-            return node[2];
+        } else if (type == "document") {
+            return node[1];
         } else {
             return null;
         }
@@ -36,7 +37,7 @@ var getChildren = function (node) {
 var getTagName = function (node) {
     if (node) {
         if (nodeTypes[node[0]] == "element") {
-            return node[2];
+            return node[1];
         } else {
             return null;
         }
@@ -48,11 +49,12 @@ var hasTag = function (node, tagName) {
         return true;
     } else {
         var cs = getChildren(node);
-        for (var i = 0; i < cs.length; i++) {
-            if (hasTag(cs[i], tagName)) {
-                return true;
+        if (cs)
+            for (var i = 0; i < cs.length; i++) {
+                if (hasTag(cs[i], tagName)) {
+                    return true;
+                }
             }
-        }
     }
     return false;
 };

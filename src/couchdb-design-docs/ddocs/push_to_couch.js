@@ -2,12 +2,13 @@ var PouchDB = require('pouchdb');
 var _ = require('underscore');
 var secret = require('./../secret');
 
-var db = new PouchDB("http://" + secret.username + ".cloudant.com/docs", {
+var database = new PouchDB("http://" + secret.username + ".cloudant.com/docs", {
     auth: secret
 });
 
 
-var push = function (ddocs) {
+var push = function (ddocs, db) {
+    if (!db) db = database;
     console.log("Pushing " + ddocs.length);
     db.allDocs(
         {
@@ -18,7 +19,8 @@ var push = function (ddocs) {
     ).then(function (res) {
         var revMap = {};
         res.rows.forEach(function (el) {
-            revMap[el.id] = el.value.rev;
+            if (el.value)
+                revMap[el.id] = el.value.rev;
         });
 
         ddocs.forEach(function (el) {

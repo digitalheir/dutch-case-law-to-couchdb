@@ -3,12 +3,13 @@ package org.leibnizcenter.rechtspraak_importer.corrections;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.cloudant.client.api.model.Response;
-import com.cloudant.client.api.views.Key;
-import com.cloudant.client.api.views.ViewRequest;
-import com.cloudant.client.api.views.ViewRequestBuilder;
-import com.cloudant.client.api.views.ViewResponse;
+import com.cloudant.client.api.views.*;
 import com.google.common.util.concurrent.*;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import org.json.JSONArray;
 import org.jsoup.HttpStatusException;
 import org.leibnizcenter.rechtspraak.CouchDoc;
 import org.leibnizcenter.rechtspraak.CouchInterface;
@@ -48,7 +49,7 @@ public class ResetAllFromOwnXml extends RsImporter<Nil> {
      * @throws IOException
      */
     public ResetAllFromOwnXml(int resultsPerPage, int stopAfter, int timeOut) throws IOException {
-        super(resultsPerPage, stopAfter, -1, 16, timeOut);
+        super(resultsPerPage, stopAfter, -1, 4, timeOut);
     }
 
     public static class Res extends ArrayList<String> {
@@ -59,24 +60,35 @@ public class ResetAllFromOwnXml extends RsImporter<Nil> {
     protected ListeningExecutorService addAllDocsToExecutor() {
         ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(threadNum));
 
+
+//        AllDocsRequest req = bulkHandler.docsDb.getAllDocsRequestBuilder()
+//                .keys(
+//                        "ECLI:NL:GHAMS:2002:AF3970",
+//                        "ECLI:NL:CRVB:2002:2",
+//                        "ECLI:NL:CBB:2010:BM1341",
+//                        "ECLI:NL:HR:1984:AC8252").build();
+
+
         ViewRequestBuilder b = bulkHandler.docsDb.getViewRequestBuilder("query_dev", "has_simplified_content");
-
-
-        ViewRequest<Key.ComplexKey, Integer> req = b.newPaginatedRequest(Key.Type.COMPLEX, Integer.class)
-                .stale("ok")
+        ViewRequest<Key.ComplexKey, Integer> req = b.newRequest(Key.Type.COMPLEX, Integer.class)
                 .reduce(false)
                 .build();
 
-        Gson gson = new Gson();
+        Key.ComplexKeyDeserializer desu = new Key.ComplexKeyDeserializer();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Key.ComplexKeyDeserializer.class,
+                desu).create();
+
         try {
             ViewResponse<Key.ComplexKey, Integer> res = req.getResponse();
+//            Map<String, String> res = req.getResponse().getIdsAndRevs();
             System.out.println(res.getKeys().size());
-            for (Key.ComplexKey key : res.getKeys()) {
-                Res r = gson.fromJson(key.toJson(), Res.class);
-                String ecli = r.get(0);
-                System.out.println(ecli);
+            for (Key.ComplexKey e : res.getKeys()) {
+                JsonArray json = (JsonArray) desu.serialize(e, null, null);
+                String ecli = json.get(0).getAsString();
+                String _rev = json.get(1).getAsString();
+                //System.out.println(ecli + "; " + _rev);
 
-                addTaskToGetDoc(executor, ecli, r.get(1));
+                addTaskToGetDoc(executor, ecli, _rev);
             }
         } catch (IOException e) {
             throw new Error(e);

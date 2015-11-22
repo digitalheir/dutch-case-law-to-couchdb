@@ -265,7 +265,9 @@ public class ViewQueryParameters<K, V> extends QueryParameters {
 
     public HttpGet asGetRequest() {
         URIBuilder builder = getViewURIBuilder();
-        for (Map.Entry<String, Object> queryParameter : processParameters(gson).entrySet()) {
+        Map<String, Object> params = processParameters(gson);
+        //params.put("keys", gson.toJsonTree(keys));
+        for (Map.Entry<String, Object> queryParameter : params.entrySet()) {
             builder.query(queryParameter.getKey(), queryParameter.getValue());
         }
         return new HttpGet(builder.buildEncoded());

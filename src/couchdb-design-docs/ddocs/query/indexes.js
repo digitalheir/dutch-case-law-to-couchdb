@@ -2,35 +2,12 @@ var functions = {
     search: {
         analyzer: "standard",
         index: function (doc) {
-            var nodeTypes = {
-                1: "element",
-                2: "attribute",
-                3: "text",
-                4: "cdata_section",
-                5: "entity_reference",
-                6: "entity",
-                7: "processing_instruction",
-                8: "comment",
-                9: "document",
-                10: "document_type",
-                11: "document_fragment",
-                12: "notation"
-            };
-            var getChildren = function (node) {
-                if (nodeTypes[node[0]].match(/element|document/)) {
-                    return node[1];
-                } else {
-                    return undefined;
-                }
-            };
-
-            var getTagName = function (node) {
-                if (nodeTypes[node[0]] == "element") {
-                    return node[2];
-                } else {
-                    return undefined;
-                }
-            };
+            var xml = null;
+            try {
+                xml = require('views/lib/xml');
+            } catch (err) {
+                xml = require('../xml_util.js');
+            }
 
             function indexDate(allWords) {
                 if (doc["date"]) {
@@ -87,11 +64,10 @@ var functions = {
                     if (node.trim().length > 0) {
                         strings.push(node.trim());
                     }
-                } else if (getChildren(node)) {
-                    var cs = getChildren(node);
-                    for (var i = 0; i < cs.length; i++) {
-                        addXmlTxt(cs[i], strings)
-                    }
+                } else {
+                    xml.forAllChildren(node,function(child){
+                        addXmlTxt(child, strings);
+                    });
                 }
             }
 
@@ -116,7 +92,6 @@ var functions = {
 
                 indexDate(globalString);
                 index("default", globalString.join(" "), {"store": "no"});
-
                 index("innerText", getXmlFullText(), {"store": "no"});
             }
         }

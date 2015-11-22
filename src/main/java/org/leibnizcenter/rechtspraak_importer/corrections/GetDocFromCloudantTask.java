@@ -1,8 +1,11 @@
 package org.leibnizcenter.rechtspraak_importer.corrections;
 
 import com.squareup.okhttp.HttpUrl;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import generated.OpenRechtspraak;
+import org.apache.http.HttpRequest;
 import org.leibnizcenter.rechtspraak.*;
 import org.leibnizcenter.rechtspraak_importer.*;
 
@@ -47,9 +50,16 @@ public class GetDocFromCloudantTask implements java.util.concurrent.Callable<Nil
     }
 
     public CouchDoc getDoc() throws Exception {
-        Response res = CouchInterface.request(ecli.trim());
-        String strXml = res.body().string();
-        OpenRechtspraak or = RechtspraakNlInterface.parseXml(strXml);
-        return new CouchDoc(or, strXml);
+        OkHttpClient httpClient = new OkHttpClient();
+        String url = getXmlUrl(ecli);
+        Request req = new Request.Builder().url(url).build();
+        Response res = httpClient.newCall(req).execute();
+        if (res.code() == 200) {
+            String strXml = res.body().string();
+            OpenRechtspraak or = RechtspraakNlInterface.parseXml(strXml);
+            return new CouchDoc(or, strXml);
+        } else {
+            throw new IllegalStateException("HTTP code " + res.code() + " for url " + url);
+        }
     }
 }

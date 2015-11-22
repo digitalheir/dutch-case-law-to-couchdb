@@ -125,7 +125,7 @@ public class Key {
 
         }
 
-        private ComplexKey(JsonArray json) {
+        public ComplexKey(JsonArray json) {
             this.json = json;
         }
 
