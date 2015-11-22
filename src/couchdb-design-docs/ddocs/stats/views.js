@@ -59,8 +59,10 @@ var functions = {
                     if (typeof node == 'string') {
                         var tokens = tokenizer.tokenize(node);
                         for (var i = 0; i < tokens.length; i++) {
-                            var token = tokens[i].toLowerCase().trim();
-                            emit(token, 1);
+                            var token = tokens[i].toLowerCase().replace(/\s/g,'');
+                            if (token.length > 0) {
+                                emit(token, 1);//Don't emit whitespace
+                            }
                         }
                     } else {
                         xml.forAllChildren(node, function (child) {
@@ -109,8 +111,10 @@ var functions = {
                     if (typeof node == 'string') {
                         var tokens = tokenizer.tokenize(node);
                         for (var i = 0; i < tokens.length; i++) {
-                            var token = tokens[i].toLowerCase().trim();
-                            emit(token, 1);
+                            var token = tokens[i].toLowerCase().replace(/\s/g,'');
+                            if (token.length > 0) {
+                                emit(token, 1);//Don't emit whitespace
+                            }
                         }
                     } else {
                         xml.forAllChildren(node, function (child) {
