@@ -90,8 +90,8 @@ describe('stats', function () {
         var emitted = testSecondaryViewOnDocs(stats_views.words_in_title, [doc, doc_rich]);
 
         assert.equal(emitted.length, 14);
-        assert.equal(emitted[0][0][0], 'i');
-        assert.equal(emitted[2][0][0], 'ontstaan');
+        assert.equal(emitted[0][0], 'i');
+        assert.equal(emitted[2][0], 'ontstaan');
     });
     it('should emit doc with image', function () {
         var emitted = testSecondaryViewOnDocs(stats_views.docs_with_image, [doc_with_image, doc_rich]);
@@ -136,10 +136,8 @@ describe('crf', function () {
             var t = require('../crf_tokenizer');
             var nat = require('../natural');
             var tokens = t.tokenize(new nat.WordPunctTokenizer(), doc_rich.xml);
-            assert.equal(tokens.length, 1213);
+            assert.equal(tokens.length, 1596);
         });
-
-
     });
 
 });
@@ -174,13 +172,14 @@ describe('query', function () {
         f(doc);
 
         it('should index like we expect', function () {
-            ////console.log(typeof  indexesMap.innerText[0].startsWith);
-            //assert.equal(indexesMap.innerText[0].substring(0, 'arrestnummer'.length), 'arrestnummer');
-            ////console.log(JSON.stringify(indexesMap));
-            //assert.equal(example_index.subject[0], indexesMap.subject[0]);
-            //assert.equal(example_index.abstract[0], indexesMap.abstract[0]);
-            //assert.equal(example_index.title[0], indexesMap.title[0]);
-            //assert.equal(example_index.ecli[0], indexesMap.ecli[0]);
+            //console.log(typeof  indexesMap.innerText[0].startsWith);
+            //console.log(indexesMap.innerText)
+            assert.equal(indexesMap.innerText[0].substring(0, 'arrestnummer'.length), 'arrestnummer');
+            //console.log(JSON.stringify(indexesMap));
+            assert.equal(example_index.subject[0], indexesMap.subject[0]);
+            assert.equal(example_index.abstract[0], indexesMap.abstract[0]);
+            assert.equal(example_index.title[0], indexesMap.title[0]);
+            assert.equal(example_index.ecli[0], indexesMap.ecli[0]);
         });
     });
 

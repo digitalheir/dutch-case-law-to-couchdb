@@ -15,11 +15,21 @@ var functions = {
             //    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
             //};
 
+
             var xml = null;
             try {
                 xml = require('views/lib/xml');
             } catch (err) {
                 xml = require('../xml_util.js');
+            }
+            function emitNrParents(node) {
+                xml.forAllChildren(node, function (child) {
+                    if (xml.getTagName(child) == 'nr') {
+                        emit([xml.getTagName(node), doc._id], 1);
+                    }
+
+                    emitNrParents(child);
+                });
             }
 
             if (doc.xml) {

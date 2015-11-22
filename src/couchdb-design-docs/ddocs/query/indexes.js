@@ -65,16 +65,35 @@ var functions = {
                         strings.push(node.trim());
                     }
                 } else {
-                    xml.forAllChildren(node,function(child){
+                    xml.forAllChildren(node, function (child) {
                         addXmlTxt(child, strings);
                     });
                 }
             }
 
+            function getContentNode(node) {
+                var n = null;
+                xml.forAllChildren(node, function (child) {
+                    var tag = xml.getTagName(child);
+                    if (tag && tag.match(/uitspraak|conclusie/i)) {
+                        n = child;
+                    } else {
+                        if (!n) {
+                            var a = getContentNode(child);
+                            if (a) {
+                                n = a;
+                            }
+                        }
+                    }
+                });
+                return n;
+            }
+
             function getXmlFullText() {
                 var strings = [];
                 if (doc.xml) {
-                    addXmlTxt(doc.xml, strings);
+                    var n = getContentNode(doc.xml);
+                    addXmlTxt(n, strings);
                 }
                 return strings.join(" ");
             }
