@@ -5,11 +5,12 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import generated.OpenRechtspraak;
-import org.apache.http.HttpRequest;
-import org.leibnizcenter.rechtspraak.CouchDoc;
 import org.leibnizcenter.rechtspraak.DocumentRequest;
 import org.leibnizcenter.rechtspraak.RechtspraakNlInterface;
-import org.leibnizcenter.rechtspraak_importer.*;
+import org.leibnizcenter.rechtspraak_importer.Credentials;
+import org.leibnizcenter.rechtspraak_importer.Nil;
+import org.leibnizcenter.rechtspraak_importer.RsImporter;
+import org.leibnizcenter.rechtspraak_importer.model.CouchDoc;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.xpath.XPathExpressionException;
@@ -59,9 +60,11 @@ public class GetDocFromCloudantTask implements java.util.concurrent.Callable<Nil
         if (res.code() == 200) {
             String strXml = res.body().string();
             OpenRechtspraak or = RechtspraakNlInterface.parseXml(strXml);
-            return new CouchDoc(or, strXml);
+            return new org.leibnizcenter.rechtspraak_importer.model.CouchDoc(or, strXml);
         } else {
             throw new IllegalStateException("HTTP code " + res.code() + " for url " + url);
         }
     }
+
+
 }

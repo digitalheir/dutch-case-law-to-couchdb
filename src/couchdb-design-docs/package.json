@@ -3,7 +3,7 @@
   "homepage": "http://documentcloud.github.com/underscore/",
   "author": "Maarten Trompper <m.f.a.trompper@uva.nl>",
   "dependencies": {
-    "mocha": "^2.3.3",
+    "mocha": "^2.3.4",
     "natural": "^0.2.1",
     "pouchdb": "^5.0.0"
   },
@@ -18,5 +18,7 @@
   "main": "push_to_couch.js",
   "private": true,
   "license": "MIT",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "devDependencies": {
+  }
 }

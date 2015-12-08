@@ -3,21 +3,19 @@ package org.leibnizcenter.rechtspraak_importer;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.cloudant.client.api.model.Response;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import org.jsoup.HttpStatusException;
-import org.leibnizcenter.rechtspraak.CouchDoc;
 import org.leibnizcenter.rechtspraak.CouchInterface;
+import org.leibnizcenter.rechtspraak_importer.model.CouchDoc;
 
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -26,23 +24,20 @@ import java.util.concurrent.TimeoutException;
  * Created by Maarten on 21-11-2015.
  */
 public abstract class RsImporter<T> implements Runnable {
-    final List<String> failed = Collections.synchronizedList(new ArrayList<>());
     public final int stopAfter;
     /**
      * Maximum number of results to return from search interface
      */
     public final int resultsPerPage;
-    final int startAt;
-
+    public final int timeOut;
     /**
      * Arbitrary number of threads
      */
     protected final int threadNum;
-    public final int timeOut;
-
-
     protected final BulkHandler bulkHandler;
     protected final List<ListenableFuture<T>> futures = Collections.synchronizedList(new ArrayList<>(5000));
+    final List<String> failed = Collections.synchronizedList(new ArrayList<>());
+    final int startAt;
 
     public RsImporter() throws IOException {
         this(1000, 0 /*+ 300 * 1000*/, -1, 16, 12 * 60 * 60);
@@ -123,13 +118,11 @@ public abstract class RsImporter<T> implements Runnable {
     public class BulkHandler {
 
         private static final int MAX_BULK_SIZE = 500;
-
+        public final List<CouchDoc> addToBulkQueue = Collections.synchronizedList(new ArrayList<>(500));
+        public final Database docsDb;
+        private final CloudantClient client;
         private int sizeKb;
         private int maxSizeMb = 10;
-        public final List<CouchDoc> addToBulkQueue = Collections.synchronizedList(new ArrayList<>(500));
-
-        private final CloudantClient client;
-        public final Database docsDb;
 
         public BulkHandler() throws IOException {
             String username = Credentials.USERNAME;

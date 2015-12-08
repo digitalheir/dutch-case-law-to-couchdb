@@ -1,8 +1,8 @@
 package org.leibnizcenter.rechtspraak_importer;
 
 import generated.OpenRechtspraak;
-import org.leibnizcenter.rechtspraak.CouchDoc;
 import org.leibnizcenter.rechtspraak.RechtspraakNlInterface;
+import org.leibnizcenter.rechtspraak_importer.model.CouchDoc;
 
 /**
  * Retrieves the document with given ecli from Rechtspraak.nl and transforms it into a

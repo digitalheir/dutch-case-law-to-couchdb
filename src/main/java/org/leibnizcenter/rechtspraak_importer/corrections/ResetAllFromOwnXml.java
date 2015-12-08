@@ -1,24 +1,23 @@
 package org.leibnizcenter.rechtspraak_importer.corrections;
 
-import com.cloudant.client.api.CloudantClient;
-import com.cloudant.client.api.Database;
-import com.cloudant.client.api.model.Response;
-import com.cloudant.client.api.views.*;
-import com.google.common.util.concurrent.*;
+import com.cloudant.client.api.views.Key;
+import com.cloudant.client.api.views.ViewRequest;
+import com.cloudant.client.api.views.ViewRequestBuilder;
+import com.cloudant.client.api.views.ViewResponse;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import org.json.JSONArray;
-import org.jsoup.HttpStatusException;
-import org.leibnizcenter.rechtspraak.CouchDoc;
-import org.leibnizcenter.rechtspraak.CouchInterface;
-import org.leibnizcenter.rechtspraak.SearchRequest;
-import org.leibnizcenter.rechtspraak_importer.*;
+import org.leibnizcenter.rechtspraak_importer.Nil;
+import org.leibnizcenter.rechtspraak_importer.RsImporter;
 
 import java.io.IOException;
-import java.net.SocketException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
@@ -28,14 +27,6 @@ import java.util.concurrent.Future;
  * @author Maarten
  */
 public class ResetAllFromOwnXml extends RsImporter<Nil> {
-    public static void main(String[] args) {
-        try {
-            new ResetAllFromOwnXml().run();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private final Set<Future> waitingForDocFutures = new HashSet<>(5000);
 
     public ResetAllFromOwnXml() throws IOException {
@@ -52,8 +43,12 @@ public class ResetAllFromOwnXml extends RsImporter<Nil> {
         super(resultsPerPage, stopAfter, -1, 4, timeOut);
     }
 
-    public static class Res extends ArrayList<String> {
-
+    public static void main(String[] args) {
+        try {
+            new ResetAllFromOwnXml().run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -116,5 +111,9 @@ public class ResetAllFromOwnXml extends RsImporter<Nil> {
 
     public BulkHandler getBulkHandler() {
         return bulkHandler;
+    }
+
+    public static class Res extends ArrayList<String> {
+
     }
 }
