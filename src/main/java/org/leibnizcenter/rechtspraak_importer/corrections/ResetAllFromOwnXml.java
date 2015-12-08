@@ -1,23 +1,14 @@
 package org.leibnizcenter.rechtspraak_importer.corrections;
 
-import com.cloudant.client.api.CloudantClient;
-import com.cloudant.client.api.Database;
-import com.cloudant.client.api.model.Response;
 import com.cloudant.client.api.views.*;
 import com.google.common.util.concurrent.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import org.json.JSONArray;
-import org.jsoup.HttpStatusException;
-import org.leibnizcenter.rechtspraak.CouchDoc;
-import org.leibnizcenter.rechtspraak.CouchInterface;
 import org.leibnizcenter.rechtspraak.SearchRequest;
 import org.leibnizcenter.rechtspraak_importer.*;
 
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;

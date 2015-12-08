@@ -1,25 +1,16 @@
 package org.leibnizcenter.rechtspraak_importer;
 
-import com.cloudant.client.api.CloudantClient;
-import com.cloudant.client.api.Database;
-import com.cloudant.client.api.model.Response;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.*;
-import org.jsoup.HttpStatusException;
-import org.leibnizcenter.rechtspraak.CouchDoc;
-import org.leibnizcenter.rechtspraak.CouchInterface;
+import org.leibnizcenter.rechtspraak_importer.model.CouchDoc;
 import org.leibnizcenter.rechtspraak.SearchRequest;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Class for importing Dutch case law metadata from http://www.rechtspraak.nl .
