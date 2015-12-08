@@ -114,15 +114,6 @@ public class ResetAllFromOwnXml extends RsImporter<Nil> {
         return true;
     }
 
-
-    public SearchRequest getRequest(int offset) {
-        return new SearchRequest.Builder()
-                .from(offset)
-                .max(resultsPerPage)
-                .returnType(SearchRequest.ReturnType.DOC)
-                .build();
-    }
-
     public BulkHandler getBulkHandler() {
         return bulkHandler;
     }

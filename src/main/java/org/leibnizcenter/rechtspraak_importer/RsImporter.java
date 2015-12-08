@@ -45,7 +45,7 @@ public abstract class RsImporter<T> implements Runnable {
     protected final List<ListenableFuture<T>> futures = Collections.synchronizedList(new ArrayList<>(5000));
 
     public RsImporter() throws IOException {
-        this(1000, 0 /*+ 300 * 1000*/, -1, 4, 12 * 60 * 60);
+        this(1000, 0 /*+ 300 * 1000*/, -1, 16, 12 * 60 * 60);
     }
 
     /**
@@ -125,7 +125,7 @@ public abstract class RsImporter<T> implements Runnable {
         private static final int MAX_BULK_SIZE = 500;
 
         private int sizeKb;
-        private int maxSizeMb = 15;
+        private int maxSizeMb = 10;
         public final List<CouchDoc> addToBulkQueue = Collections.synchronizedList(new ArrayList<>(500));
 
         private final CloudantClient client;

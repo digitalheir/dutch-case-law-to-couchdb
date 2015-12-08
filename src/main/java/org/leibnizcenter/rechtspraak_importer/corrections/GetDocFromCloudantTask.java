@@ -6,7 +6,9 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import generated.OpenRechtspraak;
 import org.apache.http.HttpRequest;
-import org.leibnizcenter.rechtspraak.*;
+import org.leibnizcenter.rechtspraak.CouchDoc;
+import org.leibnizcenter.rechtspraak.DocumentRequest;
+import org.leibnizcenter.rechtspraak.RechtspraakNlInterface;
 import org.leibnizcenter.rechtspraak_importer.*;
 
 import javax.xml.bind.JAXBException;
