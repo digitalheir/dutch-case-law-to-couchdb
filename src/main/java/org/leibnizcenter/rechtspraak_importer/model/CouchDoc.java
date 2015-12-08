@@ -218,9 +218,12 @@ public class CouchDoc {
     }
 
     private static String getSameAs(Description desc1, Description desc2, String ecli) {
+        Preconditions.checkNotNull(desc1);
         if (desc2 != null) {
             // desc2.getIdentifier() is the deeplink URI; desc1.getIdentifier() is the ECLI
-            Preconditions.checkState(desc2.getIdentifier().endsWith(desc1.getIdentifier()));
+            Preconditions.checkState(desc2.getIdentifier().trim().endsWith(desc1.getIdentifier()),
+                    desc2.getIdentifier() + " does not end with " + desc1.getIdentifier()
+            );
             Preconditions.checkState(desc2.getIdentifier().startsWith("http://"));
             return desc2.getIdentifier();
         } else {

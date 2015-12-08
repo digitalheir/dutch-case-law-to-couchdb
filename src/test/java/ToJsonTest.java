@@ -103,8 +103,8 @@ public class ToJsonTest {
 
                 OpenRechtspraak doc = CouchInterface.parseXml(strXml);
 
-                CouchDoc OuchDoc = new CouchDoc(doc, strXml);
-                parsedDocs.add(OuchDoc);
+                CouchDoc couchDoc = new CouchDoc(doc, strXml);
+                parsedDocs.add(couchDoc);
             }
 
             for (CouchDoc doc : parsedDocs) {
