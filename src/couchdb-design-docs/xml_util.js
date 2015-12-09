@@ -13,6 +13,7 @@ var nodeTypes = {
     12: "notation"
 };
 
+
 var forAllChildren = function (node, f) {
     var cs = getChildren(node);
     if (cs) {
@@ -21,6 +22,23 @@ var forAllChildren = function (node, f) {
             f(child);
         }
     }
+};
+var findContentNode = function (node) {
+    var found = null;
+    forAllChildren(node, function (child) {
+        var tagName = getTagName(child);
+        if (tagName) {
+            if (!tagName.match(/^rdf/)) {
+                if (tagName == "conclusie" || tagName == "uitspraak") {
+                    found = child;
+                }
+                if (!found) {
+                    found = findContentNode(child);
+                }
+            }
+        }
+    });
+    return found;
 };
 var getChildren = function (node) {
     if (node) {
@@ -35,7 +53,7 @@ var getChildren = function (node) {
     }
 };
 var getTagName = function (node) {
-    if (node) {
+    if (node && node.hasOwnProperty('length') && node.length > 1) {
         if (nodeTypes[node[0]] == "element") {
             return node[1];
         } else {
@@ -64,6 +82,7 @@ module.exports = {
     getChildren: getChildren,
     getTagName: getTagName,
     forAllChildren: forAllChildren,
-    hasTag: hasTag
+    hasTag: hasTag,
+    findContentNode: findContentNode
 };
 

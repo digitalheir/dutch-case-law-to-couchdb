@@ -5,7 +5,7 @@
   "dependencies": {
     "mocha": "^2.3.4",
     "natural": "^0.2.1",
-    "pouchdb": "^5.0.0"
+    "pouchdb": "^5.1.0"
   },
   "scripts": {
     "test": "mocha --recursive",
