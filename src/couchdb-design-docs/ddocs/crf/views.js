@@ -28,7 +28,8 @@ var functions = {
                     }
                 }
             }
-        }
+        },
+        reduce: 'count'
     },
     crfTrainTokens: {
         map: function (doc) {
@@ -53,7 +54,8 @@ var functions = {
                     }
                 }
             }
-        }
+        },
+        reduce: 'count'
     },
     lib: {
         "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),
