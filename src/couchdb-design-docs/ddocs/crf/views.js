@@ -29,7 +29,7 @@ var functions = {
                 }
             }
         },
-        reduce: 'count'
+        reduce: '_count'
     },
     crfTrainTokens: {
         map: function (doc) {
@@ -55,7 +55,7 @@ var functions = {
                 }
             }
         },
-        reduce: 'count'
+        reduce: '_count'
     },
     lib: {
         "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),
