@@ -17,7 +17,7 @@ var exampleRow = {
 var crf = {
     views: require('./crf/views'),
     lists: {
-        "crf-train": function (head, req) {
+        "mallet": function (head, req) {
             var row;
             start({
                 "headers": {
@@ -28,7 +28,6 @@ var crf = {
             function getFeatures(r) {
                 var f = [];
 
-                var str = r.string;
 
                 f.push(str);
                 //f.push(r.isPeriod ? 1 : 0);
@@ -40,14 +39,58 @@ var crf = {
             }
 
             while (row = getRow()) {
-                var token = row.value;
-                var features = getFeatures(row.value);
-                var label = token.tag.match(/^(nr|title)$/) ? token.tag : "out";
-                send(features.join(" ") + " " + label + "\n");
+                var tokens = row.value;
+                for (var i = 0; i < tokens.length; i++) {
+                    var token = tokens[i];
+                    var str = token[0];
+                    var tagName = token[1];
+                    var r = ({
+                        string: str.replace(/\s/g, ''),
+                        isPeriod: !!str.match(/^[\.]+$/),
+                        isNumber: !!str.match(/^[0-9\.]+$/),
+                        isCapitalized: !!str.match(/^[A-Z]/), //Match uppercase character
+                        label: tagName.match(/^(nr|title)$/) ? tagName : "out"
+                    });
+                    var features = getFeatures(r);
+                    send(features.join(" ") + " " + r.label + "\n");
+                }
             }
         },
-        "crf-test": function (head, req) {
-            //TODO
+        "xml": function (head, req) {
+            var row;
+            start({
+                "headers": {
+                    "Content-Type": "text/xml; charset:utf-8;"
+                }
+            });
+
+            send("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            send("<docs>\n");
+            while (row = getRow()) {
+                send("<doc>\n");
+                var tokens = row.value;
+                for (var i = 0; i < tokens.length; i++) {
+                    var token = tokens[i];
+                    var str = token[0];
+                    var tagName = token[1];
+                    var r = ({
+                        string: str.replace(/\s/g, ''),
+                        isPeriod: !!str.match(/^[\.]+$/),
+                        isNumber: !!str.match(/^[0-9\.]+$/),
+                        isCapitalized: !!str.match(/^[A-Z]/), //Match uppercase character
+                        label: tagName.match(/^(nr|title)$/) ? tagName : "out"
+                    });
+                    var strs = ["<token "];
+                    for (var field in r) {
+                        if (r.hasOwnProperty(field))
+                            strs.push(field + "='" + r[field] + "' ");
+                    }
+                    strs.push("/>\n");
+                    send(strs.join(""));
+                }
+                send("</doc>");
+            }
+            send("</docs>");
         }
     }
 };

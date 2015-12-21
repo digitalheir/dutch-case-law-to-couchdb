@@ -137,31 +137,22 @@ describe('crf', function () {
             var nat = require('../natural');
             var tokens = t.tokenize(new nat.WordPunctTokenizer(), doc_rich.xml);
             assert.equal(tokens.length, 1596);
+            assert.equal(tokens[1582][2], 'beslissing');
         });
 
         it('should emit tokens', function () {
             function testCorrectTokenization(emitted) {
+                emitted = emitted[0][1];
                 assert.equal(emitted.length, 1380);
-                assert.equal(emitted[2][0][0], 'ECLI:NL:CRVB:2002:2');
-                assert(emitted[2][0][1] === 2);
-                assert.equal(emitted[2][1].string, "99");
-                assert.equal(emitted[2][1].isNumber, true);
-                assert.equal(emitted[2][1].isPeriod, false);
-                assert.equal(emitted[2][1].isCapitalized, false);
-
-                assert.equal(emitted[66][1].string, ",");
-                assert.equal(emitted[6][1].string, "_CARRIAGE_RETURN");
-
+                assert.equal(emitted[0][0], "_RET");
                 for (var i = 0; i < emitted.length; i++) {
-                    assert(!emitted[i][1].string.match(/\s/)); //No whitespace should be kept
+                    assert(!emitted[i][0].match(/\s/)); //No whitespace should be kept
                     //console.log(i+": "+emitted[i][1].string);
                 }
             }
 
             doc_rich.useForCrf = 1;
-            testCorrectTokenization(testSecondaryView(crfViews.crfTestTokens, doc_rich));
-            doc_rich.useForCrf = 0;
-            testCorrectTokenization(testSecondaryView(crfViews.crfTrainTokens, doc_rich));
+            testCorrectTokenization(testSecondaryView(crfViews.crfTokens, doc_rich));
         });
     });
 

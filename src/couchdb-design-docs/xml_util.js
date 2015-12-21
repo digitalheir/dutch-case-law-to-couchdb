@@ -13,6 +13,12 @@ var nodeTypes = {
     12: "notation"
 };
 
+var getAttributes = function(node){
+    if(typeof node == 'object' && node[0] == nodeTypes[1]){
+        return node[3];
+    }
+    return null;
+};
 
 var forAllChildren = function (node, f) {
     var cs = getChildren(node);
