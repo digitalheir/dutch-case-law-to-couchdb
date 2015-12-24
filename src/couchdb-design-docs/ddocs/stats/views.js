@@ -59,15 +59,17 @@ var functions = {
                     if (typeof node == 'string') {
                         var tokens = tokenizer.tokenize(node);
                         for (var i = 0; i < tokens.length; i++) {
-                            var token = tokens[i].toLowerCase().replace(/\s/g,'');
+                            var token = tokens[i].toLowerCase().replace(/\s/g, '');
                             if (token.length > 0) {
                                 emit(token, 1);//Don't emit whitespace
                             }
                         }
                     } else {
-                        xml.forAllChildren(node, function (child) {
-                            emitRecursive(child);
-                        });
+                        if (xml.getTagName(node) != 'nr') {
+                            xml.forAllChildren(node, function (child) {
+                                emitRecursive(child);
+                            });
+                        }
                     }
                 };
 
@@ -111,7 +113,7 @@ var functions = {
                     if (typeof node == 'string') {
                         var tokens = tokenizer.tokenize(node);
                         for (var i = 0; i < tokens.length; i++) {
-                            var token = tokens[i].toLowerCase().replace(/\s/g,'');
+                            var token = tokens[i].toLowerCase().replace(/\s/g, '');
                             if (token.length > 0) {
                                 emit(token, 1);//Don't emit whitespace
                             }
@@ -125,8 +127,8 @@ var functions = {
 
                 var emitNrTokens = function (node) {
                     xml.forAllChildren(node, function (child) {
-                        if (xml.getTagName(node) == elementToEmitFrom) {
-                            emitRecursive(node);
+                        if (xml.getTagName(child) == elementToEmitFrom) {
+                            emitRecursive(child);
                         } else {
                             emitNrTokens(child);
                         }
@@ -138,6 +140,132 @@ var functions = {
         },
         reduce: "_sum",
         dbcopy: "word_count_nr"
+    },
+    section_roles: {
+        map: function (doc) {
+            if (doc.xml) {
+                var xml = null;
+                try {
+                    xml = require('views/lib/xml');
+                } catch (err) {
+                    xml = require('../xml_util.js');
+                }
+                //console.log('ok1')
+                var elementToEmitFrom = 'section';
+
+                if (xml.hasTag(doc.xml, elementToEmitFrom)) {
+                    //console.log('ok2')
+                    var emitRole = function (attrs) {
+                        if (attrs) {
+                            //console.log('ok3')
+                            for (var i = 0; i < attrs.length; i++) {
+                                var key = attrs[i][0];
+                                if (key == 'role') {
+                                    var val = attrs[i][1];
+                                    emit([val, doc._id], 1);
+                                }
+                            }
+                        }
+                    };
+                    var emitRoles = function (node) {
+                        xml.forAllChildren(node, function (child) {
+                            if (xml.getTagName(child) == 'section') {
+                                emitRole(child[3]);
+                            } else {
+                                emitRoles(child);
+                            }
+                        });
+                    };
+
+
+                    emitRoles(xml.findContentNode(doc.xml));
+                }
+            }
+        },
+        reduce: 'count'
+    },
+    section_titles_full: {
+        map: function (doc) {
+            var xml = null;
+            try {
+                xml = require('views/lib/xml');
+            } catch (err) {
+                xml = require('../xml_util.js');
+            }
+
+            var elementToEmitFrom = 'title';
+
+            if (xml.hasTag(doc.xml, elementToEmitFrom)) {
+                var emitRecursive = function (node) {
+                    if (typeof node == 'string') {
+                        var normalized = node.trim().toLowerCase();
+                        if (normalized.length > 0)
+                            emit([normalized, doc._id], 1);//Don't emit whitespace
+                    } else {
+                        if (xml.getTagName(node) != 'nr') { // Ignore nr tag
+
+                            xml.forAllChildren(node, function (child) {
+                                emitRecursive(child);
+                            });
+                        }
+                    }
+                };
+
+                var emitNrText = function (node) {
+                    xml.forAllChildren(node, function (child) {
+                        if (xml.getTagName(child) == elementToEmitFrom) {
+                            emitRecursive(child);
+                        } else {
+                            emitNrText(child);
+                        }
+                    });
+                };
+
+                emitNrText(doc.xml);
+            }
+        },
+        reduce: "_sum",
+        dbcopy: "string_count_title"
+    },
+    section_nrs_full: {
+        map: function (doc) {
+            var xml = null;
+            try {
+                xml = require('views/lib/xml');
+            } catch (err) {
+                xml = require('../xml_util.js');
+            }
+
+            var elementToEmitFrom = 'nr';
+
+            if (xml.hasTag(doc.xml, elementToEmitFrom)) {
+                var emitRecursive = function (node) {
+                    if (typeof node == 'string') {
+                        var normalized = node.trim().toLowerCase();
+                        if (normalized.length > 0)
+                            emit([normalized, doc._id], 1);//Don't emit whitespace
+                    } else {
+                        xml.forAllChildren(node, function (child) {
+                            emitRecursive(child);
+                        });
+                    }
+                };
+
+                var emitNrText = function (node) {
+                    xml.forAllChildren(node, function (child) {
+                        if (xml.getTagName(child) == elementToEmitFrom) {
+                            emitRecursive(child);
+                        } else {
+                            emitNrText(child);
+                        }
+                    });
+                };
+
+                emitNrText(doc.xml);
+            }
+        },
+        reduce: "_sum",
+        dbcopy: "string_count_nr"
     },
     docs_with_section_tag: {
         map: function (doc) {

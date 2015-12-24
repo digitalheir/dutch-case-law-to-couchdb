@@ -89,6 +89,7 @@ module.exports = {
     getTagName: getTagName,
     forAllChildren: forAllChildren,
     hasTag: hasTag,
-    findContentNode: findContentNode
+    findContentNode: findContentNode,
+    getAttributes:getAttributes
 };
 

@@ -51,27 +51,49 @@ var functions = {
     //    },
     //    reduce: '_count'
     //},
-    crfTokens: {
+    /*
+    * lol
+    */
+    //crfTokens: {
+    //    map: function (doc) {
+    //        function getLib(s) {
+    //            try {
+    //                return require('views/lib/' + s);
+    //            } catch (err) {
+    //                return require('../' + s + '.js');
+    //            }
+    //        }
+    //
+    //        if (doc.useForCrf) {
+    //            var xml = getLib('xml_util');
+    //            if (xml.hasTag(doc.xml, "section")) {
+    //                var crfTokenizer = getLib('crf_tokenizer');
+    //                var nat = getLib('natural');
+    //                var crfTokens = crfTokenizer.tokenize((new nat.WordPunctTokenizer()), xml.findContentNode(doc.xml));
+    //                emit([doc.useForCrf, doc._id], crfTokens);
+    //            }
+    //        }
+    //    },
+    //    reduce: '_count'
+    //},
+    xml_content: {
         map: function (doc) {
-            function getLib(s) {
-                try {
-                    return require('views/lib/' + s);
-                } catch (err) {
-                    return require('../' + s + '.js');
-                }
-            }
 
             if (doc.useForCrf) {
+                function getLib(s) {
+                    try {
+                        return require('views/lib/' + s);
+                    } catch (err) {
+                        return require('../' + s + '.js');
+                    }
+                }
+
                 var xml = getLib('xml_util');
                 if (xml.hasTag(doc.xml, "section")) {
-                    var crfTokenizer = getLib('crf_tokenizer');
-                    var nat = getLib('natural');
-                    var crfTokens = crfTokenizer.tokenize((new nat.WordPunctTokenizer()), xml.findContentNode(doc.xml));
-                    emit([doc.useForCrf,doc._id], crfTokens);
+                    emit(doc.useForCrf, xml.findContentNode(doc.xml));
                 }
             }
-        },
-        reduce: '_count'
+        }
     },
     lib: {
         "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),

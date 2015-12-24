@@ -11,6 +11,16 @@ var word_count_nr = new PouchDB("http://" + secret.username + ".cloudant.com/wor
     auth: secret
 });
 
+
+var string_count_title = new PouchDB("http://" + secret.username + ".cloudant.com/string_count_title", {
+    auth: secret
+});
+
+var string_count_nr = new PouchDB("http://" + secret.username + ".cloudant.com/string_count_nr", {
+    auth: secret
+});
+
+
 var ddoc = {
     "_id": "_design/ddoc",
     "views": {
@@ -30,3 +40,12 @@ ddoc
     ], word_count_nr
 );
 
+push([
+        ddoc
+    ], string_count_title
+);
+
+push([
+        ddoc
+    ], string_count_nr
+);
