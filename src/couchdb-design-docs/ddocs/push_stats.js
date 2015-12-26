@@ -1,4 +1,4 @@
-var fs = require('fs');
+
 var push = require('./push_to_couch');
 
 push([

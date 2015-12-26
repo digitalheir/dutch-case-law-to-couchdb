@@ -1,146 +1,6 @@
 var fs = require('fs');
 
 var functions = {
-        parents_of_nr: {
-            map: function (doc) {
-                //var property = function (key) {
-                //    return function (obj) {
-                //        return obj == null ? void 0 : obj[key];
-                //    };
-                //};
-                //var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
-                //var getLength = property('length');
-                //var isArrayLike = function (collection) {
-                //    var length = getLength(collection);
-                //    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
-                //};
-
-
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-                function emitNrParents(node) {
-                    xml.forAllChildren(node, function (child) {
-                        if (xml.getTagName(child) == 'nr') {
-                            emit([xml.getTagName(node), doc._id], 1);
-                        }
-
-                        emitNrParents(child);
-                    });
-                }
-
-                if (doc.xml) {
-                    emitNrParents(doc.xml);
-                }
-            },
-            reduce: "_sum"
-        },
-        words_in_title: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-                if (doc.xml && xml.hasTag(doc.xml, "title")) {
-                    var nat = null;
-                    try {
-                        nat = require('views/lib/natural');
-                    } catch (err) {
-                        nat = require('natural');
-                    }
-                    var tokenizer = new nat.WordPunctTokenizer();
-
-                    var emitRecursive = function (node) {
-                        if (typeof node == 'string') {
-                            var tokens = tokenizer.tokenize(node);
-                            for (var i = 0; i < tokens.length; i++) {
-                                var token = tokens[i].toLowerCase().replace(/\s/g, '');
-                                if (token.length > 0) {
-                                    emit(token, 1);//Don't emit whitespace
-                                }
-                            }
-                        } else {
-                            if (xml.getTagName(node) != 'nr') {
-                                xml.forAllChildren(node, function (child) {
-                                    emitRecursive(child);
-                                });
-                            }
-                        }
-                    };
-
-                    var emitTitleTokens = function (node) {
-                        xml.forAllChildren(node, function (child) {
-                            if (xml.getTagName(child) == 'title') {
-                                emitRecursive(child);
-                            } else {
-                                emitTitleTokens(child);
-                            }
-                        });
-                    };
-
-                    emitTitleTokens(doc.xml);
-                }
-            },
-            reduce: "_sum",
-            dbcopy: "word_count_title"
-        },
-        section_nrs: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-
-                var elementToEmitFrom = 'nr';
-
-                if (xml.hasTag(doc.xml, elementToEmitFrom)) {
-                    var nat = null;
-                    try {
-                        nat = require('views/lib/natural');
-                    } catch (err) {
-                        nat = require('natural');
-                    }
-                    var tokenizer = new nat.WordPunctTokenizer();
-
-                    var emitRecursive = function (node) {
-                        if (typeof node == 'string') {
-                            var tokens = tokenizer.tokenize(node);
-                            for (var i = 0; i < tokens.length; i++) {
-                                var token = tokens[i].toLowerCase().replace(/\s/g, '');
-                                if (token.length > 0) {
-                                    emit(token, 1);//Don't emit whitespace
-                                }
-                            }
-                        } else {
-                            xml.forAllChildren(node, function (child) {
-                                emitRecursive(child);
-                            });
-                        }
-                    };
-
-                    var emitNrTokens = function (node) {
-                        xml.forAllChildren(node, function (child) {
-                            if (xml.getTagName(child) == elementToEmitFrom) {
-                                emitRecursive(child);
-                            } else {
-                                emitNrTokens(child);
-                            }
-                        });
-                    };
-
-                    emitNrTokens(doc.xml);
-                }
-            },
-            reduce: "_sum",
-            dbcopy: "word_count_nr"
-        },
         section_roles: {
             map: function (doc) {
                 if (doc.xml) {
@@ -155,22 +15,56 @@ var functions = {
 
                     if (xml.hasTag(doc.xml, elementToEmitFrom)) {
                         //console.log('ok2')
-                        var emitRole = function (attrs) {
+                        var getRole = function (attrs) {
                             if (attrs) {
                                 //console.log('ok3')
                                 for (var i = 0; i < attrs.length; i++) {
                                     var key = attrs[i][0];
                                     if (key == 'role') {
-                                        var val = attrs[i][1];
-                                        emit([val, doc._id], 1);
+                                        return attrs[i][1];
                                     }
                                 }
                             }
+                            return null;
                         };
+
+                        /**
+                         * append all text nodes that are direct descendants (so not the inside of <nr>, for instance)
+                         * @param titleElement <title> element
+                         */
+                        function getTitleString(titleElement) {
+                            var strs = [];
+                            xml.forAllChildren(titleElement, function (childNode) {
+                                if (typeof childNode == 'string') {
+                                    strs.push(childNode.trim());
+                                }
+                            });
+                            return strs.join(' ');
+                        }
+
+                        /**
+                         * Tries to find a title node as a direct descendant of given node
+                         * @param node
+                         */
+                        function getNormalizedTitle(node) {
+                            var cs = xml.getChildren(node);
+                            if (cs) {
+                                for (var ci = 0; ci < cs.length; ci++) {
+                                    if (xml.getTagName(cs[ci]) == 'title') {
+                                        //Found title
+                                        return getTitleString(cs[ci]).trim().toLowerCase();
+                                    }
+                                }
+                            }
+                            return null;
+                        }
+
                         var emitRoles = function (node) {
                             xml.forAllChildren(node, function (child) {
                                 if (xml.getTagName(child) == 'section') {
-                                    emitRole(child[3]);
+                                    var role = child.length > 3 ? getRole(child[3]) : null;
+                                    //var title = getNormalizedTitle(child); // Title in lowercase, trimmed
+                                    emit([role], 1);
                                 } else {
                                     emitRoles(child);
                                 }
@@ -182,9 +76,9 @@ var functions = {
                     }
                 }
             },
-            reduce: 'count'
+            reduce: '_sum'
         },
-        section_titles_full: {
+        content_tags: {
             map: function (doc) {
                 var xml = null;
                 try {
@@ -193,42 +87,32 @@ var functions = {
                     xml = require('../xml_util.js');
                 }
 
-                var elementToEmitFrom = 'title';
+                //////////////////
 
-                if (xml.hasTag(doc.xml, elementToEmitFrom)) {
-                    var emitRecursive = function (node) {
-                        if (typeof node == 'string') {
-                            var normalized = node.trim().toLowerCase();
-                            if (normalized.length > 0)
-                                emit([normalized, doc._id], 1);//Don't emit whitespace
-                        } else {
-                            if (xml.getTagName(node) != 'nr') { // Ignore nr tag
+                function emitElementNames(node) {
+                    var tagName = xml.getTagName(node);
+                    if (tagName) {
+                        emit([
+                                tagName,
+                                doc._id
+                            ], 1
+                        );
+                    }
+                    xml.forAllChildren(node, function (chi) {
+                        emitElementNames(chi);
+                    });
+                }
 
-                                xml.forAllChildren(node, function (child) {
-                                    emitRecursive(child);
-                                });
-                            }
-                        }
-                    };
+                var contentNode = xml.findContentNode(doc.xml);
 
-                    var startEmit = function (node) {
-                        if (xml.getTagName(node) == elementToEmitFrom) {
-                            emitRecursive(node);
-                        } else {
-                            xml.forAllChildren(node, function (child) {
-                                    startEmit(child);
-                                }
-                            );
-                        }
-                    };
 
-                    startEmit(doc.xml);
+                if (contentNode) {
+                    emitElementNames(contentNode);
                 }
             },
-            reduce: "_sum",
-            dbcopy: "string_count_title"
+            reduce: "_sum"
         },
-        section_nrs_full: {
+        parent_elements_of_text: {
             map: function (doc) {
                 var xml = null;
                 try {
@@ -237,39 +121,33 @@ var functions = {
                     xml = require('../xml_util.js');
                 }
 
-                var elementToEmitFrom = 'nr';
+                //////////////////
 
-                if (xml.hasTag(doc.xml, elementToEmitFrom)) {
-                    var emitRecursive = function (node) {
-                        if (typeof node == 'string') {
-                            var normalized = node.trim().toLowerCase();
-                            if (normalized.length > 0)
-                                emit([normalized, doc._id], 1);//Don't emit whitespace
-                        } else {
-                            xml.forAllChildren(node, function (child) {
-                                emitRecursive(child);
-                            });
-                        }
-                    };
-
-                    var emitNrText = function (node) {
-                        xml.forAllChildren(node, function (child) {
-                            if (xml.getTagName(child) == elementToEmitFrom) {
-                                emitRecursive(child);
-                            } else {
-                                emitNrText(child);
+                function emitTextNodes(node) {
+                    var tagName = xml.getTagName(node);
+                    if (tagName) {
+                    }
+                    xml.forAllChildren(node, function (chi) {
+                        if (typeof chi == 'string') {
+                            var txt = chi.trim();
+                            if (txt.length > 0) {
+                                emit([tagName, txt, doc._id], 1)
                             }
-                        });
-                    };
-
-                    emitNrText(doc.xml);
+                        } else {
+                            emitTextNodes(chi);
+                        }
+                    });
                 }
-            }
-            ,
-            reduce: "_sum",
-            dbcopy: "string_count_nr"
-        }
-        ,
+
+                var contentNode = xml.findContentNode(doc.xml);
+
+
+                if (contentNode) {
+                    emitTextNodes(contentNode);
+                }
+            },
+            reduce: "_sum"
+        },
         docs_with_section_tag: {
             map: function (doc) {
                 var xml = null;
@@ -294,8 +172,7 @@ var functions = {
             }
             ,
             reduce: "_sum"
-        }
-        ,
+        },
         docs_with_image: {
             map: function (doc) {
                 var xml = null;
@@ -313,8 +190,7 @@ var functions = {
                         ], 1
                     );
                 }
-            }
-            ,
+            },
             reduce: "_sum"
         }
         ,
