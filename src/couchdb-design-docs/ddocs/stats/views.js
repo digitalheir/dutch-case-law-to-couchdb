@@ -52,7 +52,7 @@ var functions = {
                                 for (var ci = 0; ci < cs.length; ci++) {
                                     if (xml.getTagName(cs[ci]) == 'title') {
                                         //Found title
-                                        return getTitleString(cs[ci]).trim().toLowerCase();
+                                        return getTitleString(cs[ci]).trim().toLowerCase().replace(/[0-9]+/g, '_NUM');
                                     }
                                 }
                             }
@@ -63,8 +63,8 @@ var functions = {
                             xml.forAllChildren(node, function (child) {
                                 if (xml.getTagName(child) == 'section') {
                                     var role = child.length > 3 ? getRole(child[3]) : null;
-                                    //var title = getNormalizedTitle(child); // Title in lowercase, trimmed
-                                    emit([role], 1);
+                                    var title = getNormalizedTitle(child); // Title in lowercase, trimmed
+                                    emit([role, title], 1);
                                 } else {
                                     emitRoles(child);
                                 }
@@ -89,25 +89,28 @@ var functions = {
 
                 //////////////////
 
-                function emitElementNames(node) {
+                function countElementNames(node, counter) {
                     var tagName = xml.getTagName(node);
                     if (tagName) {
-                        emit([
-                                tagName,
-                                doc._id
-                            ], 1
-                        );
+                        if (counter[tagName]) {
+                            counter[tagName] = counter[tagName] + 1;
+                        } else {
+                            counter[tagName] = 1;
+                        }
                     }
                     xml.forAllChildren(node, function (chi) {
-                        emitElementNames(chi);
+                        countElementNames(chi, counter);
                     });
                 }
 
-                var contentNode = xml.findContentNode(doc.xml);
-
+                var contentNode = xml.findContentNode(doc.xml, {});
 
                 if (contentNode) {
-                    emitElementNames(contentNode);
+                    var counter = {};
+                    countElementNames(contentNode, counter);
+                    for (var field in counter) {
+                        if (counter.hasOwnProperty(field)) emit([field, doc._id], counter[field]);
+                    }
                 }
             },
             reduce: "_sum"
@@ -123,18 +126,24 @@ var functions = {
 
                 //////////////////
 
-                function emitTextNodes(node) {
+                function countTextNodeParents(node, counter) {
                     var tagName = xml.getTagName(node);
                     if (tagName) {
                     }
+
+
                     xml.forAllChildren(node, function (chi) {
                         if (typeof chi == 'string') {
                             var txt = chi.trim();
                             if (txt.length > 0) {
-                                emit([tagName, txt, doc._id], 1)
+                                if (counter[tagName]) {
+                                    counter[tagName] = counter[tagName] + 1
+                                } else {
+                                    counter[tagName] = 1;
+                                }
                             }
                         } else {
-                            emitTextNodes(chi);
+                            countTextNodeParents(chi, counter);
                         }
                     });
                 }
@@ -143,7 +152,11 @@ var functions = {
 
 
                 if (contentNode) {
-                    emitTextNodes(contentNode);
+                    var counter = {};
+                    countTextNodeParents(contentNode, counter);
+                    for (var field in counter) {
+                        if (counter.hasOwnProperty(field)) emit([field, doc._id], counter[field]);
+                    }
                 }
             },
             reduce: "_sum"

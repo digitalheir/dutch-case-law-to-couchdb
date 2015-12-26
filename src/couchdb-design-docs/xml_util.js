@@ -13,8 +13,8 @@ var nodeTypes = {
     12: "notation"
 };
 
-var getAttributes = function(node){
-    if(typeof node == 'object' && node[0] == nodeTypes[1]){
+var getAttributes = function (node) {
+    if (typeof node == 'object' && node[0] == nodeTypes[1]) {
         return node[3];
     }
     return null;
@@ -59,8 +59,8 @@ var getChildren = function (node) {
     }
 };
 var getTagName = function (node) {
-    if (node && node.hasOwnProperty('length') && node.length > 1) {
-        if (nodeTypes[node[0]] == "element") {
+    if (typeof node == 'object' && node.hasOwnProperty('length') && node.length > 1) {
+        if (node[0] == 1) { // nodeType is element
             return node[1];
         } else {
             return null;
@@ -90,6 +90,6 @@ module.exports = {
     forAllChildren: forAllChildren,
     hasTag: hasTag,
     findContentNode: findContentNode,
-    getAttributes:getAttributes
+    getAttributes: getAttributes
 };
 
