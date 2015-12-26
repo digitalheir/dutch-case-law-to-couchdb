@@ -61,7 +61,14 @@ var functions = {
                                 for (var ci = 0; ci < cs.length; ci++) {
                                     if (xml.getTagName(cs[ci]) == 'title') {
                                         //Found title
-                                        return getTitleString(cs[ci]).trim().toLowerCase().replace(/[0-9]+/g, '_NUM');
+                                        return getTitleString(cs[ci]).trim().toLowerCase()
+                                            .replace(/[0-9]+/g, '_NUM')
+                                            .replace(/\b(i{1,3})\b/g, '_NUM') // i, iii, iii
+                                            .replace(/\b(i?v)|(vi{0,3})\b/g, '_NUM')// iv, v, vi, vii, viii
+                                            .replace(/\b(i?x)|(xi{0,3})\b/g, '_NUM') // ix, x, xi, xii, xiii
+                                            .replace(/\s\s+/g, ' ') // replace double spaces with single space
+                                            .replace(/^\s*(_NUM\s*)+\s*[;:\.]+/g, '_NUM .') // Add space between first num and period/colon
+                                            ;
                                     }
                                 }
                             }
@@ -169,6 +176,7 @@ var functions = {
                 }
             },
             reduce: "_sum"
+            //,dbcopy: ''
         },
         docs_with_section_tag: {
             map: function (doc) {
