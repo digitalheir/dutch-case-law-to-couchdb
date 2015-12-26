@@ -29,16 +29,25 @@ var functions = {
                         };
 
                         /**
-                         * append all text nodes that are direct descendants (so not the inside of <nr>, for instance)
+                         * append all text nodes that are not descendant of <nr>
                          * @param titleElement <title> element
                          */
                         function getTitleString(titleElement) {
                             var strs = [];
-                            xml.forAllChildren(titleElement, function (childNode) {
-                                if (typeof childNode == 'string') {
-                                    strs.push(childNode.trim());
-                                }
-                            });
+
+                            function recurse(element, arr) {
+                                xml.forAllChildren(element, function (childNode) {
+                                    if (typeof childNode == 'string') {
+                                        arr.push(childNode.trim());
+                                    } else {
+                                        if (xml.getTagName(element) != 'nr') {
+                                            recurse(childNode, arr);
+                                        }
+                                    }
+                                });
+                            }
+
+                            recurse(titleElement, strs);
                             return strs.join(' ');
                         }
 
@@ -64,7 +73,7 @@ var functions = {
                                 if (xml.getTagName(child) == 'section') {
                                     var role = child.length > 3 ? getRole(child[3]) : null;
                                     var title = getNormalizedTitle(child); // Title in lowercase, trimmed
-                                    emit([role, title], 1);
+                                    emit([role, title, doc._id], 1);
                                 } else {
                                     emitRoles(child);
                                 }
