@@ -10,6 +10,14 @@ var functions = {
                     } catch (err) {
                         xml = require('../xml_util.js');
                     }
+                    var natural = null;
+                    try {
+                        natural = require('views/lib/natural');
+                    } catch (err) {
+                        natural = require('../natural.js');
+                    }
+                    var tokenizer = new natural.WordPunctTokenizer();
+
                     //console.log('ok1')
                     var elementToEmitFrom = 'section';
 
@@ -65,8 +73,8 @@ var functions = {
                                             .replace(/[0-9]+/g, '_NUM')
                                             .replace(/\b(i{1,3})\b/g, '_NUM') // i, iii, iii
                                             .replace(/\b((i?[vx])|([xv]i{0,3}))\b/g, '_NUM')// iv, v, vi, vii, viii,ix,x,xi,xii,xiii
-                                            .replace(/[;:\.]+/g, ' _PUNCT ') // normalize and separate punctation
                                             .replace(/\s\s+/g, ' ') // replace double spaces with single space
+                                            .replace(/^\s*(_NUM\s*)+\s*[;:\.]+/g, '_NUM .') // Add space between first num and period/colon
                                             ;
                                     }
                                 }
@@ -92,136 +100,8 @@ var functions = {
                 }
             },
             reduce: '_sum'
-        },
-        content_tags: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-
-                //////////////////
-
-                function countElementNames(node, counter) {
-                    var tagName = xml.getTagName(node);
-                    if (tagName) {
-                        if (counter[tagName]) {
-                            counter[tagName] = counter[tagName] + 1;
-                        } else {
-                            counter[tagName] = 1;
-                        }
-                    }
-                    xml.forAllChildren(node, function (chi) {
-                        countElementNames(chi, counter);
-                    });
-                }
-
-                var contentNode = xml.findContentNode(doc.xml, {});
-
-                if (contentNode) {
-                    var counter = {};
-                    countElementNames(contentNode, counter);
-                    for (var field in counter) {
-                        if (counter.hasOwnProperty(field)) emit([field, doc._id], counter[field]);
-                    }
-                }
-            },
-            reduce: "_sum"
-        },
-        parent_elements_of_text: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-
-                //////////////////
-
-                function countTextNodeParents(node, counter) {
-                    var tagName = xml.getTagName(node);
-                    if (tagName) {
-                    }
-
-
-                    xml.forAllChildren(node, function (chi) {
-                        if (typeof chi == 'string') {
-                            var txt = chi.trim();
-                            if (txt.length > 0) {
-                                if (counter[tagName]) {
-                                    counter[tagName] = counter[tagName] + 1
-                                } else {
-                                    counter[tagName] = 1;
-                                }
-                            }
-                        } else {
-                            countTextNodeParents(chi, counter);
-                        }
-                    });
-                }
-
-                var contentNode = xml.findContentNode(doc.xml);
-
-
-                if (contentNode) {
-                    var counter = {};
-                    countTextNodeParents(contentNode, counter);
-                    for (var field in counter) {
-                        if (counter.hasOwnProperty(field)) emit([field, doc._id], counter[field]);
-                    }
-                }
-            },
-            reduce: "_sum"
-            //,dbcopy: ''
-        },
-        docs_with_section_tag: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-
-                if (doc.xml) {
-                    var hasS = xml.hasTag(doc.xml, "section");
-                    var d = new Date(doc['date']);
-                    emit([
-                            hasS,
-                            d.getFullYear(),
-                            d.getMonth() + 1,
-                            d.getDate()
-                        ], 1
-                    );
-
-                }
-            }
-            ,
-            reduce: "_sum"
-        },
-        docs_with_image: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-
-                if (doc.xml) {
-                    var hasS = xml.hasTag(doc.xml, "imageobject");
-                    emit([
-                            hasS,
-                            doc._id
-                        ], 1
-                    );
-                }
-            },
-            reduce: "_sum"
         }
+
         ,
         lib: {
             "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),
