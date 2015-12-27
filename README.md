@@ -199,7 +199,7 @@ bunch of MapReduce jobs defined on the data.
     <table class="bordered-table">
         <thead>
         <tr>
-            <th>JSON field name</th>
+            <th>Tag name / JSON field</th>
             <th>JSON value</th>
             <th>Description</th>
         </tr>
