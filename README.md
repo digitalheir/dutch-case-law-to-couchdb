@@ -195,12 +195,10 @@ bunch of MapReduce jobs defined on the data.
         </tr>
         </tbody>
     </table>
-
     <h4>Document metadata</h4>
     <table class="bordered-table">
         <thead>
         <tr>
-            <th>XML tag name</th>
             <th>JSON field name</th>
             <th>JSON value</th>
             <th>Description</th>
