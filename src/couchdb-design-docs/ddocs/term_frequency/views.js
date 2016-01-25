@@ -70,6 +70,7 @@ var functions = {
                                     if (xml.getTagName(cs[ci]) == 'title') {
                                         //Found title
                                         return getTitleString(cs[ci]).trim().toLowerCase()
+                                            .replace(/\b(de|het|een)\b/g, '_ART')
                                             .replace(/[0-9]+/g, '_NUM')
                                             .replace(/\b(i{1,3})\b/g, '_NUM') // i, iii, iii
                                             .replace(/\b((i?[vx])|([xv]i{0,3}))\b/g, '_NUM')// iv, v, vi, vii, viii,ix,x,xi,xii,xiii
