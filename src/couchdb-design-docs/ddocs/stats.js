@@ -1,7 +1,7 @@
 var stringifyFunctions = require('./../stringifyFunctions');
 
 var stats = {
-    views: require('./stats/views'),
+    views: require('./stats/views')
 };
 
 module.exports = {

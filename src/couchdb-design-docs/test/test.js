@@ -84,14 +84,6 @@ describe('stats', function () {
         assert.equal(emitted[0][0][0], 'procesverloop');
 
     });
-    it('should emit full title tags', function () {
-        var emitted = testSecondaryViewOnDocs(stats_views.section_titles_full, [doc_strange]);
-
-        console.log(emitted);
-
-        //assert.equal(emitted.length, 3);
-        //assert.equal(emitted[0][0][0], 'i. ontstaan en loop van het geding');
-    });
 
     it('should emit numbers', function () {
         //var emitted = testSecondaryViewOnDocs(stats_views.section_nrs, [doc, doc_rich]);
@@ -176,6 +168,42 @@ describe('crf', function () {
         //    doc_rich.useForCrf = 1;
         //    testCorrectTokenization(testSecondaryView(crfViews.crfTokens, doc_rich));
         //});
+    });
+
+});
+
+/////////////////////////////////////////////////////
+
+
+describe('emit_sections', function () {
+    var tfViews = require('../ddocs/emit_sections/views');
+    describe('text_blocks', function () {
+        var emitted = testSecondaryViewOnDocs(
+            tfViews.text_blocks, [doc, doc_rich]
+        );
+
+        console.log(emitted);
+        //assert.equal(emitted.length, 2);
+        //assert.equal(emitted[0][0][0], false);
+        //assert.equal(emitted[1][0][0], true);
+        //assert.equal(emitted[0][1], 1);
+        //assert.equal(emitted[1][1], 1);
+        ////assert.equal(emitted[1][0][0], true);
+        ////assert.equal(emitted[1][1], 0);
+    });
+    describe('term_frequency', function () {
+        var emitted = testSecondaryViewOnDocs(
+            tfViews.term_frequency, [doc, doc_rich]
+        );
+
+        console.log(emitted);
+        //assert.equal(emitted.length, 2);
+        //assert.equal(emitted[0][0][0], false);
+        //assert.equal(emitted[1][0][0], true);
+        //assert.equal(emitted[0][1], 1);
+        //assert.equal(emitted[1][1], 1);
+        ////assert.equal(emitted[1][0][0], true);
+        ////assert.equal(emitted[1][1], 0);
     });
 
 });

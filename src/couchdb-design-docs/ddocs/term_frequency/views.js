@@ -1,101 +1,60 @@
 var fs = require('fs');
 
 var functions = {
-        section_roles: {
+        mirror: {
             map: function (doc) {
-                if (doc.xml) {
-                    var xml = null;
+                emit(doc.key, doc.value);
+            }
+        },
+        document_frequency: {
+            map: function (doc) {
+                if (doc.key.length === 3
+                    && typeof doc.value == 'number'
+                    && typeof doc.key[2] == 'string'
+                    && doc.key[2].trim().length > 0) {
+                    var Snowball = null;
                     try {
-                        xml = require('views/lib/xml');
+                        //noinspection NodeRequireContents
+                        Snowball = require('views/lib/snowball');
                     } catch (err) {
-                        xml = require('../xml_util.js');
+                        //noinspection JSFileReferences
+                        Snowball = require('../snowball.js');
                     }
+                    var stemmer = new Snowball('Dutch');
+                    Snowball = null;
+
                     var natural = null;
                     try {
+                        //noinspection NodeRequireContents
                         natural = require('views/lib/natural');
                     } catch (err) {
+                        //noinspection JSFileReferences
                         natural = require('../natural.js');
                     }
                     var tokenizer = new natural.WordPunctTokenizer();
 
-                    //console.log('ok1')
-                    var elementToEmitFrom = 'section';
 
-                    if (xml.hasTag(doc.xml, elementToEmitFrom)) {
-                        //console.log('ok2')
-                        var getRole = function (attrs) {
-                            if (attrs) {
-                                //console.log('ok3')
-                                for (var i = 0; i < attrs.length; i++) {
-                                    var key = attrs[i][0];
-                                    if (key == 'role') {
-                                        return attrs[i][1];
-                                    }
-                                }
-                            }
-                            return null;
-                        };
+                    var sectionRole = doc.key[0];
+                    var inTitle = doc.key[1];
+                    var normalized = doc.key[2].trim();
 
-                        /**
-                         * append all text nodes that are not descendant of <nr>
-                         * @param titleElement <title> element
-                         */
-                        function getTitleString(titleElement) {
-                            var strs = [];
+                    var tokens = tokenizer.tokenize(normalized);
 
-                            function recurse(element, arr) {
-                                xml.forAllChildren(element, function (childNode) {
-                                    if (typeof childNode == 'string') {
-                                        arr.push(childNode.trim());
-                                    } else {
-                                        if (xml.getTagName(element) != 'nr') {
-                                            recurse(childNode, arr);
-                                        }
-                                    }
-                                });
-                            }
+                    var stemmedWords = {};
+                    for (var i = 0; i < tokens.length; i++) {
+                        stemmer.setCurrent(tokens[i]);
+                        stemmer.stem();
+                        var stemmed = stemmer.getCurrent();
 
-                            recurse(titleElement, strs);
-                            return strs.join(' ');
+                        if (!stemmedWords[stemmed]) {
+                            stemmedWords[stemmed] = true;
                         }
-
-                        /**
-                         * Tries to find a title node as a direct descendant of given node
-                         * @param node
-                         */
-                        function getNormalizedTitle(node) {
-                            var cs = xml.getChildren(node);
-                            if (cs) {
-                                for (var ci = 0; ci < cs.length; ci++) {
-                                    if (xml.getTagName(cs[ci]) == 'title') {
-                                        //Found title
-                                        return getTitleString(cs[ci]).trim().toLowerCase()
-                                            .replace(/[0-9]+/g, '_NUM')
-                                            .replace(/\b(i{1,3})\b/g, '_NUM') // i, iii, iii
-                                            .replace(/\b((i?[vx])|([xv]i{0,3}))\b/g, '_NUM')// iv, v, vi, vii, viii,ix,x,xi,xii,xiii
-                                            .replace(/\s\s+/g, ' ') // replace double spaces with single space
-                                            .replace(/^\s*(_NUM\s*)+\s*[;:\.]+/g, '_NUM .') // Add space between first num and period/colon
-                                            ;
-                                    }
-                                }
-                            }
-                            return null;
+                    }
+                    for (var word in stemmedWords) {
+                        if (stemmedWords.hasOwnProperty(word)) {
+                            //noinspection NodeModulesDependencies
+                            emit([sectionRole, inTitle, word], doc.value);
                         }
-
-                        var emitRoles = function (node) {
-                            xml.forAllChildren(node, function (child) {
-                                if (xml.getTagName(child) == 'section') {
-                                    var role = child.length > 3 ? getRole(child[3]) : null;
-                                    var title = getNormalizedTitle(child); // Title in lowercase, trimmed
-                                    emit([role, title, doc._id], 1);
-                                } else {
-                                    emitRoles(child);
-                                }
-                            });
-                        };
-
-
-                        emitRoles(xml.findContentNode(doc.xml));
                     }
                 }
             },
@@ -105,8 +64,7 @@ var functions = {
         ,
         lib: {
             "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),
-            "crfTokenizer": fs.readFileSync('../crf_tokenizer.min.js', {encoding: 'utf-8'}),
-            "xml": fs.readFileSync('../xml_util.min.js', {encoding: 'utf-8'})
+            "snowball": fs.readFileSync('../snowball.js', {encoding: 'utf-8'})
         }
     }
     ;

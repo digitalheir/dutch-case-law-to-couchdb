@@ -8547,18 +8547,18 @@
                 if(record.status == 'hit') {
                     var ptrs = [], offsets = [];
 
-                    for(var i = 0; i < parseInt(record.tokens[3]); i++)
-                        ptrs.push(record.tokens[i]);
+                    for(var i = 0; i < parseInt(record.term_frequency[3]); i++)
+                        ptrs.push(record.term_frequency[i]);
 
-                    for(var i = 0; i < parseInt(record.tokens[2]); i++)
-                        offsets.push(parseInt(record.tokens[ptrs.length + 6 + i], 10));
+                    for(var i = 0; i < parseInt(record.term_frequency[2]); i++)
+                        offsets.push(parseInt(record.term_frequency[ptrs.length + 6 + i], 10));
 
                     indexRecord = {
-                        lemma: record.tokens[0],
-                        pos: record.tokens[1],
+                        lemma: record.term_frequency[0],
+                        pos: record.term_frequency[1],
                         ptrSymbol: ptrs,
-                        senseCnt:  parseInt(record.tokens[ptrs.length + 4], 10),
-                        tagsenseCnt:  parseInt(record.tokens[ptrs.length + 5], 10),
+                        senseCnt:  parseInt(record.term_frequency[ptrs.length + 4], 10),
+                        tagsenseCnt:  parseInt(record.term_frequency[ptrs.length + 5], 10),
                         synsetOffset:  offsets
                     };
                 }
