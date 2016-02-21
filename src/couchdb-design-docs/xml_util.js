@@ -13,8 +13,13 @@ var nodeTypes = {
     12: "notation"
 };
 
+
+var isElement = function (node) {
+    return node[0] === 1;
+};
+
 var getAttributes = function (node) {
-    if (typeof node == 'object' && node[0] == nodeTypes[1]) {
+    if (typeof node == 'object' && isElement(node)) {
         return node[3];
     }
     return null;
@@ -68,20 +73,35 @@ var getTagName = function (node) {
     }
 };
 
-var hasTag = function (node, tagName) {
-    if (getTagName(node) == tagName) {
+function innerText(element) {
+    var arr = [];
+    if (typeof element == 'string') {
+        arr.push(element.trim());
+    } else {
+        forAllChildren(element, function (childNode) {
+            arr.push(innerText(childNode));
+        });
+    }
+    return arr.join(' ').trim();
+}
+
+var hasTag = function (node, checkAgainst) {
+    var name = getTagName(node);
+    //console.log(name);
+    if (name && name.match(checkAgainst)) {
         return true;
     } else {
         var cs = getChildren(node);
         if (cs)
             for (var i = 0; i < cs.length; i++) {
-                if (hasTag(cs[i], tagName)) {
+                if (hasTag(cs[i], checkAgainst)) {
                     return true;
                 }
             }
     }
     return false;
 };
+
 
 module.exports = {
     nodeTypes: nodeTypes,
@@ -90,6 +110,9 @@ module.exports = {
     forAllChildren: forAllChildren,
     hasTag: hasTag,
     findContentNode: findContentNode,
-    getAttributes: getAttributes
+    getAttributes: getAttributes,
+    getInnerText: innerText,
+    innerText: innerText,
+    isElement: isElement,
 };
 

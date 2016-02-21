@@ -11,14 +11,5 @@ public class Main implements Executor {
         command.run();
     }
 
-    public static void main(String[] args) {
-        System.out.println("Starting importer service");
-        ImportUnknownFromSearchFeed i = null;
-        try {
-            i = new ImportUnknownFromSearchFeed();
-            i.run();
-        } catch (IOException e) {
-            throw new Error(e);
-        }
-    }
+
 }

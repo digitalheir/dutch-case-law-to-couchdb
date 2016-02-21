@@ -16,7 +16,7 @@ var push = function (ddocs, db) {
         db = database;
     }
     console.log("Pushing " + ddocs.length +"  ");
-    console.log(db);
+    //console.log(db);
     db.allDocs(
         {
             keys: _.map(ddocs, function (doc) {

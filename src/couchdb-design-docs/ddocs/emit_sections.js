@@ -1,7 +1,7 @@
 var stringifyFunctions = require('./../stringifyFunctions');
 
 var emit_sections = {
-    views: require('./emit_sections/views')
+    views: require('./offline/views')
 };
 
 module.exports = {

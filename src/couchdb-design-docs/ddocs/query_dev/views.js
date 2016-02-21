@@ -3,6 +3,11 @@ var fs = require('fs');
 //console.log(nat);
 
 var functions = {
+    random: {
+        map: function (doc) {
+            emit(doc._rev.match(/^\d+-(\w+)$/)[1], 1);
+        }
+    },
     hoge_raad_by_date: {
         map: function (doc) {
             if (doc['creator'] && doc['creator']['@id']) {

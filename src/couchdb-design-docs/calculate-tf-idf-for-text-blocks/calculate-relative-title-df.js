@@ -37,7 +37,7 @@ let result = _.sortBy(_.map(_.pairs(term_count_in_docs), function (o) {
     return -el[1];
 });
 
-fs.writeFile('relative-doc-frequency-title.json', JSON.stringify(result), function (err) {
+fs.writeFile('relative-title-frequency/relative-doc-frequency-title.json', JSON.stringify(result), function (err) {
     if (err) {
         console.error(err)
     } else {

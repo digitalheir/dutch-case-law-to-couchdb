@@ -148,4 +148,15 @@ public class ImportUnknownFromSearchFeed extends RsImporter<Nil> {
                 .returnType(SearchRequest.ReturnType.DOC)
                 .build();
     }
+
+    public static void main(String[] args) {
+        System.out.println("Starting importer service");
+        ImportUnknownFromSearchFeed i = null;
+        try {
+            i = new ImportUnknownFromSearchFeed();
+            i.run();
+        } catch (IOException e) {
+            throw new Error(e);
+        }
+    }
 }

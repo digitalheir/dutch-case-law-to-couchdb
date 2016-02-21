@@ -40,7 +40,7 @@ public abstract class RsImporter<T> implements Runnable {
     final int startAt;
 
     public RsImporter() throws IOException {
-        this(1000, 0 /*+ 300 * 1000*/, -1, 16, 12 * 60 * 60);
+        this(1000, 0 /*+ 275 * 1000*/, -1, 16, 12 * 60 * 60);
     }
 
     /**

@@ -22,7 +22,7 @@ function testSecondaryView(f, doc) {
     return emitted;
 }
 
-var tfViews = require('../ddocs/emit_sections/views');
+var tfViews = require('./views');
 
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -114,11 +114,13 @@ oboe('https://rechtspraak.cloudant.com/docs/_design/stats/_view/docs_with_sectio
     // most of the nodes have been dropped
     console.log("done");  // logs: {"rows":[]}
     //console.log(finalJson);  // logs: {"rows":[]}
-    fs.writeFile('idf.json', JSON.stringify({docCount: docCount, termDocCount: idfRes}), function (err) {
+    fs.writeFile('idf.json', JSON.stringify(
+        {docCount: docCount, termDocCount: idfRes}
+    ), function (err) {
         if (err) throw err;
         console.log('idf saved!');
     });
-    fs.writeFile('tf.json', JSON.stringify({
+    fs.writeFile('tf-sections.json', JSON.stringify({
         docCount: titleCount,
         termDocCount: idfTitle,
         termFrequency: tfRes

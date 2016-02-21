@@ -21,7 +21,7 @@ function tfidf() {
     }
     return _.sortBy(result, function (el) {
         return -el.score;
-    });
+    }).splice(0, 50);
 }
 
 
@@ -49,34 +49,26 @@ let createIdf = function (termCount) {
 
 let createTf = function (termCount) {
     //let titleBlockCount = data.docCount;
-    for (let inTitle in termCount) {
-        if (inTitle == 'true') {
-            //noinspection JSUnfilteredForInLoop
-            let sections = termCount[inTitle];
-            for (let sectionRole in sections) {
-                //noinspection JSUnfilteredForInLoop
-                let wordsInSectionTole = sections[sectionRole];
-                for (let word in wordsInSectionTole) {
-                    //noinspection JSUnfilteredForInLoop
-                    let count = term_frequency_in_titles[word] || 0;
-                    //noinspection JSUnfilteredForInLoop
-                    term_frequency_in_titles[word] = count + wordsInSectionTole[word];
-                }
-            }
-        } else {
-            console.error('???');
-        }
+    //noinspection JSUnfilteredForInLoop
+    for (let word in termCount) {
+        //noinspection JSUnfilteredForInLoop
+        let count = term_frequency_in_titles[word] || 0;
+        //noinspection JSUnfilteredForInLoop
+        term_frequency_in_titles[word] = count + termCount[word];
+        //} else {
+        //    console.error(inTitle);
+        //}
     }
 };
 let idfData = JSON.parse(fs.readFileSync('idf.json', {encoding: 'utf-8'}));
 docCount = idfData.docCount;
 createIdf(idfData.termDocCount);
 
-let tfData = JSON.parse(fs.readFileSync('tf.json', {encoding: 'utf-8'}));
+let tfData = JSON.parse(fs.readFileSync('tf-info.json', {encoding: 'utf-8'}));
 createTf(tfData.termFrequency);
 
 let result = tfidf();
-fs.writeFile('tfidf/tf-idf.json', JSON.stringify(result), function (err) {
+fs.writeFile('tfidf/tf-idf-for-inf-element.js', "module.exports = \n"+JSON.stringify(result)+"\n;", function (err) {
     if (err) {
         console.error(err)
     } else {

@@ -76,7 +76,8 @@ let tfData = JSON.parse(fs.readFileSync('tf.json', {encoding: 'utf-8'}));
 createTf(tfData.termFrequency);
 
 let result = tfidf();
-fs.writeFile('tfidf/tf-idf.json', JSON.stringify(result), function (err) {
+fs.writeFile('tfidf/section/'+section+'.js', "module.exports = \n"+
+    JSON.stringify(result)+"\n;", function (err) {
     if (err) {
         console.error(err)
     } else {
