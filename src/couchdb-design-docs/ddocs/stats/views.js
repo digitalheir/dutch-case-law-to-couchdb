@@ -1,6 +1,9 @@
 var fs = require('fs');
 
 var functions = {
+        /**
+         * []
+         */
         section_roles: {
             map: function (doc) {
                 if (doc.xml) {
@@ -61,13 +64,14 @@ var functions = {
                                 for (var ci = 0; ci < cs.length; ci++) {
                                     if (xml.getTagName(cs[ci]) == 'title') {
                                         //Found title
-                                        return getTitleString(cs[ci]).trim().toLowerCase()
-                                            .replace(/[0-9]+/g, '_NUM')
-                                            .replace(/\b(de|het|een)\b/g, '_ART')
-                                            .replace(/\b(i{1,3})\b/g, '_NUM') // i, iii, iii
-                                            .replace(/\b((i?[vx])|([xv]i{0,3}))\b/g, '_NUM')// iv, v, vi, vii, viii,ix,x,xi,xii,xiii
-                                            .replace(/[;:\.]+/g, ' _PUNCT ') // normalize and separate punctation
-                                            .replace(/\s\s+/g, ' ') // replace double spaces with single space
+                                        return getTitleString(cs[ci])
+                                            .trim()
+                                            .toLowerCase()
+                                            .replace(/^([;:\.]*\s*([0-9]|\b(i{1,3})\b|\b((i?[vx])|([xv]i{0,3}))\b)+\s*[;:\.]*)+\s*/g, '') // Remove leading numbers
+                                            .replace(/^(de|het|een)\b\s*/g, '') // Remove leading article
+                                            .replace(/[^a-z\s]/ig, '') // remove non-letters
+                                            .replace(/\s+/g, ' ') // replace double spaces with single space
+                                            .trim()
                                             ;
                                     }
                                 }
@@ -80,7 +84,7 @@ var functions = {
                                 if (xml.getTagName(child) == 'section') {
                                     var role = child.length > 3 ? getRole(child[3]) : null;
                                     var title = getNormalizedTitle(child); // Title in lowercase, trimmed
-                                    emit([role, title, doc._id], 1);
+                                    emit([role, title], 1);
                                 } else {
                                     emitRoles(child);
                                 }
@@ -94,6 +98,303 @@ var functions = {
             },
             reduce: '_sum'
         },
+        section_numbers: {
+            map: function (doc) {
+                var normalizeTitle = function (title) {
+                    title = title.trim()
+                        .toLowerCase()
+                        .replace(/^([;:\.]*\s*([0-9]|\b(i{1,3})\b|\b((i?[vx])|([xv]i{0,3}))\b)+\s*[;:\.]*)+\s*/g, '') // Remove leading numbers
+                        .replace(/^(de|het|een)\b\s*/g, '') // Remove leading article
+                        .replace(/[^a-z\s]/ig, '') // remove non-letters
+                        .replace(/\s+/g, ' ') // replace double spaces with single space
+                        .trim()
+                    ;
+                    return title;
+                };
+                if (doc.xml) {
+                    var xml = null;
+                    try {
+                        xml = require('views/lib/xml');
+                    } catch (err) {
+                        xml = require('../xml_util.js');
+                    }
+                    //console.log('ok1')
+                    var elementToEmitFrom = 'section';
+
+                    if (xml.hasTag(doc.xml, elementToEmitFrom)) {
+                        //console.log('ok2')
+                        var getRole = function (attrs) {
+                            if (attrs) {
+                                //console.log('ok3')
+                                for (var i = 0; i < attrs.length; i++) {
+                                    var key = attrs[i][0];
+                                    if (key == 'role') {
+                                        return attrs[i][1];
+                                    }
+                                }
+                            }
+                            return null;
+                        };
+
+                        /**
+                         * append all text nodes that are not descendant of <nr>
+                         * @param titleElement <title> element
+                         */
+                        function getTitleString(titleElement) {
+                            var strs = [];
+
+                            function recurse(element, arr) {
+                                xml.forAllChildren(element, function (childNode) {
+                                    if (typeof childNode == 'string') {
+                                        arr.push(childNode.trim());
+                                    } else {
+                                        if (xml.getTagName(element) != 'nr') {
+                                            recurse(childNode, arr);
+                                        }
+                                    }
+                                });
+                            }
+
+                            recurse(titleElement, strs);
+                            return strs.join(' ');
+                        }
+
+                        /**
+                         * Tries to find a title node as a direct descendant of given node
+                         * @param node
+                         */
+                        function getTitle(node) {
+                            var cs = xml.getChildren(node);
+                            if (cs) {
+                                for (var ci = 0; ci < cs.length; ci++) {
+                                    if (xml.getTagName(cs[ci]) == 'title') {
+                                        //Found title
+                                        title = getTitleString(cs[ci]);
+                                        return title;
+                                    }
+                                }
+                            }
+                            return null;
+                        }
+
+                        var emitRoles = function (node) {
+                            xml.forAllChildren(node, function (child) {
+                                if (xml.getTagName(child) == 'section') {
+                                    var role = child.length > 3 ? getRole(child[3]) : null;
+                                    var title = getTitle(child); // Title in lowercase, trimmed
+                                    var number = parseInt(title);
+                                    if (!isNaN(number)) {
+                                        title = normalizeTitle(title); // Title in lowercase, trimmed
+                                        emit([role, number, title], 1);
+                                    }
+                                } else {
+                                    emitRoles(child);
+                                }
+                            });
+                        };
+
+
+                        emitRoles(xml.findContentNode(doc.xml));
+                    }
+                }
+            },
+            reduce: '_sum'
+        },
+        section_title_has_numbering: {
+            map: function (doc) {
+                if (doc.xml) {
+                    var xml = null;
+                    try {
+                        xml = require('views/lib/xml');
+                    } catch (err) {
+                        xml = require('../xml_util.js');
+                    }
+                    //console.log('ok1')
+                    var elementToEmitFrom = 'section';
+                    if (xml.hasTag(doc.xml, elementToEmitFrom)) {
+                        //console.log('ok2')
+                        var getRole = function (attrs) {
+                            if (attrs) {
+                                //console.log('ok3')
+                                for (var i = 0; i < attrs.length; i++) {
+                                    var key = attrs[i][0];
+                                    if (key == 'role') {
+                                        return attrs[i][1];
+                                    }
+                                }
+                            }
+                            return null;
+                        };
+
+                        /**
+                         * append all text nodes that are not descendant of <nr>
+                         * @param titleElement <title> element
+                         */
+                        function getTitleString(titleElement) {
+                            var strs = [];
+
+                            function recurse(element, arr) {
+                                xml.forAllChildren(element, function (childNode) {
+                                    if (typeof childNode == 'string') {
+                                        arr.push(childNode.trim());
+                                    } else {
+                                        if (xml.getTagName(element) != 'nr') {
+                                            recurse(childNode, arr);
+                                        }
+                                    }
+                                });
+                            }
+
+                            recurse(titleElement, strs);
+                            return strs.join(' ');
+                        }
+
+                        /**
+                         * Tries to find a title node as a direct descendant of given node
+                         * @param node
+                         */
+                        function emitNumbering(node) {
+                            var cs = xml.getChildren(node);
+                            if (cs) {
+                                for (var ci = 0; ci < cs.length; ci++) {
+                                    if (xml.getTagName(cs[ci]) == 'title') {
+                                        //Found title
+                                        var m = getTitleString(cs[ci])
+                                            .trim()
+                                            .toLowerCase()
+                                            .match(/^([;:\.]*\s*([0-9]|\b(i{1,3})\b|\b((i?[vx])|([xv]i{0,3}))\b)+\s*[;:\.]*)+\s*/);
+                                        if (m) {
+                                            emit([true, m[0].trim().split(' ')], 1);
+                                        } else {
+                                            emit([false], 1);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        var emitHasNumbering = function (node) {
+                            xml.forAllChildren(node, function (child) {
+                                if (xml.getTagName(child) == 'section') {
+                                    emitNumbering(child); // Title in lowercase, trimmed
+                                } else {
+                                    emitHasNumbering(child);
+                                }
+                            });
+                        };
+
+
+                        emitHasNumbering(xml.findContentNode(doc.xml));
+                    }
+                }
+            },
+            reduce: '_sum'
+        },
+        section_title_pattern: {
+            map: function (doc) {
+                if (doc.xml) {
+                    var xml = null;
+                    try {
+                        xml = require('views/lib/xml');
+                    } catch (err) {
+                        xml = require('../xml_util.js');
+                    }
+                    //console.log('ok1')
+                    var elementToEmitFrom = 'section';
+                    if (xml.hasTag(doc.xml, elementToEmitFrom)) {
+                        //console.log('ok2')
+                        var getRole = function (attrs) {
+                            if (attrs) {
+                                //console.log('ok3')
+                                for (var i = 0; i < attrs.length; i++) {
+                                    var key = attrs[i][0];
+                                    if (key == 'role') {
+                                        return attrs[i][1];
+                                    }
+                                }
+                            }
+                            return null;
+                        };
+
+                        /**
+                         * append all text nodes that are not descendant of <nr>
+                         * @param titleElement <title> element
+                         */
+                        function getTitleString(titleElement) {
+                            var strs = [];
+
+                            function recurse(element, arr) {
+                                xml.forAllChildren(element, function (childNode) {
+                                    if (typeof childNode == 'string') {
+                                        arr.push(childNode.trim());
+                                    } else {
+                                        if (xml.getTagName(element) != 'nr') {
+                                            recurse(childNode, arr);
+                                        }
+                                    }
+                                });
+                            }
+
+                            recurse(titleElement, strs);
+                            return strs.join(' ');
+                        }
+
+                        /**
+                         * Tries to find a title node as a direct descendant of given node
+                         * @param node
+                         */
+                        function getNormalizedTitle(node) {
+                            var cs = xml.getChildren(node);
+                            if (cs) {
+                                for (var ci = 0; ci < cs.length; ci++) {
+                                    if (xml.getTagName(cs[ci]) == 'title') {
+                                        //Found title
+                                        var words = getTitleString(cs[ci])
+                                            .trim()
+                                            .toLowerCase()
+                                            .replace(/^([;:\.]*\s*([0-9]|\b(i{1,3})\b|\b((i?[vx])|([xv]i{0,3}))\b)+\s*[;:\.]*)+\s*/, '') // remove leading numbering
+                                            .replace(/[0-9]+/g, ' _NUM ')
+                                            .replace(/[“”"‘’]/g, ' _QUOTE ')
+                                            .replace(/[\(\)\[\]]/g, ' _BRACKET ')
+                                            .replace(/\b[a-zéëèê]+\b/ig, ' _WORD ') // Remove leading article
+                                            //.replace(/[^a-zéëèê]+/ig, ' _WORD ') // Remove non-alphanumerics
+                                            .trim()
+                                            .replace(/\\s+/g, ' ') // compact spaces
+                                            .split(' ');
+                                        if (words.length == 1 && words[0] == '') {
+                                            words = [];
+                                        }
+                                        return words;
+                                    }
+                                }
+                            }
+                            return null;
+                        }
+
+                        var emitRoles = function (node) {
+                            xml.forAllChildren(node, function (child) {
+                                if (xml.getTagName(child) == 'section') {
+                                    //var role = child.length > 3 ? getRole(child[3]) : null;
+                                    var title = getNormalizedTitle(child); // Title in lowercase, trimmed
+                                    emit(title, 1);
+                                } else {
+                                    emitRoles(child);
+                                }
+                            });
+                        };
+
+
+                        emitRoles(xml.findContentNode(doc.xml));
+                    }
+                }
+            },
+            reduce: '_sum'
+        },
+        /**
+         * key: word count
+         * value: number of times word count occurs
+         */
+        // TODO word count for all labels
         word_count_for_title_elements: {
             map: function (doc) {
                 var xml = null;
@@ -145,6 +446,10 @@ var functions = {
             },
             reduce: "_count"
         },
+        /**
+         * key: [<tagname>, <ecli>]
+         * value: count
+         */
         content_tags: {
             map: function (doc) {
                 var xml = null;
@@ -181,6 +486,39 @@ var functions = {
                 }
             },
             reduce: "_sum"
+        },
+        /**
+         * key: [<element name>, <parent name>]
+         * value: count
+         */
+        parent_element_of_element: {
+            map: function (doc) {
+                var xml = null;
+                try {
+                    xml = require('views/lib/xml');
+                } catch (err) {
+                    xml = require('../xml_util.js');
+                }
+
+                //////////////////
+
+                function emitElementNamesWithParentName(node, parentTag) {
+                    if (xml.isElement(node)) {
+                        var tagName = xml.getTagName(node);
+                        emit([tagName, parentTag], 1);
+                        xml.forAllChildren(node, function (chi) {
+                            emitElementNamesWithParentName(chi, tagName)
+                        });
+                    }
+                }
+
+                var contentNode = xml.findContentNode(doc.xml);
+                if (contentNode) {
+                    emitElementNamesWithParentName(contentNode, null);
+                }
+            },
+            reduce: "_sum"
+            //,dbcopy: ''
         },
         parent_elements_of_text: {
             map: function (doc) {
@@ -265,7 +603,7 @@ var functions = {
 
                 if (doc.xml) {
                     function emitElementPositions(node, pos) {
-                        if (xml.getTagName(node)== "section") {
+                        if (xml.getTagName(node) == "section") {
                             pos = 0;
                         } else if (xml.getTagName(node) == "title") {
                             //console.log(node);
@@ -320,22 +658,6 @@ var functions = {
             ,
             reduce: "_sum"
         },
-        info_tag_normalized_text: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-
-                if (doc.xml) {
-                    var hasInfo = xml.hasTag(doc.xml, /\.info$/);
-                    var hasSection = xml.hasTag(doc.xml, "section");
-                }
-            },
-            reduce: 'sum'
-        },
         s_p_a_c_e_d__w_o_r_d_s: {
             map: function (doc) {
                 var xml = null;
@@ -353,7 +675,7 @@ var functions = {
                                 for (var i = 0; i < m.length; i++) {
                                     var word = m[i].split(' ').join('');
                                     //words.push(word);
-                                    emit([word, doc._id], 1);
+                                    emit([word], 1);
                                 }
                             }
                         } else {
@@ -365,7 +687,7 @@ var functions = {
                     emitSpacedWords(xml.findContentNode(doc.xml));
                 }
             },
-            reduce: 'sum'
+            reduce: '_sum'
         },
         richness_of_markup: {
             map: function (doc) {
@@ -436,27 +758,6 @@ var functions = {
             ,
             reduce: "_sum"
         },
-        docs_with_image: {
-            map: function (doc) {
-                var xml = null;
-                try {
-                    xml = require('views/lib/xml');
-                } catch (err) {
-                    xml = require('../xml_util.js');
-                }
-
-                if (doc.xml) {
-                    var hasS = xml.hasTag(doc.xml, "imageobject");
-                    emit([
-                            hasS,
-                            doc._id
-                        ], 1
-                    );
-                }
-            },
-            reduce: "_sum"
-        }
-        ,
         lib: {
             "natural": fs.readFileSync('../natural.min.js', {encoding: 'utf-8'}),
             "crfTokenizer": fs.readFileSync('../crf_tokenizer.min.js', {encoding: 'utf-8'}),
