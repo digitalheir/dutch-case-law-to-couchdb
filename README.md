@@ -1,3 +1,5 @@
+# ⚠ This repository is deprecated in favor of [rechtspraak-js](https://github.com/digitalheir/rechtspraak-js/) ⚠
+
 # Dutch case law as linked open data 
 
 This repository contains code that clones Dutch case law XML documents from 
