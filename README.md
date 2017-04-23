@@ -1,4 +1,4 @@
-# ⚠ This repository is deprecated in favor of [rechtspraak-js](https://github.com/digitalheir/rechtspraak-js/) ⚠
+# ⚠ This repository is deprecated in favor of [rechtspraak-js](https://github.com/digitalheir/rechtspraak-js/)
 
 # Dutch case law as linked open data 
 
